@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    version="5.0"
+    xml:id="openstack-compute-admin-manual">
+    <?rax pdf.url="../openstack-install-guide-trunk.pdf" subtitle.font.size="20px"?>
+    <title>OpenStack Install and Deploy Manual - 
+    <phrase os="rhel;centos;fedora">Red Hat</phrase>
+    <phrase os="ubuntu">Ubuntu</phrase></title>
+    <info>
+        <author>
+            <personname>
+                <firstname/>
+                <surname/>
+            </personname>
+            <affiliation>
+                <orgname>OpenStack</orgname>
+            </affiliation>
+        </author>
+        <copyright>
+            <year>2012</year>
+            <holder>OpenStack LLC</holder>
+        </copyright>
+        <releaseinfo>trunk</releaseinfo>
+        <productname>OpenStack</productname>
+        <pubdate>2012-05-31</pubdate>
+        <legalnotice role="apache2">
+            <annotation>
+                <remark>Copyright details are filled in by the template.</remark>
+            </annotation>
+        </legalnotice>
+        <abstract>
+            <para>The OpenStack™ system has several key projects that
+                are separate installations but can work together
+                depending on your cloud needs: OpenStack Compute,
+                OpenStack Object Storage, OpenStack Identity Service,
+                and OpenStack Image Service. You can install any of
+                these projects separately and then configure them
+                either as standalone or connected entities. 
+
+                <phrase os="ubuntu">This guide
+                walks through an installation using packages available
+                through Ubuntu 12.04.</phrase>
+
+                <phrase os="rhel;centos;fedora">This guide
+                walks through an installation using packages available
+                through Fedora 17 as well as on RHEL and derivatives through
+                the EPEL repository.</phrase>
+
+                It offers explanations for the
+                configuration choices as well as sample configuration
+                files. </para>
+        </abstract>
+        <revhistory>
+            <revision>
+                <date>2012-05-31</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Revise install guide to encompass
+                                more Linux distros.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Doc bug fixes: <link
+                                   xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/996988"
+                                   >996988</link>, <link
+                                   xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/998116"
+                                   >998116</link>, <link
+                                   xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/999005"
+                                   >999005</link>.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-05-03</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Fixes problems with
+                                   <filename>glance-api-paste.ini</filename>
+                                and
+                                   <filename>glance-registry-paste.ini</filename>
+                                samples and instructions.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Removes "DRAFT" designation.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-05-02</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Essex release.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-05-01</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Updates the Object Storage and Identity (Keystone) configuration.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-04-25</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Changes service_id copy/paste error for the EC2 service-create command.</para>
+                            <para>Adds verification steps for Object Storage installation.</para>
+                            <para>Fixes <filename>proxy-server.conf</filename> file so it points to keystone not tempauth.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-04-23</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Adds installation and configuration for mulit-node Object Storage service.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-04-17</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Doc bug fixes: <link
+                                xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/983417"
+                                >983417</link>, <link
+                                    xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/984106"
+                                    >984106</link>, <link
+                                        xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/984034"
+                                        >984034</link></para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-04-13</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Doc bug fixes: <link
+                                   xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/977905"
+                                   >977905</link>, <link
+                                   xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/980882"
+                                   >980882</link>, <link
+                                   xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/977823"
+                                   >977823</link>, adds additional
+                                Glance database preparation
+                                steps</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-04-10</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Doc bug fixes: <link xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/977831">977831</link></para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-03-23</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Updates for Xen hypervisor.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-03-09</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Updates for Essex release, includes
+                                new Glance config files, new Keystone
+                                configuration.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-01-24</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Initial draft for Essex.</para>
+                            <itemizedlist>
+                                <listitem><para>Assumes use of Ubuntu 12.04 repository.</para></listitem>
+                            </itemizedlist>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2011-01-24</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Initial draft for Diablo.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+           
+        </revhistory>
+    </info>
+    <!-- Chapters are referred from the book file through these include statements. You can add additional chapters using these types of statements. -->
+    <xi:include href="ch_installing-openstack-overview.xml"/>
+    <xi:include href="ch_terminology.xml"/>
+    <xi:include href="ch_assumptions.xml"/>
+    <xi:include href="ch_installidentity.xml"/>
+    <xi:include href="ch_installcomputeimage.xml"/>
+    <xi:include href="ch_images-uploading.xml"/>
+    <xi:include href="ch_instances-running.xml"/>
+    <xi:include href="ch_installobjectstorage.xml"/>
+    <xi:include href="ch_installdashboard.xml"/>
+    <xi:include href="ap_configuration_files.xml"/>
+    
+</book>

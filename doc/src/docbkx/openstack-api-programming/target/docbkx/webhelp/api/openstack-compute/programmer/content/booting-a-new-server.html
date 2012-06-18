@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:exsl="http://exslt.org/common" xmlns:ng="http://docbook.org/docbook-ng" xmlns:fb="http://ogp.me/ns/fb#"><head>
+<meta http-equiv="X-UA-Compatible" content="IE=7"/>
+<title>Booting a New Server - Programming OpenStack Compute API编程
+   - 1.1</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"/><link rel="home" href="index.html" title="Programming OpenStack Compute API编程"/><link rel="up" href="creating-servers.html" title="Creating Servers"/><link rel="prev" href="listing-flavors.html" title="Listing Flavors"/><link rel="next" href="using-curl-to-boot-a-new-server.html" title="Using Curl to Boot a New Server"/><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><script type="text/javascript">
+            //The id for tree cookie
+            var treeCookieId = "treeview-2340";
+            var language = "en";
+            var w = new Object();
+            //Localization
+            txt_filesfound = 'Results';
+            txt_enter_at_least_1_char = "You must enter at least one character.";
+            txt_browser_not_supported = "Your browser is not supported. Use of Mozilla Firefox is recommended.";
+            txt_please_wait = "Please wait. Search in progress...";
+            txt_results_for = "Results for: ";
+        </script><style type="text/css">
+            input {
+            margin-bottom: 5px;
+            margin-top: 2px;
+            }
+
+            .folder {
+            display: block;
+            height: 22px;
+            padding-left: 20px;
+            background: transparent url(../common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+            }
+            
+        </style><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/><link rel="stylesheet" type="text/css" href="../common/css/positioning.css"/><link rel="stylesheet" type="text/css" href="../common/css/custom.css"/><link rel="canonical" href="http://docs.openstack.org/api/openstack-compute/programmer/content//booting-a-new-server.html"/><!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><link rel="stylesheet" type="text/css" href="../common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css"/><link rel="stylesheet" type="text/css" href="../common/jquery/treeview/jquery.treeview.css"/><script type="text/javascript" src="../common/jquery/jquery-1.4.3.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery-ui-1.8.2.custom.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.cookie.js"><!----></script><script type="text/javascript" src="../common/jquery/treeview/jquery.treeview.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.qtip-1.0.0-rc3/jquery.qtip-1.0.0-rc3.min.js"><!--jQuery plugin for glossary popups. --></script><script type="text/javascript" src="search/htmlFileList.js"><!----></script><script type="text/javascript" src="search/htmlFileInfoList.js"><!----></script><script type="text/javascript" src="search/nwSearchFnt.js"><!----></script><script type="text/javascript" src="search/stemmers/en_stemmer.js"><!--//make this scalable to other languages as well.--></script><script type="text/javascript" src="search/index-1.js"><!----></script><script type="text/javascript" src="search/index-2.js"><!----></script><script type="text/javascript" src="search/index-3.js"><!----></script><script type="text/javascript">
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-17511903-6']);
+	  </script><script type="text/javascript" src="../common/ga.js"><!----></script><script type="text/javascript" src="http://www.tabpress.com/_js/ga_social_tracking.js"><!----></script><script>
+	    (function(){var twitterWidgets = document.createElement('script');
+        twitterWidgets.type = 'text/javascript';
+        twitterWidgets.async = true;
+        twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+        // Setup a callback to track once the script loads.
+        twitterWidgets.onload = _ga.trackTwitter;
+        document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+        })();
+      </script></head><body><div id="header"><a onclick="_gaq.push(['_trackEvent', 'Header', 'logo', 'click', 1]);" target="_blank" href="http://www.openstack.org"><img src="../common/images/openstack-logo.png" alt="OpenStack Documentation" width="157" height="47"/></a><h1>Booting a New Server</h1><div id="navheader" align="right"><!----><table class="navLinks"><tr><td><a id="showHideButton" onclick="showHideToc(); _gaq.push(['_trackEvent', 'Header', 'show/hide', 'click', 1]);" class="pointLeft" title="Hide TOC tree">Sidebar
+                            </a></td><td><a accesskey="p" class="navLinkPrevious" onclick="_gaq.push(['_trackEvent', 'Header', 'prevLink', 'click', 1]);" tabindex="5" href="listing-flavors.html">上一页</a>
+				      |
+                                        <a accesskey="u" class="navLinkUp" onclick="_gaq.push(['_trackEvent', 'Header', 'upLink', 'click', 1]);" tabindex="5" href="creating-servers.html">上一级</a>
+				  |
+                                    <a accesskey="n" class="navLinkNext" onclick="_gaq.push(['_trackEvent', 'Header', 'nextLink', 'click', 1]);" tabindex="5" href="using-curl-to-boot-a-new-server.html">下一页</a></td></tr></table></div></div><div id="toolbar" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"><div id="toolbar-left"><p class="breadcrumbs"><a href="http://docs.openstack.org/">OpenStack Manuals</a><a href="index.html">Programming OpenStack Compute API编程
+   - 1.1</a></p><a onclick="_gaq.push(['_trackEvent', 'Header', 'pdfDownload', 'click', 1]);" alt="Download a pdf of this document" class="pdficon" href="../openstackapi-programming.pdf"><img src="../common/images/pdf.png"/></a></div></div><div id="content"><div class="statustext"> </div><div class="section"><div xmlns="" class="titlepage"><div><div><h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="booting-a-new-server"> </a>Booting a New Server</h3></div></div></div><p>
+          You already know how to obtain the authentication token, the
+          URL of the OpenStack Compute API, and the URLs of both the
+          server image and the flavor. You already know all you need to
+          know to make the basic POST request to create a server. We
+          will now create now a Python script that does that job for us.
+          First, we need to obtain the authentication token and the URL
+          of the OpenStack Compute API (aka.
+          <span class="strong"><strong>nova</strong></span>):
+        </p><pre class="screen">
+#!/usr/bin/python
+
+import base64
+import urllib
+import httplib
+import json
+import os
+from urlparse import urlparse
+
+### --8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+###
+###  insert the 'Get OpenStack Credentials' snippet here
+###
+### --8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+</pre><p>
+          With the token and the URL we can now ask the OpenStack
+          Compute API server for the image reference:
+        </p><pre class="screen">
+###
+### Get server image reference
+###
+
+# HTTP connection #2
+
+url2 = apiurlt[1]
+params2 = urllib.urlencode({})
+headers2 = { "X-Auth-Token":apitoken, "Content-type":"application/json" }
+
+if (usehttps == True):
+    conn2 = httplib.HTTPSConnection(url2, key_file='../cert/priv.pem', cert_file='../cert/srv_test.crt')
+else:
+    conn2 = httplib.HTTPConnection(url2)
+
+conn2.request("GET", "%s/images" % apiurlt[2], params2, headers2)
+
+# HTTP response
+
+response2 = conn2.getresponse()
+data2 = response2.read()
+dd2 = json.loads(data2)
+
+conn2.close()
+
+###
+### Server parameters
+###
+
+# Server name
+
+sname = "tornado001"
+
+# Server image URL
+
+n = len(dd2["images"])
+m = range(n)
+
+for i in m:
+    if dd2["images"][i]["id"] == 1:
+        sImageRef = dd2["images"][i]["links"][0]["href"]
+</pre><p>
+          All we need now is the flavor URL:
+        </p><pre class="screen">
+# Flavor URL
+
+# HTTP connection #3
+
+params3 = urllib.urlencode({})
+headers3 = { "X-Auth-Token":apitoken, "Content-type":"application/json" }
+
+if (usehttps == True):
+    conn3 = httplib.HTTPSConnection(url2, key_file='../cert/priv.pem', cert_file='../cert/srv_test.crt')
+else:
+    conn3 = httplib.HTTPConnection(url2)
+
+conn3.request("GET", "%s/flavors" % apiurlt[2], params3, headers3)
+
+# HTTP response #3
+
+response3 = conn3.getresponse()
+data3 = response3.read()
+dd3 = json.loads(data3)
+
+conn3.close()
+
+n = len(dd3["flavors"])
+m = range(n)
+
+for i in m:
+    if dd3["flavors"][i]["id"] == 1:
+        sFlavorRef = dd3["flavors"][i]["links"][0]["href"]
+</pre><p>
+          We can leave other parameters empty for now:
+        </p><pre class="screen">
+###
+### server metadata
+###
+
+sMetadata = {}
+
+###
+### server personalization
+###
+
+sPersonalityPath = ""
+sPersonalityContents = ""
+sPersonality = [ { "path":sPersonalityPath, "contents":base64.b64encode( sPersonalityContents ) } ]
+</pre><p>
+          All that's left to do is a call to the OpenStack Compute API
+          to create a new server:
+        </p><pre class="screen">
+s = { "server": { "name": sname, "imageRef": sImageRef, "flavorRef": sFlavorRef, "metadata": sMetadata, "personality": sPersonality } }
+
+sj = json.dumps(s)
+
+# HTTP connection #4
+
+params4 = sj
+headers4 = { "X-Auth-Token":apitoken, "Content-type":"application/json" }
+
+conn4 = httplib.HTTPConnection("localhost:8774")
+conn4.request("POST", "%s/servers" % apiurlt[2], params4, headers4)
+
+# HTTP response #4
+
+response4 = conn4.getresponse()
+data4 = response4.read()
+dd4 = json.loads(data4)
+
+conn4.close()
+
+print json.dumps(dd4, indent=2)
+</pre><p>
+          When you run that script, you will get back a JSON string that
+          looks simiar to the one below (shown expanded for better
+          readability):
+        </p><pre class="screen">
+{
+  "server": {
+    "status": "BUILD", 
+    "updated": "2011-12-04T21:18:55Z", 
+    "hostId": "", 
+    "user_id": "admin", 
+    "name": "tornado001", 
+    "links": [
+      {
+        "href": "http://localhost:8774/v1.1/openstack/servers/1", 
+        "rel": "self"
+      }, 
+      {
+        "href": "http://localhost:8774/openstack/servers/1", 
+        "rel": "bookmark"
+      }
+    ], 
+    "created": "2011-12-04T21:18:55Z", 
+    "tenant_id": "openstack", 
+    "image": {
+      "id": "1", 
+      "links": [
+        {
+          "href": "http://localhost:8774/openstack/images/1", 
+          "rel": "bookmark"
+        }
+      ]
+    }, 
+    "adminPass": "MrhcNkNqAeVnnUE7", 
+    "uuid": "8fec45a8-92fb-4840-8f2a-c64e1be49dee", 
+    "accessIPv4": "", 
+    "metadata": {
+      "Server Name": "Tornado"
+    }, 
+    "accessIPv6": "", 
+    "key_name": null, 
+    "progress": 0, 
+    "flavor": {
+      "id": "1", 
+      "links": [
+        {
+          "href": "http://localhost:8774/openstack/flavors/1", 
+          "rel": "bookmark"
+        }
+      ]
+    }, 
+    "config_drive": "", 
+    "id": 1, 
+    "addresses": {}
+  }
+}
+</pre><p>
+          Congratulations! You have a new server.
+        </p><p>
+          When you create a new server you are going to get a lot of
+          interesting information about it in return:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+              <span class="strong"><strong>status</strong></span>: set initially
+              to <span class="strong"><strong>BUILD</strong></span>, later set to
+              <span class="strong"><strong>ACTIVE</strong></span> when the server
+              is ready to use.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>updated</strong></span>: set initially
+              to the server creation date, will be updated every time
+              you modify the server.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>hostId</strong></span>: undocumented.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>user_id</strong></span>: the username
+              of the user who created the server.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>name</strong></span>: a short server
+              name assigned by whoever created the server (you), in this
+              case it is <span class="strong"><strong>tornado001</strong></span>.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>links</strong></span>: the URLs
+              pointing to the server.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>created</strong></span>: set to the
+              server creation date.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>tenant_id</strong></span>: the name of
+              the tenant that the server lives with, in this case it's
+              <span class="strong"><strong>openstack</strong></span>.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>image</strong></span>: basics data
+              information about the operating system image used to build
+              the server.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>adminPass</strong></span>: the initial
+              <span class="strong"><strong>root</strong></span>/<span class="strong"><strong>Administrator</strong></span>
+              password, set automatically for you. It is possible to
+              change it afterwards.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>uuid</strong></span>: the Universally
+              Unique Identifier (UUID) of the server.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>accessIPv4</strong></span>: the
+              <span class="emphasis"><em>public</em></span> IPv4 address of the server.
+              You will use it to access your server.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>metadata</strong></span>: a dictionary
+              that stores server metadata. This can be edited by
+              yourself as explained later in this book.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>accessIPv6</strong></span>: the
+              <span class="emphasis"><em>public</em></span> IPv6 address of the server.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>key_name</strong></span>: undocumented.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>progress</strong></span>: an integer
+              value of 0 through 100. It starts with 0 and increases as
+              the server is getting created. It is usually enough to
+              monitor the <span class="strong"><strong>status</strong></span>
+              property of a new server, but if it takes longer than a
+              couple of miutes to build, the
+              <span class="strong"><strong>progress</strong></span> indicator can
+              provide additional information that may help debug the
+              problem.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>flavor</strong></span>: basic data
+              information about the virtual hardware flavor used to
+              build the server.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>config_drive</strong></span>:
+              undocumented.
+            </p></li><li class="listitem"><p>
+              <span class="strong"><strong>id</strong></span> — the
+              <span class="strong"><strong>id</strong></span> of the server within
+              your own OpenStack account realm. The numbering starts
+              with 1.
+            </p></li></ul></div></div><script type="text/javascript" src="../common/main.js"><!----></script><hr/><div id="disqus_thread"><script type="text/javascript">
+	      var disqus_shortname = 'openstackcomputeapiprogrammer';
+	      
+	      var disqus_identifier = 'programming-openstack-compute-api-with-shell-and-python-1st-edbooting-a-new-server';
+	      </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><script type="text/javascript" src="../common/comments.js"><!----></script></div><hr/><div class="legal"><a href="index.html">Legal notices</a></div></div><div><div id="leftnavigation" style="padding-top:3px; background-color:white;"><div id="tabs"><ul><li><a href="#treeDiv" tabindex="1"><span class="contentsTab">目录</span></a></li><li><a href="#searchDiv" tabindex="1"><span class="searchTab">Search</span></a></li></ul><div id="treeDiv"><img src="../common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;"/><div id="ulTreeDiv" style="display:none" class="thisisthat"><ul id="tree" class="filetree"><li tabindex="2"><span class="file"><a href="why-should-you-use-cloud-computing.html">1. Why Should You Use Cloud Computing?</a></span><ul><li tabindex="2"><span class="file"><a href="how-will-you-manage-it-all.html">How Will You Manage It All?</a></span></li><li tabindex="2"><span class="file"><a href="the-solution-openstack-compute-api.html">The Solution: OpenStack Compute API</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="the-basics.html">2. The Basics</a></span><ul><li tabindex="2"><span class="file"><a href="getting-python.html">Getting Python</a></span></li><li tabindex="2"><span class="file"><a href="installing-python-on-your-machine.html">Installing Python on Your Machine</a></span></li><li tabindex="2"><span class="file"><a href="examples.html">Examples</a></span></li><li tabindex="2"><span class="file"><a href="getting-the-keys-to-the-kingdom.html">Getting the Keys to the Kingdom</a></span></li><li tabindex="2"><span class="file"><a href="remembering-basic-security-hygiene.html">Remembering Basic Security Hygiene</a></span></li><li tabindex="2"><span class="file"><a href="getting-the-authentication-token.html">Getting the Authentication Token</a></span><ul><li tabindex="2"><span class="file"><a href="what-about-https.html">What About HTTPS?</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="using-python-to-obtain-the-authentication-token.html">Using Python to Obtain the Authentication Token</a></span></li><li tabindex="2"><span class="file"><a href="getting-the-api-endpoint-url.html">Getting the API Endpoint URL</a></span><ul><li tabindex="2"><span class="file"><a href="getting-your-nova-credentials----the-drop-in-script-snippet-for-your-python-scripts.html">Getting Your Nova Credentials -- The Drop-In Script
+        Snippet for Your Python Scripts</a></span></li></ul></li></ul></li><li tabindex="2"><span class="file"><a href="servers.html">3. Servers</a></span><ul><li tabindex="2"><span class="file"><a href="creating-servers.html">Creating Servers</a></span><ul><li tabindex="2"><span class="file"><a href="listing-images.html">Listing Images</a></span></li><li tabindex="2"><span class="file"><a href="listing-flavors.html">Listing Flavors</a></span></li><li tabindex="2" id="webhelp-currentid"><span class="file"><a href="booting-a-new-server.html">Booting a New Server</a></span></li><li tabindex="2"><span class="file"><a href="using-curl-to-boot-a-new-server.html">Using Curl to Boot a New Server</a></span></li><li tabindex="2"><span class="file"><a href="customizing-your-server-adding-metadata.html">Customizing Your Server: Adding Metadata</a></span></li><li tabindex="2"><span class="file"><a href="customizing-your-server-adding-custom-files.html">Customizing Your Server: Adding Custom Files</a></span></li><li tabindex="2"><span class="file"><a href="server-limits.html">Server Limits</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="modifying-live-servers.html">Modifying Live Servers</a></span><ul><li tabindex="2"><span class="file"><a href="listing-servers.html">Listing Servers</a></span></li><li tabindex="2"><span class="file"><a href="listing-servers-using-python.html">Listing Servers Using Python</a></span></li><li tabindex="2"><span class="file"><a href="getting-detailed-server-information.html">Getting Detailed Server Information</a></span></li><li tabindex="2"><span class="file"><a href="getting-detailed-server-information-using-python.html">Getting Detailed Server Information Using Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="listing-server-addresses.html">Listing Server Addresses</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-addresses-using-python.html">Listing Server Addresses Using Python</a></span></li><li tabindex="2"><span class="file"><a href="listing-network-specific-server-addresses.html">Listing Network-Specific Server Addresses</a></span></li><li tabindex="2"><span class="file"><a href="listing-network-specific-server-addresses-using-python.html">Listing Network-Specific Server Addresses Using
+      Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="server-metadata.html">4. Server Metadata</a></span><ul><li tabindex="2"><span class="file"><a href="listing-server-metadata.html">Listing Server Metadata</a></span></li><li tabindex="2"><span class="file"><a href="lisitng-server-metadata-using-python.html">Lisitng Server Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-metadata-items.html">Listing Server Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-metadata-items-using-python.html">Listing Server Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-metadata.html">Setting Server Metadata</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-metadata-using-python.html">Setting Server Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-metadata-items.html">Setting Server Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-metadata-items-using-python.html">Setting Server Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="updating-server-metadata.html">Updating Server Metadata</a></span></li><li tabindex="2"><span class="file"><a href="updating-server-metadata-using-python.html">Updating Server Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-metadata-items.html">Deleting Server Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-metadata-items-using-python.html">Deleting Server Metadata Items Using Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="server-image-metadata.html">5. Server Image Metadata</a></span><ul><li tabindex="2"><span class="file"><a href="listing-server-image-metadata.html">Listing Server Image Metadata</a></span></li><li tabindex="2"><span class="file"><a href="lisitng-server-image-metadata-using-python.html">Lisitng Server Image Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-image-metadata-items.html">Listing Server Image Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-metadata-items-using-python-1.html">Listing Server Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-image-metadata.html">Setting Server Image Metadata</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-image-metadata-using-python.html">Setting Server Image Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-image-metadata-items.html">Setting Server Image Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-image-metadata-items-using-python.html">Setting Server Image Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="updating-server-image-metadata.html">Updating Server Image Metadata</a></span></li><li tabindex="2"><span class="file"><a href="updating-server-image-metadata-using-python.html">Updating Server Image Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-image-metadata-items.html">Deleting Server Image Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-image-metadata-items-using-python.html">Deleting Server Image Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="updating-servers-changing-server-name.html">Updating Servers: Changing Server Name</a></span></li><li tabindex="2"><span class="file"><a href="updating-servers-changing-server-name-using-python.html">Updating Servers: Changing Server Name Using Python</a></span></li><li tabindex="2"><span class="file"><a href="updating-servers-changing-server-access-address.html">Updating Servers: Changing Server Access Address</a></span></li><li tabindex="2"><span class="file"><a href="updating-servers-changing-server-access-address-using-python.html">Updating Servers: Changing Server Access Address Using
+      Python</a></span></li><li tabindex="2"><span class="file"><a href="changing-root-administrator-password.html">Changing Root (Administrator) Password</a></span></li><li tabindex="2"><span class="file"><a href="changing-root-administrator-password-using-python.html">Changing Root (Administrator) Password Using Python</a></span></li><li tabindex="2"><span class="file"><a href="rebooting-servers.html">Rebooting Servers</a></span></li><li tabindex="2"><span class="file"><a href="rebooting-servers-using-python.html">Rebooting Servers Using Python</a></span></li><li tabindex="2"><span class="file"><a href="rebuilding-servers.html">Rebuilding Servers</a></span></li><li tabindex="2"><span class="file"><a href="resizing-servers.html">Resizing Servers</a></span></li><li tabindex="2"><span class="file"><a href="resizing-servers-using-python.html">Resizing Servers Using Python</a></span></li><li tabindex="2"><span class="file"><a href="confirming-server-resize.html">Confirming Server Resize</a></span></li><li tabindex="2"><span class="file"><a href="confirming-server-resize-using-python.html">Confirming Server Resize Using Python</a></span></li><li tabindex="2"><span class="file"><a href="reverting-server-resize.html">Reverting Server Resize</a></span></li><li tabindex="2"><span class="file"><a href="reverting-server-resize-using-python.html">Reverting Server Resize Using Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="server-images.html">6. Server Images</a></span><ul><li tabindex="2"><span class="file"><a href="creating-server-images.html">Creating Server Images</a></span></li><li tabindex="2"><span class="file"><a href="creating-server-images-using-python.html">Creating Server Images Using Python</a></span></li><li tabindex="2"><span class="file"><a href="deleting-servers.html">Deleting Servers</a></span></li><li tabindex="2"><span class="file"><a href="deleting-servers-using-python.html">Deleting Servers Using Python</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-images.html">Deleting Server Images</a></span></li><li tabindex="2"><span class="file"><a href="deleting-servers-images-using-python.html">Deleting Servers Images Using Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="additional-tools.html">7. Additional Tools</a></span></li></ul></div></div><div id="searchDiv"><div id="search"><form onsubmit="Verifie(ditaSearch_Form);return false" name="ditaSearch_Form" class="searchForm"><fieldset class="searchFieldSet"><legend>Search</legend><center><input id="textToSearch" name="textToSearch" type="text" class="searchText"/> &nbsp; <input onclick="Verifie(ditaSearch_Form)" type="button" class="searchButton" value="Go" id="doSearch"/></center></fieldset></form></div><div id="searchResults"><center/></div><p class="searchHighlight"><a href="#" onclick="toggleHighlight()">Search Highlighter (On/Off)</a></p></div></div></div></div><script type="text/javascript" src="../common/jquery/jquery.qtip-1.0.0-rc3/jquery.qtip-1.0.0-rc3.min.js"><!--jQuery plugin for glossary popups. -->
+                   $('a[title]').qtip({ style: { name: 'cream', tip: true } })
+                </script></body></html>

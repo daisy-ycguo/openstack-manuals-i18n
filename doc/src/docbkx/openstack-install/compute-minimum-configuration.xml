@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="compute-minimum-configuration-settings"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>Configuring OpenStack Compute</title>
+    <para>Many of the settings for Compute services are stored in
+        the <filename>/etc/nova/nova.conf</filename> file by default. Here are the
+        relevant settings for getting a minimal install running.
+        Refer to the OpenStack Compute Administration Manual for guidance
+        on more configuration options.
+
+        <note>
+            <para>In the Essex release, the <filename>nova.conf</filename>
+            file format changed from flags (<literal>--name=value</literal>)
+            to INI file format (<literal>name=value</literal>).
+            The Compute service will function properly with either format.</para>
+            <para>The default <filename>nova.conf</filename> format for
+            Essex packages varies by distribution. Fedora packages use the
+            new INI style format, and Ubuntu 12.04 packages use the
+            old flag format. By convention, this guide uses the new
+            INI style format.</para>
+            <para>You can automatically convert a <filename>nova.conf</filename>
+            file from flag format to INI format using
+            <command>nova-manage</command>:</para>
+            <screen><prompt>$</prompt> <userinput>nova-manage config convert --help</userinput>
+<computeroutput>Usage: nova-manage config convert &lt;args&gt; [options]
+
+
+Options:
+  -h, --help        show this help message and exit
+  --infile=&lt;path&gt;  old-style flagfile to convert to config
+  --outfile=&lt;path&gt;  path for output file. Writes config to stdout if not
+                    specified</computeroutput></screen>
+        </note>
+    </para>
+    <para>The packages automatically do these steps for a user
+        named nova, but if you are installing as another user you
+        should ensure that the <filename>nova.conf</filename> file should have its
+        owner set to <literal>root:nova</literal>, and mode set to <literal>0640</literal>, since the
+        file contains your MySQL server’s username and password.
+        This packaged install ensures that the nova user belongs
+        to the nova group and that the .conf file permissions are
+        set, but here are the manual commands, which should be run as root:
+    </para>
+<screen>
+<prompt># </prompt><userinput>groupadd nova</userinput>
+<prompt># </prompt><userinput>usermod -g nova nova</userinput>
+<prompt># </prompt><userinput>chown -R root:nova /etc/nova</userinput>
+<prompt># </prompt><userinput>chmod 640 /etc/nova/nova.conf</userinput>
+</screen>
+    <para>The hypervisor is set either by editing <filename>/etc/nova/nova.conf</filename> or referring to
+        <filename>nova-compute.conf</filename> in the <filename>nova.conf</filename> file. The hypervisor defaults to <literal>kvm</literal>, but if you are
+        working within a VM already, switch to <literal>qemu</literal> on the <literal>libvirt_type=</literal> line. To use Xen, refer
+        to the overview in this book for where to install nova components. </para>
+    <para>Ensure the database connection defines your backend data
+        store by adding a <literal>sql_connection</literal> line to <filename>nova.conf</filename>:
+        <literal>sql_connection=mysql://<replaceable>[user]</replaceable>:<replaceable>[pass]</replaceable>@<replaceable>[primary IP]</replaceable>/<replaceable>[db
+        name]</replaceable></literal>, such as
+        <literal>sql_connection=mysql://nova:yourpassword@192.168.206.130/nova</literal>.</para>
+    <para>Add these settings to
+            <filename>/etc/nova/nova.conf</filename> for the network
+        configuration assumptions made for this installation scenario.
+        You can place comments in the <filename>nova.conf</filename>
+        file by entering a new line with a <literal>#</literal> sign
+        at the beginning of the line. To see a listing of all possible
+        configuration option settings, see <link
+            xlink:href="http://docs.openstack.org/essex/openstack-compute/admin/content/compute-options-reference.html"
+            >the reference in the OpenStack Compute Administration Manual</link>.
+</para>
+    <programlisting>
+auth_strategy=keystone
+network_manager=nova.network.manager.FlatDHCPManager
+fixed_range=192.168.100.0/24
+flat_network_dhcp_start=192.168.100.2
+public_interface=eth0
+flat_interface=eth0
+flat_network_bridge=br100</programlisting>
+    <para>Here is an example nova.conf with commented
+        sections:</para>
+    <para><programlisting><xi:include parse="text" href="samples/nova.conf"/>
+</programlisting></para>
+    <para>You also need to configure the api-paste.ini file to enable
+        Keystone as the Identity service. An example <link
+            linkend="api-paste-ini-file">api-paste.ini file</link> is
+        included in the Appendix. Update the
+            <filename>/etc/nova/api-paste.ini</filename> file
+        according to the sample file by inserting "service" for the
+        Service tenant and nova for the admin user and nova for the
+        admin password in the last three lines.</para>
+    <para>Restart the nova- services prior to running db
+        sync, by running as root:</para>
+   
+        <screen os="ubuntu">
+<prompt>#</prompt> <userinput>restart nova-api</userinput>
+<prompt>#</prompt> <userinput>restart nova-compute</userinput>
+<prompt>#</prompt> <userinput>restart nova-network</userinput>
+<prompt>#</prompt> <userinput>restart nova-scheduler</userinput>
+<prompt>#</prompt> <userinput>restart nova-vncproxy</userinput>
+<prompt>#</prompt> <userinput>restart nova-volume</userinput>
+        </screen>
+    <screen os="rhel;fedora;centos">
+        <prompt>$></prompt> <userinput>for svc in api objectstore compute network volume scheduler cert; do sudo service openstack-nova-$svc start ; sudo chkconfig openstack-nova-$svc on ;  done</userinput>
+    </screen>
+    <para>Check that all the services started up correctly and look in the logs in /var/log/nova for errors.</para>
+</section>

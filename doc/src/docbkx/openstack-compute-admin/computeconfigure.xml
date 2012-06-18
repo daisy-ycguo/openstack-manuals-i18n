@@ -1,0 +1,1464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="ch_configuring-openstack-compute"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:ns5="http://www.w3.org/1999/xhtml"
+         xmlns:ns4="http://www.w3.org/2000/svg"
+         xmlns:ns3="http://www.w3.org/1998/Math/MathML"
+         xmlns:ns="http://docbook.org/ns/docbook">
+  <title>Configuring OpenStack Compute</title>
+
+  <para>The OpenStack system has several key projects that are separate
+  installations but can work together depending on your cloud needs: OpenStack
+  Compute, OpenStack Object Storage, and OpenStack Image Store. There are basic configuration 
+  decisions to make, and the <link xlink:href="http://docs.openstack.org/trunk/openstack-compute/install/content/">OpenStack Install Guide</link> 
+    covers a basic walkthrough.</para>
+  
+    <section xml:id="configuring-openstack-compute-basics">
+    <?dbhtml stop-chunking?>
+    <title>Post-Installation Configuration for OpenStack Compute</title>
+
+    <para>Configuring your Compute installation involves many
+      configuration files - the <filename>nova.conf</filename> file,
+      the api-paste.ini file, and related Image and Identity
+      management configuration files. This section contains the basics
+      for a simple multi-node installation, but Compute can be
+      configured many ways. You can find networking options and
+      hypervisor options described in separate chapters.</para>
+
+    <section xml:id="setting-flags-in-nova-conf-file">
+      <title>Setting Configuration Options in the
+          <filename>nova.conf</filename> File</title>
+
+      <para>The configuration file <filename>nova.conf</filename> is
+        installed in <filename>/etc/nova</filename> by default. A
+        default set of options are already configured in
+          <filename>nova.conf</filename> when you install manually.   </para>
+
+      <para>Starting with the default file, you must define the
+        following required items in
+          <filename>/etc/nova/nova.conf</filename>. The options are
+        described below. You can place comments in the
+          <filename>nova.conf</filename> file by entering a new line
+        with a <literal>#</literal> sign at the beginning of the line.
+        To see a listing of all possible configuration options, refer
+        to the <link linkend="compute-options-reference" />.</para>
+
+      <para>Here is a simple example <filename>nova.conf</filename>
+        file for a small private cloud, with all the cloud controller
+        services, database server, and messaging server on the same
+        server. In this case, CONTROLLER_IP represents the IP address
+        of a central server, BRIDGE_INTERFACE represents the bridge
+        such as br100, the NETWORK_INTERFACE represents an interface
+        to your VLAN setup, and passwords are represented as
+        DB_PASSWORD_COMPUTE for your Compute (nova) database password,
+        and RABBIT PASSWORD represents the password to your rabbit
+        installation.</para>
+
+      <programlisting><xi:include parse="text" href="../openstack-install/samples/nova.conf"/></programlisting>
+
+      <para>Create a “nova” group, so you can set permissions on the
+      configuration file:</para>
+
+      <screen><prompt>$</prompt> <userinput>sudo addgroup nova</userinput></screen>
+
+      <para>The <filename>nova.config</filename> file should have its
+        owner set to <literal>root:nova</literal>, and mode set to
+          <literal>0640</literal>, since the file could contain your
+        MySQL server’s username and password. You also want to ensure
+        that the <literal>nova</literal> user belongs to the
+          <literal>nova</literal> group.</para>
+
+      <screen><prompt>$</prompt> <userinput>sudo usermod -g nova nova</userinput>
+<prompt>$</prompt> <userinput>chown -R root:nova /etc/nova</userinput>
+<prompt>$</prompt> <userinput>chmod 640 /etc/nova/nova.conf</userinput></screen>
+    </section>
+
+    <section xml:id="setting-up-openstack-compute-environment-on-the-compute-node">
+      <title>Setting Up OpenStack Compute Environment on the Compute
+      Node</title>
+
+      <para>These are the commands you run to ensure the database
+        schema is current:</para>
+
+      <screen><prompt>$</prompt> <userinput>nova-manage db sync</userinput></screen>
+<para>You also need to populate the database with the network configuration information that Compute obtains from the <filename>nova.conf</filename> file.
+</para>
+<screen><prompt>$</prompt> <userinput>nova-manage network create <replaceable>&lt;network-label&gt; &lt;project-network&gt; &lt;number-of-networks-in-project&gt; &lt;addresses-in-each-network&gt;</replaceable></userinput>
+</screen>
+
+      <para>Here is an example of what this looks like with real values
+      entered:</para>
+
+      <screen><prompt>$</prompt> <userinput>nova-manage db sync</userinput>
+<prompt>$</prompt> <userinput>nova-manage network create novanet 192.168.0.0/24 1 256</userinput></screen>
+
+      <para>For this example, the number of IPs is <literal>/24</literal>
+      since that falls inside the <literal>/16</literal> range that was set in
+      <literal>fixed-range</literal> in <filename>nova.conf</filename>.
+      Currently, there can only be one network, and this set up would use the
+      max IPs available in a <literal>/24</literal>. You can choose values
+      that let you use any valid amount that you would like.</para>
+
+      <para>The nova-manage service assumes that the first IP address is your
+      network (like 192.168.0.0), that the 2nd IP is your gateway
+      (192.168.0.1), and that the broadcast is the very last IP in the range
+      you defined (192.168.0.255). If this is not the case you will need to
+      manually edit the sql db <literal>networks</literal> table.</para>
+
+      <para>When you run the <command>nova-manage network create</command>
+      command, entries are made in the <literal>networks</literal> and
+      <literal>fixed_ips</literal> tables. However, one of the networks listed
+      in the <literal>networks</literal> table needs to be marked as bridge in
+      order for the code to know that a bridge exists. The network in the Nova
+      networks table is marked as bridged automatically for Flat
+      Manager.</para>
+    </section>
+    <section xml:id="creating-credentials"><title>Creating Credentials</title>
+      <para>The credentials you will use to launch
+        instances, bundle images, and all the other assorted
+        API functions can be sourced in a single file, such as
+        creating one called /creds/openrc. </para>
+      <para>Here's an example openrc file you can download from
+        the Dashboard in Settings > Project Settings >
+        Download RC File. </para>
+      <para>
+        <programlisting language="bash">
+#!/bin/bash
+# *NOTE*: Using the 2.0 *auth api* does not mean that compute api is 2.0.  We
+# will use the 1.1 *compute api*
+export OS_AUTH_URL=http://50.56.12.206:5000/v2.0
+export OS_TENANT_ID=27755fd279ce43f9b17ad2d65d45b75c
+export OS_USERNAME=vish
+export OS_PASSWORD=$OS_PASSWORD_INPUT
+export OS_AUTH_USER=norm
+export OS_AUTH_KEY=$OS_PASSWORD_INPUT
+export OS_AUTH_TENANT=27755fd279ce43f9b17ad2d65d45b75c
+export OS_AUTH_STRATEGY=keystone
+</programlisting>
+      </para>
+      <para>You also may want to enable EC2 access for the
+        euca2ools. Here is an example ec2rc file for enabling
+        EC2 access with the required credentials.</para>
+      <para>
+        <programlisting language="bash">
+export NOVA_KEY_DIR=/root/creds/
+export EC2_ACCESS_KEY="EC2KEY:USER"
+export EC2_SECRET_KEY="SECRET_KEY"
+export EC2_URL="http://$NOVA-API-IP:8773/services/Cloud"
+export S3_URL="http://$NOVA-API-IP:3333"
+export EC2_USER_ID=42 # nova does not use user id, but bundling requires it
+export EC2_PRIVATE_KEY=${NOVA_KEY_DIR}/pk.pem
+export EC2_CERT=${NOVA_KEY_DIR}/cert.pem
+export NOVA_CERT=${NOVA_KEY_DIR}/cacert.pem
+export EUCALYPTUS_CERT=${NOVA_CERT} # euca-bundle-image seems to require this set
+alias ec2-bundle-image="ec2-bundle-image --cert ${EC2_CERT} --privatekey ${EC2_PRIVATE_KEY} --user 42 --ec2cert ${NOVA_CERT}"
+alias ec2-upload-bundle="ec2-upload-bundle -a ${EC2_ACCESS_KEY} -s ${EC2_SECRET_KEY} --url ${S3_URL} --ec2cert ${NOVA_CERT}"</programlisting>
+      </para>
+      <para>Lastly, here is an example openrc file that works
+        with nova client and ec2
+        tools.</para>
+      <programlisting language="bash">
+export OS_PASSWORD=${ADMIN_PASSWORD:-secrete}
+export OS_AUTH_URL=${OS_AUTH_URL:-http://$SERVICE_HOST:5000/v2.0}
+export NOVA_VERSION=${NOVA_VERSION:-1.1}
+export OS_REGION_NAME=${OS_REGION_NAME:-RegionOne}
+export EC2_URL=${EC2_URL:-http://$SERVICE_HOST:8773/services/Cloud}
+export EC2_ACCESS_KEY=${DEMO_ACCESS}
+export EC2_SECRET_KEY=${DEMO_SECRET}
+export S3_URL=http://$SERVICE_HOST:3333
+export EC2_USER_ID=42 # nova does not use user id, but bundling requires it
+export EC2_PRIVATE_KEY=${NOVA_KEY_DIR}/pk.pem
+export EC2_CERT=${NOVA_KEY_DIR}/cert.pem
+export NOVA_CERT=${NOVA_KEY_DIR}/cacert.pem
+export EUCALYPTUS_CERT=${NOVA_CERT} # euca-bundle-image seems to require this set</programlisting>
+      <para>Next, add these credentials to your environment
+        prior to running any nova client commands or nova
+        commands. </para>
+      <screen><prompt>$ </prompt><userinput>cat /root/creds/openrc >> ~/.bashrc
+source ~/.bashrc</userinput></screen>
+    </section>
+    <section xml:id="creating-certifications">
+      <title>Creating Certificates</title>
+      <para>You can create certificates contained within pem
+        files using these nova client
+        commands, ensuring you have set up your environment variables for the nova client:
+        <screen><prompt>#</prompt> <userinput>nova x509-get-root-cert</userinput>
+<prompt>#</prompt> <userinput>nova x509-create-cert </userinput></screen>
+      </para>
+     </section>
+
+    <section xml:id="enabling-access-to-vms-on-the-compute-node">
+      <title>Enabling Access to VMs on the Compute Node</title>
+
+      <para>One of the most commonly missed configuration areas is not
+      allowing the proper access to VMs. Use the
+      <command>euca-authorize</command> command to enable access. Below, you
+      will find the commands to allow <command>ping</command> and
+      <command>ssh</command> to your VMs :</para>
+
+      <note>
+        <para>These commands need to be run as root only if the credentials
+        used to interact with <command>nova-api</command> have been put under
+        <filename>/root/.bashrc</filename>. If the EC2 credentials have been
+        put into another user's <filename>.bashrc</filename> file, then, it is
+        necessary to run these commands as the user.</para>
+      </note>
+
+      <screen><prompt>$</prompt> <userinput>nova secgroup-add-rule default  icmp -1 -1 0.0.0.0/0</userinput>
+<prompt>$</prompt> <userinput>nova secgroup-add-rule default  tcp 22 22 0.0.0.0/0</userinput></screen>
+
+      <para>Another common issue is you cannot ping or SSH to your instances
+      after issuing the <command>euca-authorize</command> commands. Something
+      to look at is the amount of <command>dnsmasq</command> processes that
+      are running. If you have a running instance, check to see that TWO
+      <command>dnsmasq</command> processes are running. If not, perform the
+      following:</para>
+
+      <screen><prompt>$</prompt> <userinput>sudo killall dnsmasq</userinput>
+<prompt>$</prompt> <userinput>sudo service nova-network restart</userinput></screen>
+
+      <para>If you get the <literal>instance not found</literal> message while
+      performing the restart, that means the service was not previously
+      running. You simply need to start it instead of restarting it : </para>
+
+      <screen><prompt>$</prompt> <userinput>sudo service nova-network start</userinput></screen>
+    </section>
+
+    <section xml:id="configuring-multiple-compute-nodes">
+      <title>Configuring Multiple Compute Nodes</title>
+
+      <para>If your goal is to split your VM load across more than one server,
+      you can connect an additional <command>nova-compute</command> node to a
+      cloud controller node. This configuring can be reproduced on multiple
+      compute servers to start building a true multi-node OpenStack Compute
+      cluster.</para>
+
+      <para>To build out and scale the Compute platform, you spread out
+      services amongst many servers. While there are additional ways to
+      accomplish the build-out, this section describes adding compute nodes,
+      and the service we are scaling out is called
+      <command>nova-compute</command>.</para>
+
+      <para>For a multi-node install you only make changes to
+          <filename>nova.conf</filename> and copy it to additional
+        compute nodes. Ensure each <filename>nova.conf</filename> file
+        points to the correct IP addresses for the respective
+        services. </para>
+
+      <para>By default, Nova sets the bridge device based on the
+        setting in <literal>flat_network_bridge</literal>. Now you can
+        edit <filename>/etc/network/interfaces</filename> with the
+        following template, updated with your IP information.</para>
+
+<programlisting language="bash">
+# The loopback network interface
+auto lo
+    iface lo inet loopback
+
+# The primary network interface
+auto br100
+iface br100 inet static
+    bridge_ports    eth0
+    bridge_stp      off
+    bridge_maxwait  0
+    bridge_fd       0
+    address <replaceable>xxx.xxx.xxx.xxx</replaceable>
+    netmask <replaceable>xxx.xxx.xxx.xxx</replaceable>
+    network <replaceable>xxx.xxx.xxx.xxx</replaceable>
+    broadcast <replaceable>xxx.xxx.xxx.xxx</replaceable>
+    gateway <replaceable>xxx.xxx.xxx.xxx</replaceable>
+    # dns-* options are implemented by the resolvconf package, if installed
+    dns-nameservers <replaceable>xxx.xxx.xxx.xxx</replaceable>
+</programlisting>
+
+      <para>Restart networking:</para>
+
+      <screen><prompt>$</prompt> <userinput>sudo service networking restart</userinput></screen>
+
+      <para>With <filename>nova.conf</filename> updated and networking set,
+      configuration is nearly complete. First, bounce the relevant services to
+      take the latest updates:</para>
+
+      <screen><prompt>$</prompt> <userinput>sudo service libvirtd restart</userinput>
+$ <userinput>sudo service nova-compute restart</userinput></screen>
+
+      <para>To avoid issues with KVM and permissions with Nova, run the
+      following commands to ensure we have VM's that are running
+      optimally:</para>
+
+      <screen><prompt>#</prompt> <userinput>chgrp kvm /dev/kvm</userinput>
+<prompt>#</prompt> <userinput>chmod g+rwx /dev/kvm</userinput></screen>
+
+      <para>If you want to use the 10.04 Ubuntu Enterprise Cloud images that
+      are readily available at
+      http://uec-images.ubuntu.com/releases/10.04/release/, you may run into
+      delays with booting. Any server that does not have
+      <command>nova-api</command> running on it needs this iptables entry so
+      that UEC images can get metadata info. On compute nodes, configure the
+      iptables with this next step:</para>
+
+      <screen><prompt>#</prompt> <userinput>iptables -t nat -A PREROUTING -d 169.254.169.254/32 -p tcp -m tcp --dport 80 -j DNAT --to-destination <replaceable>$NOVA_API_IP</replaceable>:8773</userinput></screen>
+
+      <para>Lastly, confirm that your compute node is talking to your cloud
+      controller. From the cloud controller, run this database query:</para>
+
+      <screen><prompt>$</prompt> <userinput>mysql -u<replaceable>$MYSQL_USER</replaceable> -p<replaceable>$MYSQL_PASS</replaceable> nova -e 'select * from services;'</userinput></screen>
+
+      <para>In return, you should see something similar to this:</para>
+
+      <screen><computeroutput>+---------------------+---------------------+------------+---------+----+----------+----------------+-----------+--------------+----------+-------------------+
+| created_at          | updated_at          | deleted_at | deleted | id | host     | binary         | topic     | report_count | disabled | availability_zone |
++---------------------+---------------------+------------+---------+----+----------+----------------+-----------+--------------+----------+-------------------+
+| 2011-01-28 22:52:46 | 2011-02-03 06:55:48 | NULL       |       0 |  1 | osdemo02 | nova-network   | network   |        46064 |        0 | nova              |
+| 2011-01-28 22:52:48 | 2011-02-03 06:55:57 | NULL       |       0 |  2 | osdemo02 | nova-compute   | compute   |        46056 |        0 | nova              |
+| 2011-01-28 22:52:52 | 2011-02-03 06:55:50 | NULL       |       0 |  3 | osdemo02 | nova-scheduler | scheduler |        46065 |        0 | nova              |
+| 2011-01-29 23:49:29 | 2011-02-03 06:54:26 | NULL       |       0 |  4 | osdemo01 | nova-compute   | compute   |        37050 |        0 | nova              |
+| 2011-01-30 23:42:24 | 2011-02-03 06:55:44 | NULL       |       0 |  9 | osdemo04 | nova-compute   | compute   |        28484 |        0 | nova              |
+| 2011-01-30 21:27:28 | 2011-02-03 06:54:23 | NULL       |       0 |  8 | osdemo05 | nova-compute   | compute   |        29284 |        0 | nova              |
++---------------------+---------------------+------------+---------+----+----------+----------------+-----------+--------------+----------+-------------------+</computeroutput>       </screen>
+
+      <para>You can see that <literal>osdemo0{1,2,4,5}</literal> are all
+      running <command>nova-compute</command>. When you start spinning up
+      instances, they will allocate on any node that is running
+      <command>nova-compute</command> from this list.</para>
+    </section>
+
+    <section xml:id="determining-version-of-compute">
+      <title>Determining the Version of Compute</title>
+
+      <para>You can find the version of the installation by using the
+      <command>nova-manage</command> command:</para>
+
+      <screen><prompt>$</prompt> <userinput>nova-manage version list</userinput></screen>
+    </section>
+      
+      <section xml:id="diagnose-compute">
+        <title>Diagnose your compute nodes</title>
+        
+        <para>You can obtain extra informations about the running
+        virtual machines : their CPU usage, the memory, the disk io or
+        network io, per instance, by running the <command>nova
+          diagnostics</command> command with a server ID:</para>
+
+        <screen><prompt>$</prompt> <userinput>nova diagnostics &lt;serverID&gt;</userinput></screen>
+      </section>
+    </section>
+
+  <section xml:id="general-compute-configuration-overview">
+    <title>General Compute Configuration Overview</title>
+
+    <para>Most configuration information is available in the
+        <filename>nova.conf</filename> configuration option file. Here
+      are some general purpose configuration options that you can use
+      to learn more about the configuration option file and the node.
+      The configuration file nova.conf is typically stored in
+        <filename>/etc/nova/nova.conf</filename>.</para>
+
+    <para>You can use a particular configuration option file by using
+      the <literal>option</literal> (<filename>nova.conf</filename>)
+      parameter when running one of the nova- services. This inserts
+      configuration option definitions from the given configuration
+      file name, which may be useful for debugging or performance
+      tuning. Here are some general purpose configuration
+      options.</para>
+
+    <para>If you want to maintain the state of all the services, you
+      can use the state_path configuration option to indicate a
+      top-level directory for storing data related to the state of
+      Compute including images if you are using the Compute object
+      store. </para>
+  </section>
+
+  <section xml:id="sample-nova-configuration-files">
+    <title>Example <filename>nova.conf</filename> Configuration Files</title>
+
+    <para>The following sections describe many of the configuration
+      option settings that can go into the
+        <filename>nova.conf</filename> files. Copies of each
+        <filename>nova.conf</filename> file need to be copied to each
+      compute node. Here are some sample
+        <filename>nova.conf</filename> files that offer examples of
+      specific configurations used for the Diablo release.</para>
+
+    <simplesect>
+      <title>Configuration using KVM, FlatDHCP, MySQL, Glance, LDAP, and
+      optionally sheepdog, API is EC2</title>
+
+      <para>From <link
+      xlink:href="http://wikitech.wikimedia.org/view/OpenStack#On_the_controller_and_all_compute_nodes.2C_configure_.2Fetc.2Fnova.2Fnova.conf">wikimedia.org</link>,
+      used with permission. Where you see parameters passed in, it's likely an
+      IP address you need.</para>
+
+      <programlisting>
+# configured using KVM, FlatDHCP, MySQL, Glance, LDAP, and optionally sheepdog, API is EC2
+verbose
+daemonize=1
+logdir=/var/log/nova
+state_path=/var/lib/nova
+lock_path=/var/lock/nova
+sql_connection=mysql://$nova_db_user:$nova_db_pass@$nova_db_host/$nova_db_name
+image_service=nova.image.glance.GlanceImageService
+s3_host=$nova_glance_host
+glance_api_servers=$nova_glance_host
+rabbit_host=$nova_rabbit_host
+network_host=$nova_network_host
+ec2_url=http://$nova_api_host:8773/services/Cloud
+libvirt_type=kvm
+dhcpbridge=/usr/bin/nova-dhcpbridge
+flat_network_bridge=br100
+network_manager=nova.network.manager.FlatDHCPManager
+flat_interface=$nova_network_flat_interface
+public_interface=$nova_network_public_interface
+routing_source_ip=$nova_network_public_ip
+ajax_console_proxy_url=$nova_ajax_proxy_url
+volume_driver=nova.volume.driver.SheepdogDriver
+auth_driver=nova.auth.ldapdriver.LdapDriver
+ldap_url=ldap://$nova_ldap_host
+ldap_password=$nova_ldap_user_pass
+ldap_user_dn=$nova_ldap_user_dn
+ldap_user_unit=people
+ldap_user_subtree=ou=people,$nova_ldap_base_dn
+ldap_project_subtree=ou=groups,$nova_ldap_base_dn
+role_project_subtree=ou=groups,$nova_ldap_base_dn
+ldap_cloudadmin=cn=cloudadmins,ou=groups,$nova_ldap_base_dn
+ldap_itsec=cn=itsec,ou=groups,$nova_ldap_base_dn
+ldap_sysadmin=cn=sysadmins,$nova_ldap_base_dn
+ldap_netadmin=cn=netadmins,$nova_ldap_base_dn
+ldap_developer=cn=developers,$nova_ldap_base_dn
+            </programlisting>
+
+      <figure xml:id="Nova_conf_KVM_LDAP">
+        <title>KVM, FlatDHCP, MySQL, Glance, LDAP, and optionally
+        sheepdog</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="figures/SCH_5003_V00_NUAC-Network_mode_KVM_LDAP_OpenStack.png"
+                       scale="60"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </simplesect>
+
+    <simplesect>
+      <title>KVM, Flat, MySQL, and Glance, OpenStack or EC2 API</title>
+
+      <para>This example <filename>nova.conf</filename> file is from an
+      internal Rackspace test system used for demonstrations.</para>
+
+      <programlisting>
+# configured using KVM, Flat, MySQL, and Glance, API is OpenStack (or EC2)
+daemonize=1
+dhcpbridge_flagfile=/etc/nova/nova.conf
+dhcpbridge=/usr/bin/nova-dhcpbridge
+flat_network_bridge=br100
+lock_path=/var/lock/nova
+logdir=/var/log/nova
+state_path=/var/lib/nova
+verbose
+network_manager=nova.network.manager.FlatManager
+sql_connection=mysql://$nova_db_user:$nova_db_pass@$nova_db_host/$nova_db_name
+osapi_host=$nova_api_host
+rabbit_host=$rabbit_api_host
+ec2_host=$nova_api_host
+image_service=nova.image.glance.GlanceImageService
+glance_api_servers=$nova_glance_host
+
+        </programlisting>
+
+      <figure xml:id="Nova_conf_KVM_Flat">
+        <title>KVM, Flat, MySQL, and Glance, OpenStack or EC2 API</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="figures/SCH_5004_V00_NUAC-Network_mode_KVM_Flat_OpenStack.png"
+                       scale="60"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </simplesect>
+
+    <simplesect>
+      <title>XenServer 5.6, Flat networking, MySQL, and Glance, OpenStack
+      API</title>
+
+      <para>This example <filename>nova.conf</filename> file is from an
+      internal Rackspace test system.</para>
+
+      <programlisting>
+verbose
+nodaemon
+sql_connection=mysql://root:&lt;password&gt;@127.0.0.1/nova
+network_manager=nova.network.manager.FlatManager
+image_service=nova.image.glance.GlanceImageService
+flat_network_bridge=xenbr0
+connection_type=xenapi
+xenapi_connection_url=https://&lt;XenServer IP&gt;
+xenapi_connection_username=root
+xenapi_connection_password=supersecret
+rescue_timeout=86400
+allow_admin_api=true
+xenapi_inject_image=false
+use_ipv6=true
+
+# To enable flat_injected, currently only works on Debian-based systems
+flat_injected=true
+ipv6_backend=account_identifier
+ca_path=./nova/CA
+
+# Add the following to your conf file if you're running on Ubuntu Maverick
+xenapi_remap_vbd_dev=true
+            </programlisting>
+
+      <figure xml:id="Nova_conf_XEN_Flat">
+        <title>KVM, Flat, MySQL, and Glance, OpenStack or EC2 API</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="figures/SCH_5005_V00_NUAC-Network_mode_XEN_Flat_OpenStack.png"
+                       scale="60"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </simplesect>
+  </section>
+  <section xml:id="configuring-logging">
+    <title>Configuring Logging</title>
+    <para>You can use <filename>nova.conf</filename> configuration
+      options to indicate where Compute will log events, the level of
+      logging, and customize log formats.</para>
+    <para>To customize log formats for
+      OpenStack Compute, use these configuration option
+      settings.</para>
+    <xi:include href="tables/log-file-nova-conf.xml"/>
+  </section>
+
+  <section xml:id="configuring-hypervisors">
+    <title>Configuring Hypervisors</title>
+
+    <para>OpenStack Compute requires a hypervisor and supports several
+      hypervisors and virtualization standards. Configuring and
+      running OpenStack Compute to use a particular hypervisor takes
+      several installation and configuration steps. The
+        <literal>libvirt_type</literal> configuration option indicates
+      which hypervisor will be used. Refer to <xref
+        linkend="hypervisor-configuration-basics"/> for more details.
+      To customize hypervisor support in OpenStack Compute, refer to
+      these configuration settings in
+      <filename>nova.conf</filename>.</para>
+    <xi:include href="tables/hypervisors-nova-conf.xml"/>
+  </section>
+
+  <section xml:id="configuring-authentication-authorization">
+    <title>Configuring Authentication and Authorization</title>
+
+    <para>There are different methods of authentication for the
+      OpenStack Compute project, including no authentication,
+      keystone, or deprecated (which uses nova-manage commands to
+      create users). With additional configuration, you can use the
+      OpenStack Identity Service, code-named Keystone. Refer to
+      <xref linkend="ch-identity-mgmt-config"/> for additional information. </para>
+    <para>To customize authorization settings for Compute, see these
+      configuration settings in <filename>nova.conf</filename>.</para>
+    
+    <xi:include href="tables/auth-nova-conf.xml"/>
+    <para>To customize certificate authority settings for Compute, see these configuration settings in <filename>nova.conf</filename>.</para>
+    <xi:include href="tables/ca-nova-conf.xml"/>
+    <para>To customize Compute and the Identity service to use LDAP as a backend, refer to these configuration settings in <filename>nova.conf</filename>.</para>
+    <xi:include href="tables/ldap-nova-conf.xml"/>
+  </section>
+
+  <section xml:id="configuring-compute-to-use-ipv6-addresses">
+    <title>Configuring Compute to use IPv6 Addresses</title>
+
+    <para>You can configure Compute to use both IPv4 and IPv6 addresses for
+    communication by putting it into a IPv4/IPv6 dual stack mode. In IPv4/IPv6
+    dual stack mode, instances can acquire their IPv6 global unicast address
+    by stateless address autoconfiguration mechanism [RFC 4862/2462].
+    IPv4/IPv6 dual stack mode works with VlanManager and FlatDHCPManager
+    networking modes, though floating IPs are not supported in the Bexar
+    release. In VlanManager, different 64bit global routing prefix is used for
+    each project. In FlatDHCPManager, one 64bit global routing prefix is used
+    for all instances. The Cactus release includes support for the FlatManager
+    networking mode with a required database migration.</para>
+
+    <para>This configuration has been tested on Ubuntu 10.04 with VM images
+    that have IPv6 stateless address autoconfiguration capability (must use
+    EUI-64 address for stateless address autoconfiguration), a requirement for
+    any VM you want to run with an IPv6 address. Each node that executes a
+    nova- service must have python-netaddr and radvd installed.</para>
+
+    <para>On all nova-nodes, install python-netaddr:</para>
+
+    <screen><prompt>$</prompt> <userinput>sudo apt-get install -y python-netaddr</userinput></screen>
+
+    <para>On all nova-network nodes install radvd and configure IPv6
+    networking:</para>
+
+    <screen><prompt>$</prompt> <userinput>sudo apt-get install -y radvd</userinput>
+<prompt>$</prompt> <userinput>sudo bash -c "echo 1 &gt; /proc/sys/net/ipv6/conf/all/forwarding"</userinput> 
+<prompt>$</prompt> <userinput>sudo bash -c "echo 0 &gt; /proc/sys/net/ipv6/conf/all/accept_ra"</userinput></screen>
+
+    <para>Edit the <filename>nova.conf</filename> file on all nodes to
+      set the use_ipv6 configuration option to True. Restart all
+      nova- services.</para>
+
+    <para>When using the command <command>nova-manage network create</command> you can add a
+    fixed range for IPv6 addresses. You must specify public or private after
+    the create parameter.</para>
+
+    <screen><prompt>$</prompt><userinput>nova-manage network create public <replaceable>fixed_range</replaceable> <replaceable>num_networks</replaceable> <replaceable>network_size</replaceable> <replaceable>vlan_start</replaceable> <replaceable>vpn_start</replaceable> <replaceable>fixed_range_v6</replaceable></userinput></screen>
+
+    <para>You can set IPv6 global routing prefix by using the
+        <literal>fixed_range_v6</literal> parameter. The default
+      is: <literal>fd00::/48</literal>. When you use FlatDHCPManager, the command uses
+      the original value of fixed_range_v6. When you use VlanManager,
+      the command creates prefixes of subnet by incrementing subnet
+      id. Guest VMs uses this prefix for generating their IPv6 global
+      unicast address.</para>
+
+    <para>Here is a usage example for VlanManager:</para>
+
+    <screen><prompt>$</prompt> <userinput>nova-manage network create public 10.0.1.0/24 3 32 100 1000 fd00:1::/48 </userinput></screen>
+
+    <para>Here is a usage example for FlatDHCPManager:</para>
+
+    <screen><prompt>$</prompt> <userinput>nova-manage network create public 10.0.2.0/24 3 32 0 0 fd00:1::/48 </userinput></screen>
+
+    <para>Note that <literal>vlan_start</literal> and <literal>vpn_start</literal> parameters are not used by
+    FlatDHCPManager.</para>
+    
+    <xi:include href="tables/ipv6-nova-conf.xml"/>
+  </section>
+
+  <section xml:id="configuring-compute-to-use-the-image-service">
+    <title>Configuring Image Service and Storage for Compute</title>
+
+    <para>Compute relies on an external image service to store virtual
+      machine images and maintain a catalog of available images. Compute
+      is configured by default to use the OpenStack Image service (Glance),
+      which is the only currently supported image service.</para>
+
+    <para>If your installation requires the use of euca2ools for registering
+      new images, you will need to run the <literal>nova-objectstore</literal> service.
+      This service provides an Amazon S3 frontend for Glance, which is needed
+      because euca2ools can only upload images to an S3-compatible image
+      store.</para>
+    <xi:include href="tables/s3-nova-conf.xml"/>
+  </section>
+
+  <section xml:id="configuring-live-migrations">
+    <title>Configuring Live Migrations</title>
+
+    <para>The live migration feature is useful when you need to
+      upgrade or installing patches to hypervisors/BIOS and you need
+      the machines to keep running; for example, when one of HDD
+      volumes RAID or one of bonded NICs is out of order. Also for
+      regular periodic maintenance, you may need to migrate VM
+      instances. When many VM instances are running on a specific
+      physical machine, you can redistribute the high load. Sometimes
+      when VM instances are scattered, you can move VM instances to a
+      physical machine to arrange them more logically.</para>
+
+    <para><emphasis role="bold">Prerequisites</emphasis> <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">OS:</emphasis>Ubuntu 10.04 or 12.04</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Shared storage:</emphasis>
+          NOVA-INST-DIR/instances/ (eg /var/lib/nova/instances) has to be
+           mounted by shared storage. This guide uses NFS but other options, 
+           including the
+           <link xlink:href="http://gluster.org/community/documentation//index.php/OSConnect">OpenStack Gluster Connector</link>
+           are available.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Instances:</emphasis> Instance can be
+          migrated with ISCSI based volumes</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Hypervisor:</emphasis> KVM with
+          libvirt</para>
+        </listitem>
+        </itemizedlist>
+          <note><para>
+          This guide assumes the default value for instances_path in your nova.conf
+          ("NOVA-INST-DIR/instances"). If you have changed the state_path or 
+          instances_path variables, please modify accordingly
+          </para></note>
+         <note><para>This feature for cloud administrators only, since the use of nova-manage is necessary.
+          </para></note>
+      </para>
+
+    <para><emphasis role="bold">Example Nova Installation Environment</emphasis> <itemizedlist>
+        <listitem>
+          <para>Prepare 3 servers at least; for example, HostA, HostB
+            and HostC</para>
+        </listitem>
+
+        <listitem>
+          <para>HostA is the "Cloud Controller", and should be running: nova-api, nova-scheduler,
+              nova-network, nova-volume, nova-objectstore, nova-scheduler.</para>
+        </listitem>
+
+        <listitem>
+          <para>Host B and Host C are the "compute nodes", running nova-compute.</para>
+        </listitem>
+
+        <listitem>
+          <para>Ensure that, NOVA-INST-DIR (set with state_path in nova.conf) is same on
+            all hosts.</para>
+        </listitem>
+
+        <listitem>
+          <para>In this example, HostA will be the NFSv4 server which exports NOVA-INST-DIR/instances,
+          and HostB and HostC mount it.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para><emphasis role="bold">System configuration</emphasis></para>
+
+    <para><orderedlist>
+        <listitem>
+          <para>Configure your DNS or <filename>/etc/hosts</filename> and
+             ensure it is consistent accross all hosts. Make sure that the three hosts
+            can perform name resolution with each other. As a test,
+            use the <command>ping</command> command to ping each host from one
+            another.</para>
+
+          <screen><prompt>$</prompt> <userinput>ping HostA</userinput>
+<prompt>$</prompt> <userinput>ping HostB</userinput>
+<prompt>$</prompt> <userinput>ping HostC</userinput></screen>
+        </listitem>
+
+        <listitem>
+          <para>Follow the instructions at
+
+<link xlink:href="https://help.ubuntu.com/community/SettingUpNFSHowTo">the Ubuntu NFS HowTo to
+setup an NFS server on HostA, and NFS Clients on HostB and HostC.</link> </para>
+        <para> Our aim is to export NOVA-INST-DIR/instances from HostA, 
+        and have it readable and writable by the nova user on HostB and HostC.</para>
+        </listitem>
+        <listitem>
+        <para>
+        Using your knowledge from the Ubuntu documentation, configure the 
+        NFS server at HostA by adding a line to <filename>/etc/exports</filename>
+          <screen><prompt>$</prompt> <userinput>NOVA-INST-DIR/instances HostA/255.255.0.0(rw,sync,fsid=0,no_root_squash)</userinput></screen>
+        </para>
+          <para>Change the subnet mask (<literal>255.255.0.0</literal>) to the appropriate
+            value to include the IP addresses of HostB and HostC. Then
+            restart the NFS server.</para>
+
+          <screen><prompt>$</prompt> <userinput>/etc/init.d/nfs-kernel-server restart</userinput>
+<prompt>$</prompt> <userinput>/etc/init.d/idmapd restart</userinput></screen>
+        </listitem>
+        <listitem>
+           <para>Set the 'execute/search' bit on your shared directory </para>
+          <para>On both compute nodes, make sure to enable the
+            'execute/search' bit to allow qemu to be able to use the images
+            within the directories. On all hosts, execute the
+            following command: </para>
+          <screen><prompt>$</prompt> <userinput>chmod o+x NOVA-INST-DIR/instances</userinput> </screen>
+        </listitem>
+        <listitem>
+          <para>Configure NFS at HostB and HostC by adding below to
+          /etc/fstab</para>
+
+          <screen><prompt>$</prompt> <userinput>HostA:/NOVA-INST-DIR/instances /NOVA-INST-DIR/instances nfs4 defaults 0 0</userinput></screen>
+
+          <para>Then ensure that the exported
+            directory can be mounted.</para>
+
+          <screen><prompt>$</prompt> <userinput>mount -a -v</userinput></screen>
+
+          <para>Check that "<filename><replaceable>NOVA-INST-DIR</replaceable>/instances/</filename>"
+          directory can be seen at HostA</para>
+
+          <screen><prompt>$</prompt> <userinput>ls -ld <filename><replaceable>NOVA-INST-DIR</replaceable>/instances/</filename></userinput></screen>
+
+
+          <programlisting language="bash">
+drwxr-xr-x 2 nova nova 4096 2012-05-19 14:34 nova-install-dir/instances/
+          </programlisting>
+
+          <para>Perform the same check at HostB and HostC - paying special
+           attention to the permissions (nova should be able to write)</para>
+
+          <screen><prompt>$</prompt> <userinput>ls -ld <filename><replaceable>NOVA-INST-DIR</replaceable>/instances/</filename></userinput></screen>
+
+          <programlisting language="bash">
+drwxr-xr-x 2 nova nova 4096 2012-05-07 14:34 nova-install-dir/instances/
+          </programlisting>
+
+          <screen><prompt>$</prompt> <userinput>df -k</userinput></screen>
+
+          <programlisting language="bash">
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/sda1            921514972   4180880 870523828   1% /
+none                  16498340      1228  16497112   1% /dev
+none                  16502856         0  16502856   0% /dev/shm
+none                  16502856       368  16502488   1% /var/run
+none                  16502856         0  16502856   0% /var/lock
+none                  16502856         0  16502856   0% /lib/init/rw
+HostA:        921515008 101921792 772783104  12% /var/lib/nova/instances  ( &lt;--- this line is important.)
+</programlisting>
+        </listitem>
+
+        <listitem>
+          <para>Update the libvirt configurations. Modify
+              <filename>/etc/libvirt/libvirtd.conf</filename>:</para>
+
+          <programlisting>
+before : #listen_tls = 0
+after : listen_tls = 0
+
+before : #listen_tcp = 1
+after : listen_tcp = 1
+
+add: auth_tcp = "none"
+                            </programlisting>
+
+          <para>Modify <filename>/etc/init/libvirt-bin.conf</filename></para>
+
+          <programlisting>
+before : exec /usr/sbin/libvirtd -d
+after : exec /usr/sbin/libvirtd -d -l
+                            </programlisting>
+
+          <para>Modify <filename>/etc/default/libvirt-bin</filename></para>
+
+          <programlisting>
+before :libvirtd_opts=" -d"
+after :libvirtd_opts=" -d -l"
+                            </programlisting>
+
+          <para>Restart libvirt. After executing the command, ensure
+            that libvirt is succesfully restarted.</para>
+
+          <screen><prompt>$</prompt> <userinput>stop libvirt-bin &amp;&amp; start libvirt-bin</userinput>
+<prompt>$</prompt> <userinput>ps -ef | grep libvirt</userinput></screen>
+
+          <programlisting language="bash">
+
+root 1145 1 0 Nov27 ? 00:00:03 /usr/sbin/libvirtd -d -l
+          </programlisting>
+        </listitem>
+        <listitem>
+        <para> Configure your firewall to allow libvirt to communicate between nodes.</para>
+        <para>Information about ports used with libvirt can be found at <link xlink:href="http://libvirt.org/remote.html#Remote_libvirtd_configuration">the libvirt documentation</link>
+        By default, libvirt listens on TCP port 16509 and an ephemeral TCP range from 49152 to
+        49261 is used for the KVM communications. As this guide has disabled libvirt auth, you
+        should take good care that these ports are only open to hosts within your installation.
+        </para>
+        </listitem>
+        <listitem>
+          <para>You can now configure options for live migration. In
+            most cases, you do not need to configure any options. The
+            following chart is for advanced usage only.</para>
+        </listitem>
+      </orderedlist></para>
+    <xi:include href="tables/live-migration-nova-conf.xml"/>
+ 
+  </section>
+
+  <section xml:id="configuring-database-connections">
+    <title>Configuring Database Connections</title>
+
+    <para>You can configure OpenStack Compute to use any SQLAlchemy-compatible
+    database. The database name is 'nova' and entries to it are mostly written
+    by the nova-scheduler service, although all the services need to be able
+    to update entries in the database. Use these settings to configure the
+    connection string for the nova database.</para>
+    <xi:include href="tables/database-nova-conf.xml"/>
+  </section>
+
+  <section xml:id="configuring-compute-messaging">
+    <title>Configuring the Compute Messaging System</title>
+
+    <para>OpenStack Compute uses an open standard for messaging middleware
+    known as AMQP. This messaging middleware enables the OpenStack compute
+    services which will exist across multiple servers to talk to each other.
+    OpenStack Compute supports two implementations of AMQP:
+    <application>RabbitMQ</application> and
+    <application>Qpid</application>.</para>
+
+    <section xml:id="configuration-rabbitmq">
+      <title>Configuration for RabbitMQ</title>
+
+      <para>OpenStack Compute uses <application>RabbitMQ</application> by
+      default. This section discusses the configuration options that are
+      relevant when <application>RabbitMQ</application> is used. The
+      <literal>rpc_backend</literal> option is not required as long as
+      <application>RabbitMQ</application> is the default messaging system.
+      However, if it is included the configuration, it must be set to
+      <literal>nova.rpc.impl_kombu</literal>.</para>
+
+
+      <programlisting language="bash">
+rpc_backend=nova.rpc.impl_kombu
+      </programlisting>
+
+      <para>The following tables describe the rest of the options that can be
+      used when <application>RabbitMQ</application> is used as the messaging
+      system. You can configure the messaging communication for different
+      installation scenarios as well as tune RabbitMQ's retries and the size
+      of the RPC thread pool.</para>
+
+      <table rules="all">
+        <caption>Description of <filename>nova.conf</filename>
+          configuration options for Remote Procedure Calls and
+          RabbitMQ Messaging</caption>
+
+        <thead>
+          <tr>
+            <td>Configuration option</td>
+
+            <td>Default</td>
+
+            <td>Description</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><literal>rabbit_host</literal></td>
+
+            <td><literal>localhost</literal></td>
+
+            <td>IP address; Location of <application>RabbitMQ</application>
+            installation.</td>
+          </tr>
+
+          <tr>
+            <td><literal>rabbit_password</literal></td>
+
+            <td><literal>guest</literal></td>
+
+            <td>String value; Password for the
+            <application>RabbitMQ</application> server.</td>
+          </tr>
+
+          <tr>
+            <td><literal>rabbit_port</literal></td>
+
+            <td><literal>5672</literal></td>
+
+            <td>Integer value; Port where <application>RabbitMQ</application>
+            server is running/listening.</td>
+          </tr>
+
+          <tr>
+            <td><literal>rabbit_userid</literal></td>
+
+            <td><literal>guest</literal></td>
+
+            <td>String value; User ID used for
+            <application>RabbitMQ</application> connections.</td>
+          </tr>
+
+          <tr>
+            <td><literal>rabbit_virtual_host</literal></td>
+
+            <td><literal>/</literal></td>
+
+            <td>Location of a virtual <application>RabbitMQ</application>
+            installation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table rules="all">
+        <caption>Description of <filename>nova.conf</filename>
+          configuration options for Tuning RabbitMQ
+          Messaging</caption>
+
+        <thead>
+          <tr>
+            <td>Configuration option</td>
+
+            <td>Default</td>
+
+            <td>Description</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>-<literal>-rabbit_max_retries</literal></td>
+
+            <td><literal>0</literal></td>
+
+            <td>Integer value; maximum retries with trying to connect to RabbitMQ(the default of <literal>0</literal> implies an infinite retry count).</td>
+          </tr>
+
+          <tr>
+            <td><literal>rabbit_retry_interval</literal></td>
+
+            <td><literal>1</literal></td>
+
+            <td>Integer value: <application>RabbitMQ</application> connection
+            retry interval.</td>
+          </tr>
+
+          <tr>
+            <td><literal>rpc_thread_pool_size</literal></td>
+
+            <td><literal>1024</literal></td>
+
+            <td>Integer value: Size of Remote Procedure Call thread pool.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section xml:id="configuration-qpid">
+      <title>Configuration for Qpid</title>
+
+      <para>This section discusses the configuration options that are relevant
+      if <application>Qpid</application> is used as the messaging system for
+      OpenStack Compute. <application>Qpid</application> is not the default
+      messaging system, so it must be enabled by setting the
+      <literal>rpc_backend</literal> option in
+      <filename>nova.conf</filename>.</para>
+
+      <programlisting language="bash">
+rpc_backend=nova.rpc.impl_qpid
+      </programlisting>
+
+      <para>This next critical option points the compute nodes to the
+      <application>Qpid</application> broker (server). Set
+      <literal>qpid_hostname</literal> in <filename>nova.conf</filename> to
+      be the hostname where the broker is running.</para>
+
+      <note>
+        <para>The -<literal>-qpid_hostname</literal> option accepts a value in
+        the form of either a hostname or an IP address.</para>
+      </note>
+
+      <programlisting language="bash">
+qpid_hostname=hostname.example.com
+      </programlisting>
+
+      <para>If the <application>Qpid</application> broker is listening on a
+      port other than the AMQP default of <literal>5672</literal>, you will
+      need to set the <literal>qpid_port</literal> option:</para>
+
+      <programlisting language="bash">
+qpid_port=12345
+      </programlisting>
+
+      <para>If you configure the <application>Qpid</application> broker to
+      require authentication, you will need to add a username and password to
+      the configuration:</para>
+
+      <programlisting language="bash">
+qpid_username=username
+qpid_password=password
+      </programlisting>
+
+      <para>By default, TCP is used as the transport. If you would like to
+      enable SSL, set the <literal>qpid_protocol</literal> option:</para>
+
+      <programlisting language="bash">
+qpid_protocol=ssl
+      </programlisting>
+
+      <para>The following table lists the rest of the options used by the Qpid
+      messaging driver for OpenStack Compute. It is not common that these
+      options are used.</para>
+
+      <table rules="all">
+        <caption>Remaining <filename>nova.conf</filename>
+          configuration options for Qpid support</caption>
+
+        <thead>
+          <tr>
+            <td>Configuration option</td>
+
+            <td>Default</td>
+
+            <td>Description</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><literal>qpid_sasl_mechanisms</literal></td>
+
+            <td><literal>(Qpid default)</literal></td>
+
+            <td>String value: A space separated list of acceptable SASL
+            mechanisms to use for authentication.</td>
+          </tr>
+
+          <tr>
+            <td><literal>qpid_reconnect_timeout</literal></td>
+
+            <td><literal>(Qpid default)</literal></td>
+
+            <td>Integer value: The number of seconds to wait before deciding
+            that a reconnect attempt has failed.</td>
+          </tr>
+
+          <tr>
+            <td><literal>qpid_reconnect_limit</literal></td>
+
+            <td><literal>(Qpid default)</literal></td>
+
+            <td>Integer value: The limit for the number of times to reconnect
+            before considering the connection to be failed.</td>
+          </tr>
+
+          <tr>
+            <td><literal>qpid_reconnect_interval_min</literal></td>
+
+            <td><literal>(Qpid default)</literal></td>
+
+            <td>Integer value: Minimum number of seconds between connection
+            attempts.</td>
+          </tr>
+
+          <tr>
+            <td><literal>qpid_reconnect_interval_max</literal></td>
+
+            <td><literal>(Qpid default)</literal></td>
+
+            <td>Integer value: Maximum number of seconds between connection
+            attempts.</td>
+          </tr>
+
+          <tr>
+            <td><literal>qpid_reconnect_interval</literal></td>
+
+            <td><literal>(Qpid default)</literal></td>
+
+            <td>Integer value: Equivalent to setting
+            <literal>qpid_reconnect_interval_min</literal> and
+            <literal>qpid_reconnect_interval_max</literal> to the same
+            value.</td>
+          </tr>
+
+          <tr>
+            <td><literal>qpid_heartbeat</literal></td>
+
+            <td><literal>5</literal></td>
+
+            <td>Integer value: Seconds between heartbeat messages sent to
+            ensure that the connection is still alive.</td>
+          </tr>
+
+          <tr>
+            <td><literal>qpid_tcp_nodelay</literal></td>
+
+            <td><literal>True</literal></td>
+
+            <td>Boolean value: Disable the Nagle algorithm.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section xml:id="common-messaging-configuration">
+      <title>Common Configuration for Messaging</title>
+
+      <para>This section lists options that are common between both the
+      <application>RabbitMQ</application> and <application>Qpid</application>
+      messaging drivers.</para>
+
+      <table rules="all">
+        <caption>Description of <filename>nova.conf</filename>
+          configuration options for Customizing Exchange or Topic
+          Names</caption>
+
+        <thead>
+          <tr>
+            <td>Configuration option</td>
+
+            <td>Default</td>
+
+            <td>Description</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><literal>control_exchange</literal></td>
+
+            <td><literal>nova</literal></td>
+
+            <td>String value; Name of the main exchange to connect to</td>
+          </tr>
+
+          <tr>
+            <td><literal>ajax_console_proxy_topic</literal></td>
+
+            <td><literal>ajax_proxy</literal></td>
+
+            <td>String value; Topic that the ajax proxy nodes listen on</td>
+          </tr>
+
+          <tr>
+            <td><literal>console_topic</literal></td>
+
+            <td><literal>console</literal></td>
+
+            <td>String value; The topic console proxy nodes listen on</td>
+          </tr>
+
+          <tr>
+            <td><literal>network_topic</literal></td>
+
+            <td><literal>network</literal></td>
+
+            <td>String value; The topic network nodes listen on.</td>
+          </tr>
+
+          <tr>
+            <td><literal>scheduler_topic</literal></td>
+
+            <td><literal>scheduler</literal></td>
+
+            <td>String value; The topic scheduler nodes listen on.</td>
+          </tr>
+
+          <tr>
+            <td><literal>volume_topic</literal></td>
+
+            <td><literal>volume</literal></td>
+
+            <td>String value; Name of the topic that volume nodes listen
+            on</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </section>
+
+  <section xml:id="configuring-compute-API">
+  <title>Configuring the Compute API</title>
+  <simplesect>
+    <title>Configuring Compute API password handling</title>
+
+    <para> The OpenStack Compute API allows the user to specify an admin
+    password when creating (or rebuilding) a server instance.  If no
+    password is specified, a randomly generated password is used. The
+    password is returned in the API response.</para>
+
+    <para>In practice, the handling of the admin password depends on the
+    hypervisor in use, and may require additional configuration of the
+    instance, such as installing an agent to handle the password setting.
+    If the hypervisor and instance configuration do not support the
+    setting of a password at server create time, then the password
+    returned by the create API call will be misleading, since it was
+    ignored.
+    </para>
+
+    <para>To prevent this confusion, the configuration configuration
+        option <literal>enable_instance_password</literal> can be
+        used to disable the return of the admin password for
+        installations that don't support setting instance
+        passwords.</para>
+
+    <table rules="all">
+      <caption>Description of nova.conf API related configuration
+          options</caption>
+
+      <thead>
+        <tr>
+          <td>Configuration option</td>
+
+          <td>Default</td>
+
+          <td>Description</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><literal>enable_instance_password</literal></td>
+
+          <td><literal>true</literal></td>
+
+          <td>When true, the create and rebuild compute API calls return the server admin password.  When false,
+          the server admin password is not included in API responses.</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </simplesect>
+
+  <simplesect>
+    <title>Configuring Compute API Rate Limiting</title>
+
+    <para>OpenStack Compute supports API rate limiting for the OpenStack API.
+    The rate limiting allows an administrator to configure limits on the type
+    and number of API calls that can be made in a specific time
+    interval.</para>
+
+    <para>When API rate limits are exceeded, HTTP requests will return a error
+    with a status code of 413 "Request entity too large", and will also
+    include a 'Retry-After' HTTP header. The response body will include the
+    error details, and the delay before the request should be retried.</para>
+
+    <para>Rate limiting is not available for the EC2 API.</para>
+  </simplesect>
+    <simplesect>
+      <title>Specifying Limits</title>
+
+      <para>Limits are specified using five values:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>The <emphasis role="bold">HTTP method</emphasis> used in the
+          API call, typically one of GET, PUT, POST, or DELETE.</para>
+        </listitem>
+
+        <listitem>
+          <para>A <emphasis role="bold">human readable URI</emphasis> that is
+          used as a friendly description of where the limit is applied.</para>
+        </listitem>
+
+        <listitem>
+          <para>A <emphasis role="bold">regular expression</emphasis>. The
+          limit will be applied to all URI's that match the regular expression
+          and HTTP Method.</para>
+        </listitem>
+
+        <listitem>
+          <para>A <emphasis role="bold">limit value </emphasis> that specifies
+          the maximum count of units before the limit takes effect.</para>
+        </listitem>
+
+        <listitem>
+          <para>An <emphasis role="bold">interval</emphasis> that specifies
+          time frame the limit is applied to. The interval can be SECOND,
+          MINUTE, HOUR, or DAY.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Rate limits are applied in order, relative to the HTTP method,
+      going from least to most specific. For example, although the default
+      threshold for POST to */servers is 50 per day, one cannot POST to
+      */servers more than 10 times within a single minute because the rate
+      limits for any POST is 10/min.</para>
+    </simplesect>
+
+    <simplesect>
+      <title>Default Limits</title>
+
+      <para>OpenStack compute is normally installed with the following limits
+      enabled:</para>
+
+      <table rules="all">
+        <caption>Default API Rate Limits</caption>
+
+        <thead>
+          <tr>
+            <td>HTTP method</td>
+
+            <td>API URI</td>
+
+            <td>API regular expression</td>
+
+            <td>Limit</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>POST</td>
+
+            <td>any URI (*)</td>
+
+            <td>.*</td>
+
+            <td>10 per minute</td>
+          </tr>
+
+          <tr>
+            <td>POST</td>
+
+            <td>/servers</td>
+
+            <td>^/servers</td>
+
+            <td>50 per day</td>
+          </tr>
+
+          <tr>
+            <td>PUT</td>
+
+            <td>any URI (*)</td>
+
+            <td>.*</td>
+
+            <td>10 per minute</td>
+          </tr>
+
+          <tr>
+            <td>GET</td>
+
+            <td>*changes-since*</td>
+
+            <td>.*changes-since.*</td>
+
+            <td>3 per minute</td>
+          </tr>
+
+          <tr>
+            <td>DELETE</td>
+
+            <td>any URI (*)</td>
+
+            <td>.*</td>
+
+            <td>100 per minute</td>
+          </tr>
+        </tbody>
+      </table>
+    </simplesect>
+
+    <simplesect>
+      <title>Configuring and Changing Limits</title>
+
+      <para>The actual limits are specified in the file
+      <filename>etc/nova/api-paste.ini</filename>, as part of the WSGI
+      pipeline.</para>
+
+      <para>To enable limits, ensure the '<literal>ratelimit</literal>' filter
+      is included in the API pipeline specification. If the
+      '<literal>ratelimit</literal>' filter is removed from the pipeline,
+      limiting will be disabled. There should also be a definition for the
+      ratelimit filter. The lines will appear as follows:</para>
+
+      <programlisting language="bash">
+[pipeline:openstack_compute_api_v2]
+pipeline = faultwrap authtoken keystonecontext ratelimit osapi_compute_app_v2
+
+[pipeline:openstack_volume_api_v1]
+pipeline = faultwrap authtoken keystonecontext ratelimit osapi_volume_app_v1
+
+[filter:ratelimit]
+paste.filter_factory = nova.api.openstack.compute.limits:RateLimitingMiddleware.factory
+            </programlisting>
+
+      <para>To modify the limits, add a '<literal>limits</literal>'
+      specification to the <literal>[filter:ratelimit]</literal> section of
+      the file. The limits are specified in the order HTTP method, friendly
+      URI, regex, limit, and interval. The following example specifies the
+      default rate limiting values:</para>
+
+      <programlisting language="bash">
+[filter:ratelimit]
+paste.filter_factory = nova.api.openstack.compute.limits:RateLimitingMiddleware.factory
+limits =(POST, "*", .*, 10, MINUTE);(POST, "*/servers", ^/servers, 50, DAY);(PUT, "*", .*, 10, MINUTE);(GET, "*changes-since*", .*changes-since.*, 3, MINUTE);(DELETE, "*", .*, 100, MINUTE)
+            </programlisting>
+    </simplesect>
+  </section>
+</chapter>

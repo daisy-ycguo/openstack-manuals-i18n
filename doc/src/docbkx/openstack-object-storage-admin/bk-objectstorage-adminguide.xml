@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    version="5.0"
+    xml:id="openstack-object-storage-admin-manual">
+    <?rax pdf.url="../os-objectstorage-adminguide-trunk.pdf"?>
+    <title>OpenStack Object Storage Administration Manual</title>
+    <info>
+        <author>
+            <personname>
+                <firstname/>
+                <surname/>
+            </personname>
+            <affiliation>
+                <orgname>OpenStack</orgname>
+            </affiliation>
+        </author>
+        <copyright>
+            <year>2010</year>
+            <year>2011</year>
+            <year>2012</year>
+            <holder>OpenStack LLC</holder>
+        </copyright>
+        <releaseinfo>trunk</releaseinfo>
+        <productname>OpenStack Object Storage</productname>
+        <pubdate>2012-06-05</pubdate>
+        <legalnotice role="apache2">
+            <annotation>
+                <remark>Copyright details are filled in by the template.</remark>
+            </annotation>
+        </legalnotice>
+        <abstract>
+            <para>OpenStack™ Object Storage offers open source software for cloud-based object
+                storage for any organization. This manual provides guidance for installing,
+                managing, and understanding the software that runs OpenStack Object Storage. </para>
+        </abstract>
+        <revhistory>
+            <revision>
+                <date>2012-06-05</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Fix <link xlink:href="https://bugs.launchpad.net/openstack-manuals/+bug/1009170">bug 1009170</link>.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-05-03</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Begin trunk designation.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-05-02</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Essex release.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-04-27</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Adds ring copy example.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+            <revision>
+                <date>2012-01-01</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Formatting updates.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>
+        </revhistory>
+    </info>
+    <!-- Chapters are referred from the book file through these include statements. You can add additional chapters using these types of statements. -->
+    <xi:include href="../common/getstart.xml"/>
+    <xi:include href="aboutobjectstorage.xml"/>
+    <xi:include href="../openstack-install/ch_installobjectstorage.xml"/>
+    <xi:include href="objectstorageadmin.xml"/>
+    <xi:include href="objectstoragetutorials.xml"/>
+    <xi:include href="objectstoragemonitoring.xml"/>
+    <xi:include href="../common/support.xml"/>
+</book>

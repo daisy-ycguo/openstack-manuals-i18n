@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="verify-swift-installation"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    version="5.0">
+    <title>Verify the Installation</title>
+    <para>You can run these commands from the proxy server or any server with access to the Identity Service. Look for
+        the default_swift_cluster setting in the
+        <filename>proxy-server.conf</filename> and match the URLs
+        (including http or https) when issuing auth
+        commands.</para>
+    <orderedlist>
+         <listitem>
+            <para>First, export the swift admin password (setup previously) in a variable so it can be re-used.</para>
+            <screen>
+<prompt>$</prompt> <userinput>export ADMINPASS=secretword</userinput>
+            </screen>
+<note><para>If you do not wish to have the swift admin password stored in your shell's history, you may
+perform the following: </para>
+        <screen><prompt>$</prompt><userinput>export SWIFT_PROXY_CONF="/etc/swift/proxy-server.conf export ADMINPASS=$( grep super_admin_key ${SWIFT_PROXY_CONF} | awk '{ print $NF }' )</userinput> </screen>
+        </note>
+        </listitem>
+
+        <listitem>
+            <para>Run the swift CLI, swift, with the correct Identity
+                service URL. Export the information for ADMINPASS
+                using <code>$ export
+                ADMINPASS=secretword</code>.</para>
+            <screen>
+<prompt>$</prompt> <userinput>swift -V 2.0 -A http://&lt;AUTH_HOSTNAME&gt;:5000/v2.0 -U openstackDemo:adminUser -K $ADMINPASS stat</userinput>
+            </screen>
+        </listitem>
+        <listitem>
+            <para>Get an X-Storage-Url and
+                X-Auth-Token:</para>
+            <screen><prompt>$</prompt> <userinput>curl -k -v -H 'X-Storage-User: openstackDemo:adminUser' -H 'X-Storage-Pass: $ADMINPASS' http://&lt;AUTH_HOSTNAME&gt;:5000/auth/v1.0</userinput>
+            </screen>
+        </listitem>
+        <listitem>
+            <para>Check that you can HEAD the
+                account:</para>
+            <screen><prompt>$</prompt> <userinput>curl -k -v -H 'X-Auth-Token: &lt;token-from-x-auth-token-above&gt;' &lt;url-from-x-storage-url-above&gt;</userinput>
+            </screen>
+        </listitem>
+        <listitem>
+            <para>Use swift to upload a few files
+                named
+                &#8216;bigfile[1-2].tgz&#8217; to a
+                container named
+                &#8216;myfiles&#8217;:</para>
+            <screen><prompt>$</prompt> <userinput>swift -A http://&lt;AUTH_HOSTNAME&gt;:5000/v2.0 -U openstackDemo:adminUser -K $ADMINPASS upload myfiles bigfile1.tgz</userinput>
+<prompt>$</prompt> <userinput>swift -A http://&lt;AUTH_HOSTNAME&gt;:5000/v2.0 -U openstackDemo:adminUser -K $ADMINPASS upload myfiles bigfile2.tgz</userinput>
+            </screen>
+        </listitem>
+        <listitem>
+            <para>Use swift to download all files
+                from the &#8216;myfiles&#8217;
+                container:</para>
+            <screen><prompt>$</prompt> <userinput>swift -A http://&lt;AUTH_HOSTNAME&gt;:5000/v2.0 -U openstackDemo:adminUser -K $ADMINPASS download myfiles</userinput>
+            </screen>
+        </listitem>
+    </orderedlist>
+</section>
+

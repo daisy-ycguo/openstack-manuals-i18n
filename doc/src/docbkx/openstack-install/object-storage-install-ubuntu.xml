@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="installing-openstack-object-storage-on-ubuntu"    
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>Installing OpenStack Object Storage on Ubuntu</title>
+    <para>Though you can install OpenStack Object Storage for development or testing purposes on a single server, a multiple-server installation enables the high availability and redundancy you want in a production distributed object storage system.</para>
+    <para>If you would like to perform a single node installation on
+        Ubuntu for development purposes from source code, use the
+        Swift All In One instructions or DevStack. See <link
+            xlink:href="http://swift.openstack.org/development_saio.html"
+            >http://swift.openstack.org/development_saio.html</link>
+        for manual instructions or <link xlink:href="http://devstack.org">http://devstack.org</link> for all-in-one
+        including authentication and a dashboard.</para>
+    <section xml:id="before-you-begin-swift-install">
+        <title>Before You Begin</title>
+        <para>Have a copy of the Ubuntu Server installation media on
+            hand if you are installing on a new server. </para>
+        <para>This document demonstrates installing a cluster using the following
+            types of nodes:</para>
+        <itemizedlist>
+            <listitem>
+                <para>One Proxy node which runs the swift-proxy-server
+                    processes and may also run the optional swauth or
+                    tempauth services, this walkthrough uses the
+                    Identity service code-named Keystone. The proxy
+                    server serves proxy requests to the appropriate
+                    Storage nodes.</para>
+            </listitem>
+            <listitem>
+                <para>Five Storage nodes that run the swift-account-server,
+                    swift-container-server, and swift-object-server
+                    processes which control storage of the account
+                    databases, the container databases, as well as the
+                    actual stored objects.</para>
+            </listitem>
+        </itemizedlist>
+        <note>
+            <para>Fewer Storage nodes can be used initially, but a minimum of 5
+                is recommended for a production cluster.</para>
+        </note>
+    </section>
+    
+   
+    <section xml:id="general-installation-steps-swift">
+        <title>General Installation Steps </title>
+        <orderedlist>
+            <listitem>
+                <para>Install the baseline operating system, such as Ubuntu Server (10.04
+                    through 12.04) or RHEL, CentOS, or Fedora, on all nodes.</para>
+            </listitem>
+            <listitem><para>Install the swift service and openSSH. </para>
+                <screen os="ubuntu"><prompt>#</prompt> <userinput>apt-get install swift openssh-server  rsync memcached python-netifaces python-xattr python-memcache</userinput> </screen>
+                <screen os="rhel;centos;fedora"><prompt>#</prompt> <userinput>yum install openstack-swift openstack-swift-proxy openstack-swift-account openstack-swift-container openstack-swift-object memcached</userinput> </screen>
+            </listitem>
+            <listitem><para>Create and populate configuration directories on all nodes:</para>
+                <para><literallayout class="monospaced">mkdir -p /etc/swift
+chown -R swift:swift /etc/swift/</literallayout></para>
+            </listitem>
+            
+            <listitem><para>Create /etc/swift/swift.conf:</para>
+                <para><literallayout class="monospaced"><xi:include parse="text" href="samples/swift.conf.txt" />
+                                </literallayout></para>
+            </listitem>
+        </orderedlist>
+        <note>
+            <para>The suffix value in
+                    <filename>/etc/swift/swift.conf</filename> should
+                be set to some random string of text to be used as a
+                salt when hashing to determine mappings in the ring.
+                This file should be the same on every node in the
+                cluster!</para>
+        </note>
+        <para>Next, set up your storage nodes, proxy node, and an auth
+            node, in this walkthrough we'll use the OpenStack Identity
+            Service, Keystone, for the common auth piece.</para>
+    </section>
+
+</section>

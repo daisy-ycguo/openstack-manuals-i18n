@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="installing-openstack-dashboard" 
+    xmlns="http://docbook.org/ns/docbook" 
+    xmlns:xi="http://www.w3.org/2001/XInclude" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    version="5.0">
+    <title>Installing the OpenStack Dashboard</title>
+    <para>Here are the overall steps for creating the OpenStack dashboard.</para>
+    <orderedlist>
+        <listitem>
+            <para>Install the OpenStack Dashboard framework including Apache and related
+                modules.</para>
+        </listitem>
+        <listitem>
+            <para>Configure the Dashboard.</para>
+        </listitem>
+        <listitem>
+            <para>Restart and run the Apache server.</para>
+        </listitem>
+    </orderedlist>
+    <para>Install the OpenStack Dashboard, as root:</para>
+    <screen os="ubuntu"><prompt>#</prompt> <userinput>apt-get install -y memcached libapache2-mod-wsgi openstack-dashboard</userinput></screen>
+    <screen os="rhel;centos;fedora"><prompt>#</prompt> <userinput>yum install -y memcached libapache2-mod-wsgi openstack-dashboard</userinput></screen>
+    <para>Next, modify the variable <literal>CACHE_BACKEND</literal> in
+            <filename>/etc/openstack-dashboard/local_settings.py</filename> to match the ones set in
+            <filename>/etc/memcached.conf</filename>. Open
+            <filename>/etc/openstack-dashboard/local_settings.py</filename> and look for this
+        line:</para>
+    <programlisting>CACHE_BACKEND = 'memcached://127.0.0.1:11211/'</programlisting>
+    <note><para>The address and port in the new value need to be equal to
+        the ones set in <filename>/etc/memcached.conf</filename>.</para></note>
+    <para>If you change the memcached settings, restart the Apache web
+        server for the changes to take effect.</para>
+</section>

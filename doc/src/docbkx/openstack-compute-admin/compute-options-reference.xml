@@ -1,0 +1,39 @@
+<?xml version= "1.0" encoding= "UTF-8"?>
+<chapter xml:id= "compute-options-reference"
+    xmlns= "http://docbook.org/ns/docbook"
+    xmlns:xi= "http://www.w3.org/2001/XInclude"
+    xmlns:xlink= "http://www.w3.org/1999/xlink" version= "5.0">
+    <title>Reference for Configuration Options in nova.conf</title>
+    <para>For a complete list of all available configuration options
+        for each OpenStack Compute service, run
+        bin/nova-&lt;servicename> --help. </para>
+
+    <important>
+      <para>Nova options should <emphasis>not</emphasis>
+      be quoted.</para>
+    </important>
+    <xi:include href="tables/common-nova-conf.xml"/>
+    <xi:include href="tables/database-nova-conf.xml"/>
+    <xi:include href="tables/ipv6-nova-conf.xml"/>
+    <xi:include href="tables/log-file-nova-conf.xml"/>
+    <xi:include href="tables/nova-services-nova-conf.xml"/>    
+    <xi:include href="tables/ca-nova-conf.xml"/>
+    <xi:include href="tables/nova-policies-nova-conf.xml"/>
+    <xi:include href="tables/nova-quotas-nova-conf.xml" />
+    <xi:include href="tables/nova-testing-nova-conf.xml" />
+    <xi:include href="tables/auth-nova-conf.xml" />
+    <xi:include href="tables/ldap-nova-conf.xml"/>
+    <xi:include href="tables/roles-auth-nova-conf.xml" />
+    <xi:include href="tables/nova-ec2-nova-conf.xml" />
+    <xi:include href="tables/vnc-guests-nova-conf.xml" />
+    <xi:include href="tables/network-nova-conf.xml" />
+    <xi:include href="tables/live-migration-nova-conf.xml"/>
+    <xi:include href="tables/compute-nodes-nova-conf.xml" />
+    <xi:include href="tables/bare-metal-nova-conf.xml" />
+    <xi:include href="tables/hypervisors-nova-conf.xml"/>
+    <xi:include href="tables/console-xenapi-vmrc-nova-conf.xml"/>
+    <xi:include href="tables/s3-nova-conf.xml"/>
+    <xi:include href="tables/scheduler-nova-conf.xml" />
+    <xi:include href="tables/volumes-nova-conf.xml" />
+
+</chapter>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:exsl="http://exslt.org/common" xmlns:ng="http://docbook.org/docbook-ng" xmlns:fb="http://ogp.me/ns/fb#"><head>
+<meta http-equiv="X-UA-Compatible" content="IE=7"/>
+<title>Getting the Authentication Token - Programming OpenStack Compute API编程
+   - 1.1</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"/><link rel="home" href="index.html" title="Programming OpenStack Compute API编程"/><link rel="up" href="the-basics.html" title="第 2 章 The Basics"/><link rel="prev" href="remembering-basic-security-hygiene.html" title="Remembering Basic Security Hygiene"/><link rel="next" href="what-about-https.html" title="What About HTTPS?"/><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><script type="text/javascript">
+            //The id for tree cookie
+            var treeCookieId = "treeview-2340";
+            var language = "en";
+            var w = new Object();
+            //Localization
+            txt_filesfound = 'Results';
+            txt_enter_at_least_1_char = "You must enter at least one character.";
+            txt_browser_not_supported = "Your browser is not supported. Use of Mozilla Firefox is recommended.";
+            txt_please_wait = "Please wait. Search in progress...";
+            txt_results_for = "Results for: ";
+        </script><style type="text/css">
+            input {
+            margin-bottom: 5px;
+            margin-top: 2px;
+            }
+
+            .folder {
+            display: block;
+            height: 22px;
+            padding-left: 20px;
+            background: transparent url(../common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+            }
+            
+        </style><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/><link rel="stylesheet" type="text/css" href="../common/css/positioning.css"/><link rel="stylesheet" type="text/css" href="../common/css/custom.css"/><link rel="canonical" href="http://docs.openstack.org/api/openstack-compute/programmer/content//getting-the-authentication-token.html"/><!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><link rel="stylesheet" type="text/css" href="../common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css"/><link rel="stylesheet" type="text/css" href="../common/jquery/treeview/jquery.treeview.css"/><script type="text/javascript" src="../common/jquery/jquery-1.4.3.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery-ui-1.8.2.custom.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.cookie.js"><!----></script><script type="text/javascript" src="../common/jquery/treeview/jquery.treeview.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.qtip-1.0.0-rc3/jquery.qtip-1.0.0-rc3.min.js"><!--jQuery plugin for glossary popups. --></script><script type="text/javascript" src="search/htmlFileList.js"><!----></script><script type="text/javascript" src="search/htmlFileInfoList.js"><!----></script><script type="text/javascript" src="search/nwSearchFnt.js"><!----></script><script type="text/javascript" src="search/stemmers/en_stemmer.js"><!--//make this scalable to other languages as well.--></script><script type="text/javascript" src="search/index-1.js"><!----></script><script type="text/javascript" src="search/index-2.js"><!----></script><script type="text/javascript" src="search/index-3.js"><!----></script><script type="text/javascript">
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-17511903-6']);
+	  </script><script type="text/javascript" src="../common/ga.js"><!----></script><script type="text/javascript" src="http://www.tabpress.com/_js/ga_social_tracking.js"><!----></script><script>
+	    (function(){var twitterWidgets = document.createElement('script');
+        twitterWidgets.type = 'text/javascript';
+        twitterWidgets.async = true;
+        twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+        // Setup a callback to track once the script loads.
+        twitterWidgets.onload = _ga.trackTwitter;
+        document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+        })();
+      </script></head><body><div id="header"><a onclick="_gaq.push(['_trackEvent', 'Header', 'logo', 'click', 1]);" target="_blank" href="http://www.openstack.org"><img src="../common/images/openstack-logo.png" alt="OpenStack Documentation" width="157" height="47"/></a><h1>Getting the Authentication Token</h1><div id="navheader" align="right"><!----><table class="navLinks"><tr><td><a id="showHideButton" onclick="showHideToc(); _gaq.push(['_trackEvent', 'Header', 'show/hide', 'click', 1]);" class="pointLeft" title="Hide TOC tree">Sidebar
+                            </a></td><td><a accesskey="p" class="navLinkPrevious" onclick="_gaq.push(['_trackEvent', 'Header', 'prevLink', 'click', 1]);" tabindex="5" href="remembering-basic-security-hygiene.html">上一页</a>
+				      |
+                                        <a accesskey="u" class="navLinkUp" onclick="_gaq.push(['_trackEvent', 'Header', 'upLink', 'click', 1]);" tabindex="5" href="the-basics.html">上一级</a>
+				  |
+                                    <a accesskey="n" class="navLinkNext" onclick="_gaq.push(['_trackEvent', 'Header', 'nextLink', 'click', 1]);" tabindex="5" href="what-about-https.html">下一页</a></td></tr></table></div></div><div id="toolbar" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"><div id="toolbar-left"><p class="breadcrumbs"><a href="http://docs.openstack.org/">OpenStack Manuals</a><a href="index.html">Programming OpenStack Compute API编程
+   - 1.1</a></p><a onclick="_gaq.push(['_trackEvent', 'Header', 'pdfDownload', 'click', 1]);" alt="Download a pdf of this document" class="pdficon" href="../openstackapi-programming.pdf"><img src="../common/images/pdf.png"/></a></div></div><div id="content"><div class="statustext"> </div><div class="section"><div xmlns="" class="titlepage"><div><div><h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="getting-the-authentication-token"> </a>Getting the Authentication Token</h2></div></div></div><p>
+        In order to obtain an API token you will need to request it from
+        your OpenStack cloud provider's authentication server. Your
+        provider will have to give you the URL of their authentication
+        server as well as your username and password.
+      </p><p>
+        The OpenStack Compute API is implemented using a convention
+        known as "representational state transfer" (REST),
+        which is a way of using various HTTP methods (GET, POST, PUT,
+        DELETE) to manage resources described using paths to those
+        resources. It sounds more complex than it is in reality.
+      </p><p>
+        The following example shows how to use the
+        <span class="strong"><strong>curl</strong></span> command to obtain the
+        authentication token using the HTTP GET method:
+      </p><pre class="screen">
+$ curl -d '{"passwordCredentials": {"username": "joe", "password": "shhh"}}' -H "Content-type: application/json" http://localhost:5000/v2.0/tokens
+</pre><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <span class="strong"><strong>joe</strong></span> — your username,
+            replace <span class="strong"><strong>joe</strong></span> without your
+            username, unless it is
+            <span class="strong"><strong>joe</strong></span>.
+          </p></li><li class="listitem"><p>
+            <span class="strong"><strong>shhh</strong></span> — the password for
+            your OpenStack account, please do not use
+            <span class="strong"><strong>shhh</strong></span>.
+          </p></li><li class="listitem"><p>
+            <span class="strong"><strong>localhost:5000</strong></span> — the URL
+            of the authentication server,
+            <span class="strong"><strong>localhost</strong></span> is just a
+            placeholder, please use an IP address or a full hostname
+            (e.g. <span class="emphasis"><em>somehost.example.com</em></span>). Please pay
+            attention to the port number, it does matter. If your
+            provider fails to tell you which port should be used, try
+            <span class="strong"><strong>5000</strong></span> and
+            <span class="strong"><strong>5001</strong></span> as these are
+            typically used by the OpenStack authentication servers to
+            listen for authentication requests.
+          </p></li><li class="listitem"><p>
+            <span class="strong"><strong>/v2.0/tokens</strong></span> — the path
+            to the token provider.
+          </p></li></ul></div><p>
+        What you will get in return should look like the following
+        stream of code:
+      </p><pre class="screen">
+{"auth": {"token": {"expires": "2015-02-05T00:00:00", "id": "999888777666"}, "serviceCatalog": {"glance": [{"adminURL": "http://10.0.2.15:9292/v1", "region": "RegionOne", "internalURL": "http://10.0.2.15:9292/v1", "publicURL": "http://10.0.2.15:9292/v1"}], "identity": [{"adminURL": "http://10.0.2.15:5001/v2.0", "region": "RegionOne", "internalURL": "http://10.0.2.15:5000/v2.0", "publicURL": "http://10.0.2.15:5000/v2.0"}], "nova": [{"adminURL": "http://10.0.2.15:8774/v1.1/openstack", "region": "RegionOne", "internalURL": "http://10.0.2.15:8774/v1.1/openstack", "publicURL": "http://10.0.2.15:8774/v1.1/openstack"}]}}}
+</pre><p>
+        It is hard to read, so here's the same output formatted for your
+        convenience:
+      </p><pre class="screen">
+{
+  "auth": {
+    "token": {
+      "expires": "2015-02-05T00:00:00", 
+      "id": "999888777666"
+    }, 
+    "serviceCatalog": {
+      "glance": [
+        {
+          "adminURL": "http://10.0.2.15:9292/v1", 
+          "region": "RegionOne", 
+          "internalURL": "http://10.0.2.15:9292/v1", 
+          "publicURL": "http://10.0.2.15:9292/v1"
+        }
+      ], 
+      "nova": [
+        {
+          "adminURL": "http://10.0.2.15:8774/v1.1/openstack", 
+          "region": "RegionOne", 
+          "internalURL": "http://10.0.2.15:8774/v1.1/openstack", 
+          "publicURL": "http://10.0.2.15:8774/v1.1/openstack"
+        }
+      ], 
+      "identity": [
+        {
+          "adminURL": "http://10.0.2.15:5001/v2.0", 
+          "region": "RegionOne", 
+          "internalURL": "http://10.0.2.15:5000/v2.0", 
+          "publicURL": "http://10.0.2.15:5000/v2.0"
+        }
+      ]
+    }
+  }
+}
+</pre><p>
+        The reponse contains the token itself (the
+        <span class="strong"><strong>id</strong></span> key in the
+        <span class="strong"><strong>token</strong></span> dictionary), the token
+        expiry date/time and the catalog of services you can talk to
+        that accept the token. The catalog lists the names of the
+        services you can access together with their region names, the
+        administration URL, the internal URL and the public URL for each
+        region. Regions are groups of servers, server farms, etc.
+        usually located in the same geogrphical area.
+      </p><p>
+        Each region is represented as a separate dictionary and those
+        dictionaries are items in a list that groups region information
+        for each service. This is an important exception to the overall
+        composition of the JSON response which is arranged in a form of
+        a nested key/value directory.
+      </p><p>
+        Although this is not going to be a frequent occurence in the
+        real world, you may get bitten by server misconfiguration in
+        test environments. If your code extracts the endpoint URLs
+        automatically, and later hangs or starts reporting strange
+        network errors, check if the URLs and port numbers returned by
+        the authentication server match the reality. It is easy to
+        forget to set the right hostname/port. The OpenStack
+        configuration is a fairly complex process and it is easy to get
+        confused. If you get an OpenStack training environment in the
+        form of a VirtualBox or VMware virtual machine, try replacing
+        whatever IP addresses or hostnames are returned by the
+        authentication server with
+        <span class="strong"><strong>localhost</strong></span> or run
+        <span class="strong"><strong>ifconfig</strong></span> to see which IP
+        addresses have been assigned to the virtual machine.
+      </p></div><script type="text/javascript" src="../common/main.js"><!----></script><hr/><div id="disqus_thread"><script type="text/javascript">
+	      var disqus_shortname = 'openstackcomputeapiprogrammer';
+	      
+	      var disqus_identifier = 'programming-openstack-compute-api-with-shell-and-python-1st-edgetting-the-authentication-token';
+	      </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><script type="text/javascript" src="../common/comments.js"><!----></script></div><hr/><div class="legal"><a href="index.html">Legal notices</a></div></div><div><div id="leftnavigation" style="padding-top:3px; background-color:white;"><div id="tabs"><ul><li><a href="#treeDiv" tabindex="1"><span class="contentsTab">目录</span></a></li><li><a href="#searchDiv" tabindex="1"><span class="searchTab">Search</span></a></li></ul><div id="treeDiv"><img src="../common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;"/><div id="ulTreeDiv" style="display:none" class="thisisthat"><ul id="tree" class="filetree"><li tabindex="2"><span class="file"><a href="why-should-you-use-cloud-computing.html">1. Why Should You Use Cloud Computing?</a></span><ul><li tabindex="2"><span class="file"><a href="how-will-you-manage-it-all.html">How Will You Manage It All?</a></span></li><li tabindex="2"><span class="file"><a href="the-solution-openstack-compute-api.html">The Solution: OpenStack Compute API</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="the-basics.html">2. The Basics</a></span><ul><li tabindex="2"><span class="file"><a href="getting-python.html">Getting Python</a></span></li><li tabindex="2"><span class="file"><a href="installing-python-on-your-machine.html">Installing Python on Your Machine</a></span></li><li tabindex="2"><span class="file"><a href="examples.html">Examples</a></span></li><li tabindex="2"><span class="file"><a href="getting-the-keys-to-the-kingdom.html">Getting the Keys to the Kingdom</a></span></li><li tabindex="2"><span class="file"><a href="remembering-basic-security-hygiene.html">Remembering Basic Security Hygiene</a></span></li><li tabindex="2" id="webhelp-currentid"><span class="file"><a href="getting-the-authentication-token.html">Getting the Authentication Token</a></span><ul><li tabindex="2"><span class="file"><a href="what-about-https.html">What About HTTPS?</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="using-python-to-obtain-the-authentication-token.html">Using Python to Obtain the Authentication Token</a></span></li><li tabindex="2"><span class="file"><a href="getting-the-api-endpoint-url.html">Getting the API Endpoint URL</a></span><ul><li tabindex="2"><span class="file"><a href="getting-your-nova-credentials----the-drop-in-script-snippet-for-your-python-scripts.html">Getting Your Nova Credentials -- The Drop-In Script
+        Snippet for Your Python Scripts</a></span></li></ul></li></ul></li><li tabindex="2"><span class="file"><a href="servers.html">3. Servers</a></span><ul><li tabindex="2"><span class="file"><a href="creating-servers.html">Creating Servers</a></span><ul><li tabindex="2"><span class="file"><a href="listing-images.html">Listing Images</a></span></li><li tabindex="2"><span class="file"><a href="listing-flavors.html">Listing Flavors</a></span></li><li tabindex="2"><span class="file"><a href="booting-a-new-server.html">Booting a New Server</a></span></li><li tabindex="2"><span class="file"><a href="using-curl-to-boot-a-new-server.html">Using Curl to Boot a New Server</a></span></li><li tabindex="2"><span class="file"><a href="customizing-your-server-adding-metadata.html">Customizing Your Server: Adding Metadata</a></span></li><li tabindex="2"><span class="file"><a href="customizing-your-server-adding-custom-files.html">Customizing Your Server: Adding Custom Files</a></span></li><li tabindex="2"><span class="file"><a href="server-limits.html">Server Limits</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="modifying-live-servers.html">Modifying Live Servers</a></span><ul><li tabindex="2"><span class="file"><a href="listing-servers.html">Listing Servers</a></span></li><li tabindex="2"><span class="file"><a href="listing-servers-using-python.html">Listing Servers Using Python</a></span></li><li tabindex="2"><span class="file"><a href="getting-detailed-server-information.html">Getting Detailed Server Information</a></span></li><li tabindex="2"><span class="file"><a href="getting-detailed-server-information-using-python.html">Getting Detailed Server Information Using Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="listing-server-addresses.html">Listing Server Addresses</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-addresses-using-python.html">Listing Server Addresses Using Python</a></span></li><li tabindex="2"><span class="file"><a href="listing-network-specific-server-addresses.html">Listing Network-Specific Server Addresses</a></span></li><li tabindex="2"><span class="file"><a href="listing-network-specific-server-addresses-using-python.html">Listing Network-Specific Server Addresses Using
+      Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="server-metadata.html">4. Server Metadata</a></span><ul><li tabindex="2"><span class="file"><a href="listing-server-metadata.html">Listing Server Metadata</a></span></li><li tabindex="2"><span class="file"><a href="lisitng-server-metadata-using-python.html">Lisitng Server Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-metadata-items.html">Listing Server Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-metadata-items-using-python.html">Listing Server Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-metadata.html">Setting Server Metadata</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-metadata-using-python.html">Setting Server Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-metadata-items.html">Setting Server Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-metadata-items-using-python.html">Setting Server Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="updating-server-metadata.html">Updating Server Metadata</a></span></li><li tabindex="2"><span class="file"><a href="updating-server-metadata-using-python.html">Updating Server Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-metadata-items.html">Deleting Server Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-metadata-items-using-python.html">Deleting Server Metadata Items Using Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="server-image-metadata.html">5. Server Image Metadata</a></span><ul><li tabindex="2"><span class="file"><a href="listing-server-image-metadata.html">Listing Server Image Metadata</a></span></li><li tabindex="2"><span class="file"><a href="lisitng-server-image-metadata-using-python.html">Lisitng Server Image Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-image-metadata-items.html">Listing Server Image Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="listing-server-metadata-items-using-python-1.html">Listing Server Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-image-metadata.html">Setting Server Image Metadata</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-image-metadata-using-python.html">Setting Server Image Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-image-metadata-items.html">Setting Server Image Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="setting-server-image-metadata-items-using-python.html">Setting Server Image Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="updating-server-image-metadata.html">Updating Server Image Metadata</a></span></li><li tabindex="2"><span class="file"><a href="updating-server-image-metadata-using-python.html">Updating Server Image Metadata Using Python</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-image-metadata-items.html">Deleting Server Image Metadata Items</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-image-metadata-items-using-python.html">Deleting Server Image Metadata Items Using Python</a></span></li><li tabindex="2"><span class="file"><a href="updating-servers-changing-server-name.html">Updating Servers: Changing Server Name</a></span></li><li tabindex="2"><span class="file"><a href="updating-servers-changing-server-name-using-python.html">Updating Servers: Changing Server Name Using Python</a></span></li><li tabindex="2"><span class="file"><a href="updating-servers-changing-server-access-address.html">Updating Servers: Changing Server Access Address</a></span></li><li tabindex="2"><span class="file"><a href="updating-servers-changing-server-access-address-using-python.html">Updating Servers: Changing Server Access Address Using
+      Python</a></span></li><li tabindex="2"><span class="file"><a href="changing-root-administrator-password.html">Changing Root (Administrator) Password</a></span></li><li tabindex="2"><span class="file"><a href="changing-root-administrator-password-using-python.html">Changing Root (Administrator) Password Using Python</a></span></li><li tabindex="2"><span class="file"><a href="rebooting-servers.html">Rebooting Servers</a></span></li><li tabindex="2"><span class="file"><a href="rebooting-servers-using-python.html">Rebooting Servers Using Python</a></span></li><li tabindex="2"><span class="file"><a href="rebuilding-servers.html">Rebuilding Servers</a></span></li><li tabindex="2"><span class="file"><a href="resizing-servers.html">Resizing Servers</a></span></li><li tabindex="2"><span class="file"><a href="resizing-servers-using-python.html">Resizing Servers Using Python</a></span></li><li tabindex="2"><span class="file"><a href="confirming-server-resize.html">Confirming Server Resize</a></span></li><li tabindex="2"><span class="file"><a href="confirming-server-resize-using-python.html">Confirming Server Resize Using Python</a></span></li><li tabindex="2"><span class="file"><a href="reverting-server-resize.html">Reverting Server Resize</a></span></li><li tabindex="2"><span class="file"><a href="reverting-server-resize-using-python.html">Reverting Server Resize Using Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="server-images.html">6. Server Images</a></span><ul><li tabindex="2"><span class="file"><a href="creating-server-images.html">Creating Server Images</a></span></li><li tabindex="2"><span class="file"><a href="creating-server-images-using-python.html">Creating Server Images Using Python</a></span></li><li tabindex="2"><span class="file"><a href="deleting-servers.html">Deleting Servers</a></span></li><li tabindex="2"><span class="file"><a href="deleting-servers-using-python.html">Deleting Servers Using Python</a></span></li><li tabindex="2"><span class="file"><a href="deleting-server-images.html">Deleting Server Images</a></span></li><li tabindex="2"><span class="file"><a href="deleting-servers-images-using-python.html">Deleting Servers Images Using Python</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="additional-tools.html">7. Additional Tools</a></span></li></ul></div></div><div id="searchDiv"><div id="search"><form onsubmit="Verifie(ditaSearch_Form);return false" name="ditaSearch_Form" class="searchForm"><fieldset class="searchFieldSet"><legend>Search</legend><center><input id="textToSearch" name="textToSearch" type="text" class="searchText"/> &nbsp; <input onclick="Verifie(ditaSearch_Form)" type="button" class="searchButton" value="Go" id="doSearch"/></center></fieldset></form></div><div id="searchResults"><center/></div><p class="searchHighlight"><a href="#" onclick="toggleHighlight()">Search Highlighter (On/Off)</a></p></div></div></div></div><script type="text/javascript" src="../common/jquery/jquery.qtip-1.0.0-rc3/jquery.qtip-1.0.0-rc3.min.js"><!--jQuery plugin for glossary popups. -->
+                   $('a[title]').qtip({ style: { name: 'cream', tip: true } })
+                </script></body></html>
