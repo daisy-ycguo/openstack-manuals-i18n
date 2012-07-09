@@ -1,12 +1,13 @@
 # 
 # Translators:
+#   <daisy.ycguo@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenStack Manuals\n"
 "POT-Creation-Date: 2012-06-18 17:13+0800\n"
-"PO-Revision-Date: 2012-06-20 02:35+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese (China) (http://www.transifex.net/projects/p/openstack-manuals-i18n/language/zh_CN/)\n"
+"PO-Revision-Date: 2012-07-06 06:50+0000\n"
+"Last-Translator: daisy.ycguo <daisy.ycguo@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/openstack-manuals-i18n/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,51 +16,51 @@ msgstr ""
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml9(title)
 msgid "Programming OpenStack Compute API"
-msgstr ""
+msgstr "OpenStack Compute API编程"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml13(firstname)
 msgid "Jacek"
-msgstr ""
+msgstr "Jacek"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml14(surname)
 msgid "Artymiak"
-msgstr ""
+msgstr "Artymiak"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml17(orgname)
 msgid "Rackspace"
-msgstr ""
+msgstr "Rackspace"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml20(edition)
 msgid "1st"
-msgstr ""
+msgstr "1st"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml22(year)
 msgid "2011"
-msgstr ""
+msgstr "2011"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml23(year)
 msgid "2012"
-msgstr ""
+msgstr "2012"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml24(holder)
 msgid "OpenStack LLC"
-msgstr ""
+msgstr "OpenStack LLC"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml26(releaseinfo)
 msgid "1.1"
-msgstr ""
+msgstr "1.1"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml27(productname)
 msgid "OpenStack Compute"
-msgstr ""
+msgstr "OpenStack Compute"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml28(pubdate)
 msgid "2012-03-21"
-msgstr ""
+msgstr "2012-03-21"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml31(remark)
 msgid "Copyright details are filled in by the template."
-msgstr ""
+msgstr "版权信息来自于模板"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml35(para)
 msgid ""
@@ -69,11 +70,11 @@ msgid ""
 "programming language. As such it will be of interest to any system "
 "administrator and programmer using BSD, Linux, Unix, Mac OS X, and Microsoft"
 " Windows operating systems."
-msgstr ""
+msgstr "该书介绍了使用OpenStack Compute Nova API, v1.1的编程。对于那些熟悉Unix shell (Bash, sh) 或者Python编程语言的程序员和系统管理员来说，都是又意义的。As such it will be of interest to any system administrator and programmer using BSD, Linux, Unix, Mac OS X, and Microsoft Windows operating systems."
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml45(title)
 msgid "Why Should You Use Cloud Computing?"
-msgstr ""
+msgstr "你为什么要用到云计算"
 
 #: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml46(para)
 msgid ""
