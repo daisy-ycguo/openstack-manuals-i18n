@@ -8,7 +8,7 @@
     to the other servers you intend to use for OpenStack services, as
     root:</para>
   <screen os="ubuntu;deb"><prompt>#</prompt> <userinput>apt-get install keystone</userinput></screen>
-  <screen os="rhel;centos;fedora"><prompt>$</prompt> <userinput>yum install openstack-utils openstack-keystone</userinput> </screen>
+  <screen os="rhel;centos;fedora"><prompt>$</prompt> <userinput>yum install openstack-utils openstack-keystone python-keystoneclient</userinput> </screen>
   <para>After installing, you need to delete the sqlite database it
     creates, then change the configuration to point to a MySQL
     database. This configuration enables easier scaling scenarios
@@ -17,7 +17,7 @@
     database backend has built-in data replication features and
     documentation surrounding high availability and data redundancy
     configurations.</para>
-  <para>Delete the <filename>keystone.db</filename> file created in
+  <para os="ubuntu">Delete the <filename>keystone.db</filename> file created in
     the <filename>/var/lib/keystone</filename>
     directory.<screen><prompt>#</prompt> <userinput>rm /var/lib/keystone/keystone.db</userinput></screen></para>
   <para>Configure the production-ready backend data store rather than
@@ -26,7 +26,7 @@
   <para>Install MySQL as
   root:</para>
   <screen os="ubuntu;deb"><prompt>#</prompt> <userinput>apt-get install python-mysqldb mysql-server</userinput></screen>
-  <screen os="rhel;fedora;centos"><prompt>$</prompt> <userinput>yum install mysql mysql-server</userinput>
+  <screen os="rhel;fedora;centos"><prompt>$</prompt> <userinput>yum install mysql mysql-server MySQL-python</userinput>
   </screen>
   <para>During the install, you'll be prompted for the mysql root
     password. Enter a password of your choice and verify it.</para>
@@ -103,9 +103,7 @@
         get other services authenticating and authorizing with the
         Identity service. </para>
       <para>Scripted configuration:</para>
-      <para>On Fedora, RHEL, and Centos, you can run this script to
-        populate with sample data.</para>
-      <screen os="rhel;centos;fedora"><prompt>$</prompt> <userinput>sudo ADMIN_PASSWORD=$OS_PASSWORD SERVICE_PASSWORD=servicepass openstack-keystone-sample-data</userinput></screen>
+      <!--<para>On Fedora, RHEL, and Centos, you can run this script to populate with sample data.</para><screen os="rhel;centos;fedora"><prompt>$</prompt> <userinput>sudo ADMIN_PASSWORD=$OS_PASSWORD SERVICE_PASSWORD=servicepass openstack-keystone-sample-data</userinput></screen>-->
       <para>The Keystone project offers a bash script for populating
         tenants, users, and roles at
         <link xlink:href="https://github.com/openstack/keystone/blob/master/tools/sample_data.sh">https://github.com/openstack/keystone/blob/master/tools/sample_data.sh</link>
@@ -626,21 +624,21 @@ service-create \
  endpoint-create \
  --region RegionOne \
  --service_id=272efad2d1234376cbb911c1e5a5a6ed \
- --publicurl 'http://127.0.0.1:8888/v1/AUTH_%(tenant_id)s' \
- --adminurl 'http://127.0.0.1:8888/' \
- --internalurl 'http://127.0.0.1:8888/v1/AUTH_%(tenant_id)s'
+ --publicurl 'http://192.168.206.130:8888/v1/AUTH_%(tenant_id)s' \
+ --adminurl 'http://192.168.206.130:8888/v1' \
+ --internalurl 'http://192.168.206.130:8888/v1/AUTH_%(tenant_id)s'
 </userinput>
 <computeroutput>
-+-------------+----------------------------------------------------------------+
-|   Property  |                         Value                                  |
-+-------------+----------------------------------------------------------------+
-| adminurl    | http://127.0.0.1:8080/                                         |
-| id          | e32b3c4780e51332f9c128a8c208a5a4                               |
-| internalurl | http://192.168.206.130:8080                                    |
-| publicurl   | http://127.0.0.1:8080/v1/AUTH_eb7e0c10a99446cfa14c244374549e9d |
-| region      | RegionOne                                                      |
-| service_id  | 272efad2d1234376cbb911c1e5a5a6ed                               |
-+-------------+----------------------------------------------------------------+
++-------------+---------------------------------------------------+
+|   Property  |                       Value                       |
++-------------+---------------------------------------------------+
+| adminurl    | http://192.168.206.130:8888/v1                    |
+| id          | e32b3c4780e51332f9c128a8c208a5a4                  |
+| internalurl | http://192.168.206.130:8888/v1/AUTH_%(tenant_id)s |
+| publicurl   | http://192.168.206.130:8888/v1/AUTH_%(tenant_id)s |
+| region      | RegionOne                                         |
+| service_id  | 272efad2d1234376cbb911c1e5a5a6ed                  |
++-------------+---------------------------------------------------+
 </computeroutput>
 </screen>
     </section>

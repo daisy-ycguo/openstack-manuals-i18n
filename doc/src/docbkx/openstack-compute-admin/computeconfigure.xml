@@ -43,7 +43,7 @@
           <filename>nova.conf</filename> file by entering a new line
         with a <literal>#</literal> sign at the beginning of the line.
         To see a listing of all possible configuration options, refer
-        to the <link linkend="compute-options-reference" />.</para>
+        to the <link linkend="compute-options-reference">Configuration Options Reference</link>.</para>
 
       <para>Here is a simple example <filename>nova.conf</filename>
         file for a small private cloud, with all the cloud controller
@@ -193,8 +193,7 @@ source ~/.bashrc</userinput></screen>
       <title>Enabling Access to VMs on the Compute Node</title>
 
       <para>One of the most commonly missed configuration areas is not
-      allowing the proper access to VMs. Use the
-      <command>euca-authorize</command> command to enable access. Below, you
+      allowing the proper access to VMs. Use nova client commands to enable access. Below, you
       will find the commands to allow <command>ping</command> and
       <command>ssh</command> to your VMs :</para>
 
@@ -481,7 +480,7 @@ glance_api_servers=$nova_glance_host
     </simplesect>
 
     <simplesect>
-      <title>XenServer 5.6, Flat networking, MySQL, and Glance, OpenStack
+      <title>XenServer, Flat networking, MySQL, and Glance, OpenStack
       API</title>
 
       <para>This example <filename>nova.conf</filename> file is from an
@@ -584,7 +583,7 @@ xenapi_remap_vbd_dev=true
     for all instances. The Cactus release includes support for the FlatManager
     networking mode with a required database migration.</para>
 
-    <para>This configuration has been tested on Ubuntu 10.04 with VM images
+    <para>This configuration has been tested with VM images
     that have IPv6 stateless address autoconfiguration capability (must use
     EUI-64 address for stateless address autoconfiguration), a requirement for
     any VM you want to run with an IPv6 address. Each node that executes a
@@ -693,6 +692,8 @@ xenapi_remap_vbd_dev=true
           </para></note>
          <note><para>This feature for cloud administrators only, since the use of nova-manage is necessary.
           </para></note>
+      <note><para>You must specify <literal>vncserver_listen=0.0.0.0</literal> or live migration will not work
+        correctly. See <link linkend="important-nova-compute-options">important nova-compute options</link> for more details on this option.</para></note>
       </para>
 
     <para><emphasis role="bold">Example Nova Installation Environment</emphasis> <itemizedlist>

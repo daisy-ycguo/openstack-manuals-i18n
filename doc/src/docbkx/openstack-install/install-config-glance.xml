@@ -10,10 +10,10 @@
     
     <para>Install the Image service, as root:</para>
     <screen os="ubuntu"><prompt>#</prompt> <userinput>apt-get install glance</userinput></screen>
-    <screen os="rhel;centos;fedora"><prompt>$</prompt> <userinput>sudo yum  install openstack-nova openstack-glance</userinput></screen>
+    <screen os="rhel;centos;fedora"><prompt>$</prompt> <userinput>sudo yum  install openstack-nova-essex openstack-glance-essex</userinput></screen>
     <para>After installing, you need to delete the sqlite database it creates, then change the
         configuration to point to the MySQL database. </para>
-    <para>Delete the <filename>glance.sqlite</filename> file created in the
+    <para os="ubuntu">Delete the <filename>glance.sqlite</filename> file created in the
             <filename>/var/lib/glance/</filename> directory.</para>
     <screen><prompt>#</prompt> <userinput>rm /var/lib/glance/glance.sqlite</userinput></screen>
  <section xml:id="configure-glance-mysql"><title>Configuring the Image Service database backend</title>
@@ -33,10 +33,6 @@
 admin_tenant_name = service
 admin_user = glance
 admin_password = glance</screen>
-        <para>Ensure that the glance-api pipeline section includes
-            <literal>authtoken</literal>:</para>
-           <screen>[pipeline:glance-api]
-pipeline = versionnegotiation authtoken auth-context apiv1app</screen>
            <para>Add this to the end of <filename>/etc/glance/glance-api.conf</filename>.</para>
            <screen>[paste_deploy]
 flavor = keystone</screen>
@@ -61,9 +57,8 @@ admin_password = glance</screen>
 #pipeline = context registryapp
 # NOTE: use the following pipeline for keystone
 pipeline = authtoken auth-context context registryapp</screen>
-        <para>Ensure that the <filename>/etc/glance/glance-registry.conf</filename> and
-            <filename>/etc/glance/glance-scrubber.conf</filename>
-            files point to the MySQL database rather than
+        <para>Ensure that <filename>/etc/glance/glance-registry.conf</filename>
+            points to the MySQL database rather than
             sqlite.<programlisting>sql_connection = mysql://glance:yourpassword@192.168.206.130/glance</programlisting></para>
         <note><para>Any time you change the .conf files, restart the
         corresponding service.</para></note>
