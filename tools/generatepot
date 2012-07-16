@@ -8,6 +8,15 @@ Created on 2012-7-3
 '''
 import os, sys
 from xml2po import Main
+from xml2po.modes.docbook import docbookXmlMode
+
+class myDocbookXmlMode(docbookXmlMode):
+    def __init__(self):
+        self.lists = ['itemizedlist', 'orderedlist', 'variablelist',
+                      'segmentedlist', 'simplelist', 'calloutlist', 'varlistentry']
+        self.objects = [ 'figure', 'textobject', 'imageobject', 'mediaobject',
+                         'screenshot','literallayout', 'programlisting' ]
+             
 default_mode = 'docbook'
 operation = 'pot'
 options = {
@@ -17,6 +26,7 @@ options = {
 }
 
 ignore_folder = {"docbkx-example"}
+ignore_file = {"api-examples.xml"}
 
 root = "./doc/src/docbkx"
 
@@ -50,14 +60,14 @@ def generateSinglePoT(folder):
         output = os.path.join(output, folder+".pot")
         try:
             xml2po_main = Main(default_mode, operation, output, options)
+            xml2po_main.current_mode = myDocbookXmlMode()
         except IOError:
             print "Error: cannot open aFile %s for writing." % (output)
             sys.exit(5)
         #print(xmlfiles)
         #print(">>>outout: %s ", output)
         xml2po_main.to_pot(xmlfiles)
-    
-    
+
 def get_all_xml (sms, dr, flst):
     if ((flst == "target") or (flst == "wadls")) :
         return
@@ -67,7 +77,7 @@ def get_all_xml (sms, dr, flst):
         return
 
     for f in flst:
-        if ((f.endswith(".xml") and (f != "pom.xml"))) :
+        if (f.endswith(".xml") and (f != "pom.xml") and (not (f in ignore_file))) :
             sms.append(os.path.join(dr,f))
             
 def main():
@@ -79,4 +89,4 @@ def main():
     
 if __name__ == '__main__':
     main()
-    
+

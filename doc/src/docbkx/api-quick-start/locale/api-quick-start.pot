@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-10 16:47+0800\n"
+"POT-Creation-Date: 2012-07-16 10:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,36 +25,16 @@ msgstr ""
 msgid "To install python-novaclient, grab the stable/nova version like so."
 msgstr ""
 
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:16(programlisting)
-#, no-wrap
-msgid "\n$ pip install -e git+https://github.com/openstack/python-novaclient.git#egg=python-novaclient\n    "
-msgstr ""
-
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:19(para)
 msgid "Now that you have installed the python-novaclient, confirm the installation by entering:"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:19(programlisting)
-#, no-wrap
-msgid "\n$ nova help\n\nusage: nova [--debug] [--os_username OS_USERNAME] [--os_password OS_PASSWORD]\n            [--os_tenant_name OS_TENANT_NAME] [--os_auth_url OS_AUTH_URL]\n            [--os_region_name OS_REGION_NAME] [--service_type SERVICE_TYPE]\n            [--service_name SERVICE_NAME] [--endpoint_type ENDPOINT_TYPE]\n            [--version VERSION]\n            &lt;subcommand&gt; ...\n"
 msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:29(para)
 msgid "In return, you will get a listing of all the commands and parameters for the nova command line client. By setting up the required parameters as environment variables, you can fly through these commands on the command line. You can add --os_username on the nova command, or set them as environment variables. When using TryStack, you are supplied with an endpoint, which the nova client recognizes as the NOVA_URL. On TryStack, you can retrieve these environment variables at https://trystack.org/dash/api_info/ after logging in."
 msgstr ""
 
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:38(programlisting)
-#, no-wrap
-msgid "\nexport NOVA_USERNAME=facebook12345679       \nexport NOVA_API_KEY=coolword\nexport NOVA_PROJECT_ID=facebook12345679       \nexport NOVA_URL=https://nova-api.trystack.org:5443/v2.0       \nexport NOVA_VERSION=1.1\n"
-msgstr ""
-
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:47(title)
 msgid "Listing Images"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:55(programlisting)
-#, no-wrap
-msgid "\n$ nova image-list\n\n+----+--------------------------------------+--------+--------+\n| ID |                 Name                 | Status | Server |\n+----+--------------------------------------+--------+--------+\n| 12 | natty-server-cloudimg-amd64-kernel   | ACTIVE |        |\n| 13 | natty-server-cloudimg-amd64          | ACTIVE |        |\n| 14 | oneiric-server-cloudimg-amd64-kernel | ACTIVE |        |\n| 15 | oneiric-server-cloudimg-amd64        | ACTIVE |        |\n+----+--------------------------------------+--------+--------+\n        "
 msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:47(para)
@@ -65,18 +45,8 @@ msgstr ""
 msgid "Next you need to know the relative sizes of each of these."
 msgstr ""
 
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:68(programlisting)
-#, no-wrap
-msgid "\n$ nova flavor-list\n        \n+----+-----------+-----------+------+-----------+------+-------+-------------+\n| ID |    Name   | Memory_MB | Disk | Ephemeral | Swap | VCPUs | RXTX_Factor |\n+----+-----------+-----------+------+-----------+------+-------+-------------+\n| 1  | m1.tiny   | 512       | 0    | N/A       | 0    | 1     |             |\n| 2  | m1.small  | 2048      | 20   | N/A       | 0    | 1     |             |\n| 3  | m1.medium | 4096      | 40   | N/A       | 0    | 2     |             |\n| 4  | m1.large  | 8192      | 80   | N/A       | 0    | 4     |             |\n| 5  | m1.xlarge | 16384     | 160  | N/A       | 0    | 8     |             |\n+----+-----------+-----------+------+-----------+------+-------+-------------+        \n    "
-msgstr ""
-
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:81(para)
 msgid "You can also narrow down the list by using grep to find only the Ubuntu 11.04 images with a command like this:"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:84(programlisting)
-#, no-wrap
-msgid "\n\n$ nova image-list | grep 'natty'\n\n| 12 | natty-server-cloudimg-amd64-kernel   | ACTIVE |        |\n| 13 | natty-server-cloudimg-amd64          | ACTIVE |        |\n"
 msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:92(para)
@@ -95,16 +65,6 @@ msgstr ""
 msgid "To launch a server, you choose an image you want to match up to a size, find the ID for the image and the ID for the flavor so you can size it, and create the command with the IDs. From the information we got previously, we know that an Ubuntu Natty image has an ID of 13, and if you want to start small with about 2 GB of memory and 20 GB of disk space, you'd choose the m1.small flavor which has an ID of 2 when using the 1.1 API on TryStack. Put those parameters in with the \"boot\" command and you can create a new virtual server. <placeholder-1/>"
 msgstr ""
 
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:112(programlisting)
-#, no-wrap
-msgid "\n $ nova boot --flavor=2 --image=13 testserver\n \n +-----------+--------------------------------------+\n|  Property |                Value                 |\n+-----------+--------------------------------------+\n| adminPass | ****************                     |\n| created   | 2011-09-01T21:40:41Z                 |\n| flavor    | m1.small                             |\n| hostId    |                                      |\n| id        | 1805                                 |\n| image     | natty                                |\n| metadata  | {}                                   |\n| name      | testserver                           |\n| progress  | 0                                    |\n| status    | BUILD                                |\n| updated   | 2011-09-01T21:40:41Z                 |\n| uuid      | ce044452-f22e-4ea4-a3ec-d1cde80cf996 |\n+-----------+--------------------------------------+\n "
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:134(programlisting)
-#, no-wrap
-msgid "\n$ nova list\n+------+------------+--------+--------------------------------+\n|  ID  |    Name    | Status |            Networks            |\n+------+------------+--------+--------------------------------+\n| 1805 | testserver | ACTIVE | private=10.4.96.81             |\n+------+------------+--------+--------------------------------+\n            "
-msgstr ""
-
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:133(para)
 msgid "Now, you can view this server in your new cloud by using the nova list command:<placeholder-1/>"
 msgstr ""
@@ -117,347 +77,8 @@ msgstr ""
 msgid "To view all the information about a particular server, use nova show with the ID of the server that you got from the nova list command."
 msgstr ""
 
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:145(programlisting)
-#, no-wrap
-msgid "\n$ nova show 1805\n\n+-----------------+----------------------------------------------------------+\n|     Property    |                          Value                           |\n+-----------------+----------------------------------------------------------+\n| created         | 2011-09-01T21:40:41Z                                     |\n| flavor          | m1.small                                                 |\n| hostId          | 58a7430169aa42cde5ce2456b0cb5bb5ac1ab0703bab6420e8a49e6e |\n| id              | 1805                                                     |\n| image           | natty                                                    |\n| metadata        | {}                                                       |\n| name            | testserver                                               |\n| private network | 10.4.96.81                                               |\n| progress        | 100                                                      |\n| status          | ACTIVE                                                   |\n| updated         | 2011-09-01T21:40:46Z                                     |\n| uuid            | ce044452-f22e-4ea4-a3ec-d1cde80cf996                     |\n+-----------------+----------------------------------------------------------+\n\n        "
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:171(programlisting)
-#, no-wrap
-msgid "$ nova boot testserver --meta description='Use for testing purposes' --meta creator=joecool"
-msgstr ""
-
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml:166(para)
 msgid "You can now launch that image again, but add more information to the server when you boot it so that you can more easily identify it amongst your ever-growing elastic cloud. Use the -meta option with a key=value pair, where you can make up the string for both the key and the value. For example, you could add a description and also the creator of the server. <placeholder-1/>"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:8(title)
-msgid "OpenStack API Examples"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:9(para)
-msgid "Here are some examples of the basic API commands you can send to an OpenStack deployment containing Compute, the Image Service, with a running Identity Server. In the \"service catalog\" that is returned when you get a token, you can find the endpoint URLs that you use for these API commands. For example this public URL entry in the service catalog offers the URL for the Image Service, code-named glance:"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:15(literallayout)
-#, no-wrap
-msgid "\"publicURL\": \"http://55.51.11.198:9292/v1.1/9\"}], \"type\": \"image\", \"name\": \"glance\""
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:17(para)
-msgid "For the Compute API, you see a service of type compute, code-named \"nova\" such as:"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:19(literallayout)
-#, no-wrap
-msgid "\"publicURL\": \"http://55.51.11.198:8774/v1.1/9\"}], \"type\": \"compute\", \"name\": \"nova\""
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:21(para)
-msgid "With these publicURLs in hand, you can now use curl commands for these endpoints and send API requests. The following sections offer walk-throughs of common API commands. Refer to <link href=\"http://docs.openstack.org/api\">docs.openstack.org/api</link> for a full reference of all API commands for these services."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:25(para)
-msgid "Many of the APIs support query parameters. For example, to navigate the collection, the parameters limit and marker can be set in the URI."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:27(title)
-msgid "Query Parameters"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:29(code)
-msgid "limit"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:31(para)
-msgid "For an integer value <inlineequation><mathphrase><emphasis>n</emphasis></mathphrase></inlineequation>, limits the number of results to at most <inlineequation><mathphrase><emphasis>n</emphasis></mathphrase></inlineequation> values."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:39(code)
-msgid "marker"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:41(para)
-msgid "Given a string value <inlineequation><mathphrase><emphasis>x</emphasis></mathphrase></inlineequation>, return object names greater in value than the specified marker."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:48(code)
-msgid "format"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:53(programlisting)
-#, no-wrap
-msgid "?format=json"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:50(para)
-msgid "Specify either <code>json</code> or <code>xml</code> to return the respective serialized response. For example, append <placeholder-1/>onto a query to inform the service that you want the information serialized in JSON when it is returned to you."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:60(para)
-msgid "At this time, a <code>prefix</code> query parameter is not supported at the account level for Object Storage."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:65(title)
-msgid "Compute API Flavor Examples"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:66(emphasis)
-msgid "GET /v1.1/flavors"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:67(para)
-msgid "Gives you a listing of flavors available, which are combinations of disk space, memory and CPU capacity bundled together as resources for virtual machines."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:69(para) ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:86(para) ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:95(para) ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:122(para) ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:127(para) ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:152(para) ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:193(para)
-msgid "Curl example:"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:70(literallayout)
-#, no-wrap
-msgid "curl -D - -H \"X-Auth-Token: 3017813d-deca-4764-aa33-9ab59a283ba6\" -X 'GET' -v\n            http://demo.rcb.me:8774/v1.1/9/flavors\n\n{\"flavors\": [{\"id\": 3, \"links\": [\n{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/3\", \"rel\": \"self\"}, \n{\"href\": \"http://demo.rcb.me:8774/9/flavors/3\", \"rel\": \"bookmark\"}], \"name\": \"m1.medium\"}, \n{\"id\": 4, \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/4\", \"rel\": \"self\"}, \n{\"href\": \"http://demo.rcb.me:8774/9/flavors/4\", \"rel\": \"bookmark\"}], \"name\": \"m1.large\"}, \n{\"id\": 1, \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/1\", \"rel\": \"self\"}, \n{\"href\": \"http://demo.rcb.me:8774/9/flavors/1\", \"rel\": \"bookmark\"}], \"name\": \"m1.tiny\"}, \n{\"id\": 5, \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/5\", \"rel\": \"self\"}, \n{\"href\": \"http://demo.rcb.me:8774/9/flavors/5\", \"rel\": \"bookmark\"}], \"name\": \"m1.xlarge\"}, \n{\"id\": 2, \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/2\", \"rel\": \"self\"}, \n{\"href\": \"http://demo.rcb.me:8774/9/flavors/2\", \"rel\": \"bookmark\"}], \"name\": \"m1.small\"}]}"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:84(emphasis)
-msgid "GET /v1.1/flavors/&lt;id&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:85(para)
-msgid "Gives you more detail about the specific flavor."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:87(para)
-msgid "curl -D - -H \"X-Auth-Token: 3017813d-deca-4764-aa33-9ab59a283ba6\" -X 'GET' -v http://demo.rcb.me:8774/v1.1/9/flavors/5"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:89(para)
-msgid "{\"flavor\": {\"rxtx_quota\": 0, \"name\": \"m1.xlarge\", \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/5\", \"rel\": \"self\"}, {\"href\": \"http://demo.rcb.me:8774/9/flavors/5\", \"rel\": \"bookmark\"}], \"ram\": 16384, \"vcpus\": 8, \"rxtx_cap\": 0, \"swap\": 0, \"disk\": 160, \"id\": 5}}"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:93(emphasis)
-msgid "GET /v1.1/flavors/detail"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:94(para)
-msgid "Gives you details on all the available instance types (flavors)."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:96(para)
-msgid "curl -D - -H \"X-Auth-Token: 3017813d-deca-4764-aa33-9ab59a283ba6\" -X 'GET' -v http://demo.rcb.me:8774/v1.1/9/flavors/detail"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:98(para)
-msgid "{\"flavors\": [{\"rxtx_quota\": 0, \"name\": \"m1.medium\", \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/3\", \"rel\": \"self\"}, {\"href\": \"http://demo.rcb.me:8774/9/flavors/3\", \"rel\": \"bookmark\"}], \"ram\": 4096, \"vcpus\": 2, \"rxtx_cap\": 0, \"swap\": 0, \"disk\": 40, \"id\": 3}, {\"rxtx_quota\": 0, \"name\": \"m1.large\", \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/4\", \"rel\": \"self\"}, {\"href\": \"http://demo.rcb.me:8774/9/flavors/4\", \"rel\": \"bookmark\"}], \"ram\": 8192, \"vcpus\": 4, \"rxtx_cap\": 0, \"swap\": 0, \"disk\": 80, \"id\": 4}, {\"rxtx_quota\": 0, \"name\": \"m1.tiny\", \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/1\", \"rel\": \"self\"}, {\"href\": \"http://demo.rcb.me:8774/9/flavors/1\", \"rel\": \"bookmark\"}], \"ram\": 512, \"vcpus\": 1, \"rxtx_cap\": 0, \"swap\": 0, \"disk\": 0, \"id\": 1}, {\"rxtx_quota\": 0, \"name\": \"m1.xlarge\", \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/5\", \"rel\": \"self\"}, {\"href\": \"http://demo.rcb.me:8774/9/flavors/5\", \"rel\": \"bookmark\"}], \"ram\": 16384, \"vcpus\": 8, \"rxtx_cap\": 0, \"swap\": 0, \"disk\": 160, \"id\": 5}, {\"rxtx_quota\": 0, \"name\": \"m1.small\", \"links\": [{\"href\": \"http://demo.rcb.me:8774/v1.1/9/flavors/2\", \"rel\": \"self\"}, {\"href\": \"http://demo.rcb.me:8774/9/flavors/2\", \"rel\": \"bookmark\"}], \"ram\": 2048, \"vcpus\": 1, \"rxtx_cap\": 0, \"swap\": 0, \"disk\": 20, \"id\": 2}]}"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:117(title)
-msgid "Compute API Server Information Examples"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:118(emphasis)
-msgid "GET /v1.1/servers"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:119(para)
-msgid "Gives you a listing of active servers under your account and tenant authorized with a particular token. If there are no servers running, you see just \"{\"servers\": []}\" returned but still get a 200 OK response."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:123(literallayout)
-#, no-wrap
-msgid "curl -D - -H \"X-Auth-Token: 3017813d-deca-4764-aa33-9ab59a283ba6\" -X 'GET' -v http://host.na.me:8774/v1.1/9/servers"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:125(emphasis)
-msgid "GET /v1.1/servers/detail"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:126(para)
-msgid "Shows details of all the active servers currently running under your account."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:128(para)
-msgid "curl -D - -H \"X-Auth-Token: 3017813d-deca-4764-aa33-9ab59a283ba6\" -X 'GET' -v http://demo.rcb.me:8774/v1.1/9/servers/detail"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:130(para)
-msgid "POST /v1.1/servers"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:131(para)
-msgid "GET /v1.1/servers/<emphasis role=\"italic\">id</emphasis>"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:132(para)
-msgid "PUT /v1.1/servers/<emphasis role=\"italic\">id</emphasis>"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:133(para)
-msgid "DELETE /v1.1/servers/<emphasis role=\"italic\">id</emphasis>"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:137(title)
-msgid "Compute API Server Actions Examples"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:138(para)
-msgid "POST /v1.1/servers/id/reboot"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:139(para)
-msgid "POST /v1.1/servers/id/rebuild"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:140(para)
-msgid "POST /v1.1/servers/id/resize?"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:141(para)
-msgid "POST /v1.1/servers/id/confirmResize?"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:142(para)
-msgid "POST /v1.1/servers/id/revertResize?"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:148(title)
-msgid "Compute API Extensions Examples"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:149(para)
-msgid "GET /v1.1/extensions"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:150(para)
-msgid "Shows the installed extensions to the API, which enable more requests and actions for the Compute server."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:153(literallayout)
-#, no-wrap
-msgid "curl -D - -H \"X-Auth-Token: 8528179e-0d07-44e9-b972-7427336c94cb\" -X 'GET' -v http://demo.rcb.me:8774/v1.1/9/extensions"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:155(literallayout)
-#, no-wrap
-msgid "{\"extensions\": [{\"updated\": \"2011-06-29T00:00:00+00:00\", \n\"name\": \"Hosts\", \"links\": [], \n\"namespace\": \"http://docs.openstack.org/ext/hosts/api/v1.1\", \n\"alias\": \"os-hosts\", \"description\": \"Host administration\"}, \n{\"updated\": \"2011-03-25T00:00:00+00:00\", \n\"name\": \"Volumes\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/volumes/api/v1.1\", \"alias\": \"os-volumes\", \"description\": \"Volumes support\"}, \n{\"updated\": \"2011-05-25 16:12:21.656723\", \n\"name\": \"Admin Controller\", \"links\": [], \"namespace\": \"http:TODO/\", \"alias\": \"ADMIN\", \"description\": \"The Admin API Extension\"}, \n{\"updated\": \"2011-08-08T00:00:00+00:00\", \n\"name\": \"Quotas\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/quotas-sets/api/v1.1\", \"alias\": \"os-quota-sets\", \"description\": \"Quotas management support\"}, \n{\"updated\": \"2011-08-18T00:00:00+00:00\", \n\"name\": \"Rescue\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/rescue/api/v1.1\", \"alias\": \"os-rescue\", \"description\": \"Instance rescue mode\"}, \n{\"updated\": \"2011-06-09T00:00:00+00:00\", \n\"name\": \"Multinic\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/multinic/api/v1.1\", \"alias\": \"NMN\", \"description\": \"Multiple network support\"}, \n{\"updated\": \"2011-09-14T00:00:00+00:00\", \n\"name\": \"FlavorExtraData\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/flavor_extra_data/api/v1.1\", \"alias\": \"os-flavor-extra-data\", \"description\": \"Provide additional data for flavors\"}, \n{\"updated\": \"2011-07-21T00:00:00+00:00\", \n\"name\": \"SecurityGroups\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/securitygroups/api/v1.1\", \"alias\": \"security_groups\", \"description\": \"Security group support\"}, \n{\"updated\": \"2011-06-23T00:00:00+00:00\", \n\"name\": \"FlavorExtraSpecs\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/flavor_extra_specs/api/v1.1\", \"alias\": \"os-flavor-extra-specs\", \"description\": \"Instance type (flavor) extra specs\"}, \n{\"updated\": \"2011-07-19T00:00:00+00:00\", \n\"name\": \"Createserverext\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/createserverext/api/v1.1\", \"alias\": \"os-create-server-ext\", \"description\": \"Extended support to the Create Server v1.1 API\"}, \n{\"updated\": \"2011-08-08T00:00:00+00:00\", \n\"name\": \"Keypairs\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/keypairs/api/v1.1\", \"alias\": \"os-keypairs\", \"description\": \"Keypair Support\"}, \n{\"updated\": \"2011-08-25T00:00:00+00:00\", \n\"name\": \"VSAs\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/vsa/api/v1.1\", \"alias\": \"zadr-vsa\", \"description\": \"Virtual Storage Arrays support\"}, \n{\"updated\": \"2011-08-19T00:00:00+00:00\", \n\"name\": \"SimpleTenantUsage\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/os-simple-tenant-usage/api/v1.1\", \"alias\": \"os-simple-tenant-usage\", \"description\": \"Simple tenant usage extension\"}, \n{\"updated\": \"2011-08-24T00:00:00+00:00\", \n\"name\": \"VolumeTypes\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/volume_types/api/v1.1\", \"alias\": \"os-volume-types\", \"description\": \"Volume types support\"}, \n{\"updated\": \"2011-08-17T00:00:00+00:00\", \n\"name\": \"VirtualInterfaces\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/virtual_interfaces/api/v1.1\", \"alias\": \"virtual_interfaces\", \"description\": \"Virtual interface support\"}, \n{\"updated\": \"2011-06-16T00:00:00+00:00\", \n\"name\": \"Floating_ips\", \"links\": [], \"namespace\": \"http://docs.openstack.org/ext/floating_ips/api/v1.1\", \"alias\": \"os-floating-ips\", \"description\": \"Floating IPs support\"}]}"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:191(title)
-msgid "Image API Examples"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:192(para)
-msgid "GET /images"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:195(literallayout)
-#, no-wrap
-msgid "curl -D - -H \"X-Auth-Token: 469dbbaa-40f2-418a-aafe-1abcf03113f7\" -X 'GET' -v http://demo.rcb.me:9292/v1/images\n\n{\"images\": [\n{\"name\": \"uec-oneiric\", \"container_format\": \"ami\", \"disk_format\": \"ami\", \"checksum\": \"f8b72b5d643152c1beaa5d15555c9353\", \"id\": 7, \"size\": 1476395008}, \n{\"name\": \"uec-oneiric-kernel\", \"container_format\": \"aki\", \"disk_format\": \"aki\", \"checksum\": \"0577116c1df5e3d39aa33aee53a64e2b\", \"id\": 6, \"size\": 4731376}, \n{\"name\": \"uec-natty\", \"container_format\": \"ami\", \"disk_format\": \"ami\", \"checksum\": \"1808dfa4fb62f3804707eb0beeb7fa03\", \"id\": 5, \"size\": 1476395008}, \n{\"name\": \"uec-natty-kernel\", \"container_format\": \"aki\", \"disk_format\": \"aki\", \"checksum\": \"af6261015c5466ad672c3ed18cecae04\", \"id\": 4, \"size\": 4594816}, \n{\"name\": \"tty\", \"container_format\": \"ami\", \"disk_format\": \"ami\", \"checksum\": \"10047a119149e08fb206eea89832eee0\", \"id\": 3, \"size\": 25165824}, \n{\"name\": \"tty-ramdisk\", \"container_format\": \"ari\", \"disk_format\": \"ari\", \"checksum\": \"2d222d406f3ed30e03ed44123c33cba6\", \"id\": 2, \"size\": 5882349}, \n{\"name\": \"tty-kernel\", \"container_format\": \"aki\", \"disk_format\": \"aki\", \"checksum\": \"3ed2965d3f8d877a3ee3e061fd648e9a\", \"id\": 1, \"size\": 4404752}]}"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:206(para)
-msgid "GET /images/details"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:207(para)
-msgid "GET /images/<emphasis role=\"italic\">id</emphasis>"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:208(para)
-msgid "POST /images"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:209(para)
-msgid "PUT /images/<emphasis role=\"italic\">id</emphasis> (with metadata headers)"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:210(para)
-msgid "GET /images/<emphasis role=\"italic\">id</emphasis>/members (knowing who can view an image)"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:212(para)
-msgid "PUT /images/<emphasis role=\"italic\">id</emphasis>/members (replaces membership list for image)"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:214(para)
-msgid "GET /shared-images/tenant-id (shares an image with a tenant, or makes it public)"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:216(para)
-msgid "DELETE /images/1/members/tenant1 (revokes tenant's access to an image)"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:217(title)
-msgid "Identity API Examples"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:218(para)
-msgid "POST /v2.0/tokens"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:219(programlisting)
-#, no-wrap
-msgid "\ncurl -X 'POST' -v http://host.na.me:5000/v2.0/tokens -d '{\"passwordCredentials\":{\"username\": \"joecool\", \"password\":\"coolword\"}, \"tenantId\":\"5\"}' -H 'Content-type: application/json' \n        "
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:224(title)
-msgid "Object API Examples"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:226(title)
-msgid "Storage Account Services"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:227(para)
-msgid "GET /v1.0/&lt;account&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:228(para)
-msgid "HEAD /v1.0/&lt;account&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:229(title)
-msgid "Storage Container Services"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:230(para)
-msgid "GET /v1.0/&lt;account&gt;/&lt;container&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:231(para)
-msgid "HEAD /v1.0/&lt;account&gt;/&lt;container&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:232(para)
-msgid "PUT /v1.0/&lt;account&gt;/&lt;container&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:233(para)
-msgid "DELETE /v1.0/&lt;account&gt;/&lt;container&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:235(title)
-msgid "Storage Object Services"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:236(para)
-msgid "GET /v1.0/&lt;account&gt;/&lt;container&gt;/&lt;object&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:237(para)
-msgid "HEAD /v1.0/&lt;account&gt;/&lt;container&gt;/&lt;object&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:238(para)
-msgid "PUT /v1.0/&lt;account&gt;/&lt;container&gt;/&lt;object&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:239(para)
-msgid "DELETE /v1.0/&lt;account&gt;/&lt;container&gt;/&lt;object&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-examples.xml:240(para)
-msgid "POST /v1.0/&lt;account&gt;/&lt;container&gt;/&lt;object&gt;"
 msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:6(title) ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-onepager.xml:9(title)
@@ -492,18 +113,8 @@ msgstr ""
 msgid "Begin API requests by asking for an authorization token from the endpoint your cloud administrator gave you, typically http://hostname:port/v2.0/tokens. You send your username, password, and what group or account you are with (the \"tenant\" in auth-speak)."
 msgstr ""
 
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:57(programlisting)
-#, no-wrap
-msgid "curl -k -X 'POST' -v https://nova-api.trystack.org:5443/v2.0/tokens -d '{\"auth\":{\"passwordCredentials\":{\"username\": \"joecool\", \"password\":\"coolword\"}, \"tenantId\":\"5\"}}' -H 'Content-type: application/json'"
-msgstr ""
-
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:60(para)
 msgid "The server returns a response in which the 24-hours token is contained. Use that token to send API requests with the X-Auth-Token included as an header field."
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:64(programlisting)
-#, no-wrap
-msgid "curl -k -D - -H \"X-Auth-Token: 7d2f63fd-4dcc-4752-8e9b-1d08f989cc00\" -X 'GET' -v https://nova-api.trystack.org:9774/v1.1/296/extensions  -H 'Content-type: application/json' "
 msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:68(para)
@@ -514,22 +125,12 @@ msgstr ""
 msgid "Request a token again when you get a 401 response until the script's job is done."
 msgstr ""
 
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:81(programlisting)
-#, no-wrap
-msgid "\n$ curl -X 'POST' -v https://nova-api.trystack.org:5443/v2.0/tokens -d '{\"auth\":{\"passwordCredentials\":{\"username\": \"joecool\", \"password\":\"coolword\"}, \"tenantId\":\"5\"}}' -H 'Content-type: application/json'\n         "
-msgstr ""
-
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:79(para)
 msgid "For a typical OpenStack deployment running the Identity Service you can request a token with this command in cURL:<placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:84(para)
 msgid "In return, you should get a 200 OK response with a token in the form of \"id\": \"cd427a33-bb4a-4079-a6d7-0ae148bdeda9\" and an expiration date 24 hours from now. Here's what it looks like:"
-msgstr ""
-
-#: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:89(programlisting)
-#, no-wrap
-msgid "\n{\n    \"access\": {\n        \"serviceCatalog\": [\n            {\n                \"endpoints\": [\n                    {\n                        \"adminURL\": \"https://nova-api.trystack.org:9774/v1.1/1\", \n                        \"internalURL\": \"https://nova-api.trystack.org:9774/v1.1/1\", \n                        \"publicURL\": \"https://nova-api.trystack.org:9774/v1.1/1\", \n                        \"region\": \"RegionOne\"\n                    }\n                ], \n                \"name\": \"nova\", \n                \"type\": \"compute\"\n            }, \n            {\n                \"endpoints\": [\n                    {\n                        \"adminURL\": \"https://GLANCE_API_IS_NOT_DISCLOSED/v1.1/1\", \n                        \"internalURL\": \"https://GLANCE_API_IS_NOT_DISCLOSED/v1.1/1\", \n                        \"publicURL\": \"https://GLANCE_API_IS_NOT_DISCLOSED/v1.1/1\", \n                        \"region\": \"RegionOne\"\n                    }\n                ], \n                \"name\": \"glance\", \n                \"type\": \"image\"\n            }, \n            {\n                \"endpoints\": [\n                    {\n                        \"adminURL\": \"https://nova-api.trystack.org:5443/v2.0\", \n                        \"internalURL\": \"https://keystone.trystack.org:5000/v2.0\", \n                        \"publicURL\": \"https://keystone.trystack.org:5000/v2.0\", \n                        \"region\": \"RegionOne\"\n                    }\n                ], \n                \"name\": \"keystone\", \n                \"type\": \"identity\"\n            }\n        ], \n        \"token\": {\n            \"expires\": \"2012-02-15T19:32:21\", \n            \"id\": \"5df9d45d-d198-4222-9b4c-7a280aa35666\", \n            \"tenant\": {\n                \"id\": \"1\", \n                \"name\": \"admin\"\n            }\n        }, \n        \"user\": {\n            \"id\": \"14\", \n            \"name\": \"annegentle\", \n            \"roles\": [\n                {\n                    \"id\": \"2\", \n                    \"name\": \"Member\", \n                    \"tenantId\": \"1\"\n                }\n            ]\n        }\n    }\n}\n\n    "
 msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml:155(title)
