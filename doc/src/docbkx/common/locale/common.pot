@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-10 16:47+0800\n"
+"POT-Creation-Date: 2012-07-16 10:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,11 +11,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/common/kvm.xml:7(title)
 msgid "KVM"
-msgstr ""
-
-#: ./doc/src/docbkx/common/kvm.xml:10(programlisting)
-#, no-wrap
-msgid "connection_type=libvirt\nlibvirt_type=kvm"
 msgstr ""
 
 #: ./doc/src/docbkx/common/kvm.xml:14(para) ./doc/src/docbkx/common/introduction-to-xen.xml:28(para) ./doc/src/docbkx/common/qemu.xml:32(para)
@@ -110,22 +105,12 @@ msgstr ""
 msgid "Intel-based processors"
 msgstr ""
 
-#: ./doc/src/docbkx/common/kvm.xml:109(programlisting)
-#, no-wrap
-msgid "kvm\nkvm-intel"
-msgstr ""
-
 #: ./doc/src/docbkx/common/kvm.xml:105(para)
 msgid "If your compute host is Intel-based, run the following as root to load the kernel modules:<screen><prompt>#</prompt> modprobe kvm\n<prompt>#</prompt> modprobe kvm-intel</screen> Add the following lines to <filename>/etc/modules</filename> so that these modules will load on reboot:<placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/common/kvm.xml:113(title)
 msgid "AMD-based processors"
-msgstr ""
-
-#: ./doc/src/docbkx/common/kvm.xml:118(programlisting)
-#, no-wrap
-msgid "kvm\nkvm-amd"
 msgstr ""
 
 #: ./doc/src/docbkx/common/kvm.xml:114(para)
@@ -268,11 +253,6 @@ msgstr ""
 msgid "It has been our experience that when a drive is about to fail, error messages will spew into /var/log/kern.log. There is a script called swift-drive-audit that can be run via cron to watch for bad drives. If errors are detected, it will unmount the bad drive, so that OpenStack Object Storage can work around it. The script takes a configuration file with the following settings:"
 msgstr ""
 
-#: ./doc/src/docbkx/common/support.xml:104(programlisting)
-#, no-wrap
-msgid "\n            [drive-audit]\n            Option \tDefault \tDescription\n            log_facility \tLOG_LOCAL0 \tSyslog log facility\n            log_level \tINFO \tLog level\n            device_dir \t/srv/node \tDirectory devices are mounted under\n            minutes \t60 \tNumber of minutes to look back in /var/log/kern.log\n            error_limit \t1 \tNumber of errors to find before a device is unmounted\n            "
-msgstr ""
-
 #: ./doc/src/docbkx/common/support.xml:113(para)
 msgid "This script has only been tested on Ubuntu 10.04, so if you are using a different distro or OS, some care should be taken before using in production."
 msgstr ""
@@ -385,11 +365,6 @@ msgstr ""
 msgid "Some OpenStack Compute features may be missing when running with LXC as the hypervisor. See the <link href=\"http://wiki.openstack.org/HypervisorSupportMatrix\">hypervisor support matrix</link> for details."
 msgstr ""
 
-#: ./doc/src/docbkx/common/lxc.xml:19(programlisting)
-#, no-wrap
-msgid "connection_type=libvirt\nlibvirt_type=lxc"
-msgstr ""
-
 #: ./doc/src/docbkx/common/lxc.xml:16(para)
 msgid "To enable LXC, ensure the following options are set in <filename>/etc/nova/nova.conf</filename> on all hosts running the <systemitem class=\"service\">nova-compute</systemitem> service.<placeholder-1/>"
 msgstr ""
@@ -408,11 +383,6 @@ msgstr ""
 msgid "Xen, XenAPI, XenServer and XCP"
 msgstr ""
 
-#: ./doc/src/docbkx/common/introduction-to-xen.xml:12(programlisting)
-#, no-wrap
-msgid "connection_type=xenapi\nxenapi_connection_url=http://your_xenapi_management_ip_address\nxenapi_connection_username=root\nxenapi_connection_password=your_password"
-msgstr ""
-
 #: ./doc/src/docbkx/common/introduction-to-xen.xml:9(para)
 msgid "The recommended way to use Xen with OpenStack is through the XenAPI driver. To enable the XenAPI driver, add the following configuration options <filename>/etc/nova/nova.conf</filename>: <placeholder-1/> The above connection details are used by the OpenStack Compute service to contact your hypervisor and are the same details you use to connect XenCenter, the XenServer management console, to your XenServer or XCP box. Note these settings are generally unique to each hypervisor host as the use of the host internal management network ip address (169.254.0.1) will cause features such as live-migration to break."
 msgstr ""
@@ -423,11 +393,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/common/introduction-to-xen.xml:24(para)
 msgid "OpenStack with XenAPI supports the following virtual machine image formats: <placeholder-1/>"
-msgstr ""
-
-#: ./doc/src/docbkx/common/introduction-to-xen.xml:42(programlisting)
-#, no-wrap
-msgid "connection_type=libvirt\nlibvirt_type=xen"
 msgstr ""
 
 #: ./doc/src/docbkx/common/introduction-to-xen.xml:36(para)
@@ -1508,27 +1473,12 @@ msgstr ""
 msgid "If you wish to restrict users from performing operations in, say, the Compute service, you need to create a role in the Identity service and then modify <filename>/etc/nova/policy.json</filename> so that this role is required for Compute operations."
 msgstr ""
 
-#: ./doc/src/docbkx/common/keystone-concepts.xml:198(programlisting)
-#, no-wrap
-msgid "     \"volume:create\": [],"
-msgstr ""
-
 #: ./doc/src/docbkx/common/keystone-concepts.xml:195(para)
 msgid "For example, this line in <filename>/etc/nova/policy.json</filename> specifies that there are no restrictions on which users can create volumes: if the user has any role in a tenant, they will be able to create volumes in that tenant. <placeholder-1/>"
 msgstr ""
 
-#: ./doc/src/docbkx/common/keystone-concepts.xml:202(programlisting)
-#, no-wrap
-msgid "     \"volume:create\": [\"role:compute-user\"],"
-msgstr ""
-
 #: ./doc/src/docbkx/common/keystone-concepts.xml:199(para)
 msgid "If we wished to restrict creation of volumes to users who had the <literal>compute-user</literal> role in a particular tenant, we would add <literal>\"role:compute-user\"</literal>, like so:<placeholder-1/>"
-msgstr ""
-
-#: ./doc/src/docbkx/common/keystone-concepts.xml:204(programlisting)
-#, no-wrap
-msgid "{\n    \"admin_or_owner\":  [[\"role:admin\"], [\"project_id:%(project_id)s\"]],\n    \"default\": [[\"rule:admin_or_owner\"]],\n\n\n    \"compute:create\": [\"role\":\"compute-user\"],\n    \"compute:create:attach_network\": [\"role\":\"compute-user\"],\n    \"compute:create:attach_volume\": [\"role\":\"compute-user\"],\n    \"compute:get_all\": [\"role\":\"compute-user\"],\n\n\n    \"admin_api\": [[\"role:admin\"]],\n    \"compute_extension:accounts\": [[\"rule:admin_api\"]],\n    \"compute_extension:admin_actions\": [[\"rule:admin_api\"]],\n    \"compute_extension:admin_actions:pause\": [[\"rule:admin_or_owner\"]],\n    \"compute_extension:admin_actions:unpause\": [[\"rule:admin_or_owner\"]],\n    \"compute_extension:admin_actions:suspend\": [[\"rule:admin_or_owner\"]],\n    \"compute_extension:admin_actions:resume\": [[\"rule:admin_or_owner\"]],\n    \"compute_extension:admin_actions:lock\": [[\"rule:admin_api\"]],\n    \"compute_extension:admin_actions:unlock\": [[\"rule:admin_api\"]],\n    \"compute_extension:admin_actions:resetNetwork\": [[\"rule:admin_api\"]],\n    \"compute_extension:admin_actions:injectNetworkInfo\": [[\"rule:admin_api\"]],\n    \"compute_extension:admin_actions:createBackup\": [[\"rule:admin_or_owner\"]],\n    \"compute_extension:admin_actions:migrateLive\": [[\"rule:admin_api\"]],\n    \"compute_extension:admin_actions:migrate\": [[\"rule:admin_api\"]],\n    \"compute_extension:aggregates\": [[\"rule:admin_api\"]],\n    \"compute_extension:certificates\": [\"role\":\"compute-user\"],\n    \"compute_extension:cloudpipe\": [[\"rule:admin_api\"]],\n    \"compute_extension:console_output\": [\"role\":\"compute-user\"],\n    \"compute_extension:consoles\": [\"role\":\"compute-user\"],\n    \"compute_extension:createserverext\": [\"role\":\"compute-user\"],\n    \"compute_extension:deferred_delete\": [\"role\":\"compute-user\"],\n    \"compute_extension:disk_config\": [\"role\":\"compute-user\"],\n    \"compute_extension:extended_server_attributes\": [[\"rule:admin_api\"]],\n    \"compute_extension:extended_status\": [\"role\":\"compute-user\"],\n    \"compute_extension:flavorextradata\": [\"role\":\"compute-user\"],\n    \"compute_extension:flavorextraspecs\": [\"role\":\"compute-user\"],\n    \"compute_extension:flavormanage\": [[\"rule:admin_api\"]],\n    \"compute_extension:floating_ip_dns\": [\"role\":\"compute-user\"],\n    \"compute_extension:floating_ip_pools\": [\"role\":\"compute-user\"],\n    \"compute_extension:floating_ips\": [\"role\":\"compute-user\"],\n    \"compute_extension:hosts\": [[\"rule:admin_api\"]],\n    \"compute_extension:keypairs\": [\"role\":\"compute-user\"],\n    \"compute_extension:multinic\": [\"role\":\"compute-user\"],\n    \"compute_extension:networks\": [[\"rule:admin_api\"]],\n    \"compute_extension:quotas\": [\"role\":\"compute-user\"],\n    \"compute_extension:rescue\": [\"role\":\"compute-user\"],\n    \"compute_extension:security_groups\": [\"role\":\"compute-user\"],\n    \"compute_extension:server_action_list\": [[\"rule:admin_api\"]],\n    \"compute_extension:server_diagnostics\": [[\"rule:admin_api\"]],\n    \"compute_extension:simple_tenant_usage:show\": [[\"rule:admin_or_owner\"]],\n    \"compute_extension:simple_tenant_usage:list\": [[\"rule:admin_api\"]],\n    \"compute_extension:users\": [[\"rule:admin_api\"]],\n    \"compute_extension:virtual_interfaces\": [\"role\":\"compute-user\"],\n    \"compute_extension:virtual_storage_arrays\": [\"role\":\"compute-user\"],\n    \"compute_extension:volumes\": [\"role\":\"compute-user\"],\n    \"compute_extension:volumetypes\": [\"role\":\"compute-user\"],\n\n\n    \"volume:create\": [\"role\":\"compute-user\"],\n    \"volume:get_all\": [\"role\":\"compute-user\"],\n    \"volume:get_volume_metadata\": [\"role\":\"compute-user\"],\n    \"volume:get_snapshot\": [\"role\":\"compute-user\"],\n    \"volume:get_all_snapshots\": [\"role\":\"compute-user\"],\n\n\n    \"network:get_all_networks\": [\"role\":\"compute-user\"],\n    \"network:get_network\": [\"role\":\"compute-user\"],\n    \"network:delete_network\": [\"role\":\"compute-user\"],\n    \"network:disassociate_network\": [\"role\":\"compute-user\"],\n    \"network:get_vifs_by_instance\": [\"role\":\"compute-user\"],\n    \"network:allocate_for_instance\": [\"role\":\"compute-user\"],\n    \"network:deallocate_for_instance\": [\"role\":\"compute-user\"],\n    \"network:validate_networks\": [\"role\":\"compute-user\"],\n    \"network:get_instance_uuids_by_ip_filter\": [\"role\":\"compute-user\"],\n\n    \"network:get_floating_ip\": [\"role\":\"compute-user\"],\n    \"network:get_floating_ip_pools\": [\"role\":\"compute-user\"],\n    \"network:get_floating_ip_by_address\": [\"role\":\"compute-user\"],\n    \"network:get_floating_ips_by_project\": [\"role\":\"compute-user\"],\n    \"network:get_floating_ips_by_fixed_address\": [\"role\":\"compute-user\"],\n    \"network:allocate_floating_ip\": [\"role\":\"compute-user\"],\n    \"network:deallocate_floating_ip\": [\"role\":\"compute-user\"],\n    \"network:associate_floating_ip\": [\"role\":\"compute-user\"],\n    \"network:disassociate_floating_ip\": [\"role\":\"compute-user\"],\n\n    \"network:get_fixed_ip\": [\"role\":\"compute-user\"],\n    \"network:add_fixed_ip_to_instance\": [\"role\":\"compute-user\"],\n    \"network:remove_fixed_ip_from_instance\": [\"role\":\"compute-user\"],\n    \"network:add_network_to_project\": [\"role\":\"compute-user\"],\n    \"network:get_instance_nw_info\": [\"role\":\"compute-user\"],\n\n    \"network:get_dns_domains\": [\"role\":\"compute-user\"],\n    \"network:add_dns_entry\": [\"role\":\"compute-user\"],\n    \"network:modify_dns_entry\": [\"role\":\"compute-user\"],\n    \"network:delete_dns_entry\": [\"role\":\"compute-user\"],\n    \"network:get_dns_entries_by_address\": [\"role\":\"compute-user\"],\n    \"network:get_dns_entries_by_name\": [\"role\":\"compute-user\"],\n    \"network:create_private_dns_domain\": [\"role\":\"compute-user\"],\n    \"network:create_public_dns_domain\": [\"role\":\"compute-user\"],\n    \"network:delete_dns_domain\": [\"role\":\"compute-user\"]\n}\n"
 msgstr ""
 
 #: ./doc/src/docbkx/common/keystone-concepts.xml:203(para)
@@ -1573,11 +1523,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/common/qemu.xml:13(para)
 msgid "The typical uses cases for QEMU are<placeholder-1/>running on"
-msgstr ""
-
-#: ./doc/src/docbkx/common/qemu.xml:27(programlisting)
-#, no-wrap
-msgid "connection_type=libvirt\nlibvirt_type=qemu"
 msgstr ""
 
 #: ./doc/src/docbkx/common/qemu.xml:23(para)
@@ -2263,18 +2208,8 @@ msgstr ""
 msgid "Edit /mnt/etc/fstab and modify the line for mounting root partition(which may look like the following)"
 msgstr ""
 
-#: ./doc/src/docbkx/common/ch_image_mgmt.xml:537(programlisting)
-#, no-wrap
-msgid "\nUUID=e7f5af8d-5d96-45cc-a0fc-d0d1bde8f31c  /               ext4    errors=remount-ro  0       1\n"
-msgstr ""
-
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:540(para)
 msgid "to"
-msgstr ""
-
-#: ./doc/src/docbkx/common/ch_image_mgmt.xml:541(programlisting)
-#, no-wrap
-msgid "\n\nLABEL=uec-rootfs              /          ext4           defaults     0    0\n                "
 msgstr ""
 
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:547(title)
@@ -2287,11 +2222,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:552(para)
 msgid "Edit the /etc/rc.local file and add the following lines before the line “touch /var/lock/subsys/local”"
-msgstr ""
-
-#: ./doc/src/docbkx/common/ch_image_mgmt.xml:555(programlisting)
-#, no-wrap
-msgid "\n\ndepmod -a\nmodprobe acpiphp\n\n# simple attempt to get the user ssh key using the meta-data service\nmkdir -p /root/.ssh\necho &gt;&gt; /root/.ssh/authorized_keys\ncurl -m 10 -s http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key | grep 'ssh-rsa' &gt;&gt; /root/.ssh/authorized_keys\necho \"AUTHORIZED_KEYS:\"\necho \"************************\"\ncat /root/.ssh/authorized_keys\necho \"************************\"\n"
 msgstr ""
 
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:572(title)
@@ -2375,11 +2305,6 @@ msgstr ""
 msgid "The status of the images that have been uploaded can be viewed by using nova image-list command. The output should like this:"
 msgstr ""
 
-#: ./doc/src/docbkx/common/ch_image_mgmt.xml:638(programlisting)
-#, no-wrap
-msgid "\n+----+---------------------------------------------+--------+\n| ID |                     Name                    | Status |\n+----+---------------------------------------------+--------+\n| 6  | ttylinux-uec-amd64-12.1_2.6.35-22_1-vmlinuz | ACTIVE |\n| 7  | ttylinux-uec-amd64-12.1_2.6.35-22_1-initrd  | ACTIVE |\n| 8  | ttylinux-uec-amd64-12.1_2.6.35-22_1.img     | ACTIVE |\n+----+---------------------------------------------+--------+\n"
-msgstr ""
-
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:650(title)
 msgid "Creating a Windows Image"
 msgstr ""
@@ -2451,16 +2376,6 @@ msgstr ""
 msgid "On Debian-like distros, you can check the version by running : <screen>dpkg -l | grep qemu</screen>"
 msgstr ""
 
-#: ./doc/src/docbkx/common/ch_image_mgmt.xml:713(programlisting)
-#, no-wrap
-msgid "\nii  qemu                            0.14.0~rc1+noroms-0ubuntu4~ppalucid1            dummy transitional pacakge from qemu to qemu\nii  qemu-common                     0.14.0~rc1+noroms-0ubuntu4~ppalucid1            qemu common functionality (bios, documentati\nii  qemu-kvm                        0.14.0~rc1+noroms-0ubuntu4~ppalucid1            Full virtualization on i386 and amd64 hardwa\n                   "
-msgstr ""
-
-#: ./doc/src/docbkx/common/ch_image_mgmt.xml:723(programlisting)
-#, no-wrap
-msgid "\nuse_cow_images=true\n                   "
-msgstr ""
-
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:718(para)
 msgid "Images can only be created from running instances if Compute is configured to use qcow2 images, which is the default setting. You can explicitly enable the use of qcow2 images by adding the following line to <filename>nova.conf</filename>: <placeholder-1/>"
 msgstr ""
@@ -2477,11 +2392,6 @@ msgstr ""
 msgid "Create the image"
 msgstr ""
 
-#: ./doc/src/docbkx/common/ch_image_mgmt.xml:746(programlisting)
-#, no-wrap
-msgid "\n+-----+------------+--------+--------------------+\n|  ID |    Name    | Status |      Networks      |\n+-----+------------+--------+--------------------+\n| 116 | Server 116 | ACTIVE | private=20.10.0.14 |\n+-----+------------+--------+--------------------+\n                       "
-msgstr ""
-
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:759(para)
 msgid "The image that will be created will be flagged as \"Private\" (For glance : is_public=False). Thus, the image will be available only for the tenant."
 msgstr ""
@@ -2492,11 +2402,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:769(emphasis)
 msgid "Check image status"
-msgstr ""
-
-#: ./doc/src/docbkx/common/ch_image_mgmt.xml:777(programlisting)
-#, no-wrap
-msgid "\n+----+---------------------------------------------+--------+\n| ID |                     Name                    | Status |\n+----+---------------------------------------------+--------+\n| 20 | Image-116                                   | ACTIVE |\n| 6  | ttylinux-uec-amd64-12.1_2.6.35-22_1-vmlinuz | ACTIVE |\n| 7  | ttylinux-uec-amd64-12.1_2.6.35-22_1-initrd  | ACTIVE |\n| 8  | ttylinux-uec-amd64-12.1_2.6.35-22_1.img     | ACTIVE |\n+----+---------------------------------------------+--------+\n                       "
 msgstr ""
 
 #: ./doc/src/docbkx/common/ch_image_mgmt.xml:772(para)
@@ -2678,11 +2583,6 @@ msgstr ""
 msgid "The local memory backend is enabled as the default for Horizon solely because it has no dependencies. It is not recommended for production use, or even for serious development work. Enabled by:"
 msgstr ""
 
-#: ./doc/src/docbkx/common/dashboard_sessions.xml:27(programlisting)
-#, no-wrap
-msgid "\nSESSION_ENGINE = 'django.contrib.sessions.backends.cache'\nCACHES = {\n    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'\n}\n "
-msgstr ""
-
 #: ./doc/src/docbkx/common/dashboard_sessions.xml:36(title)
 msgid "Memcached"
 msgstr ""
@@ -2709,11 +2609,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/common/dashboard_sessions.xml:50(para)
 msgid "Enabled by:"
-msgstr ""
-
-#: ./doc/src/docbkx/common/dashboard_sessions.xml:51(programlisting)
-#, no-wrap
-msgid "\nSESSION_ENGINE = 'django.contrib.sessions.backends.cache'\nCACHES = {\n    'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache'\n    'LOCATION': 'my_memcached_host:11211',\n}\n"
 msgstr ""
 
 #: ./doc/src/docbkx/common/dashboard_sessions.xml:60(title)
@@ -2771,11 +2666,6 @@ msgstr ""
 msgid "In the <filename>/etc/openstack-dashboard/local_settings.py</filename> file, change these options:"
 msgstr ""
 
-#: ./doc/src/docbkx/common/dashboard_sessions.xml:86(programlisting)
-#, no-wrap
-msgid "\nSESSION_ENGINE = 'django.core.cache.backends.db.DatabaseCache'\nDATABASES = {\n    'default': {\n        # Database configuration here\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'dash',\n        'USER': 'dash',\n        'PASSWORD': 'yourpassword',\n        'HOST': 'localhost',\n        'default-character-set': 'utf8'\n    }\n}\n"
-msgstr ""
-
 #: ./doc/src/docbkx/common/dashboard_sessions.xml:100(para)
 msgid "After configuring the <filename>local_settings.py</filename> as shown, you can run the <command>manage.py syncdb</command> command to populate this newly-created database."
 msgstr ""
@@ -2831,11 +2721,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/common/dashboard_sessions.xml:120(para)
 msgid "To mitigate the performance issues of database queries, you can also consider using Django’s cached_db session backend which utilizes both your database and caching infrastructure to perform write-through caching and efficient retrieval. You can enable this hybrid setting by configuring both your database and cache as discussed above and then using:"
-msgstr ""
-
-#: ./doc/src/docbkx/common/dashboard_sessions.xml:127(programlisting)
-#, no-wrap
-msgid "\nSESSION_ENGINE = \"django.contrib.sessions.backends.cached_db\"\n "
 msgstr ""
 
 #: ./doc/src/docbkx/common/dashboard_sessions.xml:132(title)
@@ -2914,11 +2799,6 @@ msgstr ""
 msgid "Edit your CSS file using the following as a starting point for customization, which simply overrides the Ubuntu customizations made in the ubuntu.css file."
 msgstr ""
 
-#: ./doc/src/docbkx/common/dashboard_customizing.xml:65(programlisting)
-#, no-wrap
-msgid "/*\n* New theme colors for dashboard that override the defaults:\n*  dark blue: #355796 / rgb(53, 87, 150)\n*  light blue: #BAD3E1 / rgb(186, 211, 225)\n*\n* By Preston Lee &lt;plee@tgen.org&gt;\n*/\nh1.brand {\nbackground: #355796 repeat-x top left;\nborder-bottom: 2px solid #BAD3E1;\n}\nh1.brand a {\nbackground: url(../img/my_cloud_logo_small.png) top left no-repeat;\n}\n#splash .login {\nbackground: #355796 url(../img/my_cloud_logo_medium.png) no-repeat center 35px;\n}\n#splash .login .modal-header {\nborder-top: 1px solid #BAD3E1;\n}\n.btn-primary {\nbackground-image: none !important;\nbackground-color: #355796 !important;\nborder: none !important;\nbox-shadow: none;\n}\n.btn-primary:hover,\n.btn-primary:active {\nborder: none;\nbox-shadow: none;\nbackground-color: #BAD3E1 !important;\ntext-decoration: none;\n}"
-msgstr ""
-
 #: ./doc/src/docbkx/common/dashboard_customizing.xml:64(para)
 msgid "Change the colors and image file names as appropriate, though the relative directory paths should be the same. <placeholder-1/>"
 msgstr ""
@@ -2927,9 +2807,8 @@ msgstr ""
 msgid "Open the following HTML template in an editor: <screen>/usr/share/openstack-dashboard/openstack_dashboard/templates/_stylesheets.html</screen>"
 msgstr ""
 
-#: ./doc/src/docbkx/common/dashboard_customizing.xml:101(programlisting)
-#, no-wrap
-msgid "...\n &lt;link href='{{ STATIC_URL }}bootstrap/css/bootstrap.min.css' media='screen' rel='stylesheet' /&gt;\n &lt;link href='{{ STATIC_URL }}dashboard/css/{% choose_css %}' media='screen' rel='stylesheet' /&gt;\n <emphasis>&lt;link href='{{ STATIC_URL }}dashboard/css/custom.css' media='screen' rel='stylesheet' /&gt;</emphasis>\n ..."
+#: ./doc/src/docbkx/common/dashboard_customizing.xml:104(emphasis)
+msgid "&lt;link href='{{ STATIC_URL }}dashboard/css/custom.css' media='screen' rel='stylesheet' /&gt;"
 msgstr ""
 
 #: ./doc/src/docbkx/common/dashboard_customizing.xml:100(para)
@@ -3009,11 +2888,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/common/vmware.xml:42(para)
 msgid "Configure nova.conf with the following VMWare-specific config options:"
-msgstr ""
-
-#: ./doc/src/docbkx/common/vmware.xml:45(programlisting)
-#, no-wrap
-msgid "vmwareapi_host_ip=&lt;ESX hypervisor machine IP&gt;\nvmwareapi_host_username=&lt; ESX hypervisor username&gt;\nvmwareapi_host_password=&lt; ESX hypervisor password&gt;\nvmwareapi_wsdl_loc=http://127.0.0.1:8080/wsdl/vim25/vimService.wsdl\n"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.

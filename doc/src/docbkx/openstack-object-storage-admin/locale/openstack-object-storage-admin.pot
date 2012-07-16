@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-10 16:47+0800\n"
+"POT-Creation-Date: 2012-07-16 10:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,22 +65,12 @@ msgstr ""
 msgid "You will need a key and certificate to do this, which we can create as a self-signed for the tutorial since we can do the extra steps to have Cyberduck accept it. Creating a self-signed cert can usually be done with these commands on the proxy server:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:42(literallayout)
-#, no-wrap
-msgid "cd /etc/swift\nopenssl req -new -x509 -nodes -out cert.crt -keyout cert.key"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:45(para)
 msgid "Ensure these generated files are in /etc/swift/cert.crt and /etc/swift/cert.key."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:46(para)
 msgid "You also should configure your iptables to enable https traffic. Here's an example setup that works."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:48(literallayout)
-#, no-wrap
-msgid "Chain INPUT (policy ACCEPT 0 packets, 0 bytes)\n pkts bytes target     prot opt in     out     source               destination         \n76774 1543M ACCEPT     all  --  lo     any     localhost            anywhere            \n 416K  537M ACCEPT     all  --  any    any     anywhere             anywhere            state RELATED,ESTABLISHED \n  106  6682 ACCEPT     tcp  --  any    any     anywhere             anywhere            tcp dpt:https \n   13   760 ACCEPT     tcp  --  any    any     anywhere             anywhere            tcp dpt:ssh \n    3   124 ACCEPT     icmp --  any    any     anywhere             anywhere            icmp echo-request \n  782 38880 DROP       all  --  any    any     anywhere             anywhere            \n\nChain FORWARD (policy ACCEPT 0 packets, 0 bytes)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 DROP       all  --  any    any     anywhere             anywhere            \n\nChain OUTPUT (policy ACCEPT 397K packets, 1561M bytes)\n pkts bytes target     prot opt in     out     source               destination   "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:63(para)
@@ -91,22 +81,12 @@ msgstr ""
 msgid "Then, edit your proxy-server.conf file to include the following in the [DEFAULT] sections."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:65(literallayout)
-#, no-wrap
-msgid "[DEFAULT]                           \nbind_port = 443\ncert_file = /etc/swift/cert.crt\nkey_file = /etc/swift/cert.key "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:69(para)
 msgid "Also, make sure you use https: for all references to the URL for the server in the .conf files as needed."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:71(para)
 msgid "Verify that you can connect using the Public URL to Object Storage by using the \"swift\" tool:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:74(literallayout)
-#, no-wrap
-msgid "swift -A https://yourswiftinstall.com:11000/v1.0 -U test:tester -K testing stat"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragetutorials.xml:77(para)
@@ -353,11 +333,6 @@ msgstr ""
 msgid "The sending of metrics is integrated with the logging framework. To enable, configure <code>log_statsd_host</code> in the relevant config file. You can also specify the port and a default sample rate. The specified default sample rate is used unless a specific call to a statsd logging method (see the list below) overrides it. Currently, no logging calls override the sample rate, but it’s conceivable that some metrics may require accuracy (sample_rate == 1) while others may not."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragemonitoring.xml:157(literallayout)
-#, no-wrap
-msgid "[DEFAULT]\n     ...\nlog_statsd_host = 127.0.0.1\nlog_statsd_port = 8125\nlog_statsd_default_sample_rate = 1"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragemonitoring.xml:162(para)
 msgid "Then the LogAdapter object returned by <code>get_logger()</code>, usually stored in <code>self.logger</code>, has the following new methods:"
 msgstr ""
@@ -388,16 +363,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragemonitoring.xml:171(para)
 msgid "Note that these logging methods may safely be called anywhere you have a logger object. If StatsD logging has not been configured, the methods are no-ops. This avoids messy conditional logic each place a metric is recorded. Here’s two example usages of the new logging methods:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragemonitoring.xml:177(programlisting)
-#, no-wrap
-msgid "# swift/obj/replicator.py\ndef update(self, job):\n    # ...\n    begin = time.time()\n    try:\n        hashed, local_hash = tpool.execute(tpooled_get_hashes, job['path'],\n                do_listdir=(self.replication_count % 10) == 0,\n                reclaim_age=self.reclaim_age)\n        # See tpooled_get_hashes \"Hack\".\n        if isinstance(hashed, BaseException):\n            raise hashed\n        self.suffix_hash += hashed\n        self.logger.update_stats('suffix.hashes', hashed)\n        # ...\n    finally:\n        self.partition_times.append(time.time() - begin)\n        self.logger.timing_since('partition.update.timing', begin)"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragemonitoring.xml:194(programlisting)
-#, no-wrap
-msgid "# swift/container/updater.py\ndef process_container(self, dbfile):\n    # ...\n    start_time = time.time()\n    # ...\n        for event in events:\n            if 200 &lt;= event.wait() &lt; 300:\n                successes += 1\n            else:\n                failures += 1\n        if successes &gt; failures:\n            self.logger.increment('successes')\n            # ...\n        else:\n            self.logger.increment('failures')\n            # ...\n        # Only track timing data for attempted updates:\n        self.logger.timing_since('timing', start_time)\n    else:\n        self.logger.increment('no_changes')\n        self.no_changes += 1"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstoragemonitoring.xml:215(para)
@@ -736,11 +701,6 @@ msgstr ""
 msgid "You can now start building the ring with:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:148(literallayout)
-#, no-wrap
-msgid "swift-ring-builder &lt;builder_file&gt; create &lt;part_power&gt; &lt;replicas&gt; &lt;min_part_hours&gt;"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:150(para)
 msgid "This will start the ring build process creating the &lt;builder_file&gt; with 2^&lt;part_power&gt; partitions. &lt;min_part_hours&gt; is the time in hours before a specific partition can be moved in succession (24 is a good value for this)."
 msgstr ""
@@ -749,22 +709,12 @@ msgstr ""
 msgid "Devices can be added to the ring with:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:155(literallayout)
-#, no-wrap
-msgid "swift-ring-builder &lt;builder_file&gt; add z&lt;zone&gt;-&lt;ip&gt;:&lt;port&gt;/&lt;device_name&gt;_&lt;meta&gt; &lt;weight&gt;"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:158(para)
 msgid "This will add a device to the ring where &lt;builder_file&gt; is the name of the builder file that was created previously, &lt;zone&gt; is the number of the zone this device is in, &lt;ip&gt; is the ip address of the server the device is in, &lt;port&gt; is the port number that the server is running on, &lt;device_name&gt; is the name of the device on the server (for example: sdb1), &lt;meta&gt; is a string of metadata for the device (optional), and &lt;weight&gt; is a float weight that determines how many partitions are put on the device relative to the rest of the devices in the cluster (a good starting point is 100.0 x TB on the drive). Add each device that will be initially in the cluster."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:168(para)
 msgid "Once all of the devices are added to the ring, run:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:169(literallayout)
-#, no-wrap
-msgid "swift-ring-builder &lt;builder_file&gt; rebalance"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:171(para)
@@ -1819,11 +1769,6 @@ msgstr ""
 msgid "The following settings should be in <code>/etc/sysctl.conf</code>:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1341(literallayout)
-#, no-wrap
-msgid "\n        \n# disable TIME_WAIT.. wait..\nnet.ipv4.tcp_tw_recycle=1\nnet.ipv4.tcp_tw_reuse=1\n\n# disable syn cookies\nnet.ipv4.tcp_syncookies = 0\n\n# double amount of allowed conntrack\nnet.ipv4.netfilter.ip_conntrack_max = 262144\n\n    "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1355(para)
 msgid "To load the updated sysctl settings, run <code>sudo sysctl -p </code>"
 msgstr ""
@@ -2172,22 +2117,12 @@ msgstr ""
 msgid "The quickest way to try out this feature is use the included swift OpenStack Object Storage client tool. You can use the -S option to specify the segment size to use when splitting a large file. For example:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1705(literallayout)
-#, no-wrap
-msgid "swift upload test_container -S 1073741824 large_file"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1707(para)
 msgid "This would split the large_file into 1G segments and begin uploading those segments in parallel. Once all the segments have been uploaded, swift will then create the manifest file so the segments can be downloaded as one."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1710(para)
 msgid "So now, the following st command would download the entire large object:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1712(literallayout)
-#, no-wrap
-msgid "swift download test_container large_file"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1714(para)
@@ -2224,11 +2159,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1752(para)
 msgid "Here's an example using curl with tiny 1-byte segments:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1753(literallayout)
-#, no-wrap
-msgid "\n            # First, upload the segments\ncurl -X PUT -H 'X-Auth-Token: &lt;token&gt;' \\\n    http://&lt;storage_url&gt;/container/myobject/1 --data-binary '1'\ncurl -X PUT -H 'X-Auth-Token: &lt;token&gt;' \\\n    http://&lt;storage_url&gt;/container/myobject/2 --data-binary '2'\ncurl -X PUT -H 'X-Auth-Token: &lt;token&gt;' \\\n    http://&lt;storage_url&gt;/container/myobject/3 --data-binary '3'\n\n# Next, create the manifest file\ncurl -X PUT -H 'X-Auth-Token: &lt;token&gt;' \\\n    -H 'X-Object-Manifest: container/myobject/' \\\n    http://&lt;storage_url&gt;/container/myobject --data-binary ''\n\n# And now we can download the segments as a single object\ncurl -H 'X-Auth-Token: &lt;token&gt;' \\\n    http://&lt;storage_url&gt;/container/myobject"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1773(title)
@@ -2479,36 +2409,16 @@ msgstr ""
 msgid "Ensure that your proxy-server.conf file contains swift3 in the pipeline and the [filter:swift3] section, as shown below:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1980(literallayout)
-#, no-wrap
-msgid "[pipeline:main]\n        pipeline = healthcheck cache swift3 swauth proxy-server\n       \n        [filter:swift3]\n        use = egg:swift#swift3\n        "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1986(para)
 msgid "Next, configure the tool that you use to connect to the S3 API. For S3curl, for example, you'll need to add your host IP information by adding y our host IP to the @endpoints array (line 33 in s3curl.pl):"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1988(literallayout)
-#, no-wrap
-msgid "my @endpoints = ( '1.2.3.4');"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1989(para)
 msgid "Now you can send commands to the endpoint, such as:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1990(literallayout)
-#, no-wrap
-msgid "\n        ./s3curl.pl - 'myacc:myuser' -key mypw -get - -s -v http://1.2.3.4:8080\n        "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1993(para)
 msgid "To set up your client, the access key will be the concatenation of the account and user strings that should look like test:tester, and the secret access key is the account password. The host should also point to the Swift storage node's hostname. It also will have to use the old-style calling format, and not the hostname-based container format. Here is an example client setup using the Python boto library on a locally installed all-in-one Swift installation."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:1999(literallayout)
-#, no-wrap
-msgid "\nconnection = boto.s3.Connection(\n    aws_access_key_id='test:tester',\n    aws_secret_access_key='testing',\n    port=8080,\n    host='127.0.0.1',\n    is_secure=False,\n    calling_format=boto.s3.connection.OrdinaryCallingFormat())\n        "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2011(title)
@@ -2524,7 +2434,7 @@ msgid "Swift CLI Basics"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2022(para)
-msgid "The command line usage for swift, the CLI tool is: <literallayout>swift (command) [options] [args]</literallayout>"
+msgid "The command line usage for swift, the CLI tool is: <placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2025(para)
@@ -2631,45 +2541,20 @@ msgstr ""
 msgid "When you want quick, command-line answers to questions about logs, you can use swift with the -o or -output option. The -o —output option can only be used with a single object download to redirect the data stream to either a different file name or to STDOUT (-). The ability to redirect the output to STDOUT allows you to pipe “|” data without saving it to disk first. One common use case is being able to do some quick log file analysis. First let’s use swift to setup some data for the examples. The “logtest” directory contains four log files with the following line format."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2078(literallayout)
-#, no-wrap
-msgid "files:\n                2010-11-16-21_access.log\n                2010-11-16-22_access.log\n                2010-11-15-21_access.log\n                2010-11-15-22_access.log\n                \n                log lines:\n                Nov 15 21:53:52 lucid64 proxy-server - 127.0.0.1 15/Nov/2010/22/53/52 DELETE /v1/AUTH_cd4f57824deb4248a533f2c28bf156d3/2eefc05599d44df38a7f18b0b42ffedd HTTP/1.0 204 - - test%3Atester%2CAUTH_tkcdab3c6296e249d7b7e2454ee57266ff - - - txaba5984c-aac7-460e-b04b-afc43f0c6571 - 0.0432"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2088(para)
 msgid "The swift tool can easily upload the four log files into a container named “logtest”:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2090(literallayout)
-#, no-wrap
-msgid "\n                $ cd logs\n                $ swift -A http://swift-auth.com:11000/v1.0 -U test:tester -K \\\n                testing upload logtest *.log\n                2010-11-16-21_access.log\n                2010-11-16-22_access.log\n                2010-11-15-21_access.log\n                2010-11-15-22_access.log\n                \n                get statistics on the account:\n                $ swift -A http://swift-auth.com:11000/v1.0 -U test:tester -K \\\n                testing -q stat\n                Account: AUTH_cd4f57824deb4248a533f2c28bf156d3\n                Containers: 1\n                Objects: 4\n                Bytes: 5888268\n                \n                get statistics on the container:\n                $ swift -A http://swift-auth.com:11000/v1.0 -U test:tester -K \\\n                testing stat logtest\n                Account: AUTH_cd4f57824deb4248a533f2c28bf156d3\n                Container: logtest\n                Objects: 4\n                Bytes: 5864468\n                Read ACL:\n                Write ACL:\n                \n                list all the objects in the container:\n                $ swift -A http:///swift-auth.com:11000/v1.0 -U test:tester -K \\\n                testing list logtest\n                2010-11-15-21_access.log\n                2010-11-15-22_access.log\n                2010-11-16-21_access.log\n                2010-11-16-22_access.log"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2124(para)
 msgid "These next three examples use the -o —output option with (-) to help answer questions about the uploaded log files. The swift command will download an object, stream it to awk to determine the breakdown of requests by return code for everything during 2200 on November 16th, 2010. Based on the log line format column 9 is the type of request and column 12 is the return code. After awk processes the data stream it is piped to sort and then uniq -c to sum up the number of occurrences for each combination of request type and return code."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2132(literallayout)
-#, no-wrap
-msgid "$ swift -A http://swift-auth.com:11000/v1.0 -U test:tester -K \\\n                    testing download -o - logtest 2010-11-16-22_access.log \\\n                    | awk ‘{ print $9”-“$12}’ | sort | uniq -c\n                    \n                    805 DELETE-204\n                    12 DELETE-404\n                    2 DELETE-409\n                    723 GET-200\n                    142 GET-204\n                    74 GET-206\n                    80 GET-304\n                    34 GET-401\n                    5 GET-403\n                    18 GET-404\n                    166 GET-412\n                    2 GET-416\n                    50 HEAD-200\n                    17 HEAD-204\n                    20 HEAD-401\n                    8 HEAD-404\n                    30 POST-202\n                    25 POST-204\n                    22 POST-400\n                    6 POST-404\n                    842 PUT-201\n                    2 PUT-202\n                    32 PUT-400\n                    4 PUT-403\n                    4 PUT-404\n                    2 PUT-411\n                    6 PUT-412\n                    6 PUT-413\n                    2 PUT-422\n                    8 PUT-499\n                    "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2168(para)
 msgid "This example uses a bash for loop with awk, swift with its -o —output option with a hyphen (-) to find out how many PUT requests are in each log file. First create a list of objects by running swift with the list command on the “logtest” container; then for each item in the list run swift with download -o - then pipe the output into grep to filter the put requests and finally into wc -l to count the lines."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2174(literallayout)
-#, no-wrap
-msgid "$ for f in `swift -A http://swift-auth.com:11000/v1.0 -U test:tester -K testing list logtest` ; \\\n                        do  echo -ne “PUTS - ” ; swift -A http://swift-auth.com:11000/v1.0 -U test:tester -K \\\n                        testing download -o -  logtest $f | grep PUT | wc -l ; done\n                        \n                        2010-11-15-21_access.log - PUTS - 402\n                        2010-11-15-22_access.log - PUTS - 1091\n                        2010-11-16-21_access.log - PUTS - 892\n                        2010-11-16-22_access.log - PUTS - 910\n                        "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2184(para)
 msgid "By adding the -p —prefix option a prefix query is performed on the list to return only the object names that begin with a specific string. Let’s determine out how many PUT requests are in each object with a name beginning with “2010-11-15”. First create a list of objects by running swift with the list command on the “logtest” container with the prefix option -p 2010-11-15. Then on each of item(s) returned run swift with the download -o - then pipe the output to grep and wc as in the previous example. The echo command is added to display the object name."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2193(literallayout)
-#, no-wrap
-msgid "$ for f in `swift -A http://swift-auth.com:11000/v1.0 -U test:tester -K testing list  \\\n                        -p 2010-11-15 logtest` ; do  echo -ne “$f - PUTS - ” ;  \\\n                        swift -A http://127.0.0.1:11000/v1.0 -U test:tester -K testing  \\\n                        download -o - logtest $f | grep PUT | wc -l ; done\n                        \n                        2010-11-15-21_access.log - PUTS - 402\n                        2010-11-15-22_access.log - PUTS - 910\n                        \n                        "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-object-storage-admin/objectstorageadmin.xml:2202(para)

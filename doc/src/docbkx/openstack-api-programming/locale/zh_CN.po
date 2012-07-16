@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenStack Manuals\n"
-"POT-Creation-Date: 2012-06-18 17:13+0800\n"
-"PO-Revision-Date: 2012-07-06 06:50+0000\n"
+"POT-Creation-Date: 2012-07-16 10:36+0800\n"
+"PO-Revision-Date: 2012-07-10 09:34+0000\n"
 "Last-Translator: daisy.ycguo <daisy.ycguo@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/openstack-manuals-i18n/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -14,55 +14,55 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml9(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml9(title)
 msgid "Programming OpenStack Compute API"
 msgstr "OpenStack Compute API编程"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml13(firstname)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml13(firstname)
 msgid "Jacek"
 msgstr "Jacek"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml14(surname)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml14(surname)
 msgid "Artymiak"
 msgstr "Artymiak"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml17(orgname)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml17(orgname)
 msgid "Rackspace"
 msgstr "Rackspace"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml20(edition)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml20(edition)
 msgid "1st"
 msgstr "1st"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml22(year)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml22(year)
 msgid "2011"
 msgstr "2011"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml23(year)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml23(year)
 msgid "2012"
 msgstr "2012"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml24(holder)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml24(holder)
 msgid "OpenStack LLC"
 msgstr "OpenStack LLC"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml26(releaseinfo)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml26(releaseinfo)
 msgid "1.1"
 msgstr "1.1"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml27(productname)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml27(productname)
 msgid "OpenStack Compute"
 msgstr "OpenStack Compute"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml28(pubdate)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml28(pubdate)
 msgid "2012-03-21"
 msgstr "2012-03-21"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml31(remark)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml31(remark)
 msgid "Copyright details are filled in by the template."
 msgstr "版权信息来自于模板"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml35(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml35(para)
 msgid ""
 "This is a book about programming the OpenStack Compute Nova API, v1.1. It is"
 " meant to be read by both programmers and system administrators familiar "
@@ -72,11 +72,11 @@ msgid ""
 " Windows operating systems."
 msgstr "该书介绍了使用OpenStack Compute Nova API, v1.1的编程。对于那些熟悉Unix shell (Bash, sh) 或者Python编程语言的程序员和系统管理员来说，都是又意义的。As such it will be of interest to any system administrator and programmer using BSD, Linux, Unix, Mac OS X, and Microsoft Windows operating systems."
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml45(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml45(title)
 msgid "Why Should You Use Cloud Computing?"
 msgstr "你为什么要用到云计算"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml46(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml46(para)
 msgid ""
 "Cloud computing is a way to build flexible server farms that can augment or "
 "replace the old-style server farms with their high maintenance cost and "
@@ -84,7 +84,7 @@ msgid ""
 "that are impossible with traditional hardware."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml53(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml53(para)
 msgid ""
 "Thanks to cloud computing, things like replacing Microsoft Windows Server "
 "with Linux on 100+ machines; replacing 10 1-core servers with 10 4-core "
@@ -97,11 +97,11 @@ msgid ""
 "traditional data center! (And don't forget to compare the pricing.)"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml67(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml67(title)
 msgid "How Will You Manage It All?"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml68(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml68(para)
 msgid ""
 "One of the first things you may think of is how on Earth are you supposed to"
 " manage all those computing and storage resources? All cloud computing "
@@ -111,7 +111,7 @@ msgid ""
 "server farm."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml76(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml76(para)
 msgid ""
 "A better way to manage your cloud is via a set of scripts that communicate "
 "with your cloud provider's infrastructure. This is done via a Programming "
@@ -119,7 +119,7 @@ msgid ""
 "computing provider."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml82(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml82(para)
 msgid ""
 "The problem with APIs is that there are so many of them. Every cloud "
 "provider's infrastructure is different and that fact is reflected in the "
@@ -129,11 +129,11 @@ msgid ""
 "infrastructures."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml93(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml93(title)
 msgid "The Solution: OpenStack Compute API"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml94(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml94(para)
 msgid ""
 "Fortunately, you are not alone with this problem. The fanatically helpful "
 "people at Rackspace have decided that it would be beneficial for their "
@@ -143,26 +143,26 @@ msgid ""
 "open, it can be used by other hosting companies."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml103(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml103(para)
 msgid ""
 "When other cloud computing providers adopt the OpenStack Compute API, you "
 "will be able to deploy your servers with different providers using the same "
 "set of tools by changing only three pieces of information in your code:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml111(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml111(para)
 msgid "the URL of the endpoint for the calls to the API;"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml116(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml116(para)
 msgid "the username of the authorized user;"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml121(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml121(para)
 msgid "the password of the authorized user."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml126(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml126(para)
 msgid ""
 "From the programmer's point of view, OpenStack Compute API looks like "
 "another web API, similar to the Flickr API or the Twitter API—if someone "
@@ -173,11 +173,11 @@ msgid ""
 " credentials."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml138(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml138(title)
 msgid "The Basics"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml139(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml139(para)
 msgid ""
 "There are two ways to start learning OpenStack Compute API programming—you "
 "can get an account with an OpenStack cloud infrastructure provider or you "
@@ -185,11 +185,11 @@ msgid ""
 " servers by following the instructions published at this URL:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml149(link)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml149(link)
 msgid "http://wiki.openstack.org/SingleNodeNovaVagrantChef"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml153(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml153(para)
 msgid ""
 "Please bear in mind that the OpenStack project is moving at a fairly rapid "
 "pace and things sometimes don't work or need to be fixed by hand. For "
@@ -197,25 +197,25 @@ msgid ""
 "little. When you hit a snag, ask for help on the OpenStack site."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml163(link)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml163(link)
 msgid "http://openstack.org"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml167(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml167(para)
 msgid ""
 "Sometimes you won't have to ask. The OpenStack project is well-documented "
 "and you can find all of the necessary information at the following URL:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml175(link)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml175(link)
 msgid "http://docs.openstack.org"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml180(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml180(title)
 msgid "Getting Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml181(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml181(para)
 msgid ""
 "The OpenStack Compute Nova API can be accessed in any programming language. "
 "In this book we present examples written in the Python programming languge "
@@ -223,7 +223,7 @@ msgid ""
 "interpreter."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml187(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml187(para)
 msgid ""
 "Ideally, you should be using the latest Python interpreter from the 2.x "
 "branch, which can be any version starting with number 2.6.1 upwards. The "
@@ -232,15 +232,15 @@ msgid ""
 "Compute Application Programming Interface (API)."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml195(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml195(para)
 msgid "Let's walk through the installation process."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml200(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml200(title)
 msgid "Installing Python on Your Machine"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml201(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml201(para)
 msgid ""
 "Python is a popular scripting language that ships pre-installed on Mac OS X "
 "and some Linux distributions. You can verify if and which version of the "
@@ -248,26 +248,26 @@ msgid ""
 "command (must be issued on the command line, do not type the dollar sign):"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml208(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml208(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ python --version\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml211(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml211(para)
 msgid ""
 "The version you need is at least 2.6.1. (Please use the latest "
 "2.<emphasis>x</emphasis>.<emphasis>x</emphasis> version.)"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml215(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml215(para)
 msgid ""
 "If you are working in a graphical user interface environment and you are not"
 " sure how to get to the command line, try the following advice:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml222(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml222(para)
 msgid ""
 "<emphasis role=\"strong\">Linux</emphasis> — click on the toolbar located "
 "along one of the edges of the screen and locate the <emphasis "
@@ -276,7 +276,7 @@ msgid ""
 "it in <emphasis>Applications &gt; Accessories &gt; Terminal</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml233(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml233(para)
 msgid ""
 "<emphasis role=\"strong\">Mac OS X</emphasis> — press Ctrl+Space to display "
 "the <emphasis role=\"strong\">Spotlight</emphasis> search field. Type "
@@ -284,7 +284,7 @@ msgid ""
 "role=\"strong\">Terminal</emphasis> application from the list of results."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml243(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml243(para)
 msgid ""
 "<emphasis role=\"strong\">Microsoft Windows</emphasis> — click the <emphasis"
 " role=\"strong\">Start</emphasis> menu button, select <emphasis "
@@ -292,14 +292,14 @@ msgid ""
 "role=\"strong\">cmd</emphasis> and hit the Enter/Return key."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml252(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml252(para)
 msgid ""
 "If you do not have Python installed on your system or it is a version "
 "earlier than 2.6.1, you will need to add a Python interpreter to your system"
 " by hand."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml257(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml257(para)
 msgid ""
 "Python installation packages exist for all popular operating systems, and if"
 " you cannot get one for your favorite work environment, you can usually "
@@ -307,11 +307,11 @@ msgid ""
 "or sources from the official Python download page:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml265(link)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml265(link)
 msgid "http://www.python.org/getit/"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml267(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml267(para)
 msgid ""
 "If your favorite operating system is not listed on that page, refer to your "
 "system's documentation for information on adding external packages. Various "
@@ -321,21 +321,21 @@ msgid ""
 "\">apt-get</emphasis> command:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml276(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml276(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ sudo apt-get install python\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml279(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml279(para)
 msgid ""
 "Whenever possible, use pre-made Python 2.<emphasis>x</emphasis> packages. "
 "You can always build software from the sources, but it should be your last "
 "choice, if you are looking for convenience."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml284(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml284(para)
 msgid ""
 "If you are installing Python on a computer running Microsoft Windows, you "
 "may have to add the path to the Python interpreter to the <emphasis "
@@ -344,70 +344,70 @@ msgid ""
 "Variables</emphasis> dialog. You can do it in the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml294(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml294(para)
 msgid "Click the <emphasis role=\"strong\">Start</emphasis> button."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml299(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml299(para)
 msgid "Right-click the <emphasis role=\"strong\">Computer</emphasis> menu item."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml305(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml305(para)
 msgid "Select <emphasis role=\"strong\">Properties</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml310(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml310(para)
 msgid "Select <emphasis role=\"strong\">Advanced System Settings</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml316(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml316(para)
 msgid ""
 "Click the <emphasis role=\"strong\">Environment Variables</emphasis> button."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml322(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml322(para)
 msgid ""
 "Click the <emphasis role=\"strong\">Path</emphasis> entry on the <emphasis "
 "role=\"strong\">System Variables</emphasis> list."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml329(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml329(para)
 msgid "Click the <emphasis role=\"strong\">Edit</emphasis> button."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml334(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml334(para)
 msgid ""
 "Add <emphasis role=\"strong\">;C:26</emphasis> (or <emphasis "
 "role=\"strong\">;C:27</emphasis> for Python 2.7.<emphasis>x</emphasis>) to "
 "the end of the string shown in the text field of the edit dialog."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml342(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml342(para)
 msgid "Click the <emphasis role=\"strong\">OK</emphasis> button."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml347(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml347(para)
 msgid ""
 "Please check the real path to the Python interpreter on your system. You can"
 " do that by browsing the system disk. Look for the topmost folder/path whose"
 " name begins with <emphasis role=\"strong\">Python</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml355(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml355(title)
 msgid "Examples"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml356(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml356(para)
 msgid ""
 "Examples from this book can be found in the repository found at the "
 "following URL:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml363(link)
-msgid "http://devguide.net/books/openstackapi"
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml363(link)
+msgid "http://devguide.net/books/openstack"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml367(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml367(para)
 msgid ""
 "Please note that all examples in this book have been written in a way that "
 "is meant to explain the concepts and the interactions between your code and "
@@ -415,23 +415,23 @@ msgid ""
 "error handling and data processing code."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml376(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml376(title)
 msgid "Getting the Keys to the Kingdom"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml377(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml377(para)
 msgid ""
 "Depending on the setup you are going to use, there could be three ways to "
 "authenticate yourself with an OpenStack Compute v1.1 API:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml384(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml384(para)
 msgid ""
 "Username/password — needs to be given with every call to the OpenStack "
 "Compute API. Not very convenient nor secure."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml390(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml390(para)
 msgid ""
 "An authentication token — typically OAuth, but could be any kind of a secret"
 " string of bits with an expiry date and time. This is the preferred way to "
@@ -441,7 +441,7 @@ msgid ""
 "token."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml401(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml401(para)
 msgid ""
 "An API key — works just like the authentication token, but does not have an "
 "expiry date/time. You or your OpenStack provider's administrator/support "
@@ -451,7 +451,7 @@ msgid ""
 " have to send those credentials at all, in fact."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml413(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml413(para)
 msgid ""
 "When you decide to use the username/password authentication, you will have "
 "to send it with every request; when you use a token, you will need to send "
@@ -461,11 +461,11 @@ msgid ""
 "username/password credentials, but you are responsible for expiring the key."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml425(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml425(title)
 msgid "Remembering Basic Security Hygiene"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml426(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml426(para)
 msgid ""
 "Please make sure that the scripts you are pasting your credentials into are "
 "not readable by other users because the authentication tokens, the API keys,"
@@ -474,7 +474,7 @@ msgid ""
 "your cloud."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml434(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml434(para)
 msgid ""
 "If you suspect that the worst might have happened, revoke the compromised "
 "credentials and generate new ones by folowing the instructions provided by "
@@ -484,11 +484,11 @@ msgid ""
 "with the new ones."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml445(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml445(title)
 msgid "Getting the Authentication Token"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml446(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml446(para)
 msgid ""
 "In order to obtain an API token you will need to request it from your "
 "OpenStack cloud provider's authentication server. Your provider will have to"
@@ -496,7 +496,7 @@ msgid ""
 "and password."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml452(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml452(para)
 msgid ""
 "The OpenStack Compute API is implemented using a convention known as "
 "\"representational state transfer\" (REST), which is a way of using various "
@@ -504,34 +504,34 @@ msgid ""
 "paths to those resources. It sounds more complex than it is in reality."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml459(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml459(para)
 msgid ""
 "The following example shows how to use the <emphasis "
 "role=\"strong\">curl</emphasis> command to obtain the authentication token "
 "using the HTTP GET method:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml464(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml464(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -d '{\"passwordCredentials\": {\"username\": \"joe\", \"password\": \"shhh\"}}' -H \"Content-type: application/json\" http://localhost:5000/v2.0/tokens\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml469(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml469(para)
 msgid ""
 "<emphasis role=\"strong\">joe</emphasis> — your username, replace <emphasis "
 "role=\"strong\">joe</emphasis> without your username, unless it is <emphasis"
 " role=\"strong\">joe</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml477(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml477(para)
 msgid ""
 "<emphasis role=\"strong\">shhh</emphasis> — the password for your OpenStack "
 "account, please do not use <emphasis role=\"strong\">shhh</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml484(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml484(para)
 msgid ""
 "<emphasis role=\"strong\">localhost:5000</emphasis> — the URL of the "
 "authentication server, <emphasis role=\"strong\">localhost</emphasis> is "
@@ -543,31 +543,31 @@ msgid ""
 " authentication servers to listen for authentication requests."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml499(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml499(para)
 msgid ""
 "<emphasis role=\"strong\">/v2.0/tokens</emphasis> — the path to the token "
 "provider."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml505(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml505(para)
 msgid ""
 "What you will get in return should look like the following stream of code:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml509(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml509(screen)
 #, no-wrap
 msgid ""
 "\n"
 "{\"auth\": {\"token\": {\"expires\": \"2015-02-05T00:00:00\", \"id\": \"999888777666\"}, \"serviceCatalog\": {\"glance\": [{\"adminURL\": \"http://10.0.2.15:9292/v1\", \"region\": \"RegionOne\", \"internalURL\": \"http://10.0.2.15:9292/v1\", \"publicURL\": \"http://10.0.2.15:9292/v1\"}], \"identity\": [{\"adminURL\": \"http://10.0.2.15:5001/v2.0\", \"region\": \"RegionOne\", \"internalURL\": \"http://10.0.2.15:5000/v2.0\", \"publicURL\": \"http://10.0.2.15:5000/v2.0\"}], \"nova\": [{\"adminURL\": \"http://10.0.2.15:8774/v1.1/openstack\", \"region\": \"RegionOne\", \"internalURL\": \"http://10.0.2.15:8774/v1.1/openstack\", \"publicURL\": \"http://10.0.2.15:8774/v1.1/openstack\"}]}}}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml512(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml512(para)
 msgid ""
 "It is hard to read, so here's the same output formatted for your "
 "convenience:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml516(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml516(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -607,7 +607,7 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml552(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml552(para)
 msgid ""
 "The reponse contains the token itself (the <emphasis "
 "role=\"strong\">id</emphasis> key in the <emphasis "
@@ -619,7 +619,7 @@ msgid ""
 " the same geogrphical area."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml563(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml563(para)
 msgid ""
 "Each region is represented as a separate dictionary and those dictionaries "
 "are items in a list that groups region information for each service. This is"
@@ -627,7 +627,7 @@ msgid ""
 "which is arranged in a form of a nested key/value directory."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml570(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml570(para)
 msgid ""
 "Although this is not going to be a frequent occurence in the real world, you"
 " may get bitten by server misconfiguration in test environments. If your "
@@ -644,11 +644,11 @@ msgid ""
 "assigned to the virtual machine."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml588(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml588(title)
 msgid "What About HTTPS?"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml589(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml589(para)
 msgid ""
 "All calls to the OpenStack Compute API presented in the examples included in"
 " this book use unencrypted HTTP connections for the convenience of testing "
@@ -656,7 +656,7 @@ msgid ""
 "connections, which need some additional care."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml596(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml596(para)
 msgid ""
 "When you want to call your OpenStack provider's API servers you will most "
 "likely need to use a secure HTTPS connection. You will recognize it by the "
@@ -665,32 +665,32 @@ msgid ""
 "<emphasis role=\"strong\">https</emphasis> and see if that one works."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml605(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml605(para)
 msgid ""
 "If you run into problems with SSL certificates while using <emphasis "
 "role=\"strong\">curl</emphasis>, read the instructions published at the "
 "following URL:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml613(link)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml613(link)
 msgid "http://curl.haxx.se/docs/sslcerts.html"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml617(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml617(para)
 msgid ""
 "Most problems with SSL are caused by SSL certificate misconfiguration on the"
 " server side or by the use of self-generated SSL certificates."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml622(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml622(para)
 msgid "Using HTTPS in Python scripts is explained later in this chapter."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml629(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml629(title)
 msgid "Using Python to Obtain the Authentication Token"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml630(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml630(para)
 msgid ""
 "When you want to obtain an API token you can do it using two standard Python"
 " modules: <emphasis role=\"strong\">httplib</emphasis> and <emphasis "
@@ -701,7 +701,7 @@ msgid ""
 "role=\"strong\">simplejson</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml642(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml642(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -722,11 +722,11 @@ msgid ""
 "\n"
 "osuser = \"joe\"\n"
 "\n"
-"## use something else than \"shhh\" for you password\n"
+"## use something else than \"shhh\" for your password\n"
 "\n"
 "ospassword = \"shhh\"\n"
 "\n"
-"params = '{\"passwordCredentials\":{\"username\":osuser, \"password\":ospassword}}'\n"
+"params = '{\"auth\":{\"passwordCredentials\":{\"username\":\"' + osuser + '\", \"password\":\"' + ospassword + '\"}}}'\n"
 "\n"
 "headers = {\"Content-Type\": \"application/json\"}\n"
 "\n"
@@ -748,13 +748,13 @@ msgid ""
 "print \"Your token is: %s\" % apitoken\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml685(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml685(para)
 msgid ""
 "When you run <emphasis role=\"strong\">gettoken.py</emphasis> you should see"
 " the following output (the token will hopefully be different):"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml690(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml690(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -762,11 +762,11 @@ msgid ""
 "Your token is: 999888777666\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml696(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml696(title)
 msgid "Getting the API Endpoint URL"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml697(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml697(para)
 msgid ""
 "The API token is only one essential piece of information you need to know to"
 " use the OpenStack Compute API. Another is the URL of the Nova API end "
@@ -776,7 +776,15 @@ msgid ""
 "information from the authentication server's response:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml706(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml705(para)
+msgid ""
+"If the service provider is using the file-based template endpoint catalog, "
+"you get an empty service catalog. For example, you see "
+"<code>\"serviceCatalog\": {}</code> in the response when using a devstack "
+"installation."
+msgstr ""
+
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml710(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -801,11 +809,11 @@ msgid ""
 "\n"
 "osuser = \"joe\"\n"
 "\n"
-"## use something else than \"shhh\" for you password\n"
+"## use something else than \"shhh\" for your password\n"
 "\n"
 "ospassword = \"shhh\"\n"
 "\n"
-"params = '{\"passwordCredentials\":{\"username\":osuser, \"password\":ospassword}}'\n"
+"params = '{\"auth\":{\"passwordCredentials\":{\"username\":\"' + osuser + '\", \"password\":\"' + ospassword + '\"}}}'\n"
 "\n"
 "headers = {\"Content-Type\": \"application/json\"}\n"
 "\n"
@@ -833,7 +841,7 @@ msgid ""
 "print \"Your Nova URL is: %s\" % apiurl\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml759(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml763(para)
 msgid ""
 "When you run that script, you should see the following output. The token "
 "will most likely be something different than <emphasis "
@@ -841,7 +849,7 @@ msgid ""
 "contain <emphasis role=\"strong\">10.0.2.15</emphasis>:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml766(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml768(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -850,13 +858,13 @@ msgid ""
 "Your Nova URL is: http://10.0.2.15:8774/v1.1/openstack\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml772(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml775(title)
 msgid ""
 "Getting Your Nova Credentials -- The Drop-In Script Snippet for Your Python "
 "Scripts"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml774(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml777(para)
 msgid ""
 "You will be coming back to the token and API URL extraction code over and "
 "over again, which is why I decided to place it in a separate section of this"
@@ -864,7 +872,7 @@ msgid ""
 "important stuff. Here's the code in all it's glory:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml781(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml782(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -888,11 +896,11 @@ msgid ""
 "\n"
 "osuser = \"joe\"\n"
 "\n"
-"## use something else than \"shhh\" for you password\n"
+"## use something else than \"shhh\" for your password\n"
 "\n"
 "ospassword = \"shhh\"\n"
 "\n"
-"params1 = '{\"passwordCredentials\":{\"username\":osuser, \"password\":ospassword}}'\n"
+"params1 = '{\"auth\":{\"passwordCredentials\":{\"username\":\"' + osuser + '\", \"password\":\"' + ospassword + '\"}}}'\n"
 "headers1 = {\"Content-Type\": \"application/json\"}\n"
 "\n"
 "# HTTP connection #1\n"
@@ -923,11 +931,11 @@ msgid ""
 "### --8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml840(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml841(title)
 msgid "Servers"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml841(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml842(para)
 msgid ""
 "Servers are the cornerstone of the OpenStack Compute cloud infrastructure. "
 "While the future implementation of OpenStack will most likely offer "
@@ -935,11 +943,11 @@ msgid ""
 "components, servers are what we have right now."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml849(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml850(title)
 msgid "Creating Servers"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml850(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml851(para)
 msgid ""
 "When you create an account with your OpenStack Compute provider you will "
 "need to create your servers yourself, either by booting them via a web "
@@ -948,22 +956,22 @@ msgid ""
 "three essential arguments:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml859(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml860(para)
 msgid "<emphasis role=\"strong\">name</emphasis> — the name of the new server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml865(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml866(para)
 msgid ""
 "<emphasis role=\"strong\">imageRef</emphasis> — the URL of the server image."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml871(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml872(para)
 msgid ""
 "<emphasis role=\"strong\">flavorRef</emphasis> — the URL of the server "
 "flavor."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml877(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml878(para)
 msgid ""
 "A short explanation is in order. <emphasis>Flavors</emphasis> contain "
 "definitions of the virtual hardware that will be used to run the server "
@@ -976,28 +984,28 @@ msgid ""
 " scratch every time you want to add a new web server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml890(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml891(para)
 msgid ""
 "Images are not tied to any particular virtual hardware flavor. The only "
 "limit is the size of the storage and the amount of RAM available for a "
 "particular flavor."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml895(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml896(para)
 msgid ""
 "Whenever one of those three components are missing, the OpenStack Compute "
 "API will complain with the following messages:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml901(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml902(para)
 msgid "missing <emphasis role=\"strong\">name</emphasis>"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml906(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml907(para)
 msgid "You forgot to name the new server:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml909(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml910(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1009,15 +1017,15 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml919(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml920(para)
 msgid "missing <emphasis role=\"strong\">imageRef</emphasis>"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml924(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml925(para)
 msgid "You forgot the URL of the server image or used the wrong one:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml927(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml928(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1029,16 +1037,16 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml937(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml938(para)
 msgid "missing <emphasis role=\"strong\">flavorRef</emphasis>"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml942(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml943(para)
 msgid ""
 "You forgot the URL of the virtual machine flavor or used the wrong one:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml946(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml947(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1050,7 +1058,7 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml954(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml955(para)
 msgid ""
 "The value of <emphasis role=\"strong\">name</emphasis> is easy to figure "
 "out, it is what you want to call your server. Typically that would be some "
@@ -1062,7 +1070,7 @@ msgid ""
 "role=\"strong\">www000</emphasis>, whatever."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml965(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml966(para)
 msgid ""
 "But <emphasis role=\"strong\">imageRef</emphasis> and <emphasis "
 "role=\"strong\">flavorRef</emphasis> cannot be just any URL. You need to ask"
@@ -1072,15 +1080,15 @@ msgid ""
 "storage or higher CPU performance."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml975(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml976(title)
 msgid "Listing Images"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml976(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml977(para)
 msgid "How do you know what images are available for building new servers?"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml980(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml981(para)
 msgid ""
 "You can list available server images by sending your request to the "
 "<emphasis>/images</emphasis> URL using the GET method. The following example"
@@ -1088,14 +1096,14 @@ msgid ""
 "command:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml986(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml987(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -v -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/images \n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml989(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml990(para)
 msgid ""
 "As you can see, you must include the <emphasis role=\"strong\">X-Auth-"
 "Token</emphasis> header with a valid token otherwise the OpenStack Compute "
@@ -1103,24 +1111,24 @@ msgid ""
 "error."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml995(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml996(para)
 msgid ""
 "When all goes well, you will get a lump of JSON that looks a bit like this:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml999(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1000(screen)
 #, no-wrap
 msgid ""
 "\n"
 "{\"images\": [{\"id\": 3, \"links\": [{\"href\": \"http://localhost:8774/v1.1/openstack/images/3\", \"rel\": \"self\"}, {\"href\": \"http://localhost:8774/openstack/images/3\", \"rel\": \"bookmark\"}], \"name\": \"ubuntu-11.04-server\"}, {\"id\": 2, \"links\": [{\"href\": \"http://localhost:8774/v1.1/openstack/images/2\", \"rel\": \"self\"}, {\"href\": \"http://localhost:8774/openstack/images/2\", \"rel\": \"bookmark\"}], \"name\": \"ubuntu-11.04-initrd\"}, {\"id\": 1, \"links\": [{\"href\": \"http://localhost:8774/v1.1/openstack/images/1\", \"rel\": \"self\"}, {\"href\": \"http://localhost:8774/openstack/images/1\", \"rel\": \"bookmark\"}], \"name\": \"ubuntu-11.04-kernel\"}]}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1002(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1167(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1003(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1168(para)
 msgid "Here is a version that is easier to read:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1005(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1006(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1172,34 +1180,34 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1053(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1054(para)
 msgid ""
 "Each item on the <emphasis role=\"strong\">images</emphasis> list represents"
 " a single server image. It is a dictionary with three keys:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1060(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1061(para)
 msgid ""
 "<emphasis role=\"strong\">id</emphasis> — the numeric ID of the server "
 "image."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1066(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1067(para)
 msgid ""
 "<emphasis role=\"strong\">links</emphasis> — the list of the URLs of the "
 "locations where you can find the image."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1072(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1073(para)
 msgid ""
 "<emphasis role=\"strong\">name</emphasis> — a descriptive name of the image."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1078(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1079(para)
 msgid "Here's how one server image is represented in that response:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1081(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1082(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1219,7 +1227,7 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1097(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1098(para)
 msgid ""
 "Please note that this is not a complete set of information about server "
 "images that you can extract using the OpenStack Compute API, but it is "
@@ -1229,7 +1237,7 @@ msgid ""
 "<emphasis>Images</emphasis> chapter later in this book."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1106(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1107(para)
 msgid ""
 "One question that programmers sometimes ask is which kind of server image "
 "identification is more reliable to rely upon, the server image <emphasis "
@@ -1240,7 +1248,7 @@ msgid ""
 " the numeric IDs."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1116(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1117(para)
 msgid ""
 "Another argument for using names to identify server images is handling "
 "errors and ensuring operational continuity. If you want to make sure that "
@@ -1256,16 +1264,16 @@ msgid ""
 " site:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1135(link)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1893(link)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1136(link)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1894(link)
 msgid "http://fabfile.org"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1141(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1142(title)
 msgid "Listing Flavors"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1142(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1143(para)
 msgid ""
 "Once you have the server image URL, you will need the URL of the virtual "
 "machine flavor. You can list available flavors by sending your request to "
@@ -1274,14 +1282,14 @@ msgid ""
 "role=\"strong\">curl</emphasis> command:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1150(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1151(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -v -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/flavors\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1153(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1154(para)
 msgid ""
 "As with every call you make to the OpenStack Compute API you must include "
 "the <emphasis role=\"strong\">X-Auth-Token</emphasis> header with a valid "
@@ -1289,20 +1297,20 @@ msgid ""
 "role=\"strong\">401 Unauthorized</emphasis> error."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1160(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1161(para)
 msgid ""
 "When all goes well, you will get a JSON string that looks like the one "
 "below:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1164(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1165(screen)
 #, no-wrap
 msgid ""
 "\n"
 "{\"flavors\": [{\"id\": 3, \"links\": [{\"href\": \"http://localhost:8774/v1.1/openstack/flavors/3\", \"rel\": \"self\"}, {\"href\": \"http://localhost:8774/openstack/flavors/3\", \"rel\": \"bookmark\"}], \"name\": \"m1.medium\"}, {\"id\": 4, \"links\": [{\"href\": \"http://localhost:8774/v1.1/openstack/flavors/4\", \"rel\": \"self\"}, {\"href\": \"http://localhost:8774/openstack/flavors/4\", \"rel\": \"bookmark\"}], \"name\": \"m1.large\"}, {\"id\": 1, \"links\": [{\"href\": \"http://localhost:8774/v1.1/openstack/flavors/1\", \"rel\": \"self\"}, {\"href\": \"http://localhost:8774/openstack/flavors/1\", \"rel\": \"bookmark\"}], \"name\": \"m1.tiny\"}, {\"id\": 5, \"links\": [{\"href\": \"http://localhost:8774/v1.1/openstack/flavors/5\", \"rel\": \"self\"}, {\"href\": \"http://localhost:8774/openstack/flavors/5\", \"rel\": \"bookmark\"}], \"name\": \"m1.xlarge\"}, {\"id\": 2, \"links\": [{\"href\": \"http://localhost:8774/v1.1/openstack/flavors/2\", \"rel\": \"self\"}, {\"href\": \"http://localhost:8774/openstack/flavors/2\", \"rel\": \"bookmark\"}], \"name\": \"m1.small\"}]}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1170(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1171(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1382,7 +1390,7 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1246(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1247(para)
 msgid ""
 "The list of virtual machine flavors is arranged in a way similar to the list"
 " of server images. Each item on the <emphasis "
@@ -1390,26 +1398,26 @@ msgid ""
 "flavor. It is a dictionary with three keys:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1255(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1256(para)
 msgid "<emphasis role=\"strong\">id</emphasis> — the numeric ID of the flavor."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1261(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1262(para)
 msgid ""
 "<emphasis role=\"strong\">links</emphasis> — the list of the URLs of the "
 "locations where you can find the flavor."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1267(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1268(para)
 msgid ""
 "<emphasis role=\"strong\">name</emphasis> — a descriptve name of the flavor."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1273(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1274(para)
 msgid "Here's how one virtual machine flavor is represented in that response:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1277(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1278(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1429,11 +1437,11 @@ msgid ""
 "}, \n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1295(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1296(title)
 msgid "Booting a New Server"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1296(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1297(para)
 msgid ""
 "You already know how to obtain the authentication token, the URL of the "
 "OpenStack Compute API, and the URLs of both the server image and the flavor."
@@ -1443,7 +1451,7 @@ msgid ""
 " OpenStack Compute API (aka. <emphasis role=\"strong\">nova</emphasis>):"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1306(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1307(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1463,13 +1471,13 @@ msgid ""
 "### --8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1322(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1323(para)
 msgid ""
 "With the token and the URL we can now ask the OpenStack Compute API server "
 "for the image reference:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1326(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1327(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1516,11 +1524,11 @@ msgid ""
 "        sImageRef = dd2[\"images\"][i][\"links\"][0][\"href\"]\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1369(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1370(para)
 msgid "All we need now is the flavor URL:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1372(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1373(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1554,11 +1562,11 @@ msgid ""
 "        sFlavorRef = dd3[\"flavors\"][i][\"links\"][0][\"href\"]\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1402(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1403(para)
 msgid "We can leave other parameters empty for now:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1405(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1406(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1577,13 +1585,13 @@ msgid ""
 "sPersonality = [ { \"path\":sPersonalityPath, \"contents\":base64.b64encode( sPersonalityContents ) } ]\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1420(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1421(para)
 msgid ""
 "All that's left to do is a call to the OpenStack Compute API to create a new"
 " server:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1424(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1425(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1610,13 +1618,13 @@ msgid ""
 "print json.dumps(dd4, indent=2)\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1447(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1448(para)
 msgid ""
 "When you run that script, you will get back a JSON string that looks simiar "
 "to the one below (shown expanded for better readability):"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1452(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1453(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1673,80 +1681,80 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1505(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1506(para)
 msgid "Congratulations! You have a new server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1508(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1509(para)
 msgid ""
 "When you create a new server you are going to get a lot of interesting "
 "information about it in return:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1514(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2277(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1515(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2278(para)
 msgid ""
 "<emphasis role=\"strong\">status</emphasis>: set initially to <emphasis "
 "role=\"strong\">BUILD</emphasis>, later set to <emphasis "
 "role=\"strong\">ACTIVE</emphasis> when the server is ready to use."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1522(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2285(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1523(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2286(para)
 msgid ""
 "<emphasis role=\"strong\">updated</emphasis>: set initially to the server "
 "creation date, will be updated every time you modify the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1529(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2292(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1530(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2293(para)
 msgid "<emphasis role=\"strong\">hostId</emphasis>: undocumented."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1534(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2297(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1535(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2298(para)
 msgid ""
 "<emphasis role=\"strong\">user_id</emphasis>: the username of the user who "
 "created the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1540(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2303(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1541(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2304(para)
 msgid ""
 "<emphasis role=\"strong\">name</emphasis>: a short server name assigned by "
 "whoever created the server (you), in this case it is <emphasis "
 "role=\"strong\">tornado001</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1547(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2310(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1548(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2311(para)
 msgid ""
 "<emphasis role=\"strong\">links</emphasis>: the URLs pointing to the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1553(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2316(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1554(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2317(para)
 msgid ""
 "<emphasis role=\"strong\">created</emphasis>: set to the server creation "
 "date."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1559(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2322(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1560(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2323(para)
 msgid ""
 "<emphasis role=\"strong\">tenant_id</emphasis>: the name of the tenant that "
 "the server lives with, in this case it's <emphasis "
 "role=\"strong\">openstack</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1566(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2329(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1567(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2330(para)
 msgid ""
 "<emphasis role=\"strong\">image</emphasis>: basics data information about "
 "the operating system image used to build the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1573(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1574(para)
 msgid ""
 "<emphasis role=\"strong\">adminPass</emphasis>: the initial <emphasis "
 "role=\"strong\">root</emphasis>/<emphasis "
@@ -1754,43 +1762,43 @@ msgid ""
 "you. It is possible to change it afterwards."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1581(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2336(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1582(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2337(para)
 msgid ""
 "<emphasis role=\"strong\">uuid</emphasis>: the Universally Unique Identifier"
 " (UUID) of the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1587(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2342(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1588(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2343(para)
 msgid ""
 "<emphasis role=\"strong\">accessIPv4</emphasis>: the "
 "<emphasis>public</emphasis> IPv4 address of the server. You will use it to "
 "access your server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1594(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2349(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1595(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2350(para)
 msgid ""
 "<emphasis role=\"strong\">metadata</emphasis>: a dictionary that stores "
 "server metadata. This can be edited by yourself as explained later in this "
 "book."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1601(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2356(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1602(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2357(para)
 msgid ""
 "<emphasis role=\"strong\">accessIPv6</emphasis>: the "
 "<emphasis>public</emphasis> IPv6 address of the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1607(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2362(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1608(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2363(para)
 msgid "<emphasis role=\"strong\">key_name</emphasis>: undocumented."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1612(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2367(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1613(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2368(para)
 msgid ""
 "<emphasis role=\"strong\">progress</emphasis>: an integer value of 0 through"
 " 100. It starts with 0 and increases as the server is getting created. It is"
@@ -1800,54 +1808,54 @@ msgid ""
 "provide additional information that may help debug the problem."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1625(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2380(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1626(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2381(para)
 msgid ""
 "<emphasis role=\"strong\">flavor</emphasis>: basic data information about "
 "the virtual hardware flavor used to build the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1632(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2387(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1633(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2388(para)
 msgid "<emphasis role=\"strong\">config_drive</emphasis>: undocumented."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1638(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2393(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1639(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2394(para)
 msgid ""
 "<emphasis role=\"strong\">id</emphasis> — the <emphasis "
 "role=\"strong\">id</emphasis> of the server within your own OpenStack "
 "account realm. The numbering starts with 1."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1648(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1649(title)
 msgid "Using Curl to Boot a New Server"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1649(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1650(para)
 msgid ""
 "If you want to use <emphasis role=\"strong\">curl</emphasis> to create a new"
 " server, this is how you'd structure your request:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1653(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1654(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -v -X POST -H \"X-Auth-Token:999888777666\" -H \"Content-type:application/json\" -d '{\"server\": {\"flavorRef\": \"http://localhost:8774/v1.1/openstack/flavors/1\", \"personality\": [{\"path\": \"\", \"contents\": \"\"}], \"name\": \"tornado001\", \"imageRef\": \"http://localhost:8774/v1.1/openstack/images/1\", \"metadata\": {\"Server Name\": \"Tornado\"}}}' http://localhost:8774/v1.1/openstack/servers\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1656(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1657(para)
 msgid ""
 "The result on that request will be a new server, whose description will be "
 "similar to the one discussed in the previous section."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1663(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1664(title)
 msgid "Customizing Your Server: Adding Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1664(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1665(para)
 msgid ""
 "Short server names like <emphasis role=\"strong\">tornado000</emphasis> may "
 "be good enough to describe a small set of servers, but they become "
@@ -1856,13 +1864,13 @@ msgid ""
 " of its creation."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1672(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1673(para)
 msgid ""
 "If you go back to the section with the example of using Python to create a "
 "new server, you will see the following snippet of code:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1677(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1678(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1889,7 +1897,7 @@ msgid ""
 "...\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1700(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1701(para)
 msgid ""
 "Because providing server metadata is optional, the example sets it to an "
 "empty dictionary. When you want to add metadata at server creation time, you"
@@ -1899,8 +1907,8 @@ msgid ""
 "something like this:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1710(screen)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1804(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1711(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1805(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -1927,7 +1935,7 @@ msgid ""
 "...\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1733(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1734(para)
 msgid ""
 "The keys and values you choose can be anything you like, but it is a good "
 "idea to develop a schema that can be reused. For example, in the code "
@@ -1942,37 +1950,37 @@ msgid ""
 "backed up."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1748(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1749(para)
 msgid ""
 "The amount of metadata information assigned to each OpenStack server is "
 "currently limited to: 5 keys each holding values no larger than 10240 bytes."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1755(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1756(title)
 msgid "Customizing Your Server: Adding Custom Files"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1756(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1757(para)
 msgid "There are three ways of customizing newly created servers:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1761(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1762(para)
 msgid "log into a server and customize it by hand (not very efficient)."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1767(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1768(para)
 msgid ""
 "create a <link href=\"http://docs.fabfile.org/\">Fabric</link> script and "
 "customize it automatically."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1774(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1775(para)
 msgid ""
 "preload server configuration scripts and (optionally) reboot it, wait, test "
 "if everything went fine."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1780(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1781(para)
 msgid ""
 "While you have to take care of the first two solutions, OpenStack Compute "
 "API can help with the last one. You can write up to 5 files, each no larger "
@@ -1984,7 +1992,7 @@ msgid ""
 "unless that's what you want."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1792(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1793(para)
 msgid ""
 "However you want to use server personalization, you need to put the "
 "personalization files into a dictionary whose keys are paths to the files "
@@ -1992,14 +2000,14 @@ msgid ""
 "contents of the destination file, which needs to be encoded as Base64."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1799(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1800(para)
 msgid ""
 "To learn how it works in practice, we need to go back to the example showing"
 " how to create a new server and focus our attention of the following snippet"
 " of code:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1827(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1828(para)
 msgid ""
 "If you carefully examine the value of <emphasis "
 "role=\"strong\">sPersonality</emphasis>, you will notice that it is a list "
@@ -2010,7 +2018,7 @@ msgid ""
 " match the names and the locations of their destination):"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1838(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1839(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2060,18 +2068,18 @@ msgid ""
 "...\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1884(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1885(para)
 msgid ""
 "What if five files are not enough? You can add more after the server boots. "
 "You can do it the hard way using <emphasis role=\"strong\">scp</emphasis> or"
 " you can write a Fabric script. Use Fabric. It lives here:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1899(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1900(title)
 msgid "Server Limits"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1900(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1901(para)
 msgid ""
 "Although cloud-based servers give us a lot of flexibility, they still live "
 "in data centers and need to be managed in order to avoid hoarding of the "
@@ -2079,48 +2087,48 @@ msgid ""
 "private server clouds have their limits."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1907(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1908(para)
 msgid ""
 "Every OpenStack cloud provider is free to set their own limits, but the ones"
 " suggested in the official documentation are:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1914(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1915(para)
 msgid ""
 "<emphasis role=\"strong\">maxTotalRAMSize</emphasis> — total amount of RAM "
 "of all active servers: 51200MB (50GB), this could be up to two hundred 256MB"
 " instances, or any mixture of other servers."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1922(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1923(para)
 msgid ""
 "<emphasis role=\"strong\">maxServerMeta</emphasis> — maximum number of "
 "metadata entries per server: 5."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1928(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1929(para)
 msgid ""
 "<emphasis role=\"strong\">maxImageMeta</emphasis> — maximum number of "
 "metadata entries per image: 5."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1934(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1935(para)
 msgid ""
 "<emphasis role=\"strong\">maxPersonality</emphasis> — maximum number of "
 "personalisation files per server: 5."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1940(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1941(para)
 msgid ""
 "<emphasis role=\"strong\">maxPersonalitySize</emphasis> — maximum size of "
 "each personalization file: 10240 bytes (10KB)."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1950(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1951(title)
 msgid "Modifying Live Servers"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1951(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1952(para)
 msgid ""
 "Once a server is created, it is by no means set in stone. Apart from the "
 "obvious modifications to the operating system you can also modify the "
@@ -2128,21 +2136,21 @@ msgid ""
 "maintenance tasks."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1957(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1958(para)
 msgid ""
 "How you modify the operating system is up to you and up to the ways of the "
 "operating system, the rest can be done via the OpenStack Compute API."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1963(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1964(title)
 msgid "Listing Servers"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1964(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1965(para)
 msgid "Before you can modify anything, you should have a good look at it."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1968(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1969(para)
 msgid ""
 "When you want to check how many servers you have active, you need to use the"
 " GET mthod when you call the <emphasis>/server</emphasis> URL. When you are "
@@ -2150,21 +2158,21 @@ msgid ""
 " get the raw JSON reply:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1975(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1976(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -v -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/servers\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1978(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1979(para)
 msgid ""
 "When you have no active servers, the result will be a dictionary with one "
 "key—<emphasis role=\"strong\">servers</emphasis>—whose value is an empty "
 "list:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1984(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1985(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2173,13 +2181,13 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1989(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1990(para)
 msgid ""
 "When there are more servers active, you will see a longer list of all "
 "servers that you can manage:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1993(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml1994(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2219,13 +2227,13 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2029(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2030(para)
 msgid ""
 "For a better view, here is a single server entry in the <emphasis "
 "role=\"strong\">servers</emphasis> list:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2033(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2034(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2246,35 +2254,35 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2050(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2051(para)
 msgid ""
 "The keys in a dictionary that describes each server have the following "
 "meaning:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2056(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2057(para)
 msgid "<emphasis role=\"strong\">id</emphasis> — the numeric ID of the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2062(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2063(para)
 msgid ""
 "<emphasis role=\"strong\">uuid</emphasis> — the universally unique "
 "identifier of the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2068(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2069(para)
 msgid ""
 "<emphasis role=\"strong\">links</emphasis> — the list of URLs that point to "
 "the server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2074(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2075(para)
 msgid ""
 "<emphasis role=\"strong\">name</emphasis> — a descriptive name of the "
 "server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2080(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2081(para)
 msgid ""
 "It is worth poinitng out a few things: the server <emphasis "
 "role=\"strong\">id</emphasis> is unique within your account with the "
@@ -2285,7 +2293,7 @@ msgid ""
 "unique, even within your own account."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2090(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2091(para)
 msgid ""
 "The only unique identifier of your server will be its <emphasis "
 "role=\"strong\">uuid</emphasis>. It is assigned automatically by you "
@@ -2294,22 +2302,22 @@ msgid ""
 "UUIDs on Wikipedia:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2101(link)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2102(link)
 msgid "http://en.wikipedia.org/wiki/Universally_unique_identifier"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2107(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2108(title)
 msgid "Listing Servers Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2108(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2109(para)
 msgid ""
 "When you want to use Python to list server information, the procedure is a "
 "bit more complex, but you do get access to the items returned by the "
 "OpenStack Compute API."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2113(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2114(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2356,7 +2364,7 @@ msgid ""
 "print dd2\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2156(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2157(para)
 msgid ""
 "When you want to access specific keys in the dictionary of servers, you will"
 " need to either hard-code the paths to specific pieces of information, or "
@@ -2364,7 +2372,7 @@ msgid ""
 "that you already have the list of server information:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2163(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2164(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2387,18 +2395,18 @@ msgid ""
 "        print dd2['servers'][n]['links'][0]['href']\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2184(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2185(title)
 msgid "Getting Detailed Server Information"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2185(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2186(para)
 msgid ""
 "A call to <emphasis>/servers</emphasis> returns the list of all servers and "
 "can be very long, which is why the JSON response contain only that data "
 "which can be used in other calls to update, rebuild, or delete a server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2191(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2192(para)
 msgid ""
 "You can learn much more about a particular server by calling a different "
 "URL. It's <emphasis>/server/id</emphasis> where <emphasis "
@@ -2407,20 +2415,20 @@ msgid ""
 "<emphasis role=\"strong\">curl</emphasis>:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2199(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2200(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -v -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/servers/1\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2202(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2203(para)
 msgid ""
 "What you will get in return is a JSON response with a lot more information "
 "about server whose <emphasis role=\"strong\">id</emphasis> is set to 1:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2207(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2208(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2489,11 +2497,11 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2272(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2273(para)
 msgid "Here is a guide to all those tasty bits of information:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2401(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2402(para)
 msgid ""
 "The list show above is almost an exact copy of the list shown in the chapter"
 " on server creation. One missing field is <emphasis "
@@ -2504,17 +2512,17 @@ msgid ""
 " web interface or using a special OpenStack Compute API call."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2413(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2414(title)
 msgid "Getting Detailed Server Information Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2414(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2415(para)
 msgid ""
 "What if you want to get all details of a particular server using Python? "
 "Here's how you do it:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2418(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2419(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2562,11 +2570,11 @@ msgid ""
 "print dd2\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2465(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2466(title)
 msgid "Listing Server Addresses"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2466(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2467(para)
 msgid ""
 "One piece of information that is looked up more often than others is server "
 "IP address. Or addresses, as is the case with all OpenStack Compute servers."
@@ -2575,7 +2583,7 @@ msgid ""
 "its own private and public IPv6 address."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2474(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2475(para)
 msgid ""
 "You can list them using a GET request for the "
 "<emphasis>/servers/id/ips</emphasis> URL. For example, if you were to use "
@@ -2584,21 +2592,21 @@ msgid ""
 "the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2482(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2483(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -v -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/servers/1/ips\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2485(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2601(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2486(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2602(para)
 msgid ""
 "What you will get in return will be a JSON response similar to the one "
 "below:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2489(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2490(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2628,7 +2636,7 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2515(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2516(para)
 msgid ""
 "The <emphasis role=\"strong\">addresses</emphasis> dictionary contains two "
 "lists: <emphasis role=\"strong\">private</emphasis> and <emphasis "
@@ -2638,17 +2646,17 @@ msgid ""
 "private IPv4 and one public IPv4 address."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2526(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2527(title)
 msgid "Listing Server Addresses Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2527(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2528(para)
 msgid ""
 "When you want to extract the list of IP addresses for a server using Python,"
 " use the following recipe as your starting point:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2531(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2532(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2696,13 +2704,13 @@ msgid ""
 "print dd2\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2575(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2576(para)
 msgid ""
 "If you want to access a specific address you need to use a dictionary/list "
 "access notation, e.g. if you want to print the first public IPv4 address:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2580(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2581(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2712,11 +2720,11 @@ msgid ""
 "    print ipAddr[\"addr\"]\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2588(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2589(title)
 msgid "Listing Network-Specific Server Addresses"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2589(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2590(para)
 msgid ""
 "It is possible to request just private or public server addresses. You can "
 "list them using a GET request for the "
@@ -2726,14 +2734,14 @@ msgid ""
 "you'd do it in the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2598(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2599(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -v -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/servers/1/ips/public\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2605(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2606(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2753,15 +2761,15 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2623(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2624(title)
 msgid "Listing Network-Specific Server Addresses Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2625(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2626(para)
 msgid "Network-specific IP addresses can be retrieved using a Python script:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2629(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2630(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2810,11 +2818,11 @@ msgid ""
 "print dd2\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2677(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2678(title)
 msgid "Server Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2678(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2679(para)
 msgid ""
 "Server metadata is stored in the <emphasis "
 "role=\"strong\">metadata</emphasis> dictionary within the server description"
@@ -2823,11 +2831,11 @@ msgid ""
 "associated with your servers."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2686(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2687(title)
 msgid "Listing Server Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2687(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2688(para)
 msgid ""
 "It is possible to access server metadata information without having to list "
 "all properties of the server. For example, if you want to use <emphasis "
@@ -2836,21 +2844,21 @@ msgid ""
 " way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2695(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2696(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/servers/1/metadata\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2698(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2786(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3157(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3245(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2699(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2787(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3158(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3246(para)
 msgid "The result should look similar to the output shown below:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2701(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2702(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2861,24 +2869,24 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2708(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2709(para)
 msgid ""
 "Notice that the GET method must be applied to the URL that ends with the "
 "<emphasis>/servers/id/metadata</emphasis> path."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2714(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2715(title)
 msgid "Lisitng Server Metadata Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2715(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3174(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2716(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3175(para)
 msgid ""
 "When you'd rather use Python to access metadata information, you could do it"
 " in the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2719(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2720(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2926,11 +2934,11 @@ msgid ""
 "print dd2\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2765(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2766(title)
 msgid "Listing Server Metadata Items"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2766(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2767(para)
 msgid ""
 "Using the <emphasis>/servers/id/metadata</emphasis> URI gets you the "
 "dictionary of all metadata keys. If you wanted to access a specific key, you"
@@ -2940,7 +2948,7 @@ msgid ""
 "the metadata key you want the value of."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2776(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2777(para)
 msgid ""
 "For example, if you want to get the value of the <emphasis "
 "role=\"strong\">owner</emphasis> metadata key for server whose <emphasis "
@@ -2948,17 +2956,17 @@ msgid ""
 "role=\"strong\">curl</emphasis> in the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2783(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2784(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/servers/1/metadata/owner\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2789(screen)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2915(screen)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3248(screen)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3374(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2790(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2916(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3249(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3375(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -2969,32 +2977,32 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2798(title)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3257(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2799(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3258(title)
 msgid "Listing Server Metadata Items Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2799(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3258(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2800(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3259(para)
 msgid ""
 "If you wanted to check for a particular metadata key, you can reuse the "
 "Python script from the previous section. You already have the metadata "
 "dictionary, and all that's left is retrieving the key you are looking for:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2805(screen)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3264(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2806(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3265(screen)
 #, no-wrap
 msgid ""
 "\n"
 "print dd2['metadata']['owner']\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2810(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2811(title)
 msgid "Setting Server Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2811(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2812(para)
 msgid ""
 "Server metadata is stored in the <emphasis "
 "role=\"strong\">metadata</emphasis> dictionary, which is a part of each "
@@ -3003,15 +3011,15 @@ msgid ""
 "<emphasis role=\"strong\">name</emphasis> of the image."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2819(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2820(para)
 msgid ""
 "Server metadata can be set at server creation time or later. When you want "
 "to do it after you create your server, you need to use the PUT method and a "
 "URL with a three-part path, <emphasis>/servers/id/metadata</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2825(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2987(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2826(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2988(para)
 msgid ""
 "The <emphasis>id</emphasis> part is the numeric <emphasis "
 "role=\"strong\">id</emphasis> of the server. For example, if you wanted to "
@@ -3020,37 +3028,37 @@ msgid ""
 " <emphasis>/servers/1/metadata</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2833(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2922(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2995(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3067(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3292(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3381(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3454(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3526(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2834(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2923(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2996(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3068(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3293(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3382(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3455(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3527(para)
 msgid ""
 "If you were to use <emphasis role=\"strong\">curl</emphasis> to set metadata"
 " keys, this is how you'd do it:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2837(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2838(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X PUT -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" -d '{\"metadata\":{\"owner\":\"joe\",\"group\":\"www\"}}' http://localhost:8774/v1.1/openstack/servers/1/metadata\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2842(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2843(title)
 msgid "Setting Server Metadata Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2843(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2844(para)
 msgid ""
 "When you want to use Python to set server metadata, you could do it in the "
 "following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2847(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2848(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3096,26 +3104,26 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2891(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2892(title)
 msgid "Setting Server Metadata Items"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2892(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3351(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2893(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3352(para)
 msgid ""
 "In the previous section you learned how to set multiple metadata items in "
 "one go. But what if you wanted to set them one at a time?"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2897(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2898(para)
 msgid ""
 "Once again, you need to use the PUT method and a URI that points to the "
 "metadata you wish to set, e.g. "
 "<emphasis>/servers/id/metadata/key</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2902(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3059(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2903(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3060(para)
 msgid ""
 "The <emphasis>id</emphasis> part is the numeric <emphasis "
 "role=\"strong\">id</emphasis> of the server. For example, if you wanted to "
@@ -3124,32 +3132,32 @@ msgid ""
 " <emphasis>/servers/1/metadata/owner</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2910(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3369(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2911(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3370(para)
 msgid ""
 "The value of the key set has to be passed to the OpenStack Compute API "
 "server as a single-key <emphasis role=\"strong\">metadata</emphasis> "
 "dictionary:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2926(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2927(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X PUT -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" -d '{\"metadata\":{\"owner\":\"joe\"}}' http://localhost:8774/v1.1/openstack/servers/1/metadata/owner\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2931(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2932(title)
 msgid "Setting Server Metadata Items Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2932(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2933(para)
 msgid ""
 "When you want to use Python to set server metadata items, you can do it in "
 "the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2936(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2937(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3196,35 +3204,35 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2981(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2982(title)
 msgid "Updating Server Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2982(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2983(para)
 msgid ""
 "If you want to update an existing metadata key, you need to use the POST "
 "method and the same, three-part URL path, "
 "<emphasis>/servers/id/metadata</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml2999(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3000(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X POST -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" -d '{\"metadata\":{\"owner\":\"adam\"}}' http://localhost:8774/v1.1/openstack/servers/1/metadata\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3004(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3005(title)
 msgid "Updating Server Metadata Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3005(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3006(para)
 msgid ""
 "When you want to use Python to update server metadata, you could do it in "
 "the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3009(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3010(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3270,42 +3278,42 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3053(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3054(title)
 msgid "Deleting Server Metadata Items"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3054(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3055(para)
 msgid ""
 "When you want to delete an existing metadata item, you will need to use the "
 "DELETE method and the four-part URI, "
 "<emphasis>/servers/id/metadata/key</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3071(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3072(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X DELETE -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" http://localhost:8774/v1.1/openstack/servers/1/metadata/owner\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3074(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3533(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3075(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3534(para)
 msgid ""
 "Please note there is no data payload in a delete operation. It is a common "
 "mistake to leave it in while editing scripts."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3080(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3081(title)
 msgid "Deleting Server Metadata Items Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3081(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3082(para)
 msgid ""
 "Deleting server metadata items using Python can be done in the way shown "
 "below:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3085(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3086(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3352,17 +3360,17 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3131(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3132(title)
 msgid "Server Image Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3132(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3133(para)
 msgid ""
 "Server image metadata is not the same as the server image data, but the way "
 "you use it, modify it, or delete it is very similar."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3136(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3137(para)
 msgid ""
 "Server image metadata is stored in the <emphasis "
 "role=\"strong\">metadata</emphasis> dictionary within the server image "
@@ -3371,11 +3379,11 @@ msgid ""
 " and delete metadata items associated with your server images."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3145(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3146(title)
 msgid "Listing Server Image Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3146(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3147(para)
 msgid ""
 "It is possible to access server image metadata information without having to"
 " list all properties of the server image. For example, if you want to use "
@@ -3384,14 +3392,14 @@ msgid ""
 "the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3154(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3155(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/images/1/metadata\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3160(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3161(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3402,17 +3410,17 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3167(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3168(para)
 msgid ""
 "Notice that the GET method must be applied to the URL that ends with the "
 "<emphasis>/images/id/metadata</emphasis> path."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3173(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3174(title)
 msgid "Lisitng Server Image Metadata Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3178(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3179(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3460,11 +3468,11 @@ msgid ""
 "print dd2\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3224(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3225(title)
 msgid "Listing Server Image Metadata Items"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3225(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3226(para)
 msgid ""
 "Using the <emphasis>/images/id/metadata</emphasis> URI gets you the "
 "dictionary of all metadata keys. If you wanted to access a specific key, you"
@@ -3474,7 +3482,7 @@ msgid ""
 "<emphasis>key</emphasis> is the metadata key you want the value of."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3235(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3236(para)
 msgid ""
 "For example, if you want to get the value of the <emphasis "
 "role=\"strong\">owner</emphasis> metadata key for server image whose "
@@ -3482,18 +3490,18 @@ msgid ""
 "role=\"strong\">curl</emphasis> in the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3242(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3243(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/images/1/metadata/owner\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3269(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3270(title)
 msgid "Setting Server Image Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3270(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3271(para)
 msgid ""
 "Server image metadata is stored in the <emphasis "
 "role=\"strong\">metadata</emphasis> dictionary, which is a part of each "
@@ -3502,7 +3510,7 @@ msgid ""
 "<emphasis role=\"strong\">name</emphasis> of the image."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3278(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3279(para)
 msgid ""
 "Server image metadata can be set at server image creation time or later. "
 "When you want to do it after you create your server image, you need to use "
@@ -3510,8 +3518,8 @@ msgid ""
 "<emphasis>/images/id/metadata</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3284(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3446(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3285(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3447(para)
 msgid ""
 "The <emphasis>id</emphasis> part is the numeric <emphasis "
 "role=\"strong\">id</emphasis> of the server image. For example, if you "
@@ -3520,24 +3528,24 @@ msgid ""
 "path would be <emphasis>/images/1/metadata</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3296(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3297(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X PUT -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" -d '{\"metadata\":{\"owner\":\"joe\",\"group\":\"www\"}}' http://localhost:8774/v1.1/openstack/images/1/metadata\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3301(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3302(title)
 msgid "Setting Server Image Metadata Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3302(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3303(para)
 msgid ""
 "When you want to use Python to set server image metadata, you could do it in"
 " the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3306(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3307(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3583,18 +3591,18 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3350(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3351(title)
 msgid "Setting Server Image Metadata Items"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3356(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3357(para)
 msgid ""
 "Once again, you need to use the PUT method and a URI that points to the "
 "metadata you wish to set, e.g. <emphasis>/images/id/metadata/key</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3361(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3518(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3362(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3519(para)
 msgid ""
 "The <emphasis>id</emphasis> part is the numeric <emphasis "
 "role=\"strong\">id</emphasis> of the server image. For example, if you "
@@ -3603,24 +3611,24 @@ msgid ""
 "path would be <emphasis>/images/1/metadata/owner</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3385(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3386(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X PUT -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" -d '{\"metadata\":{\"owner\":\"joe\"}}' http://localhost:8774/v1.1/openstack/images/1/metadata/owner\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3390(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3391(title)
 msgid "Setting Server Image Metadata Items Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3391(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3392(para)
 msgid ""
 "When you want to use Python to set server image metadata items, you can do "
 "it in the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3395(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3396(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3667,35 +3675,35 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3440(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3441(title)
 msgid "Updating Server Image Metadata"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3441(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3442(para)
 msgid ""
 "If you want to update an existing metadata key, you need to use the POST "
 "method and the same, three-part URL path, "
 "<emphasis>/images/id/metadata</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3458(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3459(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X POST -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" -d '{\"metadata\":{\"owner\":\"adam\"}}' http://localhost:8774/v1.1/openstack/images/1/metadata\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3463(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3464(title)
 msgid "Updating Server Image Metadata Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3464(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3465(para)
 msgid ""
 "When you want to use Python to update server image metadata, you could do it"
 " in the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3468(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3469(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3741,35 +3749,35 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3512(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3513(title)
 msgid "Deleting Server Image Metadata Items"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3513(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3514(para)
 msgid ""
 "When you want to delete an existing metadata item, you will need to use the "
 "DELETE method and the four-part URI, "
 "<emphasis>/images/id/metadata/key</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3530(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3531(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X DELETE -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" http://localhost:8774/v1.1/openstack/images/1/metadata/owner\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3539(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3540(title)
 msgid "Deleting Server Image Metadata Items Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3540(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3541(para)
 msgid ""
 "Deleting server image metadata items using Python can be done in the way "
 "shown below:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3544(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3545(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3816,11 +3824,11 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3589(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3590(title)
 msgid "Updating Servers: Changing Server Name"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3590(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3591(para)
 msgid ""
 "Contrary to what some users of cloud server think, it is not necessary to "
 "delete a server and create a new one when you want to change something about"
@@ -3828,7 +3836,7 @@ msgid ""
 "address can be done without such drastic measures."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3597(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3598(para)
 msgid ""
 "If you want to change the server name, you will need to use a PUT request "
 "directed at <emphasis>/servers/id</emphasis>, where <emphasis "
@@ -3836,7 +3844,7 @@ msgid ""
 "update. You need to include a JSON payload:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3603(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3604(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3847,31 +3855,31 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3610(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3611(para)
 msgid ""
 "If you were to use <emphasis role=\"strong\">curl</emphasis> to change the "
 "server name, this is how you can do it:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3614(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3615(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X PUT -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" -d '{\"server\": {\"name\": \"nginx000\"}}' http://localhost:8774/v1.1/openstack/servers/1\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3617(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3694(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3618(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3695(para)
 msgid ""
 "The response to this request will be a long JSON string similar to the one "
 "you get when you create a new server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3623(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3624(title)
 msgid "Updating Servers: Changing Server Name Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3624(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3625(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3920,11 +3928,11 @@ msgid ""
 "print dd2\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3671(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3672(title)
 msgid "Updating Servers: Changing Server Access Address"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3672(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3673(para)
 msgid ""
 "If you want to change server access IPv4 and/or IPv6, you can do it using a "
 "PUT request directed at <emphasis>/servers/id</emphasis>, where <emphasis "
@@ -3932,7 +3940,7 @@ msgid ""
 "update. You need to include a JSON payload:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3679(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3680(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -3944,30 +3952,30 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3687(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3688(para)
 msgid ""
 "If you were to use <emphasis role=\"strong\">curl</emphasis> to change the "
 "server access addresses, this is how you can do it:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3691(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3692(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -X PUT -H \"X-Auth-Token:999888777666\" -H \"Accept: application/json\" -d '{\"server\": {\"accessIPv4\": \"192.168.100.2\", \"accessIPv6\": \"fe80:0:0:0:0:0:c0a8:6402\"}}' http://localhost:8774/v1.1/openstack/servers/1\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3700(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3701(title)
 msgid "Updating Servers: Changing Server Access Address Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3702(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3703(para)
 msgid ""
 "If you want to use Python to change server access IP addresses, you could "
 "start with the following script:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3706(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3707(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4017,11 +4025,11 @@ msgid ""
 "print dd2\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3754(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3755(title)
 msgid "Changing Root (Administrator) Password"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3755(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3756(para)
 msgid ""
 "The <emphasis role=\"strong\">root</emphasis> (<emphasis "
 "role=\"strong\">Administrator</emphasis>) password is the most important of "
@@ -4035,7 +4043,7 @@ msgid ""
 " also do it via the OpenStack Compute API."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3769(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3770(para)
 msgid ""
 "What you need to do is use a POST request directed at "
 "<emphasis>/servers/id/action</emphasis>, where <emphasis "
@@ -4046,7 +4054,7 @@ msgid ""
 "dictionary structure:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3779(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3780(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4057,30 +4065,30 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3786(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3787(para)
 msgid ""
 "If you want to use <emphasis role=\"strong\">curl</emphasis> to reset "
 "<emphasis role=\"strong\">root</emphasis> or <emphasis "
 "role=\"strong\">Administrator</emphasis>, here's how you can do it:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3792(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3793(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -s -X POST -H \"X-Auth-Token:999888777666\" -d '{\"changePassword\": {\"adminPass\": \"dontusesshhhforpassword\"}}' http://localhost:8774/v1.1/openstack/servers/3/action\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3797(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3798(title)
 msgid "Changing Root (Administrator) Password Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3798(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3799(para)
 msgid ""
 "If you want to delete a server using Python, here's how it can be done:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3802(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3803(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4126,11 +4134,11 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3846(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3847(title)
 msgid "Rebooting Servers"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3847(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3848(para)
 msgid ""
 "One of the most common administrative tasks is server reboot. You can log "
 "into a server as <emphasis role=\"strong\">root</emphasis> (<emphasis "
@@ -4138,14 +4146,14 @@ msgid ""
 "role=\"strong\">shutdown</emphasis> command:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3854(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3855(screen)
 #, no-wrap
 msgid ""
 "\n"
 "# shutdown -r now\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3857(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3858(para)
 msgid ""
 "But what if you cannot log into the server or when you have a couple of "
 "dozens of servers to reboot? The answer is a POST request directed at "
@@ -4156,7 +4164,7 @@ msgid ""
 " those actions, and their values. It has to be a JSON string:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3867(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3868(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4167,45 +4175,45 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3874(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3875(para)
 msgid "There are two types of reboot:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3879(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3880(para)
 msgid ""
 "<emphasis role=\"strong\">HARD</emphasis> — the equivalent of turning power "
 "off and on again."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3885(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3886(para)
 msgid ""
 "<emphasis role=\"strong\">SOFT</emphasis> — a gentle kind of reboot, think "
 "<emphasis role=\"strong\">shutdown -r now</emphasis>."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3892(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3893(para)
 msgid ""
 "If you want to use <emphasis role=\"strong\">curl</emphasis> to reboot a "
 "server, you can do it in the following way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3896(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3897(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -s -X POST -H \"X-Auth-Token:999888777666\" -d '{\"reboot\": {\"type\": \"HARD\"}}' http://localhost:8774/v1.1/openstack/servers/3/action\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3901(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3902(title)
 msgid "Rebooting Servers Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3902(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3903(para)
 msgid ""
 "If you want to reboot a server using Python, here's how it can be done:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3906(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3907(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4251,11 +4259,11 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3950(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3951(title)
 msgid "Rebuilding Servers"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3951(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3952(para)
 msgid ""
 "When things go wrong, e.g. you log in as <emphasis "
 "role=\"strong\">root</emphasis> and overwrite <emphasis>/bin</emphasis>, you"
@@ -4266,7 +4274,7 @@ msgid ""
 "addresses."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3961(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3962(para)
 msgid ""
 "The POST request sent to <emphasis>/servers/id/action</emphasis> should "
 "carry a JSON payload that includes the <emphasis "
@@ -4277,7 +4285,7 @@ msgid ""
 "numeric ID of the server you want to renuild."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3971(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3972(para)
 msgid ""
 "You do not need to provide the flavor reference, because the virtual "
 "hardware your rebuilt server will run on does not change. If you want to "
@@ -4285,14 +4293,14 @@ msgid ""
 "section)."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3977(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3978(para)
 msgid ""
 "The following script demonstrates how to rebuild a server using Python. I "
 "skipped the metadata and personalization setup for clarity, but you can find"
 " out how to use it if you read earlier sections on that subject."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3983(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml3984(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4390,17 +4398,17 @@ msgid ""
 "print json.dumps(dd3, indent=2)\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4079(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4080(title)
 msgid "Resizing Servers"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4080(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4081(para)
 msgid ""
 "When you need more memory or more storage space (or both), you can resize "
 "the virtual hardware your server runs on."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4084(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4085(para)
 msgid ""
 "The POST request sent to <emphasis>/servers/id/action</emphasis> must carry "
 "a simple JSON payload with the name of the operation, <emphasis "
@@ -4408,7 +4416,7 @@ msgid ""
 "one below (it points to the server flavor number 5):"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4091(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4092(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4419,39 +4427,39 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4098(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4214(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4291(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4099(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4215(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4292(para)
 msgid ""
 "If you want to use <emphasis role=\"strong\">curl</emphasis>, the server "
 "resize request would look like this:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4102(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4103(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -s -X POST -H \"X-Auth-Token:999888777666\" -d '{\"resize\": {\"flavorRef\": \"http://localhost:8774/v1.1/openstack/flavors/5\"}}' http://localhost:8774/v1.1/openstack/servers/3/action\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4105(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4106(para)
 msgid ""
 "It is possible to resize your server down, but it is up to you to make sure "
 "that your data fits on the new, smaller disks."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4111(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4112(title)
 msgid "Resizing Servers Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4112(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4113(para)
 msgid ""
 "The following example shows how to resize a server using Python. It looks "
 "more complex than the <emphasis role=\"strong\">curl</emphasis> example, but"
 " that's only because it also shows how to exrtact the flavor URL:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4118(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4119(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4529,11 +4537,11 @@ msgid ""
 "conn3.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4194(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4195(title)
 msgid "Confirming Server Resize"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4195(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4196(para)
 msgid ""
 "The OpenStack Compute cloud will wait for 24 hours before making changes "
 "permanent. This gives you a chance to test things and go back to the old "
@@ -4545,12 +4553,12 @@ msgid ""
 "resized."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4206(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4283(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4207(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4284(para)
 msgid "Don't forget the JSON payload:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4209(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4210(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4559,24 +4567,24 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4218(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4219(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -s -X POST -H \"X-Auth-Token:999888777666\" -d '{\"confirmResize\": null}' http://localhost:8774/v1.1/openstack/servers/3/action\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4223(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4224(title)
 msgid "Confirming Server Resize Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4224(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4225(para)
 msgid ""
 "If you want to use Python to confirm server resize, use this as your "
 "inspiration:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4228(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4229(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4621,17 +4629,17 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4271(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4272(title)
 msgid "Reverting Server Resize"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4272(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4273(para)
 msgid ""
 "If you are not happy with your reszied server, you can revert to the old "
 "flavor using the <emphasis role=\"strong\">revertResize</emphasis> command."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4277(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4278(para)
 msgid ""
 "You can do it by sending a POST request to "
 "<emphasis>/servers/id/action</emphasis>. The <emphasis "
@@ -4639,7 +4647,7 @@ msgid ""
 "resized."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4286(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4287(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4648,24 +4656,24 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4295(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4296(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -s -X POST -H \"X-Auth-Token:999888777666\" -d '{\"revertResize\": null}' http://localhost:8774/v1.1/openstack/servers/3/action\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4300(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4301(title)
 msgid "Reverting Server Resize Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4301(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4302(para)
 msgid ""
 "If you want to use Python to revert server resize, use this as your "
 "inspiration:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4305(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4306(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4710,11 +4718,11 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4349(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4350(title)
 msgid "Server Images"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4350(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4351(para)
 msgid ""
 "Servers can be created using default templates, but you can also create your"
 " own server images that will be later reused to quickly replicate your "
@@ -4724,11 +4732,11 @@ msgid ""
 "you need."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4359(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4360(title)
 msgid "Creating Server Images"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4360(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4361(para)
 msgid ""
 "The server image creation operation is quite simple, all you need to do is "
 "send a POST request to <emphasis>/servers/id/action</emphasis>. The "
@@ -4736,7 +4744,7 @@ msgid ""
 " you want to preserve."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4367(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4368(para)
 msgid ""
 "The JSON payload that accompanies the <emphasis "
 "role=\"strong\">createImage</emphasis> command must include the name of the "
@@ -4744,7 +4752,7 @@ msgid ""
 "server metadata."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4373(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4374(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4759,30 +4767,30 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4384(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4385(para)
 msgid ""
 "If you want to use <emphasis role=\"strong\">curl</emphasis>, the server "
 "image creation request would look like this:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4388(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4389(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -s -X POST -H \"X-Auth-Token:999888777666\" -d '{\"createImage\": {\"name\": \"tornado-app-server\", \"metadata\": {\"version\": \"1.0.0\", \"creator\": \"joe\"}}}' http://localhost:8774/v1.1/openstack/servers/3/action\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4393(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4394(title)
 msgid "Creating Server Images Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4394(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4395(para)
 msgid ""
 "If you want to use Python to to create a server image, use this as your "
 "inspiration:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4398(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4399(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4829,11 +4837,11 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4443(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4444(title)
 msgid "Deleting Servers"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4444(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4445(para)
 msgid ""
 "When a server is no longer necessary you can simply delete it. One REST call"
 " and the server is gone. You will need to add the server <emphasis "
@@ -4841,23 +4849,23 @@ msgid ""
 " you must use the DELETE method, as in:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4451(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4452(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -s -X DELETE -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/servers/3\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4454(para)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4527(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4455(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4528(para)
 msgid ""
 "The OpenStack Compute API server will not return a JSON object when the "
 "operation is successful, but it will return an error message when the server"
 " you are trying to delete does not exist:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4459(screen)
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4532(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4460(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4533(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4869,17 +4877,17 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4469(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4470(title)
 msgid "Deleting Servers Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4470(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4471(para)
 msgid ""
 "When you use Python, server deletion procedure can be done in a fairly "
 "simple way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4474(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4475(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4923,11 +4931,11 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4516(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4517(title)
 msgid "Deleting Server Images"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4517(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4518(para)
 msgid ""
 "When a server image is no longer necessary you can get rid of it. You will "
 "need to send a DELETE request to <emphasis>/servers/id</emphasis>, where "
@@ -4935,24 +4943,24 @@ msgid ""
 "image you want to remove:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4524(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4525(screen)
 #, no-wrap
 msgid ""
 "\n"
 "$ curl -s -X DELETE -H \"X-Auth-Token:999888777666\" http://localhost:8774/v1.1/openstack/images/3\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4542(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4543(title)
 msgid "Deleting Servers Images Using Python"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4543(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4544(para)
 msgid ""
 "When you use Python, server image deletion procedure can be done in a fairly"
 " simple way:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4547(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4548(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -4996,11 +5004,11 @@ msgid ""
 "conn2.close()\n"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4590(title)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4591(title)
 msgid "Additional Tools"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4591(para)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4592(para)
 msgid ""
 "A while ago I wrote a simple tool for pretty-printing JSON data. Over time I"
 " found it handy to have around when working with various applications and "
@@ -5008,7 +5016,7 @@ msgid ""
 "working with JSON. Here it is:"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4597(screen)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml4598(screen)
 #, no-wrap
 msgid ""
 "\n"
@@ -5038,6 +5046,6 @@ msgid ""
 msgstr ""
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml0(None)
+#: ./doc/src/docbkx/openstack-api-programming/openstackapi-programming.xml0(None)
 msgid "translator-credits"
 msgstr ""

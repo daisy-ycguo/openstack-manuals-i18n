@@ -1,22 +1,21 @@
 # 
 # Translators:
-#   <daisy.ycguo@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenStack Manuals\n"
 "POT-Creation-Date: 2012-07-16 10:31+0800\n"
-"PO-Revision-Date: 2012-07-16 03:37+0000\n"
+"PO-Revision-Date: 2012-07-16 02:33+0000\n"
 "Last-Translator: daisy.ycguo <daisy.ycguo@gmail.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/openstack-manuals-i18n/language/zh_CN/)\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/openstack-manuals-i18n/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_CN\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml7(title)
 msgid "Setting Up python-novaclient"
-msgstr "安装python-novaclient"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml9(para)
 msgid ""
@@ -25,7 +24,7 @@ msgid ""
 "the Compute 1.1 API while the openstack-compute client works against the "
 "Rackspace Cloud Servers public cloud which is the OpenStack Compute 1.0 API."
 " You only need a username and password to use the python-novaclient tool."
-msgstr "你可以通过使用客户端，比如python-novalcient或者python-comput客户端，做更多的复杂的工作。Python-novaclient实现了Compute 1.1 的 API。openstack-compute客户端工作在Rackspace Cloud Servers共有云之上，实现的是OpenStack Compute 1.0 API. 使用Python-novaclient工具时，你只需要提供用户名和密码。"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml10(para)
 msgid ""
@@ -34,17 +33,17 @@ msgid ""
 "the client, and then provide your username and password, set as environment "
 "variables for convenience, and then you can have the ability to send "
 "commands to your cloud on the command-line."
-msgstr "安装python-novaclient后，就会生成一个<code>nova</code> shell命令行，它可以通过命令行形式调用Compute API。你安装客户端，提供你的用户名和密码，为方便起见，可以把他们设为环境变量，之后，你就可以在命令行窗口想你的云发送命令了。"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml14(para)
 msgid "To install python-novaclient, grab the stable/nova version like so."
-msgstr "安装 python-novaclient，抓取稳定的nova版本"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml19(para)
 msgid ""
 "Now that you have installed the python-novaclient, confirm the installation "
 "by entering:"
-msgstr "现在你已经完成python-novaclient的安装，确认安装，请输入："
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml29(para)
 msgid ""
@@ -56,11 +55,11 @@ msgid ""
 "endpoint, which the nova client recognizes as the NOVA_URL. On TryStack, you"
 " can retrieve these environment variables at "
 "https://trystack.org/dash/api_info/ after logging in."
-msgstr "作为返回，你将得到nova命令行客户端中的所有的命令和参数的列表。通过将所需参数设为环境变量，你可以在命令行中快速使用这些命令。你可以在nova命令中添加--os_username，或者设定为环境变量。当使用TryStack时，你将得到一个端点（endpoint），这个端点就是nova客户端认定的NOVA_URL。在TryStack中，登录后你可以从https://trystack.org/dash/api_info/看到这些环境变量。"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml47(title)
 msgid "Listing Images"
-msgstr "列出所有的镜像"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml47(para)
 msgid ""
@@ -91,7 +90,7 @@ msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml93(title)
 msgid "Launching Instances"
-msgstr "启动实例"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml105(para)
 msgid ""
@@ -143,7 +142,7 @@ msgstr ""
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml6(title)
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-onepager.xml9(title)
 msgid "OpenStack API Quick Start"
-msgstr "OpenStack API快速入门"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml7(para)
 msgid ""
@@ -157,7 +156,7 @@ msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml16(title)
 msgid "OpenStack API Introduction"
-msgstr "OpenStack API介绍"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml17(para)
 msgid ""
@@ -175,7 +174,7 @@ msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml32(title)
 msgid "Getting Credentials"
-msgstr "取得证书"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml33(para)
 msgid ""
@@ -216,30 +215,30 @@ msgid ""
 "Repeatedly send API requests with that token in the x-auth-token header "
 "until either: 1) the job's done or 2) you get a 401 (Unauthorized) code in "
 "return."
-msgstr "将这个令牌置于信息头x-auth-token中，反复发送API请求，直到任一种情况发生：1)任务完成，或者2)你得到401（未授权）响应"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml74(para)
 msgid ""
 "Request a token again when you get a 401 response until the script's job is "
 "done."
-msgstr "当你得到401的响应时，请求令牌，直到脚本任务完成。"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml79(para)
 msgid ""
 "For a typical OpenStack deployment running the Identity Service you can "
 "request a token with this command in cURL:<placeholder-1/>"
-msgstr "对一个运行身份服务（Identity Service）的典型的OpenStack部署来说，你可以通过cURL的这个命令来请求令牌：<placeholder-1/>"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml84(para)
 msgid ""
 "In return, you should get a 200 OK response with a token in the form of "
 "\"id\": \"cd427a33-bb4a-4079-a6d7-0ae148bdeda9\" and an expiration date 24 "
 "hours from now. Here's what it looks like:"
-msgstr "作为回复，你会得到一个200 OK的响应，同时以“id”的形式，带回一个令牌：\"cd427a33-bb4a-4079-a6d7-0ae148bdeda9\"和一个有效期：从现在开始的24小时。这是响应看起来如下所示:"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml155(title)
 msgid "Sending Requests to the API"
-msgstr "向API发送请求"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml156(para)
 msgid ""
@@ -248,7 +247,7 @@ msgid ""
 "from <link href=\"http://curl.haxx.se/\">http://curl.haxx.se/</link>. With "
 "cURL you can send HTTP requests and receive responses back from the command "
 "line."
-msgstr "要通过API向OpenStack发送请求，你有很多选择。开发人员和测试人员可能喜欢使用cURL，一个命令行工具，下载地址为<link href=\"http://curl.haxx.se/\">http://curl.haxx.se/</link>。使用cURL，你可以通过命令行发送HTTP请求和接收响应。"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml163(para)
 msgid ""
@@ -260,15 +259,15 @@ msgid ""
 "client, a Java application to test RESTful web services, from <link "
 "href=\"http://code.google.com/p/rest-client/\">http://code.google.com/p"
 "/rest-client/</link>."
-msgstr "如果你希望采用一个更图形化的界面，Firefox的REST客户端也可以用于测试和实验命令。参见<link href=\"https://addons.mozilla.org/en-US/firefox/addon/restclient/\">https://addons.mozilla.org/en-US/firefox/addon/restclient/</link>。你也可以下载和安装rest-client，一个Java应用，来测试RESTful web服务，下载地址为<link href=\"http://code.google.com/p/rest-client/\">http://code.google.com/p/rest-client/</link>。"
+msgstr ""
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml172(para)
 msgid ""
 "You need to generate a token as shown above if you use cURL or a REST "
 "client."
-msgstr "如果你使用cURL或者REST客户端，你需要生成一个令牌，如上面所示。"
+msgstr ""
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-onepager.xml0(None)
 msgid "translator-credits"
-msgstr "translator-credits"
+msgstr ""

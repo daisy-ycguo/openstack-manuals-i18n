@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-10 16:47+0800\n"
+"POT-Creation-Date: 2012-07-16 11:00+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,11 +27,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:20(para)
 msgid "Basic architecture and terms"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:23(screen)
-#, no-wrap
-msgid "\n----------------------------\n- *node* - a host machine running one or more Swift services\n- *Proxy node* - node that runs Proxy services; also runs TempAuth\n- *Storage node* - node that runs Account, Container, and Object services\n- *ring* - a set of mappings of Swift data to physical devices\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:30(para)
@@ -90,45 +85,20 @@ msgstr ""
 msgid "Install common Swift software prereqs:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:105(screen)
-#, no-wrap
-msgid "\napt-get install python-software-properties\nadd-apt-repository ppa:swift-core/release\napt-get update\napt-get install swift openssh-server\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:113(para)
 msgid "Create and populate configuration directories:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:116(screen)
-#, no-wrap
-msgid "\nmkdir -p /etc/swift\nchown -R swift:swift /etc/swift/\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:122(para)
 msgid "On the first node only, create /etc/swift/swift.conf:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:125(screen)
-#, no-wrap
-msgid "\ncat &gt;/etc/swift/swift.conf &lt;&lt;EOF\n[swift-hash]\n# random unique string that can never change (DO NOT LOSE)\nswift_hash_path_suffix = `od -t x8 -N 8 -A n &lt;/dev/random`\nEOF\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:134(para)
 msgid "On the second and subsequent nodes: Copy that file over. It must be the same on every node in the cluster!:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:138(screen)
-#, no-wrap
-msgid "\nscp firstnode.example.com:/etc/swift/swift.conf /etc/swift/  \n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:143(para)
 msgid "Publish the local network IP address for use by scripts found later in this documentation:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:147(screen)
-#, no-wrap
-msgid "\nexport STORAGE_LOCAL_NET_IP=10.1.2.3\nexport PROXY_LOCAL_NET_IP=10.1.2.4\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:153(para)
@@ -147,18 +117,8 @@ msgstr ""
 msgid "Install swift-proxy service:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:163(screen)
-#, no-wrap
-msgid "\napt-get install swift-proxy memcached\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:168(para) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:21(para)
 msgid "Create self-signed cert for SSL:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:171(screen)
-#, no-wrap
-msgid "\ncd /etc/swift\nopenssl req -new -x509 -nodes -out cert.crt -keyout cert.key\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:177(para)
@@ -169,59 +129,24 @@ msgstr ""
 msgid "Modify memcached to listen on the default interfaces. Preferably this should be on a local, non-public network. Edit the IP address in /etc/memcached.conf, for example:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:185(screen)
-#, no-wrap
-msgid "\nperl -pi -e \"s/-l 127.0.0.1/-l $PROXY_LOCAL_NET_IP/\" /etc/memcached.conf\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:190(para) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:39(para)
 msgid "Restart the memcached server:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:193(screen)
-#, no-wrap
-msgid "\nservice memcached restart\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:198(para) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:50(para)
 msgid "Create /etc/swift/proxy-server.conf:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:201(screen)
-#, no-wrap
-msgid "\ncat &gt;/etc/swift/proxy-server.conf &lt;&lt;EOF\n[DEFAULT]\ncert_file = /etc/swift/cert.crt\nkey_file = /etc/swift/cert.key\nbind_port = 8080\nworkers = 8\nuser = swift\n\n[pipeline:main]\npipeline = healthcheck cache tempauth proxy-server\n\n[app:proxy-server]\nuse = egg:swift#proxy\nallow_account_management = true\naccount_autocreate = true\n\n[filter:tempauth]\nuse = egg:swift#tempauth\nuser_system_root = testpass .admin https://$PROXY_LOCAL_NET_IP:8080/v1/AUTH_system\n\n[filter:healthcheck]\nuse = egg:swift#healthcheck\n\n[filter:cache]\nuse = egg:swift#memcache\nmemcache_servers = $PROXY_LOCAL_NET_IP:11211\nEOF\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:232(para) ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:261(para)
 msgid "..note:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:235(screen)
-#, no-wrap
-msgid "\nIf you run multiple memcache servers, put the multiple IP:port listings    \nin the [filter:cache] section of the proxy-server.conf file like:\n`10.1.2.3:11211,10.1.2.4:11211`. Only the proxy server uses memcache.\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:242(para)
 msgid "Create the account, container and object rings. The builder command is basically creating a builder file with a few parameters. The parameter with the value of 18 represents 2 ^ 18th, the value that the partition will be sized to. Set this \"partition power\" value based on the total amount of storage you expect your entire ring to use. The value of 3 represents the number of replicas of each object, with the last value being the number of hours to restrict moving a partition more than once."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:253(screen)
-#, no-wrap
-msgid "\ncd /etc/swift\nswift-ring-builder account.builder create 18 3 1\nswift-ring-builder container.builder create 18 3 1\nswift-ring-builder object.builder create 18 3 1\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:264(screen)
-#, no-wrap
-msgid "\nFor more information on building rings, see :doc:`overview_ring`.\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:269(para)
 msgid "For every storage device in /srv/node on each node add entries to each ring:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:273(screen)
-#, no-wrap
-msgid "\nexport ZONE=                    # set the zone number for that storage device\nexport STORAGE_LOCAL_NET_IP=    # and the IP address\nexport WEIGHT=100               # relative weight (higher for bigger/faster disks)\nexport DEVICE=sdb1\nswift-ring-builder account.builder add z$ZONE-$STORAGE_LOCAL_NET_IP:6002/$DEVICE $WEIGHT\nswift-ring-builder container.builder add z$ZONE-$STORAGE_LOCAL_NET_IP:6001/$DEVICE $WEIGHT\nswift-ring-builder object.builder add z$ZONE-$STORAGE_LOCAL_NET_IP:6000/$DEVICE $WEIGHT\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:284(para) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:95(para)
@@ -232,18 +157,8 @@ msgstr ""
 msgid "Verify the ring contents for each ring:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:290(screen)
-#, no-wrap
-msgid "\nswift-ring-builder account.builder\nswift-ring-builder container.builder\nswift-ring-builder object.builder\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:297(para) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:109(para)
 msgid "Rebalance the rings:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:300(screen)
-#, no-wrap
-msgid "\nswift-ring-builder account.builder rebalance\nswift-ring-builder container.builder rebalance\nswift-ring-builder object.builder rebalance\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:307(para) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:117(para)
@@ -258,18 +173,8 @@ msgstr ""
 msgid "Make sure all the config files are owned by the swift user:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:320(screen)
-#, no-wrap
-msgid "\nchown -R swift:swift /etc/swift\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:325(para) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:131(para)
 msgid "Start Proxy services:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:328(screen)
-#, no-wrap
-msgid "\nswift-init proxy start\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:334(title)
@@ -284,45 +189,20 @@ msgstr ""
 msgid "Install Storage node packages:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:342(screen)
-#, no-wrap
-msgid "\napt-get install swift-account swift-container swift-object xfsprogs\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:347(para) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:22(para)
 msgid "For every device on the node, setup the XFS volume (/dev/sdb is used as an example):"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:351(screen)
-#, no-wrap
-msgid "\nfdisk /dev/sdb  (set up a single partition)\nmkfs.xfs -i size=1024 /dev/sdb1\necho \"/dev/sdb1 /srv/node/sdb1 xfs noatime,nodiratime,nobarrier,logbufs=8 0 0\" &gt;&gt; /etc/fstab\nmkdir -p /srv/node/sdb1\nmount /srv/node/sdb1\nchown -R swift:swift /srv/node\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:361(para) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:31(para)
 msgid "Create /etc/rsyncd.conf:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:364(screen)
-#, no-wrap
-msgid "\ncat &gt;/etc/rsyncd.conf &lt;&lt;EOF\nuid = swift\ngid = swift\nlog file = /var/log/rsyncd.log\npid file = /var/run/rsyncd.pid\naddress = $STORAGE_LOCAL_NET_IP\n\n[account]\nmax connections = 2\npath = /srv/node/\nread only = false\nlock file = /var/lock/account.lock\n\n[container]\nmax connections = 2\npath = /srv/node/\nread only = false\nlock file = /var/lock/container.lock\n\n[object]\nmax connections = 2\npath = /srv/node/\nread only = false\nlock file = /var/lock/object.lock\nEOF\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:393(para)
 msgid "Edit the RSYNC_ENABLE= line in /etc/default/rsync:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:396(screen)
-#, no-wrap
-msgid "\nperl -pi -e 's/RSYNC_ENABLE=false/RSYNC_ENABLE=true/' /etc/default/rsync\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:401(para) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:60(para)
 msgid "Start rsync daemon:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:404(screen)
-#, no-wrap
-msgid "\nservice rsync start\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:409(para) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:64(para)
@@ -333,45 +213,20 @@ msgstr ""
 msgid "Create /etc/swift/account-server.conf:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:415(screen)
-#, no-wrap
-msgid "\ncat &gt;/etc/swift/account-server.conf &lt;&lt;EOF\n[DEFAULT]\nbind_ip = $STORAGE_LOCAL_NET_IP\nworkers = 2\n\n[pipeline:main]\npipeline = account-server\n\n[app:account-server]\nuse = egg:swift#account\n\n[account-replicator]\n\n[account-auditor]\n\n[account-reaper]\nEOF\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:436(para) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:87(para)
 msgid "Create /etc/swift/container-server.conf:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:439(screen)
-#, no-wrap
-msgid "\ncat &gt;/etc/swift/container-server.conf &lt;&lt;EOF\n[DEFAULT]\nbind_ip = $STORAGE_LOCAL_NET_IP\nworkers = 2\n\n[pipeline:main]\npipeline = container-server\n\n[app:container-server]\nuse = egg:swift#container\n\n[container-replicator]\n\n[container-updater]\n\n[container-auditor]\nEOF\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:460(para) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:105(para)
 msgid "Create /etc/swift/object-server.conf:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:463(screen)
-#, no-wrap
-msgid "\ncat &gt;/etc/swift/object-server.conf &lt;&lt;EOF\n[DEFAULT]\nbind_ip = $STORAGE_LOCAL_NET_IP\nworkers = 2\n\n[pipeline:main]\npipeline = object-server\n\n[app:object-server]\nuse = egg:swift#object\n\n[object-replicator]\n\n[object-updater]\n\n[object-auditor]\nEOF\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:484(para)
 msgid "Start the storage services. If you use this command, it will try to start every service for which a configuration file exists, and throw a warning for any configuration files which don't exist:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:490(screen)
-#, no-wrap
-msgid "\nswift-init all start\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:493(para)
 msgid "Or, if you want to start them one at a time, run them as below. Note that if the server program in question generates any output on its stdout or stderr, swift-init has already redirected the command's output to /dev/null. If you encounter any difficulty, stop the server and run it by hand from the command line. Any server may be started using \"swift-$SERVER-$SERVICE /etc/swift/$SERVER-config\", where $SERVER might be object, continer, or account, and $SERVICE might be server, replicator, updater, or auditor."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:504(screen)
-#, no-wrap
-msgid "\nswift-init object-server start\nswift-init object-replicator start\nswift-init object-updater start\nswift-init object-auditor start\nswift-init container-server start\nswift-init container-replicator start\nswift-init container-updater start\nswift-init container-auditor start\nswift-init account-server start\nswift-init account-replicator start\nswift-init account-auditor start\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:520(title)
@@ -386,81 +241,36 @@ msgstr ""
 msgid "Get an X-Storage-Url and X-Auth-Token:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:530(screen)
-#, no-wrap
-msgid "\ncurl -k -v -H 'X-Storage-User: system:root' -H 'X-Storage-Pass: testpass' https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:535(para) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:37(para)
 msgid "Check that you can HEAD the account:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:538(screen)
-#, no-wrap
-msgid "\ncurl -k -v -H 'X-Auth-Token: &lt;token-from-x-auth-token-above&gt;' &lt;url-from-x-storage-url-above&gt;\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:543(para)
 msgid "Check that <literal>swift</literal> works (at this point, expect zero containers, zero objects, and zero bytes):"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:547(screen)
-#, no-wrap
-msgid "\nswift -A https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0 -U system:root -K testpass stat\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:552(para)
 msgid "Use <literal>swift</literal> to upload a few files named 'bigfile[1-2].tgz' to a container named 'myfiles':"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:556(screen)
-#, no-wrap
-msgid "\nswift -A https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0 -U system:root -K testpass upload myfiles bigfile1.tgz\nswift -A https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0 -U system:root -K testpass upload myfiles bigfile2.tgz\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:562(para)
 msgid "Use <literal>swift</literal> to download all files from the 'myfiles' container:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:566(screen)
-#, no-wrap
-msgid "\nswift -A https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0 -U system:root -K testpass download myfiles\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:571(para)
 msgid "Use <literal>swift</literal> to save a backup of your builder files to a container named 'builders'. Very important not to lose your builders!:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:576(screen)
-#, no-wrap
-msgid "\nswift -A https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0 -U system:root -K testpass upload builders /etc/swift/*.builder\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:581(para)
 msgid "Use <literal>swift</literal> to list your containers:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:584(screen)
-#, no-wrap
-msgid "\nswift -A https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0 -U system:root -K testpass list\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:589(para)
 msgid "Use <literal>swift</literal> to list the contents of your 'builders' container:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:593(screen)
-#, no-wrap
-msgid "\nswift -A https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0 -U system:root -K testpass list builders\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:598(para)
 msgid "Use <literal>swift</literal> to download all files from the 'builders' container:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:602(screen)
-#, no-wrap
-msgid "\nswift -A https://$PROXY_LOCAL_NET_IP:8080/auth/v1.0 -U system:root -K testpass download builders\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:608(title)
@@ -483,18 +293,8 @@ msgstr ""
 msgid "Update the list of memcache servers in /etc/swift/proxy-server.conf for all the added proxy servers. If you run multiple memcache servers, use this pattern for the multiple IP:port listings: `10.1.2.3:11211,10.1.2.4:11211` in each proxy server's conf file.:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:637(screen)
-#, no-wrap
-msgid "\n[filter:cache]\nuse = egg:swift#memcache\nmemcache_servers = $PROXY_LOCAL_NET_IP:11211\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:644(para)
 msgid "Change the storage url for any users to point to the load balanced url, rather than the first proxy server you created in /etc/swift/proxy-server.conf:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:649(screen)
-#, no-wrap
-msgid "\n[filter:tempauth]\nuse = egg:swift#tempauth\nuser_system_root = testpass .admin http[s]://&lt;LOAD_BALANCER_HOSTNAME&gt;:&lt;PORT&gt;/v1/AUTH_system\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-howto-install-multinode.xml:656(para) ./doc/src/docbkx/openstack-install/object-storage-post-install.xml:53(para)
@@ -528,11 +328,6 @@ msgstr ""
 #. <para>To avoid confusion, you can also remove the unnecessary virtual network that libvirt creates. </para><literallayout class="monospaced">sudo virsh net-destroy default; rm  /etc/libvirt/qemu/networks/autostart/default.xml</literallayout>
 #: ./doc/src/docbkx/openstack-install/compute-create-network.xml:8(para)
 msgid "You must run the command that creates the network and the bridge using the br100 specified in the nova.conf file to create the network that the virtual machines use. This example shows the network range using 192.168.100.0/24 as the fixed range for our guest VMs, but you can substitute the range for the network you have available. We're labeling it with \"private\" in this case."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-create-network.xml:12(literallayout)
-#, no-wrap
-msgid "nova-manage network create private --multi_host=T --fixed_range_v4=192.168.100.0/24 --bridge_interface=br100 --num_networks=1 --network_size=256"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/dashboard-configure.xml:6(title)
@@ -731,27 +526,8 @@ msgstr ""
 msgid "Install the swift service and openSSH."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-install-ubuntu.xml:53(prompt) ./doc/src/docbkx/openstack-install/object-storage-install-ubuntu.xml:54(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:10(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:28(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:38(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:39(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:91(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:94(prompt) ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:9(prompt) ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:26(prompt) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:17(prompt) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:18(prompt) ./doc/src/docbkx/openstack-install/dashboard-install.xml:22(prompt) ./doc/src/docbkx/openstack-install/dashboard-install.xml:23(prompt) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:19(prompt) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:20(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:47(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:48(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:49(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:50(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:96(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:97(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:98(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:99(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:100(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:101(prompt) ./doc/src/docbkx/openstack-install/installing-ntp.xml:16(prompt) ./doc/src/docbkx/openstack-install/installing-ntp.xml:17(prompt) ./doc/src/docbkx/openstack-install/install-config-glance.xml:12(prompt) ./doc/src/docbkx/openstack-install/install-config-glance.xml:18(prompt) ./doc/src/docbkx/openstack-install/install-config-glance.xml:72(prompt) ./doc/src/docbkx/openstack-install/install-config-glance.xml:73(prompt)
-msgid "#"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-install-ubuntu.xml:53(userinput)
-#, no-wrap
-msgid "apt-get install swift openssh-server  rsync memcached python-netifaces python-xattr python-memcache"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-install-ubuntu.xml:54(userinput)
-#, no-wrap
-msgid "yum install openstack-swift openstack-swift-proxy openstack-swift-account openstack-swift-container openstack-swift-object memcached"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-install-ubuntu.xml:56(para)
 msgid "Create and populate configuration directories on all nodes:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-install-ubuntu.xml:57(literallayout)
-#, no-wrap
-msgid "mkdir -p /etc/swift\nchown -R swift:swift /etc/swift/"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-install-ubuntu.xml:61(para)
@@ -782,11 +558,6 @@ msgstr ""
 msgid "Now that the proxy server and storage servers are configured, you want to restart the services."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-post-install.xml:8(screen)
-#, no-wrap
-msgid "swift-init main start\nswift-init rest start"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-post-install.xml:12(title)
 msgid "Adding an Additional Proxy Server"
 msgstr ""
@@ -804,12 +575,7 @@ msgid "Configure an initial proxy node for the initial setup, and then follow th
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-post-install.xml:34(para)
-msgid "Update the list of memcache servers in /etc/swift/proxy-server.conf for all the added proxy servers. If you run multiple memcache servers, use this pattern for the multiple IP:port listings: <literallayout class=\"monospaced\">10.1.2.3:11211,10.1.2.4:11211</literallayout> in each proxy server’s conf file.:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-post-install.xml:45(literallayout)
-#, no-wrap
-msgid "\n[filter:cache]\nuse = egg:swift#memcache\nmemcache_servers = &lt;PROXY_LOCAL_NET_IP&gt;:11211\n"
+msgid "Update the list of memcache servers in /etc/swift/proxy-server.conf for all the added proxy servers. If you run multiple memcache servers, use this pattern for the multiple IP:port listings: <placeholder-1/> in each proxy server’s conf file.:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-post-install.xml:67(title) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:61(title) ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:116(title) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:8(title) ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:63(title) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:61(title)
@@ -828,26 +594,12 @@ msgstr ""
 msgid "Install the Identity service on any server that is accessible to the other servers you intend to use for OpenStack services, as root:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:10(userinput)
-#, no-wrap
-msgid "apt-get install keystone"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:11(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:29(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:53(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:87(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:88(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:92(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:112(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:122(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:128(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:138(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:151(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:158(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:169(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:173(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:185(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:199(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:202(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:216(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:219(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:233(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:237(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:251(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:402(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:417(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:448(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:463(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:486(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:503(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:527(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:544(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:568(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:583(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:607(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:622(prompt) ./doc/src/docbkx/openstack-install/ch_assumptions.xml:73(prompt) ./doc/src/docbkx/openstack-install/configure-creds.xml:14(prompt) ./doc/src/docbkx/openstack-install/configure-creds.xml:15(prompt) ./doc/src/docbkx/openstack-install/configure-creds.xml:26(prompt) ./doc/src/docbkx/openstack-install/configure-creds.xml:32(prompt) ./doc/src/docbkx/openstack-install/identity-verify-install.xml:10(prompt) ./doc/src/docbkx/openstack-install/identity-verify-install.xml:11(prompt) ./doc/src/docbkx/openstack-install/identity-verify-install.xml:74(prompt) ./doc/src/docbkx/openstack-install/identity-verify-install.xml:76(prompt) ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:29(prompt) ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:33(prompt) ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:53(prompt) ./doc/src/docbkx/openstack-install/installing-ntp.xml:11(prompt) ./doc/src/docbkx/openstack-install/installing-ntp.xml:12(prompt) ./doc/src/docbkx/openstack-install/installing-ntp.xml:18(prompt) ./doc/src/docbkx/openstack-install/installing-ntp.xml:19(prompt) ./doc/src/docbkx/openstack-install/install-config-glance.xml:13(prompt) ./doc/src/docbkx/openstack-install/install-config-glance.xml:22(prompt) ./doc/src/docbkx/openstack-install/ch_instances-running.xml:37(prompt) ./doc/src/docbkx/openstack-install/ch_instances-running.xml:216(prompt) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:13(prompt) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:17(prompt) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:27(prompt) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:33(prompt) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:39(prompt) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:48(prompt) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:49(prompt) ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:56(prompt)
-msgid "$"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:11(userinput)
-#, no-wrap
-msgid "yum install openstack-utils openstack-keystone python-keystoneclient"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:12(para)
 msgid "After installing, you need to delete the sqlite database it creates, then change the configuration to point to a MySQL database. This configuration enables easier scaling scenarios since you can bring up multiple Keystone front ends when needed, and configure them all to point back to the same database. Plus a database backend has built-in data replication features and documentation surrounding high availability and data redundancy configurations."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:20(para)
-msgid "Delete the <filename>keystone.db</filename> file created in the <filename>/var/lib/keystone</filename> directory.<screen><prompt>#</prompt> <userinput>rm /var/lib/keystone/keystone.db</userinput></screen>"
+msgid "Delete the <filename>keystone.db</filename> file created in the <filename>/var/lib/keystone</filename> directory.<placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:23(para)
@@ -858,36 +610,16 @@ msgstr ""
 msgid "Install MySQL as root:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:28(userinput)
-#, no-wrap
-msgid "apt-get install python-mysqldb mysql-server"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:29(userinput)
-#, no-wrap
-msgid "yum install mysql mysql-server MySQL-python"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:31(para)
 msgid "During the install, you'll be prompted for the mysql root password. Enter a password of your choice and verify it."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:33(para)
-msgid "Use <command>sed</command> to edit <filename>/etc/mysql/my.cnf</filename> to change <literal>bind-address</literal> from localhost (127.0.0.1) to any (0.0.0.0) and restart the mysql service, as root."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:38(userinput)
-#, no-wrap
-msgid "sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:39(userinput)
-#, no-wrap
-msgid "service mysql restart"
+msgid "Use <placeholder-1/> to edit <filename>/etc/mysql/my.cnf</filename> to change <literal>bind-address</literal> from localhost (127.0.0.1) to any (0.0.0.0) and restart the mysql service, as root."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:41(para)
-msgid "Set MySQL to start the daemon every time you start and then start the server. <screen>\n    <prompt>#</prompt> <userinput>chkconfig --level 2345 mysqld on</userinput>\n    <prompt>#</prompt> <userinput>service mysqld start</userinput></screen>"
+msgid "Set MySQL to start the daemon every time you start and then start the server. <placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:45(para)
@@ -895,16 +627,11 @@ msgid "The following sequence of commands will create a MySQL database named \"k
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:48(para)
-msgid "On Fedora, RHEL, and CentOS, you can configure the Keystone database with the <command>openstack-db</command> command.<screen os=\"rhel;centos;fedora\"><prompt>$&gt;</prompt> <userinput>sudo openstack-db --init --service keystone</userinput> </screen>"
+msgid "On Fedora, RHEL, and CentOS, you can configure the Keystone database with the <placeholder-1/> command.<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:51(para)
-msgid "To manually create the database, start the <command>mysql</command> command line client by running:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:53(userinput) ./doc/src/docbkx/openstack-install/compute-database-mysql.xml:9(literallayout) ./doc/src/docbkx/openstack-install/install-config-glance.xml:22(userinput)
-#, no-wrap
-msgid "mysql -u root -p"
+msgid "To manually create the database, start the <placeholder-1/> command line client by running:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:54(para) ./doc/src/docbkx/openstack-install/compute-database-mysql.xml:10(para)
@@ -915,15 +642,6 @@ msgstr ""
 msgid "To configure the MySQL database, create the keystone database."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:57(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:67(prompt) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:70(prompt) ./doc/src/docbkx/openstack-install/install-config-glance.xml:23(prompt) ./doc/src/docbkx/openstack-install/install-config-glance.xml:25(prompt)
-msgid "mysql&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:57(userinput)
-#, no-wrap
-msgid "CREATE DATABASE keystone;"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:58(para)
 msgid "Create a MySQL user for the newly-created keystone database that has full control of the keystone database."
 msgstr ""
@@ -932,22 +650,12 @@ msgstr ""
 msgid "Choose a secure password for the keystone user and replace all references to <replaceable>[YOUR_KEYSTONE_PASSWORD]</replaceable> with this password."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:67(replaceable)
+#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:67(replaceable) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:83(replaceable)
 msgid "[YOUR_KEYSTONE_PASSWORD]"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:67(userinput)
-#, no-wrap
-msgid "GRANT ALL ON keystone.* TO 'keystone'@'%' IDENTIFIED BY '<placeholder-1/>';"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:68(para)
 msgid "Enter quit at the <literal>mysql&gt;</literal> prompt to exit MySQL."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:70(userinput)
-#, no-wrap
-msgid "quit"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:72(title)
@@ -962,51 +670,16 @@ msgstr ""
 msgid "Once Keystone is installed, it is configured via a primary configuration file (<filename>/etc/keystone/keystone.conf</filename>), and by initializing data into keystone using the command line client. By default, Keystone's data store is sqlite. To change the data store to mysql, change the line defining \"connection\" in <filename>/etc/keystone/keystone.conf</filename> like so:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:83(programlisting)
-#, no-wrap
-msgid "connection = mysql://keystone:<replaceable>[YOUR_KEYSTONE_PASSWORD]</replaceable>@192.168.206.130/keystone"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:84(para)
 msgid "Also, ensure that the proper service token is used in the <filename>keystone.conf</filename> file. An example is provided in the Appendix or you can generate a random string. The sample token is:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:86(programlisting)
-#, no-wrap
-msgid "admin_token = 012345SECRET99TOKEN012345"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:87(userinput)
-#, no-wrap
-msgid "export ADMIN_TOKEN=$(openssl rand -hex 10)"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:88(userinput)
-#, no-wrap
-msgid "sudo openstack-config --set /etc/keystone/keystone.conf DEFAULT admin_token $ADMIN_TOKEN"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:89(para)
 msgid "Next, restart the keystone service so that it picks up the new database configuration."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:91(userinput)
-#, no-wrap
-msgid "sudo service keystone restart"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:92(userinput)
-#, no-wrap
-msgid "sudo service keystone start &amp;&amp; sudo chkconfig keystone on"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:93(para)
 msgid "Lastly, initialize the new keystone database, as root:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:94(userinput)
-#, no-wrap
-msgid "keystone-manage db_sync"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:96(title)
@@ -1038,11 +711,6 @@ msgstr ""
 msgid "On any distribution with python tools, you can run this keystone-init script that automates the steps below that use the keystone client API."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:112(userinput)
-#, no-wrap
-msgid "git clone https://github.com/nimbis/keystone-init.git"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:113(para)
 msgid "You'll need <link href=\"http://pyyaml.org/wiki/PyYAML\">PyYAML</link> installed to use this script. Look at the script that does the work: <link href=\"https://github.com/nimbis/keystone-init/blob/master/keystone-init.py\">https://github.com/nimbis/keystone-init/blob/master/keystone-init.py</link>."
 msgstr ""
@@ -1051,13 +719,8 @@ msgstr ""
 msgid "Edit the accompanying configuration file the script uses: <link href=\"https://github.com/nimbis/keystone-init/blob/master/config.yaml\">https://github.com/nimbis/keystone-init/blob/master/config.yaml</link> with the IP address of your servers. You can substitute quickly using this command in the directory where config.yaml is stored:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:122(userinput)
-#, no-wrap
-msgid "sed -i.bak s/192.168.206.130/172.16.150.12/g config.yaml"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:123(para)
-msgid "Then run the modified script as root:<screen><prompt>#</prompt> <userinput>./keystone-init.py config.yaml</userinput></screen>"
+msgid "Then run the modified script as root:<placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:125(para)
@@ -1068,61 +731,16 @@ msgstr ""
 msgid "Here are the manual, unscripted steps. First, create a default tenant, we'll name it <literal>openstackDemo</literal> in this example."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:128(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 tenant-create --name openstackDemo --description \"Default Tenant\" --enabled true"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:129(programlisting)
-#, no-wrap
-msgid "      +-------------+----------------------------------+\n      |   Property  |              Value               |\n      +-------------+----------------------------------+\n      | description | Default Tenant                   |\n      | enabled     | true                             |\n      | id          | b5815b046cfe47bb891a7b64119e7f80 |\n      | name        | openstackDemo                    |\n      +-------------+----------------------------------+"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:137(para)
 msgid "Create a default user named <literal>adminUser</literal>."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:138(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-create --tenant_id b5815b046cfe47bb891a7b64119e7f80 --name adminUser --pass secretword --enabled true"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:139(programlisting)
-#, no-wrap
-msgid "      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | Property |                                                          Value                                                          |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | email    | None                                                                                                                    |\n      | enabled  | true                                                                                                                    |\n      | id       | a4c2d43f80a549a19864c89d759bb3fe                                                                                        |\n      | name     | admin                                                                                                                   |\n      | password | $6$rounds=40000$MsFWIgIfbAHnhUH8$vvSK9/Uy3P5BTdH0kn.0MH.xFHAR2pWQCpTRLTENPs.3w53jb5BbbkIKHnkTbzWW3xVwqsb3W5e./3EIaNPeP0 |\n      | tenantId | b5815b046cfe47bb891a7b64119e7f80                                                                                        |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:149(para)
 msgid "Create the default roles, <literal>admin</literal> and <literal>memberRole</literal>."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:151(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 role-create --name admin"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:152(programlisting)
-#, no-wrap
-msgid "      +----------+----------------------------------+\n      | Property |              Value               |\n      +----------+----------------------------------+\n      | id       | e3d9d157cc95410ea45d23bbbc2e5c10 |\n      | name     | admin                            |\n      +----------+----------------------------------+"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:158(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 role-create --name memberRole"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:159(programlisting)
-#, no-wrap
-msgid "      +----------+----------------------------------+\n      | Property |              Value               |\n      +----------+----------------------------------+\n      | id       | cffc2edea9c74b4a8779cc0d7a22fc21 |\n      | name     | memberRole                       |\n      +----------+----------------------------------+"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:165(para)
 msgid "Grant the <literal>admin</literal> role to the <literal>adminUser</literal> user in the <literal>openstackDemo</literal> tenant with \"user-role-add\"."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:169(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-role-add --user a4c2d43f80a549a19864c89d759bb3fe --tenant_id b5815b046cfe47bb891a7b64119e7f80 --role e3d9d157cc95410ea45d23bbbc2e5c10"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:170(para) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:200(para) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:217(para) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:234(para) ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:252(para)
@@ -1133,106 +751,36 @@ msgstr ""
 msgid "Create a Service Tenant. This tenant contains all the services that we make known to the service catalog."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:173(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 tenant-create --name service --description \"Service Tenant\" --enabled true"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:174(programlisting)
-#, no-wrap
-msgid "      +-------------+----------------------------------+\n      |   Property  |              Value               |\n      +-------------+----------------------------------+\n      | description | Service Tenant                   |\n      | enabled     | true                             |\n      | id          | eb7e0c10a99446cfa14c244374549e9d |\n      | name        | service                          |\n      +-------------+----------------------------------+"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:182(para)
 msgid "Create a Glance Service User in the Service Tenant. You'll do this for any service you add to be in the Keystone service catalog."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:185(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-create --tenant_id eb7e0c10a99446cfa14c244374549e9d --name glance --pass glance --enabled true"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:186(programlisting)
-#, no-wrap
-msgid "      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | Property |                                                          Value                                                          |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | email    | None                                                                                                                    |\n      | enabled  | true                                                                                                                    |\n      | id       | 46b2667a7807483d983e0b4037a1623b                                                                                        |\n      | name     | glance                                                                                                                  |\n      | password | $6$rounds=40000$kf1ENaCoy7wOfRjx$LKQtsQbBqSBr2ZH7fwToAut0EYYz6M278N16Xg4Va2vTEOFabvTVXCdCP4hA5ikdCQO8Mh1nJvuFMEvGHaht3/ |\n      | tenantId | eb7e0c10a99446cfa14c244374549e9d                                                                                        |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:196(para)
 msgid "Grant the <literal>admin</literal> role to the <literal>glance</literal> user in the <literal>service</literal> tenant."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:199(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-role-add --user 46b2667a7807483d983e0b4037a1623b --tenant_id eb7e0c10a99446cfa14c244374549e9d --role e3d9d157cc95410ea45d23bbbc2e5c10"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:201(para)
 msgid "Create a Nova Service User in the Service Tenant."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:202(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-create --tenant_id eb7e0c10a99446cfa14c244374549e9d --name nova --pass nova --enabled true"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:203(programlisting)
-#, no-wrap
-msgid "      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | Property |                                                          Value                                                          |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | email    | None                                                                                                                    |\n      | enabled  | true                                                                                                                    |\n      | id       | 54b3776a8707834d983e0b4037b1345c                                                                                        |\n      | name     | nova                                                                                                                    |\n      | password | $6$rounds=40000$kf1ENaCoy7wOfRjx$LKQtsQbBqSBr2ZH7fwToAut0EYYz6M278N16Xg4Va2vTEOFabvTVXCdCP4hA5ikdCQO8Mh1nJvuFMEvGHaht3/ |\n      | tenantId | eb7e0c10a99446cfa14c244374549e9d                                                                                        |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:213(para)
 msgid "Grant the <literal>admin</literal> role to the <literal>nova</literal> user in the <literal>service</literal> tenant."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:216(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-role-add --user 54b3776a8707834d983e0b4037b1345c --tenant_id eb7e0c10a99446cfa14c244374549e9d --role e3d9d157cc95410ea45d23bbbc2e5c10"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:218(para)
 msgid "Create an EC2 Service User in the Service Tenant."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:219(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-create --tenant_id eb7e0c10a99446cfa14c244374549e9d --name ec2 --pass ec2 --enabled true"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:220(programlisting)
-#, no-wrap
-msgid "      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | Property |                                                          Value                                                          |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | email    | None                                                                                                                    |\n      | enabled  | true                                                                                                                    |\n      | id       | 32e7668b8707834d983e0b4037b1345c                                                                                        |\n      | name     | ec2                                                                                                                     |\n      | password | $6$rounds=40000$kf1ENaCoy7wOfRjx$LKQtsQbBqSBr2ZH7fwToAut0EYYz6M278N16Xg4Va2vTEOFabvTVXCdCP4hA5ikdCQO8Mh1nJvuFMEvGHaht3/ |\n      | tenantId | eb7e0c10a99446cfa14c244374549e9d                                                                                        |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:230(para)
 msgid "Grant the <literal>admin</literal> role to the <literal>ec2</literal> user in the <literal>service</literal> tenant."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:233(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-role-add --user 32e7668b8707834d983e0b4037b1345c --tenant_id eb7e0c10a99446cfa14c244374549e9d --role e3d9d157cc95410ea45d23bbbc2e5c10"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:235(para)
 msgid "Create an Object Storage Service User in the Service Tenant."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:237(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-create --tenant_id eb7e0c10a99446cfa14c244374549e9d --name swift --pass swiftpass --enabled true"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:238(programlisting)
-#, no-wrap
-msgid "      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | Property |                                                          Value                                                          |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+\n      | email    | None                                                                                                                    |\n      | enabled  | true                                                                                                                    |\n      | id       | 4346677b8909823e389f0b4037b1246e                                                                                        |\n      | name     | swift                                                                                                                   |\n      | password | $6$rounds=40000$kf1ENaCoy7wOfRjx$LKQtsQbBqSBr2ZH7fwToAut0EYYz6M278N16Xg4Va2vTEOFabvTVXCdCP4hA5ikdCQO8Mh1nJvuFMEvGHaht3/ |\n      | tenantId | eb7e0c10a99446cfa14c244374549e9d                                                                                        |\n      +----------+-------------------------------------------------------------------------------------------------------------------------+"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:248(para)
 msgid "Grant the <literal>admin</literal> role to the <literal>swift</literal> user in the <literal>service</literal> tenant."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:251(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 --endpoint http://192.168.206.130:35357/v2.0 user-role-add --user 4346677b8909823e389f0b4037b1246e --tenant_id eb7e0c10a99446cfa14c244374549e9d --role e3d9d157cc95410ea45d23bbbc2e5c10"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:253(para)
@@ -1257,11 +805,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:264(para)
 msgid "There are two alternative ways of defining services with keystone: <placeholder-1/> While using a template file is simpler, it is not recommended except for development environments such as <link href=\"http://www.devstack.org\">DevStack</link>. The template file does not enable CRUD operations on the service catalog through keystone commands, but you can use the service-list command when using the template catalog. A database backend can provide better reliability, availability, and data redundancy. This section describes how to populate the Keystone service catalog using the database backend. Your <filename>/etc/keystone/keystone.conf</filename> file should contain the following lines if it is properly configured to use the database backend."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:284(programlisting) ./doc/src/docbkx/openstack-install/identity-defining-services.xml:35(programlisting)
-#, no-wrap
-msgid "\n[catalog]\ndriver = keystone.catalog.backends.sql.Catalog\n      "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:289(title) ./doc/src/docbkx/openstack-install/identity-defining-services.xml:40(title)
@@ -1293,11 +836,11 @@ msgid "A description of the service, (e.g., <literal>\"Nova Compute Service\"</l
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:293(para) ./doc/src/docbkx/openstack-install/identity-defining-services.xml:45(para)
-msgid "Use the <command>keystone service-create</command> command to create a database entry for the service, with the following attributes: <placeholder-1/>"
+msgid "Use the <placeholder-1/> command to create a database entry for the service, with the following attributes: <placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:328(para) ./doc/src/docbkx/openstack-install/identity-defining-services.xml:65(para)
-msgid "Use the <command>keystone endpoint-create</command> command to create a database entry that describes how different types of clients can connect to the service, with the following attributes:"
+msgid "Use the <placeholder-1/> command to create a database entry that describes how different types of clients can connect to the service, with the following attributes:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:334(literal) ./doc/src/docbkx/openstack-install/identity-defining-services.xml:70(literal)
@@ -1313,7 +856,7 @@ msgid "--service_id"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:343(para) ./doc/src/docbkx/openstack-install/identity-defining-services.xml:76(para)
-msgid "The ID field returned by the <command>keystone service-create</command> (e.g., <literal>935fd37b6fa74b2f9fba6d907fa95825</literal>)"
+msgid "The ID field returned by the <placeholder-1/> (e.g., <literal>935fd37b6fa74b2f9fba6d907fa95825</literal>)"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:349(literal) ./doc/src/docbkx/openstack-install/identity-defining-services.xml:80(literal)
@@ -1364,26 +907,6 @@ msgstr ""
 msgid "Define the Identity service:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:402(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n service-create \\\n --name=keystone \\\n --type=identity \\\n --description=\"Keystone Identity Service\"\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:409(computeroutput)
-#, no-wrap
-msgid "+-------------+----------------------------------+\n|   Property  |              Value               |\n+-------------+----------------------------------+\n| description | Keystone Identity Service        |\n| id          | 15c11a23667e427e91bc31335b45f4bd |\n| name        | keystone                         |\n| type        | identity                         |\n+-------------+----------------------------------+"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:417(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n endpoint-create \\\n --region RegionOne \\\n --service_id=15c11a23667e427e91bc31335b45f4bd \\\n --publicurl=http://192.168.206.130:5000/v2.0 \\\n --internalurl=http://192.168.206.130:5000/v2.0 \\\n --adminurl=http://192.168.206.130:35357/v2.0"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:425(computeroutput)
-#, no-wrap
-msgid "+-------------+-----------------------------------+\n|   Property  |             Value                 |\n+-------------+-----------------------------------+\n| adminurl    | http://192.168.206.130:35357/v2.0 |\n| id          | 11f9c625a3b94a3f8e66bf4e5de2679f  |\n| internalurl | http://192.168.206.130:5000/v2.0  |\n| publicurl   | http://192.168.206.130:5000/v2.0  |\n| region      | RegionOne                         |\n| service_id  | 15c11a23667e427e91bc31335b45f4bd  |\n+-------------+-----------------------------------+\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:440(para)
 msgid "The <literal>%(tenant_id)s</literal> and single quotes around the <literal>publicurl</literal>, <literal>internalurl</literal>, and <literal>adminurl</literal> must be typed exactly as shown for both the Compute endpoint and the Volume endpoint."
 msgstr ""
@@ -1392,120 +915,20 @@ msgstr ""
 msgid "Define the Compute service, which requires a separate endpoint for each tenant. Here we use the <literal>service</literal> tenant from the previous section. <placeholder-1/>"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:448(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n--endpoint http://192.168.206.130:35357/v2.0/ \\\nservice-create \\\n --name=nova \\\n --type=compute \\\n --description=\"Nova Compute Service\""
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:454(computeroutput)
-#, no-wrap
-msgid "+-------------+----------------------------------+\n|   Property  |              Value               |\n+-------------+----------------------------------+\n| description | Nova Compute Service             |\n| id          | abc0f03c02904c24abdcc3b7910e2eed |\n| name        | nova                             |\n| type        | compute                          |\n+-------------+----------------------------------+\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:463(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n--endpoint http://192.168.206.130:35357/v2.0/ \\\nendpoint-create \\\n --region RegionOne \\\n --service_id=abc0f03c02904c24abdcc3b7910e2eed \\\n --publicurl='http://192.168.206.130:8774/v2/%(tenant_id)s' \\\n --internalurl='http://192.168.206.130:8774/v2/%(tenant_id)s' \\\n --adminurl='http://192.168.206.130:8774/v2/%(tenant_id)s'"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:471(computeroutput)
-#, no-wrap
-msgid "+-------------+----------------------------------------------+\n|   Property  |                               Value          |\n+-------------+----------------------------------------------+\n| adminurl    | http://192.168.206.130:8774/v2/%(tenant_id)s |\n| id          | 935fd37b6fa74b2f9fba6d907fa95825             |\n| internalurl | http://192.168.206.130:8774/v2/%(tenant_id)s |\n| publicurl   | http://192.168.206.130:8774/v2/%(tenant_id)s |\n| region      | RegionOne                                    |\n| service_id  | abc0f03c02904c24abdcc3b7910e2eed             |\n+-------------+----------------------------------------------+\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:483(para)
 msgid "Define the Volume service, which also requires a separate endpoint for each tenant."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:486(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\nservice-create \\\n --name=volume \\\n --type=volume \\\n --description=\"Nova Volume Service\"\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:493(computeroutput)
-#, no-wrap
-msgid "\n+-------------+----------------------------------+\n|   Property  |              Value               |\n+-------------+----------------------------------+\n| description | Nova Volume Service              |\n| id          | 1ff4ece13c3e48d8a6461faebd9cd38f |\n| name        | volume                           |\n| type        | volume                           |\n+-------------+----------------------------------+\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:503(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n endpoint-create \\\n --region RegionOne \\\n --service_id=1ff4ece13c3e48d8a6461faebd9cd38f \\\n --publicurl='http://192.168.206.130:8776/v1/%(tenant_id)s' \\\n --internalurl='http://192.168.206.130:8776/v1/%(tenant_id)s' \\\n --adminurl='http://192.168.206.130:8776/v1/%(tenant_id)s' \n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:512(computeroutput)
-#, no-wrap
-msgid "\n+-------------+----------------------------------------------+\n|   Property  |                   Value                      |\n+-------------+----------------------------------------------+\n| adminurl    | http://192.168.206.130:8776/v1/%(tenant_id)s |\n| id          | 1ff4ece13c3e48d8a6461faebd9cd38f             |\n| internalurl | http://192.168.206.130:8776/v1/%(tenant_id)s |\n| publicurl   | http://192.168.206.130:8776/v1/%(tenant_id)s |\n| region      | RegionOne                                    |\n| service_id  | 8a70cd235c7d4a05b43b2dffb9942cc0             |\n+-------------+----------------------------------------------+\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:525(para)
 msgid "Define the Image service:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:527(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n service-create \\\n --name=glance \\\n --type=image \\\n --description=\"Glance Image Service\"\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:534(computeroutput)
-#, no-wrap
-msgid "\n+-------------+----------------------------------+\n|   Property  |              Value               |\n+-------------+----------------------------------+\n| description | Glance Image Service             |\n| id          | 7d5258c490144c8c92505267785327c1 |\n| name        | glance                           |\n| type        | image                            |\n+-------------+----------------------------------+\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:544(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n endpoint-create \\\n --region RegionOne \\\n --service_id=7d5258c490144c8c92505267785327c1 \\\n --publicurl=http://192.168.206.130:9292/v1 \\\n --internalurl=http://192.168.206.130:9292/v1 \\\n --adminurl=http://192.168.206.130:9292/v1\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:553(computeroutput)
-#, no-wrap
-msgid "\n+-------------+-----------------------------------+\n|   Property  |             Value                 |\n+-------------+-----------------------------------+\n| adminurl    | http://192.168.206.130:9292/v1    |\n| id          | 3c8c0d749f21490b90163bfaed9befe7  |\n| internalurl | http://192.168.206.130:9292/v1    |\n| publicurl   | http://192.168.206.130:9292/v1    |\n| region      | RegionOne                         |\n| service_id  | 7d5258c490144c8c92505267785327c1  |\n+-------------+-----------------------------------+\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:566(para)
 msgid "Define the EC2 compatibility service:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:568(userinput)
-#, no-wrap
-msgid "keystone  --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n service-create \\\n --name=ec2 \\\n --type=ec2 \\\n --description=\"EC2 Compatibility Layer\""
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:574(computeroutput)
-#, no-wrap
-msgid "+-------------+----------------------------------+\n|   Property  |              Value               |\n+-------------+----------------------------------+\n| description | EC2 Compatibility Layer          |\n| id          | 181cdad1d1264387bcc411e1c6a6a5fd |\n| name        | ec2                              |\n| type        | ec2                              |\n+-------------+----------------------------------+\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:583(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n endpoint-create \\\n --region RegionOne \\\n --service_id=181cdad1d1264387bcc411e1c6a6a5fd \\\n --publicurl=http://192.168.206.130:8773/services/Cloud \\\n --internalurl=http://192.168.206.130:8773/services/Cloud \\\n --adminurl=http://192.168.206.130:8773/services/Admin\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:592(computeroutput)
-#, no-wrap
-msgid "\n+-------------+--------------------------------------------+\n|   Property  |                  Value                     |\n+-------------+--------------------------------------------+\n| adminurl    | http://192.168.206.130:8773/services/Cloud |\n| id          | d2a3d7490c61442f9b2c8c8a2083c4b6           |\n| internalurl | http://192.168.206.130:8773/services/Cloud |\n| publicurl   | http://192.168.206.130:8773/services/Admin |\n| region      | RegionOne                                  |\n| service_id  | 181cdad1d1264387bcc411e1c6a6a5fd           |\n+-------------+--------------------------------------------+\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:605(para)
 msgid "Define the Object Storage service:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:607(userinput)
-#, no-wrap
-msgid "keystone  --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n service-create \\\n --name=swift \\\n --type=object-store \\\n --description=\"Object Storage Service\""
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:613(computeroutput)
-#, no-wrap
-msgid "+-------------+---------------------------------+\n|   Property  |              Value               |\n+-------------+----------------------------------+\n| description | Object Storage Service           |\n| id          | 272efad2d1234376cbb911c1e5a5a6ed |\n| name        | swift                            |\n| type        | object-store                     |\n+-------------+----------------------------------+\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:622(userinput)
-#, no-wrap
-msgid "keystone --token 012345SECRET99TOKEN012345 \\\n --endpoint http://192.168.206.130:35357/v2.0/ \\\n endpoint-create \\\n --region RegionOne \\\n --service_id=272efad2d1234376cbb911c1e5a5a6ed \\\n --publicurl 'http://192.168.206.130:8888/v1/AUTH_%(tenant_id)s' \\\n --adminurl 'http://192.168.206.130:8888/v1' \\\n --internalurl 'http://192.168.206.130:8888/v1/AUTH_%(tenant_id)s'\n"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-install-keystone.xml:631(computeroutput)
-#, no-wrap
-msgid "\n+-------------+---------------------------------------------------+\n|   Property  |                       Value                       |\n+-------------+---------------------------------------------------+\n| adminurl    | http://192.168.206.130:8888/v1                    |\n| id          | e32b3c4780e51332f9c128a8c208a5a4                  |\n| internalurl | http://192.168.206.130:8888/v1/AUTH_%(tenant_id)s |\n| publicurl   | http://192.168.206.130:8888/v1/AUTH_%(tenant_id)s |\n| region      | RegionOne                                         |\n| service_id  | 272efad2d1234376cbb911c1e5a5a6ed                  |\n+-------------+---------------------------------------------------+\n"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -1648,27 +1071,12 @@ msgstr ""
 msgid "You can find the version of the installation by using the glance --version command:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:9(literallayout)
-#, no-wrap
-msgid "glance --version"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:11(para)
 msgid "The version number 2012.1 corresponds with the Essex release."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:14(literallayout)
-#, no-wrap
-msgid "glance 2012.1"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:15(para)
 msgid "Obtain a test image."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:16(screen)
-#, no-wrap
-msgid "mkdir /tmp/images\n    cd /tmp/images/\n    wget http://smoser.brickies.net/ubuntu/ttylinux-uec/ttylinux-uec-amd64-12.1_2.6.35-22_1.tar.gz\n    tar -zxvf ttylinux-uec-amd64-12.1_2.6.35-22_1.tar.gz "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:20(para)
@@ -1680,54 +1088,19 @@ msgid "This example shows inputting --os_username, --os_password, --os_tenant, -
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:26(para)
-msgid "Then you would source these environment variables by running <userinput>source openrc</userinput>."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:27(screen)
-#, no-wrap
-msgid "glance --os_username=adminUser --os_password=secretword --os_tenant=openstackDemo --os_auth_url=http://127.0.0.1:5000/v2.0 add name=\"tty-linux-kernel\" disk_format=aki container_format=aki &lt; ttylinux-uec-amd64-12.1_2.6.35-22_1-vmlinuz"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:28(programlisting)
-#, no-wrap
-msgid "Uploading image 'tty-linux-kernel'\n    =================================================================================================================================================================[100%] 41.8M/s, ETA  0h  0m  0s\n    Added new image with ID: 599907ff-296d-4042-a671-d015e34317d2"
+msgid "Then you would source these environment variables by running <placeholder-1/>."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:32(para)
 msgid "Upload the initrd."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:33(screen)
-#, no-wrap
-msgid "glance --os_username=adminUser --os_password=secretword --os_tenant=openstackDemo --os_auth_url=http://127.0.0.1:5000/v2.0 add name=\"tty-linux-ramdisk\" disk_format=ari container_format=ari &lt; ttylinux-uec-amd64-12.1_2.6.35-22_1-loader "
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:34(programlisting)
-#, no-wrap
-msgid "Uploading image 'tty-linux-ramdisk'\n    ===========================================================================================================================================================[100%] 937.483441K/s, ETA  0h  0m  0s\n    Added new image with ID: 7d9f0378-1640-4e43-8959-701f248d999d"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:38(para)
 msgid "Upload the image."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:39(screen)
-#, no-wrap
-msgid "glance --os_username=adminUser --os_password=secretword --os_tenant=openstackDemo --os_auth_url=http://127.0.0.1:5000/v2.0 add name=\"tty-linux\" disk_format=ami container_format=ami kernel_id=599907ff-296d-4042-a671-d015e34317d2 ramdisk_id=7d9f0378-1640-4e43-8959-701f248d999d &lt; ttylinux-uec-amd64-12.1_2.6.35-22_1.img "
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:40(programlisting)
-#, no-wrap
-msgid "Uploading image 'tty-linux'\n    ===========================================================================================================================================================[100%] 118.480514M/s, ETA  0h  0m  0s\n    Added new image with ID: 21b421e5-44d4-4903-9db0-4f134fdd0793"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:45(para)
 msgid "Now a glance index should show a legitimate image."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/images-verifying-install.xml:46(programlisting)
-#, no-wrap
-msgid "glance --os_username=adminUser --os_password=secretword --os_tenant=openstackDemo --os_auth_url=http://127.0.0.1:5000/v2.0 index\n    ID                                   Name                           Disk Format          Container Format     Size          \n    ------------------------------------ ------------------------------ -------------------- -------------------- --------------\n    21b421e5-44d4-4903-9db0-4f134fdd0793 tty-linux                      ami                  ami                        25165824\n    7d9f0378-1640-4e43-8959-701f248d999d tty-linux-ramdisk              ari                  ari                           96629\n    599907ff-296d-4042-a671-d015e34317d2 tty-linux-kernel               aki                  aki                         4404752"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:6(title)
@@ -1746,72 +1119,32 @@ msgstr ""
 msgid "For a multi-node install you only make changes to nova.conf and copy it to additional compute nodes. Ensure each nova.conf file points to the correct IP addresses for the respective services. Customize the nova.conf example below to match your environment. The CC_ADDR is the Cloud Controller IP Address."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:23(programlisting)
-#, no-wrap
-msgid "\ndhcpbridge_flagfile=/etc/nova/nova.conf\ndhcpbridge=/usr/bin/nova-dhcpbridge\nflat_network_bridge=br100\nlogdir=/var/log/nova\nstate_path=/var/lib/nova\nverbose\nsql_connection=mysql://root:nova@CC_ADDR/nova\ns3_host=CC_ADDR\nrabbit_host=CC_ADDR\nec2_api=CC_ADDR\nec2_url=http://CC_ADDR:8773/services/Cloud\nnetwork_manager=nova.network.manager.FlatManager\nfixed_range= network/CIDR\nnetwork_size=number of addresses\n                  "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:39(para)
 msgid "By default, Nova sets the bridge device based on the setting in --flat_network_bridge. Now you can edit /etc/network/interfaces with the following template, updated with your IP information."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:43(programlisting)
-#, no-wrap
-msgid "\n# The loopback network interface\nauto lo\n    iface lo inet loopback\n\n# The primary network interface\nauto br100\niface br100 inet static\n    bridge_ports    eth0\n    bridge_stp      off\n    bridge_maxwait  0\n    bridge_fd       0\n    address xxx.xxx.xxx.xxx\n    netmask xxx.xxx.xxx.xxx\n    network xxx.xxx.xxx.xxx\n    broadcast xxx.xxx.xxx.xxx\n    gateway xxx.xxx.xxx.xxx\n    # dns-* options are implemented by the resolvconf package, if installed\n    dns-nameservers xxx.xxx.xxx.xxx\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:63(para)
 msgid "Restart networking:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:64(literallayout)
-#, no-wrap
-msgid "/etc/init.d/networking restart"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:65(para)
 msgid "With nova.conf updated and networking set, configuration is nearly complete. First, bounce the relevant services to take the latest updates:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:68(literallayout)
-#, no-wrap
-msgid "restart libvirt-bin; service nova-compute restart"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:69(para)
 msgid "To avoid issues with KVM and permissions with Nova, run the following commands to ensure we have VM's that are running optimally:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:72(literallayout)
-#, no-wrap
-msgid "\nchgrp kvm /dev/kvm\nchmod g+rwx /dev/kvm\n"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:76(para)
 msgid "If you want to use the 10.04 Ubuntu Enterprise Cloud images that are readily available at http://uec-images.ubuntu.com/releases/10.04/release/, you may run into delays with booting. Any server that does not have nova-api running on it needs this iptables entry so that UEC images can get metadata info. On compute nodes, configure the iptables with this next step:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:83(literallayout)
-#, no-wrap
-msgid "iptables -t nat -A PREROUTING -d 169.254.169.254/32 -p tcp -m tcp --dport 80 -j DNAT --to-destination $NOVA_API_IP:8773"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:84(para)
 msgid "Lastly, confirm that your compute node is talking to your cloud controller. From the cloud controller, run this database query:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:87(literallayout)
-#, no-wrap
-msgid "mysql -u$MYSQL_USER -p$MYSQL_PASS nova -e 'select * from services;'"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:88(para)
 msgid "In return, you should see something similar to this:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:90(programlisting)
-#, no-wrap
-msgid "\n+---------------------+---------------------+------------+---------+----+----------+----------------+-----------+--------------+----------+-------------------+\n| created_at          | updated_at          | deleted_at | deleted | id | host     | binary         | topic     | report_count | disabled | availability_zone |\n+---------------------+---------------------+------------+---------+----+----------+----------------+-----------+--------------+----------+-------------------+\n| 2011-01-28 22:52:46 | 2011-02-03 06:55:48 | NULL       |       0 |  1 | osdemo02 | nova-network   | network   |        46064 |        0 | nova              |\n| 2011-01-28 22:52:48 | 2011-02-03 06:55:57 | NULL       |       0 |  2 | osdemo02 | nova-compute   | compute   |        46056 |        0 | nova              |\n| 2011-01-28 22:52:52 | 2011-02-03 06:55:50 | NULL       |       0 |  3 | osdemo02 | nova-scheduler | scheduler |        46065 |        0 | nova              |\n| 2011-01-29 23:49:29 | 2011-02-03 06:54:26 | NULL       |       0 |  4 | osdemo01 | nova-compute   | compute   |        37050 |        0 | nova              |\n| 2011-01-30 23:42:24 | 2011-02-03 06:55:44 | NULL       |       0 |  9 | osdemo04 | nova-compute   | compute   |        28484 |        0 | nova              |\n| 2011-01-30 21:27:28 | 2011-02-03 06:54:23 | NULL       |       0 |  8 | osdemo05 | nova-compute   | compute   |        29284 |        0 | nova              |\n+---------------------+---------------------+------------+---------+----+----------+----------------+-----------+--------------+----------+-------------------+\n            "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/configuring-multiple-compute-nodes.xml:102(para)
@@ -1926,27 +1259,12 @@ msgstr ""
 msgid "First, ensure you have python-software-properties installed, and then you need to add the repository:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/preconfig-managedit-packages.xml:12(literallayout)
-#, no-wrap
-msgid "sudo apt-get install python-software-properties \nsudo add-apt-repository -y ppa:managedit/openstack"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/preconfig-managedit-packages.xml:14(para)
 msgid "Now, update to ensure the package repository is picked up by your system:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/preconfig-managedit-packages.xml:16(literallayout) ./doc/src/docbkx/openstack-install/preconfig-for-packages.xml:26(literallayout) ./doc/src/docbkx/openstack-install/preconfig-rcb-packages.xml:28(literallayout)
-#, no-wrap
-msgid "sudo apt-get update"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/preconfig-managedit-packages.xml:17(para)
 msgid "Now ensure that these packages are used instead of those bundled with Ubuntu:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/preconfig-managedit-packages.xml:19(literallayout)
-#, no-wrap
-msgid "sudo apt-get install -y managedit-openstack-pin"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/preconfig-managedit-packages.xml:20(para)
@@ -1958,21 +1276,11 @@ msgid "Verifying the Compute Installation"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:7(para)
-msgid "You can ensure all the Compute services are running by using the <command>nova-manage</command> command, as root:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:9(userinput)
-#, no-wrap
-msgid "nova-manage service list"
+msgid "You can ensure all the Compute services are running by using the <placeholder-1/> command, as root:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:10(para)
 msgid "In return you should see \"smiley faces\" rather than three X symbols. Here's an example."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:11(computeroutput)
-#, no-wrap
-msgid "Binary           Host     Zone    Status     State Updated_At\nnova-compute     myhost    nova    enabled    :-)   2012-04-02 14:06:15\nnova-cert        myhost    nova    enabled    :-)   2012-04-02 14:06:16\nnova-volume      myhost    nova    enabled    :-)   2012-04-02 14:06:14\nnova-scheduler   myhost    nova    enabled    :-)   2012-04-02 14:06:11\nnova-network     myhost    nova    enabled    :-)   2012-04-02 14:06:13\nnova-consoleauth myhost    nova    enabled    :-)   2012-04-02 14:06:10"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:19(para)
@@ -1980,21 +1288,11 @@ msgid "If you see three X symbols and are running services on separate hosts, en
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:18(para)
-msgid "<placeholder-1/>You can find the version of the installation by using the <command>nova-manage</command> command, as root:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:26(userinput) ./doc/src/docbkx/openstack-install/determining-version-of-compute.xml:9(literallayout)
-#, no-wrap
-msgid "nova-manage version list"
+msgid "<placeholder-1/>You can find the version of the installation by using the <placeholder-2/> command, as root:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:28(para)
 msgid "The version number 2012.1 corresponds with the Essex release of Compute."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-verifying-install.xml:31(literallayout)
-#, no-wrap
-msgid "2012.1 (2012.1-LOCALBRANCH:LOCALREVISION)"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:6(title)
@@ -2021,36 +1319,16 @@ msgstr ""
 msgid "Here's an example:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:13(literallayout)
-#, no-wrap
-msgid "# The loopback network interface\nauto lo\niface lo inet loopback\n\n# The primary network interface\nauto eth0\niface eth0 inet dhcp\n                    \n# Bridge network interface for VM networks \nauto br100 \niface br100 inet static \naddress 192.168.100.1 \nnetmask 255.255.255.0 \nbridge_stp off\nbridge_fd 0"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:28(para)
 msgid "Also install bridge-utils:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:29(literallayout)
-#, no-wrap
-msgid "sudo apt-get install bridge-utils"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:30(para)
 msgid "Ensure that you set up the bridge, although if you use flat_network_bridge=br100 in your <filename>nova.conf</filename> file, nova will set up the bridge for you when you run the nova-manage network command."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:34(literallayout)
-#, no-wrap
-msgid "sudo brctl addbr br100"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:35(para)
 msgid "Lastly, restart networking to have these changes take effect. (This method is deprecated but \"<code>restart networking</code>\" doesn't always work.)"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:38(literallayout)
-#, no-wrap
-msgid "sudo /etc/init.d/networking restart"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:40(title)
@@ -2065,15 +1343,6 @@ msgstr ""
 msgid "Set selinux in permissive mode:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:45(prompt) ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:52(prompt) ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:54(prompt) ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:57(prompt) ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:104(prompt) ./doc/src/docbkx/openstack-install/compute-db-sync.xml:27(prompt)
-msgid "$&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:45(userinput)
-#, no-wrap
-msgid "sudo setenforce permissive"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:46(para)
 msgid "Otherwise you will get issues like <link href=\"https://bugzilla.redhat.com/show_bug.cgi?id=734346\">https://bugzilla.redhat.com/show_bug.cgi?id=734346</link> /usr/bin/nova-dhcpbridge: No such file or directory."
 msgstr ""
@@ -2082,27 +1351,12 @@ msgstr ""
 msgid "If RHEL 6.2 based, use the openstack-config package to turn off force DHCP releases."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:52(userinput)
-#, no-wrap
-msgid "sudo openstack-config --set /etc/nova/nova.conf DEFAULT force_dhcp_release False"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:53(para)
 msgid "If RHEL 6.3 based, install dnsmasq utilities."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:54(userinput)
-#, no-wrap
-msgid "sudo yum install dnsmasq-utils"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:55(para)
 msgid "If you intend to use guest images that don't have a single partition, then allow libguestfs to inspect the image so that files can be injected, by setting:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-config-guest-network.xml:57(userinput)
-#, no-wrap
-msgid "sudo openstack-config --set /etc/nova/nova.conf DEFAULT libvirt_inject_partition -1"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-cloud-controller.xml:6(title)
@@ -2117,28 +1371,8 @@ msgstr ""
 msgid "You have the option of installing Apache Qpid, refer to the Compute Administration Manual for configuration instructions, including adding rpc_backend=nova.rpc.impl_qpid to your <filename>nova.conf</filename>."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-cloud-controller.xml:11(screen)
-#, no-wrap
-msgid "sudo apt-get install rabbitmq-server"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-cloud-controller.xml:12(screen)
-#, no-wrap
-msgid "sudo yum install openstack-utils memcached qpid-cpp-server"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-cloud-controller.xml:13(para)
 msgid "Install the required nova- packages, and dependencies are automatically installed."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-cloud-controller.xml:15(screen)
-#, no-wrap
-msgid "sudo apt-get install nova-compute nova-volume nova-vncproxy nova-api nova-ajax-console-proxy nova-cert nova-consoleauth nova-doc nova-scheduler nova-network"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-cloud-controller.xml:16(screen)
-#, no-wrap
-msgid "sudo yum install openstack-nova "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_installing-openstack-overview.xml:6(title)
@@ -2245,11 +1479,6 @@ msgstr ""
 msgid "First, install PostgreSQL on the controller node."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:11(literallayout)
-#, no-wrap
-msgid "apt-fast install postgresql postgresql-server-dev-8.4 python-dev python-psycopg2"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:13(para)
 msgid "Edit /etc/postgresql/8.4/main/postgresql.conf and change the listen_address to listen to all appropriate addresses, PostgreSQL listen only to localhost by default. For example:"
 msgstr ""
@@ -2258,81 +1487,36 @@ msgstr ""
 msgid "To listen on a specific IP address:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:15(literallayout)
-#, no-wrap
-msgid "# - Connection Settings -\nlisten_address = '10.1.1.200,192.168.100.2'"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:17(para)
 msgid "To listen on all addresses:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:18(literallayout)
-#, no-wrap
-msgid "# - Connection Settings -\nlisten_address = '*'"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:21(para)
 msgid "Add appropriate addresses and networks to /etc/postgresql/8.4/main/pg_hba.conf to allow remote access to PostgreSQL, this should include all servers hosting OpenStack (but not neccessarily those hosted by Openstack). As an example, append the following lines:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:22(literallayout)
-#, no-wrap
-msgid "host all all 192.168.0.0/16\nhost all all 10.1.0.0/16\n                    "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:25(para)
 msgid "Change the default PostgreSQL user's password:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:26(literallayout)
-#, no-wrap
-msgid "\nsudo -u postgres psql template1\ntemplate1=#\\password\nEnter Password:\nEnter again:\ntemplate1=#\\q"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:33(para)
 msgid "Restart PostgreSQL:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:34(literallayout)
-#, no-wrap
-msgid "service postgresql restart"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:36(para)
 msgid "Create nova databases:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:37(literallayout)
-#, no-wrap
-msgid "sudo -u postgres createdb nova\nsudo -u postgres createdb glance"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:40(para)
 msgid "Create nova database user which will be used for all OpenStack services, note the adduser and createuser steps will prompt for the user's password ($PG_PASS):"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:41(literallayout)
-#, no-wrap
-msgid "\nadduser nova\nsudo -u postgres createuser -PSDR nova\nsudo -u postgres psql template1\ntemplate1=#GRANT ALL PRIVILEGES ON DATABASE nova TO nova\ntemplate1=#GRANT ALL PRIVILEGES ON DATABASE glance TO nova\ntemplate1=#\\q\n                    "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:50(para)
 msgid "For the Cactus version of Nova, the following fix is required for the PostgreSQL database schema. You don't need to do this for Diablo:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:51(literallayout)
-#, no-wrap
-msgid "\nsudo -u postgres psql template1\ntemplate1=#alter table instances alter instance_type_id type integer using cast(instance_type_id as integer);\ntemplate1=#\\q"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:55(para)
 msgid "For Nova components that require access to this database the required configuration in /etc/nova/nova.conf should be (replace $PG_PASS with password):"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:57(literallayout)
-#, no-wrap
-msgid "sql_connection=postgresql://nova:$PG_PASS@control.example.com/nova"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-database-postgresql.xml:58(para)
@@ -2430,20 +1614,15 @@ msgid "KVM or Xen (XenServer or XCP) as the hypervisor."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_assumptions.xml:64(para)
-msgid "Ensure the operating system is up-to-date by running <command>yum update</command> prior to the installation."
+msgid "Ensure the operating system is up-to-date by running <placeholder-1/> prior to the installation."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_assumptions.xml:67(para)
-msgid "Ensure the operating system is up-to-date by running <command>apt-get update</command> and <command>apt-get upgrade</command> prior to the installation."
+msgid "Ensure the operating system is up-to-date by running <placeholder-1/> and <placeholder-2/> prior to the installation."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_assumptions.xml:72(para)
 msgid "On RHEL (and derivatives) enable the EPEL repository by running:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/ch_assumptions.xml:73(userinput)
-#, no-wrap
-msgid "sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-7.noarch.rpm"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_assumptions.xml:75(para)
@@ -2462,11 +1641,6 @@ msgstr ""
 msgid "To configure the MySQL database, create the nova database."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-database-mysql.xml:12(literallayout)
-#, no-wrap
-msgid "mysql&gt; CREATE DATABASE nova;"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-database-mysql.xml:13(para)
 msgid "Create a MySQL user and password for the newly-created nova database that has full control of the database."
 msgstr ""
@@ -2475,18 +1649,8 @@ msgstr ""
 msgid "[YOUR_NOVADB_PASSWORD]"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-database-mysql.xml:15(literallayout)
-#, no-wrap
-msgid "mysql&gt; GRANT ALL ON nova.* TO 'nova'@'%' IDENTIFIED BY '<placeholder-1/>';"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-database-mysql.xml:16(para)
 msgid "Enter quit at the mysql&gt; prompt to exit MySQL."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-database-mysql.xml:17(literallayout) ./doc/src/docbkx/openstack-install/install-config-glance.xml:27(literallayout)
-#, no-wrap
-msgid "mysql&gt; quit"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-database-mysql.xml:19(para)
@@ -2533,83 +1697,28 @@ msgstr ""
 msgid "It is assumed that all commands are run as the root user."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:17(userinput)
-#, no-wrap
-msgid "apt-get install swift-proxy memcached"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:18(userinput)
-#, no-wrap
-msgid "yum install openstack-swift-proxy memcached"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:23(literallayout)
-#, no-wrap
-msgid "cd /etc/swift\nopenssl req -new -x509 -nodes -out cert.crt -keyout cert.key"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:28(para)
 msgid "Modify memcached to listen on the default interfaces. Preferably this should be on a local, non-public network. Edit the following line in /etc/memcached.conf, changing:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:33(literallayout)
-#, no-wrap
-msgid "-l 127.0.0.1\nto\n-l &lt;PROXY_LOCAL_NET_IP&gt;"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:40(literallayout)
-#, no-wrap
-msgid "service memcached restart"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:43(para)
-msgid "To set up Object Storage to authenticate tokens we need to set the keystone Admin token in the swift proxy file with the openstack-config command. <screen><prompt>#</prompt> <userinput>openstack-config --set /etc/swift/proxy-server.conf filter:authtoken admin_token $ADMIN_TOKEN</userinput>\n            <prompt>#</prompt> sudo <userinput>openstack-config --set /etc/swift/proxy-server.conf filter:authtoken auth_token $ADMIN_TOKEN</userinput></screen>"
+msgid "To set up Object Storage to authenticate tokens we need to set the keystone Admin token in the swift proxy file with the openstack-config command. <placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:55(para)
-msgid "If you run multiple memcache servers, put the multiple IP:port listings in the [filter:cache] section of the proxy-server.conf file like: <literallayout class=\"monospaced\">10.1.2.3:11211,10.1.2.4:11211</literallayout>Only the proxy server uses memcache."
+msgid "If you run multiple memcache servers, put the multiple IP:port listings in the [filter:cache] section of the proxy-server.conf file like: <placeholder-1/>Only the proxy server uses memcache."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:63(para)
 msgid "Create the account, container and object rings. The builder command is basically creating a builder file with a few parameters. The parameter with the value of 18 represents 2 ^ 18th, the value that the partition will be sized to. Set this “partition power” value based on the total amount of storage you expect your entire ring to use. The value of 3 represents the number of replicas of each object, with the last value being the number of hours to restrict moving a partition more than once."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:74(literallayout)
-#, no-wrap
-msgid "cd /etc/swift\nswift-ring-builder account.builder create 18 3 1\nswift-ring-builder container.builder create 18 3 1\nswift-ring-builder object.builder create 18 3 1"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:82(para)
 msgid "For every storage device on each node add entries to each ring:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:85(literallayout)
-#, no-wrap
-msgid "swift-ring-builder account.builder add z&lt;ZONE&gt;-&lt;STORAGE_LOCAL_NET_IP&gt;:6002/&lt;DEVICE&gt; 100\nswift-ring-builder container.builder add z&lt;ZONE&gt;-&lt;STORAGE_LOCAL_NET_IP_1&gt;:6001/&lt;DEVICE&gt; 100\nswift-ring-builder object.builder add z&lt;ZONE&gt;-&lt;STORAGE_LOCAL_NET_IP_1&gt;:6000/&lt;DEVICE&gt; 100"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:89(para)
-msgid "For example, if you were setting up a storage node with a partition in Zone 1 on IP 10.0.0.1. The mount point of this partition is /srv/node/sdb1, and the path in rsyncd.conf is /srv/node/, the DEVICE would be sdb1 and the commands would look like: <literallayout class=\"monospaced\">swift-ring-builder account.builder add z1-10.0.0.1:6002/sdb1 100\nswift-ring-builder container.builder add z1-10.0.0.1:6001/sdb1 100\nswift-ring-builder object.builder add z1-10.0.0.1:6000/sdb1 100</literallayout>"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:103(literallayout)
-#, no-wrap
-msgid "swift-ring-builder account.builder\nswift-ring-builder container.builder\nswift-ring-builder object.builder"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:111(literallayout)
-#, no-wrap
-msgid "swift-ring-builder account.builder rebalance\nswift-ring-builder container.builder rebalance\nswift-ring-builder object.builder rebalance"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:128(literallayout)
-#, no-wrap
-msgid "chown -R swift:swift /etc/swift"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-proxy-node.xml:132(literallayout)
-#, no-wrap
-msgid "swift-init proxy start"
+msgid "For example, if you were setting up a storage node with a partition in Zone 1 on IP 10.0.0.1. The mount point of this partition is /srv/node/sdb1, and the path in rsyncd.conf is /srv/node/, the DEVICE would be sdb1 and the commands would look like: <placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/bk_openstackinstallguide.xml:10(title)
@@ -2900,22 +2009,12 @@ msgstr ""
 msgid "These commands need to be run as root only if the credentials used to interact with nova-api have been put under /root/.bashrc. If the EC2 credentials have been put into another user's .bashrc file, then, it is necessary to run these commands as the user. You can also add --os_username as a parameter to the nova command when you want to run as a specific user."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/enable-access-security-group.xml:19(literallayout)
-#, no-wrap
-msgid "\n nova  secgroup-add-rule default  icmp - 1 -1 0.0.0.0/0 \n nova  secgroup-add-rule default  tcp 22 22 0.0.0.0/0 \n                "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/enable-access-security-group.xml:23(para)
 msgid "Another common issue is you cannot ping or SSH your instances after issuing these commands. Something to look at is the amount of ‘dnsmasq’ processes that are running. If you have a running instance, check to see that TWO \"dnsmasq’\" processes are running. If not, perform the following:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/enable-access-security-group.xml:28(literallayout)
-#, no-wrap
-msgid "sudo killall dnsmasq \nsudo service nova-network restart"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/enable-access-security-group.xml:30(para)
-msgid "If you get the <literallayout class=\"monospaced\">instance not found</literallayout> message while performing the restart, that means the service was not previously running. You simply need to start it instead of restarting it: <literallayout class=\"monospaced\">sudo service nova-network start</literallayout>"
+msgid "If you get the <placeholder-1/> message while performing the restart, that means the service was not previously running. You simply need to start it instead of restarting it: <placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_installdashboard.xml:7(title) ./doc/src/docbkx/openstack-install/dashboard-install.xml:7(title)
@@ -2939,17 +2038,7 @@ msgid "Defining Compute and Image Service Credentials"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/configure-creds.xml:7(para)
-msgid "Create an <filename>openrc</filename> file that can contain these variables that are used by the <command>nova</command> (Compute) and <command>glance</command> (Image) command-line interface clients. In this document, we store the <filename>openrc</filename> file in the <filename>~/creds</filename> directory:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/configure-creds.xml:14(userinput)
-#, no-wrap
-msgid "mkdir ~/creds"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/configure-creds.xml:15(userinput)
-#, no-wrap
-msgid "nano ~/creds/openrc"
+msgid "Create an <filename>openrc</filename> file that can contain these variables that are used by the <placeholder-1/> (Compute) and <placeholder-2/> (Image) command-line interface clients. In this document, we store the <filename>openrc</filename> file in the <filename>~/creds</filename> directory:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/configure-creds.xml:18(para)
@@ -2960,23 +2049,8 @@ msgstr ""
 msgid "Next, ensure these are used in your environment. If you see 401 Not Authorized errors on commands using tokens, ensure that you have properly sourced your credentials and that all the pipelines are accurate in the configuration files."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/configure-creds.xml:26(userinput)
-#, no-wrap
-msgid "source ~/creds/openrc"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/configure-creds.xml:29(para)
-msgid "Verify your credentials are working by using the <command>nova</command> client to list the available images:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/configure-creds.xml:32(userinput)
-#, no-wrap
-msgid "nova image-list"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/configure-creds.xml:33(computeroutput)
-#, no-wrap
-msgid "\n+--------------------------------------+-------------------+--------+--------+\n|                  ID                  |        Name       | Status | Server |\n+--------------------------------------+-------------------+--------+--------+\n| 58b71381-1d8a-4cbb-94f2-c67bfced35f5 | tty-linux-kernel  | ACTIVE |        |\n| 5ca3d2fa-fd89-4edb-af41-ae96136e48ef | tty-linux-ramdisk | ACTIVE |        |\n| cc63afc1-9a83-4978-8d75-f19d874fdf94 | tty-linux         | ACTIVE |        |\n+--------------------------------------+-------------------+--------+--------+\n"
+msgid "Verify your credentials are working by using the <placeholder-1/> client to list the available images:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/configure-creds.xml:43(para)
@@ -2991,18 +2065,8 @@ msgstr ""
 msgid "These are the commands you run to ensure the database schema is current, and then set up a user and project, if you are using built-in auth with the <code>--use_deprecated_auth</code> flag rather than the Identity Service. We'll walk through these to offer a validation step and show that the cloud is accepting commands."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/nova-manage-initial-user-project.xml:13(literallayout)
-#, no-wrap
-msgid "sudo nova-manage user admin &lt;user_name&gt;\nnova-manage project create &lt;project_name&gt; &lt;user_name&gt;\nnova-manage network create &lt;network-label&gt; --bridge=&lt;bridgename&gt; &lt;IP-range-of-network-CIDR&gt; &lt;number-of-networks-to-define-for-project&gt; &lt;addresses-in-each-network&gt; "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/nova-manage-initial-user-project.xml:17(para)
 msgid "Here is an example of what this looks like with real values entered and values returned:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/nova-manage-initial-user-project.xml:19(literallayout)
-#, no-wrap
-msgid "$ sudo nova-manage user admin dub\nexport EC2_ACCESS_KEY=a42e03c9-656d-4c11-a660-80ed374a4cfb\nexport EC2_SECRET_KEY=a00a3a32-726a-4e1e-b0c8-24e7df55c959\n\n$ sudo nova-manage project create dubproject dub\n\n$ sudo nova-manage network create novanet --bridge_interface=br100 192.168.100.0/24 1 256"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/nova-manage-initial-user-project.xml:26(para)
@@ -3025,82 +2089,32 @@ msgstr ""
 msgid "Install curl, a command-line tool for running REST API requests along with openssl for meeting a dependency requirement:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:10(userinput)
-#, no-wrap
-msgid "apt-get install curl openssl"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:11(userinput)
-#, no-wrap
-msgid "yum install curl openssl"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:12(para)
 msgid "Here is a curl command you can use to ensure that the Identity service is working:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:13(literallayout)
-#, no-wrap
-msgid "curl -d '{\"auth\": {\"tenantName\": \"adminTenant\", \"passwordCredentials\":{\"username\": \"adminUser\", \"password\": \"secretword\"}}}' -H \"Content-type: application/json\" http://192.168.206.130:35357/v2.0/tokens | python -mjson.tool"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:14(para)
 msgid "In return, you should receive a token for the adminUser user."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:16(literallayout)
-#, no-wrap
-msgid "{\n    \"access\": {\n        \"serviceCatalog\": {}, \n        \"token\": {\n            \"expires\": \"2012-04-12T00:40:12Z\", \n            \"id\": \"cec68088d08747639c682ee5228106d1\"\n        }, \n        \"user\": {\n            \"id\": \"6b0141904f09480d810a5949d79ea0f3\", \n            \"name\": \"adminUser\", \n            \"roles\": [], \n            \"roles_links\": [], \n            \"username\": \"adminUser\"\n        }\n    }\n}"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:32(para)
 msgid "You can also get a token that expires in 24 hours using the adminUser account:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:34(literallayout)
-#, no-wrap
-msgid "curl -d '{\"auth\": {\"tenantName\": \"openstackDemo\", \"passwordCredentials\":{\"username\": \"adminUser\", \"password\": \"secretword\"}}}' -H \"Content-type: application/json\" http://192.168.206.130:35357/v2.0/tokens | python -mjson.tool"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:35(para)
 msgid "In return, you get the token listing shown below."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:36(literallayout)
-#, no-wrap
-msgid "\n{\n    \"access\": {\n        \"serviceCatalog\": {}, \n        \"token\": {\n            \"expires\": \"2012-04-12T00:41:21Z\", \n            \"id\": \"a220bfdf313b404fa5e063fcc7cc1f3e\", \n            \"tenant\": {\n                \"description\": \"Default Tenant\", \n                \"enabled\": true, \n                \"id\": \"50af8cc655c24ada96f73010c96b70a2\", \n                \"name\": \"openstackDemo\"\n            }\n        }, \n        \"user\": {\n            \"id\": \"6b0141904f09480d810a5949d79ea0f3\", \n            \"name\": \"adminUser\", \n            \"roles\": [], \n            \"roles_links\": [], \n            \"username\": \"adminUser\"\n        }\n    }\n}\n    "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:61(para)
 msgid "Here is another quick test to ensure that the Keystone CLI is working. First, set up a keystonerc file with the admin token and the necessary password:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:65(programlisting)
-#, no-wrap
-msgid "\n        export ADMIN_TOKEN=012345SECRET99TOKEN012345\n        export OS_USERNAME=adminUser\n        export OS_PASSWORD=secretword\n        export OS_TENANT_NAME=openstackDemo\n        export OS_AUTH_URL=http://127.0.0.1:5000/v2.0/\n        "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:72(para)
 msgid "Source the file."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:74(userinput)
-#, no-wrap
-msgid ". ./keystonerc"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:75(para)
-msgid "You should see a listing of users after typing in <userinput>keystone user-list</userinput>."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:76(userinput)
-#, no-wrap
-msgid "keystone user-list"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-verify-install.xml:77(computeroutput)
-#, no-wrap
-msgid "\n+----------------------------------+---------+-------+-----------+\n|                id                | enabled | email |    name   |\n+----------------------------------+---------+-------+-----------+\n| 318003c9a97342dbab6ff81675d68364 | True    | None  | swift     |\n| 3a316b32f44941c0b9ebc577feaa5b5c | True    | None  | nova      |\n| ac4dd12ebad84e55a1cd964b356ddf65 | True    | None  | glance    |\n| ca951c79453d4033a7c270bc6e0860fa | True    | None  | adminUser |\n| ec47114af7014afd9a8994cbb6057a8b | True    | None  | ec2       |\n+----------------------------------+---------+-------+-----------+\n"
+msgid "You should see a listing of users after typing in <placeholder-1/>."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/dashboard-install.xml:8(para)
@@ -3123,23 +2137,8 @@ msgstr ""
 msgid "Install the OpenStack Dashboard, as root:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/dashboard-install.xml:22(userinput)
-#, no-wrap
-msgid "apt-get install -y memcached libapache2-mod-wsgi openstack-dashboard"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/dashboard-install.xml:23(userinput)
-#, no-wrap
-msgid "yum install -y memcached libapache2-mod-wsgi openstack-dashboard"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/dashboard-install.xml:24(para)
 msgid "Next, modify the variable <literal>CACHE_BACKEND</literal> in <filename>/etc/openstack-dashboard/local_settings.py</filename> to match the ones set in <filename>/etc/memcached.conf</filename>. Open <filename>/etc/openstack-dashboard/local_settings.py</filename> and look for this line:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/dashboard-install.xml:29(programlisting)
-#, no-wrap
-msgid "CACHE_BACKEND = 'memcached://127.0.0.1:11211/'"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/dashboard-install.xml:30(para)
@@ -3182,16 +2181,6 @@ msgstr ""
 msgid "Connect the RHEL 3. 6.0 x86_64 DVD as a repository in YUM."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-rhel-install.xml:18(literallayout)
-#, no-wrap
-msgid "\nsudo mount /dev/cdrom /mnt/cdrom\n/etc/yum.repos.d/rhel.repo \n            "
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-rhel-install.xml:22(programlisting)
-#, no-wrap
-msgid "\n[rhel]\nname=RHEL 6.0\nbaseurl=file:///mnt/cdrom/Server\nenabled=1\ngpgcheck=0\n            "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-rhel-install.xml:29(para)
 msgid "Download and install repo config and key."
 msgstr ""
@@ -3205,7 +2194,7 @@ msgid "Centos yum repo: <link href=\"http://yum.griddynamics.net/yum/essex-cent
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-rhel-install.xml:37(para)
-msgid "For a test installation, use: <screen>$ yum install openstack-nova-essex-node-full       </screen>"
+msgid "For a test installation, use: <placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/preconfig-for-packages.xml:6(title)
@@ -3216,27 +2205,12 @@ msgstr ""
 msgid "These packages are unsupported but known to work and are used by the Crowbar project and Rackspace Cloud Builders deployments. First, you need to add a signing key for the Cloud Builders repository that contains packages that are known and tested to work together, such as diablo-d5 or diablo-final. Once you add the signing key, you add a repository entry pointing to it and update your repo pointer with an apt-get command."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/preconfig-for-packages.xml:13(literallayout) ./doc/src/docbkx/openstack-install/preconfig-rcb-packages.xml:16(literallayout)
-#, no-wrap
-msgid "sudo apt-key adv --keyserver hkp://subkeys.pgp.net --recv F87CBDE0"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/preconfig-for-packages.xml:14(para) ./doc/src/docbkx/openstack-install/preconfig-rcb-packages.xml:17(para)
 msgid "Now, create a new sources.list and add a pointer to the Rackspace Cloud Builders packages for a finalized Diablo release containing Compute, Object Storage, Image Service, the Dashboard, and Identity Service."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/preconfig-for-packages.xml:18(literallayout) ./doc/src/docbkx/openstack-install/preconfig-rcb-packages.xml:21(literallayout)
-#, no-wrap
-msgid "sudo nano /etc/apt/sources.list.d/rcb-sources.list           "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/preconfig-for-packages.xml:19(para)
 msgid "Paste the following line into the newly created rcb-sources.list file. The options are maverick (10.11), natty (11.04), or oneiric (11.10) for the operating system and diablo-d5 or diablo-final for the related release parts:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/preconfig-for-packages.xml:24(literallayout)
-#, no-wrap
-msgid "deb http://ops.rcb.me/packages natty diablo-final"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/preconfig-for-packages.xml:25(para) ./doc/src/docbkx/openstack-install/preconfig-rcb-packages.xml:27(para)
@@ -3259,62 +2233,12 @@ msgstr ""
 msgid "OpenStack Object Storage should work on any modern filesystem that supports Extended Attributes (XATTRS). We currently recommend XFS as it demonstrated the best overall performance for the swift use case after considerable testing and benchmarking at Rackspace. It is also the only filesystem that has been thoroughly tested."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:19(userinput)
-#, no-wrap
-msgid "apt-get install swift-account swift-container swift-object xfsprogs"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:20(userinput)
-#, no-wrap
-msgid "yum install openstack-swift-account openstack-swift-container openstack-swift-object xfsprogs"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:24(literallayout)
-#, no-wrap
-msgid "fdisk /dev/sdb  (set up a single partition)\nmkfs.xfs -i size=1024 /dev/sdb1\necho \"/dev/sdb1 /srv/node/sdb1 xfs noatime,nodiratime,nobarrier,logbufs=8 0 0\" &gt;&gt; /etc/fstab\nmkdir -p /srv/node/sdb1\nmount /srv/node/sdb1\nchown -R swift:swift /srv/node"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:32(literallayout)
-#, no-wrap
-msgid "uid = swift\ngid = swift\nlog file = /var/log/rsyncd.log\npid file = /var/run/rsyncd.pid\naddress = &lt;STORAGE_LOCAL_NET_IP&gt;\n\n[account]\nmax connections = 2\npath = /srv/node/\nread only = false\nlock file = /var/lock/account.lock\n\n[container]\nmax connections = 2\npath = /srv/node/\nread only = false\nlock file = /var/lock/container.lock\n\n[object]\nmax connections = 2\npath = /srv/node/\nread only = false\nlock file = /var/lock/object.lock"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:56(para)
 msgid "Edit the following line in /etc/default/rsync:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:57(literallayout)
-#, no-wrap
-msgid "RSYNC_ENABLE = true"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:61(literallayout)
-#, no-wrap
-msgid "service rsync start"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:69(literallayout)
-#, no-wrap
-msgid "[DEFAULT]\nbind_ip = &lt;STORAGE_LOCAL_NET_IP&gt;\nworkers = 2\n\n[pipeline:main]\npipeline = account-server\n\n[app:account-server]\nuse = egg:swift#account\n\n[account-replicator]\n\n[account-auditor]\n\n[account-reaper]"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:88(literallayout)
-#, no-wrap
-msgid "[DEFAULT]\nbind_ip = &lt;STORAGE_LOCAL_NET_IP&gt;\nworkers = 2\n\n[pipeline:main]\npipeline = container-server\n\n[app:container-server]\nuse = egg:swift#container\n\n[container-replicator]\n\n[container-updater]\n\n[container-auditor]"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:106(literallayout)
-#, no-wrap
-msgid "[DEFAULT]\nbind_ip = &lt;STORAGE_LOCAL_NET_IP&gt;\nworkers = 2\n\n[pipeline:main]\npipeline = object-server\n\n[app:object-server]\nuse = egg:swift#object\n\n[object-replicator]\n\n[object-updater]\n\n[object-auditor]\n\n[object-expirer]"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:127(para)
 msgid "Start the storage services:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-storage-nodes.xml:128(literallayout)
-#, no-wrap
-msgid "swift-init object-server start\nswift-init object-replicator start\nswift-init object-updater start\nswift-init object-auditor start\nswift-init container-server start\nswift-init container-replicator start\nswift-init container-updater start\nswift-init container-auditor start\nswift-init account-server start\nswift-init account-replicator start\nswift-init account-auditor start"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -3380,35 +2304,15 @@ msgid "The default <filename>nova.conf</filename> format for Essex packages vari
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:23(para)
-msgid "You can automatically convert a <filename>nova.conf</filename> file from flag format to INI format using <command>nova-manage</command>:"
+msgid "You can automatically convert a <filename>nova.conf</filename> file from flag format to INI format using <placeholder-1/>:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:7(para)
-msgid "Many of the settings for Compute services are stored in the <filename>/etc/nova/nova.conf</filename> file by default. Here are the relevant settings for getting a minimal install running. Refer to the OpenStack Compute Administration Manual for guidance on more configuration options. <note><placeholder-1/><placeholder-2/><placeholder-3/><screen><prompt>$</prompt> <userinput>nova-manage config convert --help</userinput>\n<computeroutput>Usage: nova-manage config convert &lt;args&gt; [options]\n\n\nOptions:\n  -h, --help        show this help message and exit\n  --infile=&lt;path&gt;  old-style flagfile to convert to config\n  --outfile=&lt;path&gt;  path for output file. Writes config to stdout if not\n                    specified</computeroutput></screen></note>"
+msgid "Many of the settings for Compute services are stored in the <filename>/etc/nova/nova.conf</filename> file by default. Here are the relevant settings for getting a minimal install running. Refer to the OpenStack Compute Administration Manual for guidance on more configuration options. <placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:37(para)
 msgid "The packages automatically do these steps for a user named nova, but if you are installing as another user you should ensure that the <filename>nova.conf</filename> file should have its owner set to <literal>root:nova</literal>, and mode set to <literal>0640</literal>, since the file contains your MySQL server’s username and password. This packaged install ensures that the nova user belongs to the nova group and that the .conf file permissions are set, but here are the manual commands, which should be run as root:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:47(userinput)
-#, no-wrap
-msgid "groupadd nova"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:48(userinput)
-#, no-wrap
-msgid "usermod -g nova nova"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:49(userinput)
-#, no-wrap
-msgid "chown -R root:nova /etc/nova"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:50(userinput)
-#, no-wrap
-msgid "chmod 640 /etc/nova/nova.conf"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:52(para)
@@ -3423,11 +2327,6 @@ msgstr ""
 msgid "Add these settings to <filename>/etc/nova/nova.conf</filename> for the network configuration assumptions made for this installation scenario. You can place comments in the <filename>nova.conf</filename> file by entering a new line with a <literal>#</literal> sign at the beginning of the line. To see a listing of all possible configuration option settings, see <link href=\"http://docs.openstack.org/essex/openstack-compute/admin/content/compute-options-reference.html\">the reference in the OpenStack Compute Administration Manual</link>."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:71(programlisting)
-#, no-wrap
-msgid "\nauth_strategy=keystone\nnetwork_manager=nova.network.manager.FlatDHCPManager\nfixed_range=192.168.100.0/24\nflat_network_dhcp_start=192.168.100.2\npublic_interface=eth0\nflat_interface=eth0\nflat_network_bridge=br100"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:79(para)
 msgid "Here is an example nova.conf with commented sections:"
 msgstr ""
@@ -3438,41 +2337,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:91(para)
 msgid "Stop the nova- services prior to running db sync, by running stop commands as root. Otherwise your logs show errors because the database has not yet been populated:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:96(userinput)
-#, no-wrap
-msgid "stop nova-api"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:97(userinput)
-#, no-wrap
-msgid "stop nova-compute"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:98(userinput)
-#, no-wrap
-msgid "stop nova-network"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:99(userinput)
-#, no-wrap
-msgid "stop nova-scheduler"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:100(userinput)
-#, no-wrap
-msgid "stop nova-vncproxy"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:101(userinput)
-#, no-wrap
-msgid "stop nova-volume"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-minimum-configuration.xml:104(userinput)
-#, no-wrap
-msgid "for svc in api objectstore compute network volume scheduler cert; do sudo service openstack-nova-$svc stop ; sudo chkconfig openstack-nova-$svc on ;  done"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-network-planning.xml:5(title)
@@ -3515,45 +2379,20 @@ msgstr ""
 msgid "Create tenants first. Here is an example set."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:11(literallayout)
-#, no-wrap
-msgid "ADMIN_TENANT=$(get_id keystone tenant-create --name=admin)\n    SERVICE_TENANT=$(get_id keystone tenant-create --name=$SERVICE_TENANT_NAME)\n    DEMO_TENANT=$(get_id keystone tenant-create --name=demo)\n    INVIS_TENANT=$(get_id keystone tenant-create --name=invisible_to_admin)"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:15(para)
 msgid "Next, create users."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:16(literallayout)
-#, no-wrap
-msgid "ADMIN_USER=$(get_id keystone user-create --name=admin \\\n    --pass=\"$ADMIN_PASSWORD\" \\\n    --email=admin@example.com)\n    DEMO_USER=$(get_id keystone user-create --name=demo \\\n    --pass=\"$ADMIN_PASSWORD\" \\\n    --email=demo@example.com)"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:22(para)
 msgid "Here are some roles to create."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:23(literallayout)
-#, no-wrap
-msgid "ADMIN_ROLE=$(get_id keystone role-create --name=admin)\n    KEYSTONEADMIN_ROLE=$(get_id keystone role-create --name=KeystoneAdmin)\n    KEYSTONESERVICE_ROLE=$(get_id keystone role-create --name=KeystoneServiceAdmin)\n    SYSADMIN_ROLE=$(get_id keystone role-create --name=sysadmin)\n    NETADMIN_ROLE=$(get_id keystone role-create --name=netadmin)"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:28(para)
 msgid "Add Roles to Users in Tenants"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:29(literallayout)
-#, no-wrap
-msgid "keystone user-role-add --user $ADMIN_USER --role $ADMIN_ROLE --tenant_id $ADMIN_TENANT\n    keystone user-role-add --user $ADMIN_USER --role $ADMIN_ROLE --tenant_id $DEMO_TENANT\n    keystone user-role-add --user $DEMO_USER --role $SYSADMIN_ROLE --tenant_id $DEMO_TENANT\n    keystone user-role-add --user $DEMO_USER --role $NETADMIN_ROLE --tenant_id $DEMO_TENANT\n    keystone user-role-add --user $ADMIN_USER --role $KEYSTONEADMIN_ROLE --tenant_id $ADMIN_TENANT\n    keystone user-role-add --user $ADMIN_USER --role $KEYSTONESERVICE_ROLE --tenant_id $ADMIN_TENANT\n    "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:36(para)
 msgid "Also, the Member role is used by Horizon and Swift so we need to continue creating it:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:37(literallayout)
-#, no-wrap
-msgid "MEMBER_ROLE=$(get_id keystone role-create --name=Member)\n    keystone user-role-add --user $DEMO_USER --role $MEMBER_ROLE --tenant_id $DEMO_TENANT\n    keystone user-role-add --user $DEMO_USER --role $MEMBER_ROLE --tenant_id $INVIS_TENANT"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:42(title)
@@ -3566,11 +2405,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:45(para)
 msgid "First add all the services you want to have the Identity service connected with. Here's an example using all the available services in this example."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:49(literallayout)
-#, no-wrap
-msgid "keystone service-create --name=keystone \\\n                        --type=identity \\\n                        --description=\"Keystone Identity Service\"\n\nkeystone service-create --name=nova \\\n                        --type=compute \\\n                        --description=\"Nova Compute Service\"\nNOVA_USER=$(get_id keystone user-create --name=nova \\\n                                        --pass=\"$SERVICE_PASSWORD\" \\\n                                        --tenant_id $SERVICE_TENANT \\\n                                        --email=nova@example.com)\nkeystone user-role-add --tenant_id $SERVICE_TENANT \\\n                       --user $NOVA_USER \\\n                       --role $ADMIN_ROLE\n\nkeystone service-create --name=ec2 \\\n                        --type=ec2 \\\n                        --description=\"EC2 Compatibility Layer\"\n\nkeystone service-create --name=glance \\\n                        --type=image \\\n                        --description=\"Glance Image Service\"\nGLANCE_USER=$(get_id keystone user-create --name=glance \\\n                                          --pass=\"$SERVICE_PASSWORD\" \\\n                                          --tenant_id $SERVICE_TENANT \\\n                                          --email=glance@example.com)\nkeystone user-role-add --tenant_id $SERVICE_TENANT \\\n                       --user $GLANCE_USER \\\n                       --role $ADMIN_ROLE"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/identity-config-keystone.xml:78(para)
@@ -3601,40 +2435,20 @@ msgstr ""
 msgid "Create a directory called <filename>stackimages</filename> to house your image files:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:29(userinput)
-#, no-wrap
-msgid "mkdir stackimages"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:31(para)
 msgid "Download the CirrOS image into your <filename>stackimages</filename> directory."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:33(userinput)
-#, no-wrap
-msgid "wget -c https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img -O stackimages/cirros.img"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:35(para)
-msgid "Verify that your <command>glance</command> client can access the Image service by requesting a list of installed images:<screen><prompt>$</prompt> <userinput>glance index</userinput>\n<computeroutput>ID                                   Name                           Disk Format          Container Format     Size          \n------------------------------------ ------------------------------ -------------------- -------------------- --------------\n</computeroutput></screen>"
+msgid "Verify that your <placeholder-1/> client can access the Image service by requesting a list of installed images:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:41(para)
-msgid "If you get the following error, make sure that the environment variables set in <filename>~/openrc</filename><screen><computeroutput>Failed to show index. Got error:\nYou are not authenticated.\nDetails: 401 Unauthorized\n\nThis server could not verify that you are authorized to access the document you requested. Either you supplied the wrong credentials (e.g., bad password), or your browser does not understand how to supply the credentials required.\n\n Authentication required  </computeroutput></screen>"
+msgid "If you get the following error, make sure that the environment variables set in <filename>~/openrc</filename><placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:50(para)
-msgid "Add the CirrOS image to the Image service using the <command>glance add</command> command, passing the image file through standard input:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:53(userinput)
-#, no-wrap
-msgid "glance add name=cirros-0.3.0-x86_64 disk_format=qcow2 container_format=bare &lt; stackimages/cirros.img"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:54(computeroutput)
-#, no-wrap
-msgid "Added new image with ID: f4addd24-4e8a-46bb-b15d-fae2591f1a35"
+msgid "Add the CirrOS image to the Image service using the <placeholder-1/> command, passing the image file through standard input:"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:58(para)
@@ -3654,7 +2468,7 @@ msgid "disk_format=qcow2"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:74(para)
-msgid "The <literal>disk_format</literal> field specifies the format of the image file. In this case, the image file format is QCOW2, which can be verified using the <command>file</command> command:<screen><prompt>$</prompt> <userinput>file <userinput>stackimages/cirros.img</userinput>\n<computeroutput>stackimages/cirros.img: QEMU QCOW Image (v2), 41126400 bytes</computeroutput></userinput></screen>"
+msgid "The <literal>disk_format</literal> field specifies the format of the image file. In this case, the image file format is QCOW2, which can be verified using the <placeholder-1/> command:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:79(para)
@@ -3666,7 +2480,7 @@ msgid "container_format=bare"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:88(para)
-msgid "The <literal>container_format</literal> field is required by the <command>glance add</command> command but isn't actually used by any of the OpenStack services, so the value specified here has no effect on system behavior. We specify <literal>bare</literal> to indicate that the image file is not in a file format that contains metadata about the virtual machine."
+msgid "The <literal>container_format</literal> field is required by the <placeholder-1/> command but isn't actually used by any of the OpenStack services, so the value specified here has no effect on system behavior. We specify <literal>bare</literal> to indicate that the image file is not in a file format that contains metadata about the virtual machine."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:94(para)
@@ -3674,11 +2488,11 @@ msgid "Because the value is not used anywhere, it safe to always specify <litera
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:62(para)
-msgid "The rationale for the arguments is:<placeholder-1/>Confirm it was uploaded by listing the images in the Image service:<screen><prompt>$</prompt> <userinput>glance index</userinput>\n<computeroutput>ID                                   Name                           Disk Format          Container Format     Size          \n------------------------------------ ------------------------------ -------------------- -------------------- --------------\nf4addd24-4e8a-46bb-b15d-fae2591f1a35 cirros-0.3.0-x86_64            qcow2                bare                        9761280</computeroutput></screen>"
+msgid "The rationale for the arguments is:<placeholder-1/>Confirm it was uploaded by listing the images in the Image service:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_images-uploading.xml:105(para)
-msgid "The <command>nova image-list</command> command will also list the images in the Image service:<screen><prompt>$</prompt> <userinput>nova image-list</userinput>\n<computeroutput>+--------------------------------------+----------------------------------------+--------+--------------------------------------+\n|                  ID                  |                  Name                  | Status |                Server                |\n+--------------------------------------+----------------------------------------+--------+--------------------------------------+\n| f4addd24-4e8a-46bb-b15d-fae2591f1a35 | cirros-0.3.0-x86_64                    | ACTIVE |                                      |\n+--------------------------------------+----------------------------------------+--------+--------------------------------------+</computeroutput></screen>"
+msgid "The <placeholder-1/> command will also list the images in the Image service:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/determining-version-of-compute.xml:6(title)
@@ -3709,22 +2523,12 @@ msgstr ""
 msgid "Download DevStack:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:23(literallayout)
-#, no-wrap
-msgid "git clone git://github.com/cloudbuilders/devstack.git"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:24(para)
 msgid "The devstack repo contains a script that installs OpenStack Compute with the Image Service and the Identity Service and OpenStack Object Storage. It offers templates for configuration files plus data scripts."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:32(para)
 msgid "Start the install:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:32(literallayout)
-#, no-wrap
-msgid "cd devstack; ./stack.sh"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:32(para)
@@ -3751,11 +2555,6 @@ msgstr ""
 msgid "Download the upstart scripts:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:53(literallayout)
-#, no-wrap
-msgid "git clone git://github.com/maoy/devstack/tree/upstart.git"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:54(para)
 msgid "The devstack repo contains a script that installs OpenStack Compute, the Image Service and the Identity Service and offers templates for configuration files plus data scripts."
 msgstr ""
@@ -3764,18 +2563,8 @@ msgstr ""
 msgid "Run the upstart install script."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:58(literallayout)
-#, no-wrap
-msgid "./upstart.sh install"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:60(para)
 msgid "Now the services are installed. To use them, either reboot to get rid of the services started by stack.sh, and automatically start those services, or do killall screen, then:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-scripted-ubuntu-install.xml:63(literallayout)
-#, no-wrap
-msgid "./upstart.sh start"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-db-sync.xml:5(title)
@@ -3786,27 +2575,12 @@ msgstr ""
 msgid "Create the tables in your backend data store by running the following command:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/compute-db-sync.xml:8(literallayout)
-#, no-wrap
-msgid "sudo nova-manage db sync"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/compute-db-sync.xml:9(para)
 msgid "If you see any response, you can look in /var/log/nova/nova-manage.log to see the problem. No response means the command completed correctly and your nova database is now populated."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-db-sync.xml:14(para)
 msgid "Restart all services in total, just to cover the entire spectrum:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-db-sync.xml:17(screen)
-#, no-wrap
-msgid "sudo start nova-api\nsudo start nova-compute\nsudo start nova-network\nsudo start nova-scheduler\nsudo start nova-vncproxy\nsudo start nova-volume\nsudo start libvirt-bin\nsudo /etc/init.d/rabbitmq-server restart "
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/compute-db-sync.xml:27(userinput)
-#, no-wrap
-msgid "for svc in api objectstore compute network volume scheduler cert; do sudo service openstack-nova-$svc start ; sudo chkconfig openstack-nova-$svc on ;  done"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/compute-db-sync.xml:29(para)
@@ -3934,11 +2708,11 @@ msgid "In the Linux world, a service (also known as a daemon) refers to a single
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_terminology.xml:142(para)
-msgid "OpenStack services are implemented by multiple Linux services. For example, <command>nova-compute</command> and <command>nova-scheduler</command> are two of the Linux services that implement the Compute service. OpenStack also depends on several third-party services, such as a database (typically MySQL) and a message broker (typically RabbitMQ or Qpid)."
+msgid "OpenStack services are implemented by multiple Linux services. For example, <placeholder-1/> and <placeholder-2/> are two of the Linux services that implement the Compute service. OpenStack also depends on several third-party services, such as a database (typically MySQL) and a message broker (typically RabbitMQ or Qpid)."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_terminology.xml:149(para)
-msgid "In this document, we generally use the term \"service\" to refer both to lower-level Linux services and higher-level OpenStack services. It should be clear from the context whether we are referring to a high-level OpenStack service (e.g., Image), or a low-level Linux service (e.g., <command>glance-api</command>)."
+msgid "In this document, we generally use the term \"service\" to refer both to lower-level Linux services and higher-level OpenStack services. It should be clear from the context whether we are referring to a high-level OpenStack service (e.g., Image), or a low-level Linux service (e.g., <placeholder-1/>)."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_terminology.xml:157(title)
@@ -4025,11 +2799,6 @@ msgstr ""
 msgid "Paste the following line into the newly created rcb-sources.list file. The options are maverick (10.11), natty (11.04), or oneiric (11.10) for the operating system and diablo-d5 or diablo-final for the related release text:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/preconfig-rcb-packages.xml:26(literallayout)
-#, no-wrap
-msgid "deb http://ops.rcb.me/packages oneiric diablo-final"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/installing-ntp.xml:6(title)
 msgid "Installing Network Time Protocol (NTP)"
 msgstr ""
@@ -4038,47 +2807,12 @@ msgstr ""
 msgid "To keep all the services in sync across multiple machines, you need to install NTP, and if you do a multi-node configuration you will configure one server to be the reference server."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/installing-ntp.xml:11(userinput)
-#, no-wrap
-msgid "<placeholder-1/> sudo apt-get install -y ntp"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/installing-ntp.xml:12(userinput)
-#, no-wrap
-msgid "sudo yum install -y ntp"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/installing-ntp.xml:13(para)
 msgid "Set up the NTP server on your controller node so that it receives data by modifying the <filename>ntp.conf</filename> file and restarting the service. As root:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/installing-ntp.xml:16(userinput)
-#, no-wrap
-msgid "sed -i 's/server ntp.ubuntu.com/server ntp.ubuntu.com\\nserver 127.127.1.0\\nfudge 127.127.1.0 stratum 10/g' /etc/ntp.conf"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/installing-ntp.xml:17(userinput)
-#, no-wrap
-msgid "service ntp restart"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/installing-ntp.xml:18(userinput)
-#, no-wrap
-msgid "sudo service ntpd start"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/installing-ntp.xml:19(userinput)
-#, no-wrap
-msgid "sudo chkconfig ntpd on"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/installing-ntp.xml:20(para)
 msgid "Set up the NTP client on your compute node so that the time between controller node and compute node is synchronized. Do the following as a cron job on compute node."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/installing-ntp.xml:23(programlisting)
-#, no-wrap
-msgid "ntpdate 'controllernode ip'\nhwclock -w"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:9(title)
@@ -4089,27 +2823,12 @@ msgstr ""
 msgid "Install the Image service, as root:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:12(userinput)
-#, no-wrap
-msgid "apt-get install glance"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:13(userinput)
-#, no-wrap
-msgid "sudo yum  install openstack-nova-essex openstack-glance-essex"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:14(para)
 msgid "After installing, you need to delete the sqlite database it creates, then change the configuration to point to the MySQL database."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:16(para)
 msgid "Delete the <filename>glance.sqlite</filename> file created in the <filename>/var/lib/glance/</filename> directory."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:18(userinput)
-#, no-wrap
-msgid "rm /var/lib/glance/glance.sqlite"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:19(title)
@@ -4132,22 +2851,12 @@ msgstr ""
 msgid "To configure the MySQL database, create the glance database."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:23(userinput)
-#, no-wrap
-msgid "CREATE DATABASE glance;"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:24(para)
 msgid "Create a MySQL user for the newly-created glance database that has full control of the database."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:25(replaceable)
 msgid "[YOUR_GLANCEDB_PASSWORD]"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:25(userinput)
-#, no-wrap
-msgid "GRANT ALL ON glance.* TO 'glance'@'%' IDENTIFIED BY '<placeholder-1/>';"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:26(para)
@@ -4162,27 +2871,12 @@ msgstr ""
 msgid "Update <filename>/etc/glance/glance-api-paste.ini</filename> and configure the <literal>admin_<replaceable>*</replaceable></literal> values under <literal>[filter:authtoken]</literal>."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:32(screen) ./doc/src/docbkx/openstack-install/install-config-glance.xml:51(screen)
-#, no-wrap
-msgid "[filter:authtoken]\nadmin_tenant_name = service\nadmin_user = glance\nadmin_password = glance"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:36(para)
 msgid "Add this to the end of <filename>/etc/glance/glance-api.conf</filename>."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:37(screen) ./doc/src/docbkx/openstack-install/install-config-glance.xml:44(screen)
-#, no-wrap
-msgid "[paste_deploy]\nflavor = keystone"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:40(para)
 msgid "Restart glance-api to pick up these changed settings."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:41(screen) ./doc/src/docbkx/openstack-install/install-config-glance.xml:73(userinput)
-#, no-wrap
-msgid "service glance-api restart"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:43(para)
@@ -4197,16 +2891,6 @@ msgstr ""
 msgid "Ensure that the glance-registry pipeline section includes authtoken:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:56(screen)
-#, no-wrap
-msgid "[pipeline:glance-registry]\n#pipeline = context registryapp\n# NOTE: use the following pipeline for keystone\npipeline = authtoken auth-context context registryapp"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:62(programlisting)
-#, no-wrap
-msgid "sql_connection = mysql://glance:yourpassword@192.168.206.130/glance"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:60(para)
 msgid "Ensure that <filename>/etc/glance/glance-registry.conf</filename> points to the MySQL database rather than sqlite.<placeholder-1/>"
 msgstr ""
@@ -4216,20 +2900,15 @@ msgid "Any time you change the .conf files, restart the corresponding service."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:65(para)
-msgid "On Ubuntu 12.04, the database tables are under version control and you must do these steps on a new install to prevent the Image service from breaking possible upgrades, as root: <screen><prompt>#</prompt> <userinput>glance-manage version_control 0</userinput></screen>"
+msgid "On Ubuntu 12.04, the database tables are under version control and you must do these steps on a new install to prevent the Image service from breaking possible upgrades, as root: <placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:69(para)
-msgid "Now you can populate or migrate the database. <screen><prompt>#</prompt> <userinput>glance-manage db_sync</userinput></screen>"
+msgid "Now you can populate or migrate the database. <placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:71(para)
 msgid "Restart glance-registry and glance-api services, as root:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/install-config-glance.xml:72(userinput)
-#, no-wrap
-msgid "service glance-registry restart"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/install-config-glance.xml:74(para)
@@ -4249,11 +2928,11 @@ msgid "The Compute service uses the concept of security groups to control what n
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:14(para)
-msgid "Security groups can be listed by the <command>nova secgroup-list</command> command.<screen><prompt>$</prompt> <userinput>nova secgroup-list</userinput><computeroutput>\n+---------+-------------+\n|   Name  | Description |\n+---------+-------------+\n| default | default     |\n+---------+-------------+</computeroutput></screen>"
+msgid "Security groups can be listed by the <placeholder-1/> command.<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:21(para)
-msgid "In this example, we will use the nova <command>secgroup-add-rule</command> command to enable access to TCP port 22 (so we can SSH to instances) Allow access to port 22 from all IP addresses (specified in CIDR notation as <literal>0.0.0.0/0</literal>) with the following command:<screen><prompt>$</prompt> <userinput>nova secgroup-add-rule default tcp 22 22 0.0.0.0/0</userinput></screen>"
+msgid "In this example, we will use the nova <placeholder-1/> command to enable access to TCP port 22 (so we can SSH to instances) Allow access to port 22 from all IP addresses (specified in CIDR notation as <literal>0.0.0.0/0</literal>) with the following command:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:25(para)
@@ -4264,25 +2943,20 @@ msgstr ""
 msgid "To be able to ping virtual machine instances, you must specify a rule to allow ICMP traffic. When specifying ICMP rules, instead of specifying a begin and end port, you specify a pemitted ICMP code and ICMP type. You can also specify <literal>-1</literal> for the code to enable all codes and <literal>-1</literal> for the type to enable all ICMP types. Allow access to all codes and types of ICMP traffic from all IP addresses with the following command:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:37(userinput)
-#, no-wrap
-msgid "nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:41(title)
 msgid "Adding a keypair"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:42(para)
-msgid "The Compute service can inject an SSH public key into an account on the instance, assuming the virtual machine image being used supports this. To add a keypair to the Compute service, use the <command>nova keypair-add</command> command. This command can be used to either generate a new keypair, or to upload an existing public key. The following example uploads an existing public key, located at <filename>~/.ssh/id_rsa.pub</filename>, and gives the keypair the name <literal>mykey</literal>.<screen><prompt>$</prompt> nova keypair-add --pub_key ~/.ssh/id_rsa.pub mykey</screen>"
+msgid "The Compute service can inject an SSH public key into an account on the instance, assuming the virtual machine image being used supports this. To add a keypair to the Compute service, use the <placeholder-1/> command. This command can be used to either generate a new keypair, or to upload an existing public key. The following example uploads an existing public key, located at <filename>~/.ssh/id_rsa.pub</filename>, and gives the keypair the name <literal>mykey</literal>.<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:49(para)
-msgid "List the keypairs by doing:<screen><prompt>$</prompt> <userinput>nova keypair-list</userinput>\n<computeroutput>+-------+-------------------------------------------------+\n|  Name |                   Fingerprint                   |\n| mykey | c3:d2:b5:d3:ec:4a:29:b0:22:32:6e:34:dd:91:f9:cf |\n+-------+-------------------------------------------------+</computeroutput></screen>"
+msgid "List the keypairs by doing:<placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:55(para)
-msgid "Confirm that the uploaded keypair matches your local key by checking your key's fingerprint with the <command>ssh-keygen</command> command:<screen><prompt>$</prompt> <userinput>ssh-keygen -l -f ~/.ssh/id_rsa.pub</userinput>\n<computeroutput>2048 c3:d2:b5:d3:ec:4a:29:b0:22:32:6e:34:dd:91:f9:cf /home/myaccount/.ssh/id_rsa.pub (RSA)</computeroutput></screen>"
+msgid "Confirm that the uploaded keypair matches your local key by checking your key's fingerprint with the <placeholder-1/> command:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:61(title)
@@ -4294,7 +2968,7 @@ msgid "nova-api"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:67(para)
-msgid "The <systemitem class=\"service\">nova-api</systemitem> service must be running to respond to the request to boot an instance, as well as to serve as the metadata server so that the instance can retrieve the public key uploaded i a previous section. If the <command>nova</command> commands in the previous section succeeded, then the service is running."
+msgid "The <systemitem class=\"service\">nova-api</systemitem> service must be running to respond to the request to boot an instance, as well as to serve as the metadata server so that the instance can retrieve the public key uploaded i a previous section. If the <placeholder-1/> commands in the previous section succeeded, then the service is running."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:76(systemitem)
@@ -4318,15 +2992,15 @@ msgid "Before trying to start an instance, confirm that all of the necessary ser
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:103(para)
-msgid "The <command>nova-manage service list</command> command does not indicate whether the <systemitem class=\"service\">nova-api</systemitem> service is running."
+msgid "The <placeholder-1/> command does not indicate whether the <systemitem class=\"service\">nova-api</systemitem> service is running."
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:101(para)
-msgid "The <command>nova-manage service list</command> command can be used to confirm that these services are running properly.<placeholder-1/>"
+msgid "The <placeholder-1/> command can be used to confirm that these services are running properly.<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:107(para)
-msgid "As root:<screen><prompt>#</prompt> <userinput>nova-manage service list</userinput>\n<computeroutput>Binary           Host                               Zone             Status     State Updated_At\nnova-compute     myhost-1                            nova             enabled    :-)   2012-05-27 12:36:35\nnova-network     myhost-1                            nova             enabled    :-)   2012-05-27 12:36:28\nnova-scheduler   myhost-1                            nova             enabled    :-)   2012-05-27 12:36:33</computeroutput></screen>"
+msgid "As root:<placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:113(para)
@@ -4338,41 +3012,35 @@ msgid "Starting an instance"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:119(para)
-msgid "To start an instance, we need to specify a <emphasis role=\"italic\">flavor</emphasis>, also known as an <emphasis role=\"italic\">instance type</emphasis>, which indicates the size of an instance. Use the <command>nova flavor-list</command> command to view the list of available flavors:<screen><prompt>$</prompt> <userinput>nova flavor-list</userinput>\n<computeroutput>+----+-----------+-----------+------+-----------+------+-------+-------------+\n| ID |    Name   | Memory_MB | Disk | Ephemeral | Swap | VCPUs | RXTX_Factor |\n+----+-----------+-----------+------+-----------+------+-------+-------------+\n| 1  | m1.tiny   | 512       | 0    | 0         |      | 1     | 1.0         |\n| 2  | m1.small  | 2048      | 15   | 15        |      | 1     | 1.0         |\n| 3  | m1.medium | 4096      | 25   | 25        |      | 2     | 1.0         |\n| 4  | m1.large  | 8192      | 45   | 45        |      | 4     | 1.0         |\n| 5  | m1.xlarge | 16384     | 85   | 85        |      | 8     | 1.0         |\n+----+-----------+-----------+------+-----------+------+-------+-------------+</computeroutput></screen>"
+msgid "To start an instance, we need to specify a <emphasis role=\"italic\">flavor</emphasis>, also known as an <emphasis role=\"italic\">instance type</emphasis>, which indicates the size of an instance. Use the <placeholder-1/> command to view the list of available flavors:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:133(para)
-msgid "We also need to specify the image. Use the <command>nova image-list</command> to retrieve the ID of the CirrOS image.<screen><prompt>$</prompt> <userinput>nova image-list</userinput>\n<computeroutput>+--------------------------------------+----------------------------------------+--------+--------------------------------------+\n|                  ID                  |                  Name                  | Status |                Server                |\n+--------------------------------------+----------------------------------------+--------+--------------------------------------+\n| f4addd24-4e8a-46bb-b15d-fae2591f1a35 | cirros-0.3.0-x86_64                    | ACTIVE |                                      |\n+--------------------------------------+----------------------------------------+--------+--------------------------------------+</computeroutput></screen>"
+msgid "We also need to specify the image. Use the <placeholder-1/> to retrieve the ID of the CirrOS image.<placeholder-2/>"
+msgstr ""
+
+#: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:148(replaceable)
+msgid "f4addd24-4e8a-46bb-b15d-fae2591f1a35"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:141(para)
-msgid "Use the <literal>nova boot</literal> command to launch a new virtual machine instance. We'll use an <literal>m1.small</literal> instance in this example, using the CirrOS image, and the <literal>mykey</literal> keypair we added. We also need to give this virtual machine instance a name, we'll call it <literal>cirros</literal>. We will explicitly specify the <literal>default</literal> security group in this example, although this isn't strictly necessary since the <literal>default</literal> group will be used if no security group is specified.<screen><prompt>$</prompt> <userinput>nova boot --flavor 2 --image <replaceable>f4addd24-4e8a-46bb-b15d-fae2591f1a35</replaceable> --key_name mykey --security_group default cirros</userinput>\n<computeroutput>+-------------------------------------+----------------------------------------------------------+\n|               Property              |                          Value                           |\n+-------------------------------------+----------------------------------------------------------+\n| OS-DCF:diskConfig                   | MANUAL                                                   |\n| OS-EXT-SRV-ATTR:host                | host-1                                                   |\n| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                     |\n| OS-EXT-SRV-ATTR:instance_name       | instance-00000001                                        |\n| OS-EXT-STS:power_state              | 0                                                        |\n| OS-EXT-STS:task_state               | scheduling                                               |\n| OS-EXT-STS:vm_state                 | building                                                 |\n| accessIPv4                          |                                                          |\n| accessIPv6                          |                                                          |\n| adminPass                           | RG3W2bpZDbCo                                             |\n| config_drive                        |                                                          |\n| created                             | 2012-05-27T13:00:33Z                                     |\n| flavor                              | m1.small                                                 |\n| hostId                              | a2fd457e034c030506bac5c790c38d9519ea7a03b6861474a712c6b7 |\n| id                                  | c6bbbf26-b40a-47e7-8d5c-eb17bf65c485                     |\n| image                               | cirros-0.3.0-x86_64                                      |\n| key_name                            | mykey                                                    |\n| metadata                            | {}                                                       |\n| name                                | cirros                                                   |\n| progress                            | 0                                                        |\n| status                              | BUILD                                                    |\n| tenant_id                           | b5815b046cfe47bb891a7b64119e7f80                         |\n| updated                             | 2012-05-27T13:00:33Z                                     |\n| user_id                             | a4c2d43f80a549a19864c89d759bb3fe                         |\n+-------------------------------------+----------------------------------------------------------+</computeroutput></screen>"
+msgid "Use the <literal>nova boot</literal> command to launch a new virtual machine instance. We'll use an <literal>m1.small</literal> instance in this example, using the CirrOS image, and the <literal>mykey</literal> keypair we added. We also need to give this virtual machine instance a name, we'll call it <literal>cirros</literal>. We will explicitly specify the <literal>default</literal> security group in this example, although this isn't strictly necessary since the <literal>default</literal> group will be used if no security group is specified.<placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:177(para)
-msgid "Check the progress of the instance with the <command>nova list</command> command. When the instance has booted, the command output will look something like:<screen><prompt>$</prompt> <userinput>nova list</userinput>\n+--------------------------------------+-----------------------+--------+------------------------------------------+\n|                  ID                  |          Name         | Status |                 Networks                 |\n+--------------------------------------+-----------------------+--------+------------------------------------------+\n| c6bbbf26-b40a-47e7-8d5c-eb17bf65c485 | cirros                | ACTIVE | private=192.168.100.5                    |\n+--------------------------------------+-----------------------+--------+------------------------------------------+</screen>"
+msgid "Check the progress of the instance with the <placeholder-1/> command. When the instance has booted, the command output will look something like:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:185(para)
-msgid "You can view the boot messages of the instances using the <command>nova console-log</command> command:<screen><prompt>$</prompt> <userinput>nova console-log</userinput>\n<computeroutput>...\nStarting network...\nudhcpc (v1.18.5) started\nSending discover...\nSending select for 192.168.100.5...\nLease of 192.168.100.5 obtained, lease time 120\ndeleting routers\nroute: SIOCDELRT: No such process\nadding dns 192.168.100.4\ncloud-setup: checking http://169.254.169.254/2009-04-04/meta-data/instance-id\ncloud-setup: successful after 1/30 tries: up 1.45. iid=i-00000001\nStarting dropbear sshd: generating rsa key... generating dsa key... OK\n===== cloud-final: system completely up in 1.77 seconds ====\n  instance-id: i-00000001\n  public-ipv4: \n  local-ipv4 : 192.168.100.5\ncloud-userdata: user data not a script\n  ____               ____  ____\n / __/ __ ____ ____ / __ \\/ __/\n/ /__ / // __// __// /_/ /\\ \\ \n\\___//_//_/  /_/   \\____/___/ \n http://launchpad.net/cirros\n\n\nlogin as 'cirros' user. default password: 'cubswin:)'. use 'sudo' for root.\ncirros login: </computeroutput></screen>"
+msgid "You can view the boot messages of the instances using the <placeholder-1/> command:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:214(para)
 msgid "You should be able to ping your instance:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:216(userinput)
-#, no-wrap
-msgid "ping -c5 192.168.100.5"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:217(computeroutput)
-#, no-wrap
-msgid "PING 192.168.100.5 (192.168.100.5) 56(84) bytes of data.\n64 bytes from 192.168.100.5: icmp_req=1 ttl=64 time=0.270 ms\n64 bytes from 192.168.100.5: icmp_req=2 ttl=64 time=0.228 ms\n64 bytes from 192.168.100.5: icmp_req=3 ttl=64 time=0.244 ms\n64 bytes from 192.168.100.5: icmp_req=4 ttl=64 time=0.203 ms\n64 bytes from 192.168.100.5: icmp_req=5 ttl=64 time=0.210 ms\n\n--- 192.168.100.5 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 3999ms\nrtt min/avg/max/mdev = 0.203/0.231/0.270/0.024 ms"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:228(para)
-msgid "You should be able to ssh to your instance as the <literal>cirros</literal> user, using either the ssh keypair you uploaded or using the password <literal>cubswin:)</literal><screen>$ ssh cirros@192.168.100.5\n<computeroutput>The authenticity of host '192.168.100.5 (192.168.100.5)' can't be established.\nRSA key fingerprint is c2:0a:95:d4:e7:e1:a6:a2:6a:99:4d:b8:f9:66:13:64.</computeroutput>\n<prompt>Are you sure you want to continue connecting (yes/no)?</prompt> <userinput>yes</userinput>\n<computeroutput>Warning: Permanently added '192.168.100.5' (RSA) to the list of known hosts.</computeroutput>\n<prompt>cirros@192.168.100.5's password: </prompt><userinput>cubswin:)</userinput>\n<prompt>$</prompt></screen>"
+msgid "You should be able to ssh to your instance as the <literal>cirros</literal> user, using either the ssh keypair you uploaded or using the password <literal>cubswin:)</literal><placeholder-1/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:239(title)
@@ -4380,7 +3048,7 @@ msgid "Bringing down an instance"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/ch_instances-running.xml:240(para)
-msgid "Bring down your instance using the <command>nova delete</command> command:<screen><prompt>$</prompt> <userinput>nova delete c6bbbf26-b40a-47e7-8d5c-eb17bf65c485</userinput></screen>"
+msgid "Bring down your instance using the <placeholder-1/> command:<placeholder-2/>"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:7(title)
@@ -4395,60 +3063,20 @@ msgstr ""
 msgid "First, export the swift admin password (setup previously) in a variable so it can be re-used."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:13(userinput)
-#, no-wrap
-msgid "export ADMINPASS=secretword"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:15(para)
 msgid "If you do not wish to have the swift admin password stored in your shell's history, you may perform the following:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:17(userinput)
-#, no-wrap
-msgid "export SWIFT_PROXY_CONF=\"/etc/swift/proxy-server.conf export ADMINPASS=$( grep super_admin_key ${SWIFT_PROXY_CONF} | awk '{ print $NF }' )"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:22(para)
 msgid "Run the swift CLI, swift, with the correct Identity service URL. Export the information for ADMINPASS using <code>$ export ADMINPASS=secretword</code>."
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:27(userinput)
-#, no-wrap
-msgid "swift -V 2.0 -A http://&lt;AUTH_HOSTNAME&gt;:5000/v2.0 -U openstackDemo:adminUser -K $ADMINPASS stat"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:33(userinput)
-#, no-wrap
-msgid "curl -k -v -H 'X-Storage-User: openstackDemo:adminUser' -H 'X-Storage-Pass: $ADMINPASS' http://&lt;AUTH_HOSTNAME&gt;:5000/auth/v1.0"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:39(userinput)
-#, no-wrap
-msgid "curl -k -v -H 'X-Auth-Token: &lt;token-from-x-auth-token-above&gt;' &lt;url-from-x-storage-url-above&gt;"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:43(para)
 msgid "Use swift to upload a few files named ‘bigfile[1-2].tgz’ to a container named ‘myfiles’:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:48(userinput)
-#, no-wrap
-msgid "swift -A http://&lt;AUTH_HOSTNAME&gt;:5000/v2.0 -U openstackDemo:adminUser -K $ADMINPASS upload myfiles bigfile1.tgz"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:49(userinput)
-#, no-wrap
-msgid "swift -A http://&lt;AUTH_HOSTNAME&gt;:5000/v2.0 -U openstackDemo:adminUser -K $ADMINPASS upload myfiles bigfile2.tgz"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:53(para)
 msgid "Use swift to download all files from the ‘myfiles’ container:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:56(userinput)
-#, no-wrap
-msgid "swift -A http://&lt;AUTH_HOSTNAME&gt;:5000/v2.0 -U openstackDemo:adminUser -K $ADMINPASS download myfiles"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-install/object-storage-verifying-install.xml:62(para)

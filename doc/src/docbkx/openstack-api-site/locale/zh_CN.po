@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenStack Manuals\n"
-"POT-Creation-Date: 2012-06-18 17:13+0800\n"
+"POT-Creation-Date: 2012-07-16 10:36+0800\n"
 "PO-Revision-Date: 2012-06-20 03:37+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/openstack-manuals-i18n/language/zh_CN/)\n"
@@ -13,19 +13,19 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml10(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml10(title)
 msgid "OpenStack APIs"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml12(year)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml12(year)
 msgid "2010-2012"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml19(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml19(title)
 msgid "OpenStack API Reference"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml21(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml21(para)
 msgid ""
 "The OpenStack system has several key projects that are separate "
 "installations but can work together depending on your cloud needs: OpenStack"
@@ -33,7 +33,7 @@ msgid ""
 "OpenStack Image Service."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml26(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml26(para)
 msgid ""
 "This page covers the basics for working with your OpenStack cloud through "
 "the Compute API and Image API after authorizing with the Identity Service "
@@ -45,21 +45,21 @@ msgid ""
 "for specifications of each API."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml39(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml39(title)
 msgid "Identity"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml40(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml40(para)
 msgid ""
 "With the Identity API, you obtain a token that lasts 24 hours so you can "
 "gain access to the Compute API. The version of the Identity API is 2.0."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml51(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml51(title)
 msgid "Compute"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml52(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml52(para)
 msgid ""
 "With the Compute API, you launch virtual machines based on the images "
 "uploaded to the system. You can reboot the server when needed, resize it "
@@ -67,11 +67,11 @@ msgid ""
 " started. The v1.1 API is identical to the v2 API."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml62(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml62(title)
 msgid "Compute API Extensions"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml63(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml63(para)
 msgid ""
 "An extension adds capabilities to an API beyond those defined in the core "
 "API. The introduction of new features, MIME types, actions, states, headers,"
@@ -80,238 +80,238 @@ msgid ""
 "are available with a GET request to v1.1/extensions."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml70(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml70(title)
 msgid "Disk Config"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml71(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml71(para)
 msgid "Extends servers and images with a diskConfig attribute."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml77(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml77(title)
 msgid "Server - Extended Create"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml78(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml78(para)
 msgid "Provides extra information when creating a server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml84(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml84(title)
 msgid "Server Rescue"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml85(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml85(para)
 msgid "Rescues and unrescues a server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml91(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml91(title)
 msgid "Server Console Output"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml92(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml92(para)
 msgid "Gets the output from the console log for a server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml98(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml98(title)
 msgid "Server VNC Console"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml99(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml99(para)
 msgid "Accesses a VNC console for a specific server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml105(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml105(title)
 msgid "Extended Instance Status"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml106(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml106(para)
 msgid ""
 "Adds vm_state, task_state, and power_state to detailed server responses."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml112(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml112(title)
 msgid "Extended Server Attributes"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml113(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml113(para)
 msgid "Adds additional metadata to servers detail and show response."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml119(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml119(title)
 msgid "Server Start/Stop"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml120(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml120(para)
 msgid "Starts and stops a server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml126(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml126(title)
 msgid "Server Force Delete/Restore"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml127(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml127(para)
 msgid ""
 "When Nova is deployed with deferred delete on, restores or forces the "
 "deletion of a server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml135(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml135(title)
 msgid "Floating IPs"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml136(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml136(para)
 msgid ""
 "The Floating IPs extension enables assigning and allocation of floating IP "
 "addresses to instances running in an OpenStack cloud."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml145(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml145(title)
 msgid "Floating IP Pools"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml146(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml146(para)
 msgid "Manages groups of Floating IPs."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml152(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml152(title)
 msgid "Floating IP DNS"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml153(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml153(para)
 msgid ""
 "The Floating IP DNS extension provides an interface for managing DNS records"
 " associated with IP addresses allocated by the Floating Ips extension. "
 "Requests are dispatched to a DNS driver selected at startup."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml164(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml164(title)
 msgid "Networks"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml165(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml165(para)
 msgid ""
 "The Networks extension allows you to view and delete networks. It also "
 "provides an action to disassociate a network from a project if you are using"
 " vlan mode."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml175(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml175(title)
 msgid "Scheduler Hints"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml176(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml176(para)
 msgid "Provides information directly to the scheduler when creating a server."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml184(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml184(title)
 msgid "Keypairs"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml185(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml185(para)
 msgid "Generates, imports, and deletes SSH keys.."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml191(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml191(title)
 msgid "Simple Usage"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml192(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml192(para)
 msgid "Reports stats on compute and storage resources."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml198(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml198(title)
 msgid "Security Groups"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml199(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml199(para)
 msgid "Creates, modifies, and deletes security groups and rules."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml205(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml205(title)
 msgid "Cloudpipe"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml206(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml206(para)
 msgid "Manages virtual vpns for projects."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml212(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml212(title)
 msgid "Hosts"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml213(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml213(para)
 msgid "Manages physical hosts."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml219(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml219(title)
 msgid "Flavor Management"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml220(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml220(para)
 msgid "Creates and deletes flavors."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml226(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml226(title)
 msgid "Flavors - Extra Data"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml227(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml227(para)
 msgid ""
 "Allows extra attributes to be returned with flavor objects. This includes "
 "'swap', 'rxtx_factor' and 'OS-FLV-EXT-DATA:ephemeral'."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml236(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml236(title)
 msgid "Host Aggregates"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml237(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml237(para)
 msgid ""
 "Allows the creation and management of host aggregates (such as pools of "
 "compute nodes)."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml243(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml243(title)
 msgid "Virtual Interfaces"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml244(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml244(para)
 msgid "Enables listing of Virtual Interfaces of running instances."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml250(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml250(title)
 msgid "Volume Attachments"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml251(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml251(para)
 msgid ""
 "Enables you to attach volumes created through the volume API to server "
 "instances. You can also list volume attachments for a server instance, get "
 "volume details for a volume attachment, and delete a volume attachment."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml259(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml259(title)
 msgid "Image"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml260(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml260(para)
 msgid ""
 "Loads images for use at launch time by the Compute API. Some cloud "
 "implementations do not expose this API and offer pre-tested images only. You"
 " can also assign metadata to images with this API."
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml269(title)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml269(title)
 msgid "Volume"
 msgstr ""
 
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml270(para)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml270(para)
 msgid ""
 "Allows you to manage volumes and snapshots that can be used with the Compute"
 " API."
 msgstr ""
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
-#: /home/daisy/OpenStack/openstack-manuals-i18n/doc/src/docbkx/openstack-api-site/src/docbkx/index.xml0(None)
+#: ./doc/src/docbkx/openstack-api-site/src/docbkx/index.xml0(None)
 msgid "translator-credits"
 msgstr ""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-10 16:47+0800\n"
+"POT-Creation-Date: 2012-07-16 10:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -353,18 +353,8 @@ msgstr ""
 msgid "First, install python setup tools. For example, on Ubuntu:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:359(literallayout)
-#, no-wrap
-msgid "sudo apt-get install python-setuptools python-dev libxslt1-dev"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:360(para)
 msgid "Then install the client and server packages using setup tools. For example, on Ubuntu:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:361(literallayout)
-#, no-wrap
-msgid "tar xzf python-quantumclient-&lt;version&gt;.tar.gz\ntar xzf quantum-&lt;version&gt;.tar.gz\ncd python-quantumclient-&lt;version&gt;\nsudo python setup.py install\ncd ..\ncd quantum-&lt;version&gt;\nsudo python setup.py install"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:368(para)
@@ -379,18 +369,8 @@ msgstr ""
 msgid "After installing from source, quantum-server will not automatically find a config file unless it is specified as a command-line parameter to the deamon, for example:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:375(literallayout)
-#, no-wrap
-msgid "quantum-server quantum-&lt;version&gt;/etc/quantum.conf"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:376(para)
 msgid "If you wish to run quantum-server with no argument, you can copy the quantum config directory in your source tarball to /etc/quantum . For example: file to /etc/quantum, for example:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:379(literallayout)
-#, no-wrap
-msgid "sudo mkdir /etc/quantum\nsudo cp quantum-&lt;version&gt;/etc/* /etc/quantum"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:383(title)
@@ -409,27 +389,12 @@ msgstr ""
 msgid "First, install dependencies. For example, on Ubuntu:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:392(literallayout)
-#, no-wrap
-msgid "sudo apt-get install python-setuptools python-pip python-virtualenv git gcc python-dev libxslt1-dev"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:393(para)
 msgid "Next, untar the code and install dependencies using pip. On Ubuntu:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:394(literallayout)
-#, no-wrap
-msgid "tar xzf quantum-&lt;version&gt;.tar.gz\ncd quantum-&lt;version&gt;\nsudo pip install -r tools/pip-requires"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:397(para)
 msgid "Then, from within the Quantum source directory, you can run the unit tests to confirm that the dependencies are correctly installed:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:399(literallayout)
-#, no-wrap
-msgid "./run_tests.sh -N"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:400(para)
@@ -444,22 +409,12 @@ msgstr ""
 msgid "When running from source, $QUANTUM_CONF_DIR is the etc/ directory within the Quantum source directory. For example, from the top of the Quantum source directory, run:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:409(literallayout)
-#, no-wrap
-msgid "bin/quantum-server"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:414(title)
 msgid "Selecting a Plugin"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:415(para)
 msgid "The plugin used by the Quantum Service is configured using the plugins.ini found in $QUANTUM_CONF_DIR. By default, Quantum is configured to use a ''FakePlugin'' that will let you make API calls, but does not actually manage any switches. To change to another plugin, edit the following line in the plugins.ini file to point to your plugin of choice:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:420(literallayout)
-#, no-wrap
-msgid "provider = quantum.plugins.SamplePlugin.FakePlugin        "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:421(para)
@@ -502,27 +457,12 @@ msgstr ""
 msgid "If installed from packages, the recommend approach is to use the init script:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:455(literallayout)
-#, no-wrap
-msgid "/etc/init.d/quantum-server start"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:456(para)
 msgid "If installed or running from source, the service can also be invoked directly:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:457(literallayout)
-#, no-wrap
-msgid "quantum-server"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:458(para)
 msgid "A successful start of the Quantum service with default settings will have output that ends with a line similar to. If running from an init script, this output will be in the file /var/log/quantum/quantum-server.log ."
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:461(literallayout)
-#, no-wrap
-msgid "DEBUG [eventlet.wsgi.server] (2094) wsgi starting up on http://0.0.0.0:9696/            "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:462(para)
@@ -533,11 +473,6 @@ msgstr ""
 msgid "To use a non-standard location for quantum.conf, run quantum-server directly and provide it as an argument when running the server:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:468(literallayout)
-#, no-wrap
-msgid "quantum-server /path/to/quantum.conf"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:471(title)
 msgid "Validating the Setup"
 msgstr ""
@@ -546,18 +481,8 @@ msgstr ""
 msgid "You can use the basic Quantum API client CLI to validate your setup. While still running the Quantum service, run the following command from the same host to confirm that the client can communicate with Quantum service API running your plugin:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:476(literallayout)
-#, no-wrap
-msgid "quantum create_net quantum-fake-tenant net1            "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:477(para)
 msgid "This command creates a Quantum network named 'net1' for a non-existent tenant named 'quantum-fake-tenant'. The resulting output should resemble:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:481(literallayout)
-#, no-wrap
-msgid "Created a new Virtual Network with ID: 0a649eca-3764-417c-91a7-eb51291d4bb9\nfor Tenant: quantum-fake-tenant            "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:483(para)
@@ -566,11 +491,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:489(para)
 msgid "To experiment more with basic Quantum API commands, invoke the CLI utility with no arguments to see all available commands:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:493(literallayout)
-#, no-wrap
-msgid "list_nets &lt;tenant-id&gt; [filterspec ...]\ncreate_net &lt;tenant-id&gt; &lt;net-name&gt;\nunplug_iface &lt;tenant-id&gt; &lt;net-id&gt; &lt;port-id&gt;\nplug_iface &lt;tenant-id&gt; &lt;net-id&gt; &lt;port-id&gt; &lt;iface-id&gt;\nupdate_port &lt;tenant-id&gt; &lt;net-id&gt; &lt;port-id&gt; &lt;params&gt;\nshow_port_detail &lt;tenant-id&gt; &lt;net-id&gt; &lt;port-id&gt;\nshow_net &lt;tenant-id&gt; &lt;net-id&gt;\ndelete_port &lt;tenant-id&gt; &lt;net-id&gt; &lt;port-id&gt;\ndelete_net &lt;tenant-id&gt; &lt;net-id&gt;\nlist_nets_detail &lt;tenant-id&gt; [filterspec ...]\nshow_net_detail &lt;tenant-id&gt; &lt;net-id&gt;\nshow_iface &lt;tenant-id&gt; &lt;net-id&gt; &lt;port-id&gt;\nupdate_net &lt;tenant-id&gt; &lt;net-id&gt; &lt;new-name&gt;\nshow_port &lt;tenant-id&gt; &lt;net-id&gt; &lt;port-id&gt;\nlist_ports_detail &lt;tenant-id&gt; &lt;net-id&gt; [filterspec ...]\ncreate_port &lt;tenant-id&gt; &lt;net-id&gt;\nlist_ports &lt;tenant-id&gt; &lt;net-id&gt; [filterspec ...]"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:510(para)
@@ -595,11 +515,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:533(para)
 msgid "To enable the Quantum Manager, your nova-network service must specify the following flag:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:535(literallayout)
-#, no-wrap
-msgid "network_manager=nova.network.quantum.manager.QuantumManager            "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:536(para)
@@ -674,11 +589,6 @@ msgstr ""
 msgid "To create a network using Quantum Manager, run:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:604(literallayout)
-#, no-wrap
-msgid "nova-manage network create --label=public --fixed_range_v4=8.8.8.0/24"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:605(para)
 msgid "When this command is invoked, the Quantum Manager will contact the Quantum Service to create a corresponding Quantum network, and likewise will create an IPAM subnet using the specified fixed range."
 msgstr ""
@@ -687,18 +597,8 @@ msgstr ""
 msgid "By default, networks are \"global\" in the sense that they are shared by all tenants (i.e. projects in Nova). To create a tenant-specific network, specify the \"--project_id\" argument when creating the network. For example:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:611(literallayout)
-#, no-wrap
-msgid "nova-manage network create --label=tenant2-private --fixed_range_v4=10.0.0.0/24 --project_id=10daaef1-b481-42a6-8653-7a42e982e409"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:612(para)
 msgid "This project_id should be the tenant UUID from keystone. To view all keystone tenant UUIDs, run the following command as a keystone admin user:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:614(literallayout)
-#, no-wrap
-msgid "keystone tenant-list"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:615(para)
@@ -707,11 +607,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:619(para)
 msgid "Networks are deleted by specifying their UUID (specifying their IP range is not sufficient):"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:620(literallayout)
-#, no-wrap
-msgid "nova-manage network delete --uuid 174d677f-7d15-4d7f-9d93-43feaae25d4d"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:622(para)
@@ -730,18 +625,8 @@ msgstr ""
 msgid "To do this, first create the shared network:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:636(literallayout)
-#, no-wrap
-msgid "nova-manage network create --label=public --fixed_range_v4=8.8.8.0/24 --priority=0            "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:637(para)
 msgid "Then, for each with tenant with UUID X, create a private network:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:638(literallayout)
-#, no-wrap
-msgid "nova-manage network create --label=tenantX-private --fixed_range_v4=10.0.0.0/24 --project_id=X --priority=1            "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:639(para)
@@ -768,11 +653,6 @@ msgstr ""
 msgid "Specifying a Null L3 driver will mean no gateway devices are connected to any Quantum networks:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:671(literallayout)
-#, no-wrap
-msgid "l3_lib=nova.network.l3.NullL3"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:672(para)
 msgid "Similar to the VlanManager, the gateway implemented by the Quantum Manager also performs the rewriting of HTTP requests destined to the Metadata server IP address (169.254.169.254) to instead reach the IP address of Nova's meta-data service."
 msgstr ""
@@ -789,11 +669,6 @@ msgstr ""
 msgid "It is also possible to use nova-manage to create a network that refers to an existing Quantum network. The ''uuid'' flag passes an existing Quantum Network UUID to nova-manage, meaning that Quantum Manager does not need to contact the Quantum service to create a network. Instead the Quantum Manager will just create a corresponding IPAM subnet, and then create and delete ports on the network when VMs are created/deleted. For example:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:687(literallayout)
-#, no-wrap
-msgid "nova-manage network create --label=public --fixed_range_v4=8.8.8.0/24 --priority=0 --uuid=0a649eca-3764-417c-91a7-eb51291d4bb9    "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:690(title)
 msgid "Specifying VM Network Connectivity on Boot"
 msgstr ""
@@ -804,11 +679,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:695(para)
 msgid "This extension can be invoked using the nova client utilities --nic option. A virtual server will get a vNIC for each --nic is specified. For example, to connect to two networks with UUIDs of 99b1d65e-34ae-4658-8387-ce97245ec4b4 and d6b7c997-d76d-4131-90a0-fc3408f921a4, use a command like:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:699(literallayout)
-#, no-wrap
-msgid "nova boot --image ed8b2a37-5535-4a5f-a615-443513036d71 --flavor 1 --nic net-id=99b1d65e-34ae-4658-8387-ce97245ec4b4 --nic net-id=d6b7c997-d76d-4131-90a0-fc3408f921a4 test-vm1  "
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:700(para)
@@ -835,11 +705,6 @@ msgstr ""
 msgid "Quantum Manager can leverage the same dnsmasq DHCP mechanism supported by other Nova Network Managers. DHCP is not enabled by default. It can be enabled system-wide with the following configuration option:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:717(literallayout)
-#, no-wrap
-msgid "quantum_use_dhcp=True"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:720(title)
 msgid "Using Melange IPAM"
 msgstr ""
@@ -850,11 +715,6 @@ msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:725(para)
 msgid "Using Melange requires downloading the Melange code (it is a separate project from both Quantum and Nova) and running the Melange service. To tell Nova to use Melange IPAM instead of the default, set the following configuration option:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:728(literallayout)
-#, no-wrap
-msgid "quantum_ipam_lib=nova.network.quantum.melange_ipam_lib"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:729(para)
@@ -933,22 +793,12 @@ msgstr ""
 msgid "Authentication and Authorization middleware should be enabled in the Quantum pipeline. To this aim, uncomment the following line in quantum.conf:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:786(literallayout)
-#, no-wrap
-msgid "pipeline = authtoken extensions quantumapiapp_v1_0"
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:787(para)
 msgid "3. Configuring Quantum to Connect to Keystone"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:788(para)
 msgid "The final step concerns configuring access to Keystone. The correct values of the following attributes must be specified in the [filter:authtoken] section of quantum.conf:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:790(literallayout)
-#, no-wrap
-msgid "paste.filter_factory = keystone.middleware.auth_token:filter_factory\nauth_host = 127.0.0.1\nauth_port = 35357\nauth_protocol = http\nauth_uri = http://127.0.0.1:5000/\n"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:796(para)
@@ -979,18 +829,8 @@ msgstr ""
 msgid "For example, using password:"
 msgstr ""
 
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:807(literallayout)
-#, no-wrap
-msgid "admin_tenant_name = service\nadmin_user = nova\nadmin_password = sp "
-msgstr ""
-
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:810(para)
 msgid "Or using a token:"
-msgstr ""
-
-#: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:811(literallayout)
-#, no-wrap
-msgid "admin_token = 9a82c95a-99e9-4c3a-b5ee-199f6ba7ff04"
 msgstr ""
 
 #: ./doc/src/docbkx/openstack-network-connectivity-admin/quantum-admin-guide.xml:812(para)
