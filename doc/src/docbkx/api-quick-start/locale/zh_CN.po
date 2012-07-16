@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenStack Manuals\n"
 "POT-Creation-Date: 2012-07-16 10:31+0800\n"
-"PO-Revision-Date: 2012-07-16 03:37+0000\n"
+"PO-Revision-Date: 2012-07-16 09:10+0000\n"
 "Last-Translator: daisy.ycguo <daisy.ycguo@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/openstack-manuals-i18n/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgid ""
 "the Compute 1.1 API while the openstack-compute client works against the "
 "Rackspace Cloud Servers public cloud which is the OpenStack Compute 1.0 API."
 " You only need a username and password to use the python-novaclient tool."
-msgstr "你可以通过使用客户端，比如python-novalcient或者python-comput客户端，做更多的复杂的工作。Python-novaclient实现了Compute 1.1 的 API。openstack-compute客户端工作在Rackspace Cloud Servers共有云之上，实现的是OpenStack Compute 1.0 API. 使用Python-novaclient工具时，你只需要提供用户名和密码。"
+msgstr "你可以通过使用客户端，比如python-novalcient或者python-comput客户端，做更多的复杂工作。Python-novaclient实现了Compute 1.1 的 API。openstack-compute客户端工作在Rackspace Cloud Servers公有云之上，实现的是OpenStack Compute 1.0 API. 使用Python-novaclient工具时，你只需要提供用户名和密码。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml10(para)
 msgid ""
@@ -34,17 +34,17 @@ msgid ""
 "the client, and then provide your username and password, set as environment "
 "variables for convenience, and then you can have the ability to send "
 "commands to your cloud on the command-line."
-msgstr "安装python-novaclient后，就会生成一个<code>nova</code> shell命令行，它可以通过命令行形式调用Compute API。你安装客户端，提供你的用户名和密码，为方便起见，可以把他们设为环境变量，之后，你就可以在命令行窗口想你的云发送命令了。"
+msgstr "安装python-novaclient后，就会生成一个<code>nova</code> shell命令行，它可以通过命令行形式调用Compute API。你安装客户端，提供你的用户名和密码，为方便起见，可以把他们设为环境变量，之后，你就可以在命令行窗口向你的云发送命令了。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml14(para)
 msgid "To install python-novaclient, grab the stable/nova version like so."
-msgstr "安装 python-novaclient，抓取稳定的nova版本"
+msgstr "安装 python-novaclient，如下所示，获取稳定的nova版本"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml19(para)
 msgid ""
 "Now that you have installed the python-novaclient, confirm the installation "
 "by entering:"
-msgstr "现在你已经完成python-novaclient的安装，确认安装，请输入："
+msgstr "现在你已经完成python-novaclient的安装，确认安是否装成功，请输入："
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml29(para)
 msgid ""
@@ -70,24 +70,24 @@ msgid ""
 "iTunes for your cloud - you can view the playlist of images before using "
 "your favorite image to create a new instance in the cloud. To get the list "
 "of images, their names, status, and ID, use this command: <placeholder-1/>"
-msgstr ""
+msgstr "在你开始搭建你的云之前，你应该知道有哪些镜像是可用的。这可以通过询问镜像服务”有哪几种可用的配置类型“来实现。镜像服务类似于云计算中的iTunes - 在使用你喜爱的镜像创建新的实例之前，你可以查看镜像的播放类表。要得到镜像列表、他们的名字、状态和ID，使用如下命令：<placeholder-1/>"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml67(para)
 msgid "Next you need to know the relative sizes of each of these."
-msgstr ""
+msgstr "下一步，你需要知道他们中每一个的相对大小。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml81(para)
 msgid ""
 "You can also narrow down the list by using grep to find only the Ubuntu "
 "11.04 images with a command like this:"
-msgstr ""
+msgstr "你还可以缩小列表范围，通过用grep来只查找Ubuntu 11.04的镜像，命令如下所示："
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml92(para)
 msgid ""
 "With the information about what is available to you, you can choose the "
 "combination of image and flavor to create your virtual servers and launch "
 "instances."
-msgstr ""
+msgstr "使用这些对你来说有用的信息，你可以选择镜像和类型的组合来创建你的虚拟服务器，启动实例。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml93(title)
 msgid "Launching Instances"
@@ -98,7 +98,7 @@ msgid ""
 "When using an endpoint that supports 1.1 of the Compute API, you can launch "
 "instances with an ID. When using an endpoint that supports v2 of the Compute"
 " API, you must use the UUID to launch an instance."
-msgstr ""
+msgstr "当使用支持Compute API 1.1版本的服务端点时，你能够通过一个ID来启动实例。而当使用支持Compute API 2版本的服务端点时，你必须使用UUID来启动实例。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml95(para)
 msgid ""
@@ -110,26 +110,26 @@ msgid ""
 "m1.small flavor which has an ID of 2 when using the 1.1 API on TryStack. Put"
 " those parameters in with the \"boot\" command and you can create a new "
 "virtual server. <placeholder-1/>"
-msgstr ""
+msgstr "要启动服务器，你首先选择你想要的镜像以及相配的大小，找到相应的镜像ID和类型ID，然后根据这些ID们创建命令。从我们之前得到的信息来看，我们知道那个Ubuntu Natty镜像的ID是13，如果你想启动一个小的实例，2GB内存和20GB硬盘，你应该选择m1.small类型，当在TryStack中使用1.1版本的API时，它的ID是2。将这些参数代入boot命令，你就可以创建一个新的虚拟服务器了。<placeholder-1/>"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml133(para)
 msgid ""
 "Now, you can view this server in your new cloud by using the nova list "
 "command:<placeholder-1/>"
-msgstr ""
+msgstr "现在，你可以在你的云中查看这台服务器了，使用nova list命令：<placeholder-1/>"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml143(para)
 msgid ""
 "There are three statuses you may see - ACTIVE, BUILDING, and UNKNOWN. The "
 "BUILDING status is transient and you likely will not see it. If you see "
 "UNKNOWN, run <code>nova list</code> again until it goes away."
-msgstr ""
+msgstr "你能够看到三种状态：ACTIVE，BUILDING，和UNKNOWN。状态BUILDING是个瞬时状态，很有可能你根本看不到它。如果你看到UNKNOWN，再次运行<code>nova list</code>，直到这个状态消失。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml144(para)
 msgid ""
 "To view all the information about a particular server, use nova show with "
 "the ID of the server that you got from the nova list command."
-msgstr ""
+msgstr "要查看某个特定服务器的所有信息，使用nova show以及你刚才从nova list命令中看到的服务器ID。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/cli-uses.xml166(para)
 msgid ""
@@ -138,7 +138,7 @@ msgid ""
 "growing elastic cloud. Use the -meta option with a key=value pair, where you"
 " can make up the string for both the key and the value. For example, you "
 "could add a description and also the creator of the server. <placeholder-1/>"
-msgstr ""
+msgstr "现在你可以再次启动那个镜像了，不过启动时需要给它增加一些信息，这样你就能在日益增长的弹性云中更容易的识别它了。使用-meta选项，带一个key=value键值对，这里你可以填入键和值。例如，你可以增加一个描述，以及服务器的创建者。<placeholder-1/>"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml6(title)
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-onepager.xml9(title)
@@ -153,7 +153,7 @@ msgid ""
 "OpenStack Image Store. With the TryStack OpenStack installation, the "
 "OpenStack Compute, OpenStack Identity, and OpenStack Image Store projects "
 "are all working together in the background of the installation."
-msgstr ""
+msgstr "OpenStack系统包含几个核心项目，他们是分开安装的，但能共同工作，取决于你的云的需求：OpenStack计算服务，OpenStack对象存储，OpenStack身份服务，和OpenStack镜像存储。借助TryStack中OpenStack安装， OpenStack计算服务，OpenStack标识服务，和OpenStack镜像存储几个项目共同工作在一起。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml16(title)
 msgid "OpenStack API Introduction"
@@ -171,11 +171,11 @@ msgid ""
 "service/2.0/content/\">Identity Service 2.0 specification</link> published "
 "at <link "
 "href=\"http://docs.openstack.org/api\">docs.openstack.org/api</link>."
-msgstr ""
+msgstr "本页包含使用计算API与OpenStack云之间交互的基础知识，这是在通过身份服务API完成认证之后。你可以启动镜像，赋予实例元数据，构建一个云，这些全部可以采用API完成。在<link href=\"http://docs.openstack.org/api\">docs.openstack.org/api</link>里发布有一份API参考，包含所有有效的命令，<link href=\"http://docs.openstack.org/api/openstack-compute/1.1/content/\">OpenStack Compute API 1.1 规范</link> 和 <link href=\"http://docs.openstack.org/api/openstack-identity-service/2.0/content/\">Identity Service 2.0 规范</link>。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml32(title)
 msgid "Getting Credentials"
-msgstr "取得证书"
+msgstr "获取证书"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml33(para)
 msgid ""
@@ -187,14 +187,14 @@ msgid ""
 "generate authorization tokens. You can also get the tenant ID from the "
 "Dashboard URLs, for example https://trystack.org/dash/296/images/ indicates "
 "a tenant ID of 296."
-msgstr ""
+msgstr "证书是个组合信息，包括你的用户名、密码，以及云运行在哪个租户（或者说，项目）之下。当你与云直接通过API服务端口交互的时候，你只需要生成一个附加令牌。你的云管理员会提供你的用户名，密码，以及你的租户标识符，你可以根据这些信息生授权令牌。你还可以从仪表盘URL那里得到租户标识符，例如，https://trystack.org/dash/296/images/里面表明了租户标识符为296。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml44(para)
 msgid ""
 "These tokens are typically good for 24 hours, and when the token expires, "
 "you will find out with a 401 (Unauthorized) error and can request another "
 "token programmatically. The general workflow goes something like this:"
-msgstr ""
+msgstr "通常来说，这些令牌24小时之内是有效的，当令牌过期后，你会得到401（未授权）错误，那时你可以通过程序请求另外一张令牌。一般的工作流程如下所示："
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml51(para)
 msgid ""
@@ -202,14 +202,14 @@ msgid ""
 "your cloud administrator gave you, typically "
 "http://hostname:port/v2.0/tokens. You send your username, password, and what"
 " group or account you are with (the \"tenant\" in auth-speak)."
-msgstr ""
+msgstr "开始API请求之前，首先要从云管理员提供的服务端口那里请求授权令牌，服务端口通常是http://hostname:port/v2.0/tokens。发送你的用户名，密码，和你所属的组或者帐户（也就是auth-speak中的”租户“）"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml60(para)
 msgid ""
 "The server returns a response in which the 24-hours token is contained. Use "
 "that token to send API requests with the X-Auth-Token included as an header "
 "field."
-msgstr ""
+msgstr "服务器返回响应消息，其中含有一个24小时有效的令牌。可以使用这个令牌发送API请求，请求头中包含X-Auth-Token字段。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml68(para)
 msgid ""
@@ -222,20 +222,20 @@ msgstr "将这个令牌置于信息头x-auth-token中，反复发送API请求，
 msgid ""
 "Request a token again when you get a 401 response until the script's job is "
 "done."
-msgstr "当你得到401的响应时，请求令牌，直到脚本任务完成。"
+msgstr "当你得到401的响应时，再次请求令牌，直到脚本任务完成。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml79(para)
 msgid ""
 "For a typical OpenStack deployment running the Identity Service you can "
 "request a token with this command in cURL:<placeholder-1/>"
-msgstr "对一个运行身份服务（Identity Service）的典型的OpenStack部署来说，你可以通过cURL的这个命令来请求令牌：<placeholder-1/>"
+msgstr "对一个使用身份服务的典型的OpenStack部署来说，你可以通过cURL的这个命令来请求令牌：<placeholder-1/>"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml84(para)
 msgid ""
 "In return, you should get a 200 OK response with a token in the form of "
 "\"id\": \"cd427a33-bb4a-4079-a6d7-0ae148bdeda9\" and an expiration date 24 "
 "hours from now. Here's what it looks like:"
-msgstr "作为回复，你会得到一个200 OK的响应，同时以“id”的形式，带回一个令牌：\"cd427a33-bb4a-4079-a6d7-0ae148bdeda9\"和一个有效期：从现在开始的24小时。这是响应看起来如下所示:"
+msgstr "作为回复，你会得到一个200 OK的响应，同时以“id”的形式，带回一个令牌：\"cd427a33-bb4a-4079-a6d7-0ae148bdeda9\"和一个有效期：从现在开始的24小时。响应消息看起来如下所示:"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml155(title)
 msgid "Sending Requests to the API"
@@ -260,7 +260,7 @@ msgid ""
 "client, a Java application to test RESTful web services, from <link "
 "href=\"http://code.google.com/p/rest-client/\">http://code.google.com/p"
 "/rest-client/</link>."
-msgstr "如果你希望采用一个更图形化的界面，Firefox的REST客户端也可以用于测试和实验命令。参见<link href=\"https://addons.mozilla.org/en-US/firefox/addon/restclient/\">https://addons.mozilla.org/en-US/firefox/addon/restclient/</link>。你也可以下载和安装rest-client，一个Java应用，来测试RESTful web服务，下载地址为<link href=\"http://code.google.com/p/rest-client/\">http://code.google.com/p/rest-client/</link>。"
+msgstr "如果你希望采用一个更图形化的界面，Firefox的REST客户端也可以用于测试和尝试命令。参见<link href=\"https://addons.mozilla.org/en-US/firefox/addon/restclient/\">https://addons.mozilla.org/en-US/firefox/addon/restclient/</link>。你也可以下载和安装rest-client，一个Java应用，来测试RESTful web服务，下载地址为<link href=\"http://code.google.com/p/rest-client/\">http://code.google.com/p/rest-client/</link>。"
 
 #: ./doc/src/docbkx/api-quick-start/src/docbkx/api-quick-start-intro.xml172(para)
 msgid ""

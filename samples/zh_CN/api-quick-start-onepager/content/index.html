@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:exsl="http://exslt.org/common" xmlns:ng="http://docbook.org/docbook-ng" xmlns:fb="http://ogp.me/ns/fb#"><head>
+<meta http-equiv="X-UA-Compatible" content="IE=7"/>
+<title>OpenStack API快速入门 - OpenStack API快速入门</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"/><link rel="home" href="index.html" title="OpenStack API快速入门"/><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><script type="text/javascript">
+            //The id for tree cookie
+            var treeCookieId = "treeview-163";
+            var language = "en";
+            var w = new Object();
+            //Localization
+            txt_filesfound = 'Results';
+            txt_enter_at_least_1_char = "You must enter at least one character.";
+            txt_browser_not_supported = "Your browser is not supported. Use of Mozilla Firefox is recommended.";
+            txt_please_wait = "Please wait. Search in progress...";
+            txt_results_for = "Results for: ";
+        </script><style type="text/css">
+            input {
+            margin-bottom: 5px;
+            margin-top: 2px;
+            }
+
+            .folder {
+            display: block;
+            height: 22px;
+            padding-left: 20px;
+            background: transparent url(../common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+            }
+            
+        </style><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/><link rel="stylesheet" type="text/css" href="../common/css/positioning.css"/><link rel="stylesheet" type="text/css" href="../common/css/custom.css"/><!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><link rel="stylesheet" type="text/css" href="../common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css"/><link rel="stylesheet" type="text/css" href="../common/jquery/treeview/jquery.treeview.css"/><script type="text/javascript" src="../common/jquery/jquery-1.4.3.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery-ui-1.8.2.custom.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.cookie.js"><!----></script><script type="text/javascript" src="../common/jquery/treeview/jquery.treeview.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.qtip-1.0.0-rc3/jquery.qtip-1.0.0-rc3.min.js"><!--jQuery plugin for glossary popups. --></script><script type="text/javascript" src="search/htmlFileList.js"><!----></script><script type="text/javascript" src="search/htmlFileInfoList.js"><!----></script><script type="text/javascript" src="search/nwSearchFnt.js"><!----></script><script type="text/javascript" src="search/stemmers/en_stemmer.js"><!--//make this scalable to other languages as well.--></script><script type="text/javascript" src="search/index-1.js"><!----></script><script type="text/javascript" src="search/index-2.js"><!----></script><script type="text/javascript" src="search/index-3.js"><!----></script><script type="text/javascript">
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-17511903-6']);
+	  </script><script type="text/javascript" src="../common/ga.js"><!----></script><script type="text/javascript" src="http://www.tabpress.com/_js/ga_social_tracking.js"><!----></script><script>
+	    (function(){var twitterWidgets = document.createElement('script');
+        twitterWidgets.type = 'text/javascript';
+        twitterWidgets.async = true;
+        twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+        // Setup a callback to track once the script loads.
+        twitterWidgets.onload = _ga.trackTwitter;
+        document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+        })();
+      </script></head><body><div id="header"><a onclick="_gaq.push(['_trackEvent', 'Header', 'logo', 'click', 1]);" target="_blank" href="http://www.openstack.org"><img src="../common/images/openstack-logo.png" alt="OpenStack Documentation" width="157" height="47"/></a><h1>OpenStack API快速入门</h1><div id="navheader" align="right"><!----><table class="navLinks"><tr><td><a id="showHideButton" onclick="showHideToc(); _gaq.push(['_trackEvent', 'Header', 'show/hide', 'click', 1]);" class="pointLeft" title="Hide TOC tree">Sidebar
+                            </a></td></tr></table></div></div><div id="toolbar" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"><div id="toolbar-left"><p class="breadcrumbs"><a href="http://docs.openstack.org/">OpenStack Manuals</a><a href="index.html">OpenStack API快速入门</a></p></div></div><div id="content"><div class="statustext"> </div><div xml:lang="zh" class="chapter"><div xmlns="" class="titlepage"><div><div><h2 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="openstack-api-quick-start"> </a>OpenStack API快速入门</h2></div></div></div><div class="toc"><p><strong>目录</strong></p><dl><dt><span class="section"><a href="index.html#Compute_API_Quick_Start">OpenStack API快速入门</a></span></dt><dd><dl><dt><span class="section"><a href="index.html#Openstack-API-Concepts-a09234">OpenStack API介绍</a></span></dt><dt><span class="section"><a href="index.html#Getting-Credentials-a00665">获取证书</a></span></dt><dt><span class="section"><a href="index.html#Sending-Requests-to-API-a09879">向API发送请求</a></span></dt></dl></dd><dt><span class="section"><a href="index.html#Setting-Up-Python-novaclient">安装python-novaclient</a></span></dt><dd><dl><dt><span class="section"><a href="index.html#Launching-Images-a09140">列出所有的镜像</a></span></dt><dt><span class="section"><a href="index.html#Listing-Images-a01518">启动实例</a></span></dt></dl></dd></dl></div><div xml:lang="zh" class="section"><div xmlns="" class="titlepage"><div><div><h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="Compute_API_Quick_Start"> </a>OpenStack API快速入门</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="index.html#Openstack-API-Concepts-a09234">OpenStack API介绍</a></span></dt><dt><span class="section"><a href="index.html#Getting-Credentials-a00665">获取证书</a></span></dt><dt><span class="section"><a href="index.html#Sending-Requests-to-API-a09879">向API发送请求</a></span></dt></dl></div><p>OpenStack系统包含几个核心项目，他们是分开安装的，但能共同工作，取决于你的云的需求：OpenStack计算服务，OpenStack对象存储，OpenStack身份服务，和OpenStack镜像存储。借助TryStack中OpenStack安装， OpenStack计算服务，OpenStack标识服务，和OpenStack镜像存储几个项目共同工作在一起。</p><div class="section"><div xmlns="" class="titlepage"><div><div><h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="Openstack-API-Concepts-a09234"> </a>OpenStack API介绍</h3></div></div></div><p>本页包含使用计算API与OpenStack云之间交互的基础知识，这是在通过身份服务API完成认证之后。你可以启动镜像，赋予实例元数据，构建一个云，这些全部可以采用API完成。在<a class="link" href="http://docs.openstack.org/api" target="_top">docs.openstack.org/api</a>里发布有一份API参考，包含所有有效的命令，<a class="link" href="http://docs.openstack.org/api/openstack-compute/1.1/content/" target="_top">OpenStack Compute API 1.1 规范</a> 和 <a class="link" href="http://docs.openstack.org/api/openstack-identity-service/2.0/content/" target="_top">Identity Service 2.0 规范</a>。</p></div><div class="section"><div xmlns="" class="titlepage"><div><div><h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="Getting-Credentials-a00665"> </a>获取证书</h3></div></div></div><p>证书是个组合信息，包括你的用户名、密码，以及云运行在哪个租户（或者说，项目）之下。当你与云直接通过API服务端口交互的时候，你只需要生成一个附加令牌。你的云管理员会提供你的用户名，密码，以及你的租户标识符，你可以根据这些信息生授权令牌。你还可以从仪表盘URL那里得到租户标识符，例如，https://trystack.org/dash/296/images/里面表明了租户标识符为296。</p><p>通常来说，这些令牌24小时之内是有效的，当令牌过期后，你会得到401（未授权）错误，那时你可以通过程序请求另外一张令牌。一般的工作流程如下所示：</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>开始API请求之前，首先要从云管理员提供的服务端口那里请求授权令牌，服务端口通常是http://hostname:port/v2.0/tokens。发送你的用户名，密码，和你所属的组或者帐户（也就是auth-speak中的”租户“）</p><pre class="programlisting">curl -k -X 'POST' -v https://nova-api.trystack.org:5443/v2.0/tokens -d '{"auth":{"passwordCredentials":{"username": "joecool", "password":"coolword"}, "tenantId":"5"}}' -H 'Content-type: application/json'</pre></li><li class="listitem"><p>服务器返回响应消息，其中含有一个24小时有效的令牌。可以使用这个令牌发送API请求，请求头中包含X-Auth-Token字段。</p><pre class="programlisting">curl -k -D - -H "X-Auth-Token: 7d2f63fd-4dcc-4752-8e9b-1d08f989cc00" -X 'GET' -v https://nova-api.trystack.org:9774/v1.1/296/extensions  -H 'Content-type: application/json' </pre></li><li class="listitem"><p>将这个令牌置于信息头x-auth-token中，反复发送API请求，直到任一种情况发生：1)任务完成，或者2)你得到401（未授权）响应</p></li><li class="listitem"><p>当你得到401的响应时，再次请求令牌，直到脚本任务完成。</p></li></ol></div><p>对一个使用身份服务的典型的OpenStack部署来说，你可以通过cURL的这个命令来请求令牌：</p><pre class="programlisting">
+$ curl -X 'POST' -v https://nova-api.trystack.org:5443/v2.0/tokens -d '{"auth":{"passwordCredentials":{"username": "joecool", "password":"coolword"}, "tenantId":"5"}}' -H 'Content-type: application/json'
+         </pre><p>作为回复，你会得到一个200 OK的响应，同时以“id”的形式，带回一个令牌："cd427a33-bb4a-4079-a6d7-0ae148bdeda9"和一个有效期：从现在开始的24小时。响应消息看起来如下所示:</p><p>
+            </p><pre class="programlisting">
+{
+    "access": {
+        "serviceCatalog": [
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "https://nova-api.trystack.org:9774/v1.1/1", 
+                        "internalURL": "https://nova-api.trystack.org:9774/v1.1/1", 
+                        "publicURL": "https://nova-api.trystack.org:9774/v1.1/1", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "name": "nova", 
+                "type": "compute"
+            }, 
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "https://GLANCE_API_IS_NOT_DISCLOSED/v1.1/1", 
+                        "internalURL": "https://GLANCE_API_IS_NOT_DISCLOSED/v1.1/1", 
+                        "publicURL": "https://GLANCE_API_IS_NOT_DISCLOSED/v1.1/1", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "name": "glance", 
+                "type": "image"
+            }, 
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "https://nova-api.trystack.org:5443/v2.0", 
+                        "internalURL": "https://keystone.trystack.org:5000/v2.0", 
+                        "publicURL": "https://keystone.trystack.org:5000/v2.0", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "name": "keystone", 
+                "type": "identity"
+            }
+        ], 
+        "token": {
+            "expires": "2012-02-15T19:32:21", 
+            "id": "5df9d45d-d198-4222-9b4c-7a280aa35666", 
+            "tenant": {
+                "id": "1", 
+                "name": "admin"
+            }
+        }, 
+        "user": {
+            "id": "14", 
+            "name": "annegentle", 
+            "roles": [
+                {
+                    "id": "2", 
+                    "name": "Member", 
+                    "tenantId": "1"
+                }
+            ]
+        }
+    }
+}
+
+    </pre></div><div class="section"><div xmlns="" class="titlepage"><div><div><h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="Sending-Requests-to-API-a09879"> </a>向API发送请求</h3></div></div></div><p>要通过API向OpenStack发送请求，你有很多选择。开发人员和测试人员可能喜欢使用cURL，一个命令行工具，下载地址为<a class="link" href="http://curl.haxx.se/" target="_top">http://curl.haxx.se/</a>。使用cURL，你可以通过命令行发送HTTP请求和接收响应。</p><p>如果你希望采用一个更图形化的界面，Firefox的REST客户端也可以用于测试和尝试命令。参见<a class="link" href="https://addons.mozilla.org/en-US/firefox/addon/restclient/" target="_top">https://addons.mozilla.org/en-US/firefox/addon/restclient/</a>。你也可以下载和安装rest-client，一个Java应用，来测试RESTful web服务，下载地址为<a class="link" href="http://code.google.com/p/rest-client/" target="_top">http://code.google.com/p/rest-client/</a>。</p><p>如果你使用cURL或者REST客户端，你需要生成一个令牌，如上面所示。</p></div></div><div xml:lang="zh" class="section"><div xmlns="" class="titlepage"><div><div><h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="Setting-Up-Python-novaclient"> </a>安装python-novaclient</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="index.html#Launching-Images-a09140">列出所有的镜像</a></span></dt><dt><span class="section"><a href="index.html#Listing-Images-a01518">启动实例</a></span></dt></dl></div><p>你可以通过使用客户端，比如python-novalcient或者python-comput客户端，做更多的复杂工作。Python-novaclient实现了Compute 1.1 的 API。openstack-compute客户端工作在Rackspace Cloud Servers公有云之上，实现的是OpenStack Compute 1.0 API. 使用Python-novaclient工具时，你只需要提供用户名和密码。</p><p>安装python-novaclient后，就会生成一个<code class="code">nova</code> shell命令行，它可以通过命令行形式调用Compute API。你安装客户端，提供你的用户名和密码，为方便起见，可以把他们设为环境变量，之后，你就可以在命令行窗口向你的云发送命令了。</p><p>安装 python-novaclient，如下所示，获取稳定的nova版本</p><pre class="programlisting">
+$ pip install -e git+https://github.com/openstack/python-novaclient.git#egg=python-novaclient
+    </pre><p>现在你已经完成python-novaclient的安装，确认安是否装成功，请输入：</p><pre class="programlisting">
+$ nova help
+
+usage: nova [--debug] [--os_username OS_USERNAME] [--os_password OS_PASSWORD]
+            [--os_tenant_name OS_TENANT_NAME] [--os_auth_url OS_AUTH_URL]
+            [--os_region_name OS_REGION_NAME] [--service_type SERVICE_TYPE]
+            [--service_name SERVICE_NAME] [--endpoint_type ENDPOINT_TYPE]
+            [--version VERSION]
+            &lt;subcommand&gt; ...
+</pre><p>作为返回，你将得到nova命令行客户端中的所有的命令和参数的列表。通过将所需参数设为环境变量，你可以在命令行中快速使用这些命令。你可以在nova命令中添加--os_username，或者设定为环境变量。当使用TryStack时，你将得到一个端点（endpoint），这个端点就是nova客户端认定的NOVA_URL。在TryStack中，登录后你可以从https://trystack.org/dash/api_info/看到这些环境变量。</p><pre class="programlisting">
+export NOVA_USERNAME=facebook12345679       
+export NOVA_API_KEY=coolword
+export NOVA_PROJECT_ID=facebook12345679       
+export NOVA_URL=https://nova-api.trystack.org:5443/v2.0       
+export NOVA_VERSION=1.1
+</pre><p>
+    </p><div class="section"><div xmlns="" class="titlepage"><div><div><h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="Launching-Images-a09140"> </a>列出所有的镜像</h3></div></div></div><p>在你开始搭建你的云之前，你应该知道有哪些镜像是可用的。这可以通过询问镜像服务”有哪几种可用的配置类型“来实现。镜像服务类似于云计算中的iTunes - 在使用你喜爱的镜像创建新的实例之前，你可以查看镜像的播放类表。要得到镜像列表、他们的名字、状态和ID，使用如下命令：</p><pre class="programlisting">
+$ nova image-list
+
++----+--------------------------------------+--------+--------+
+| ID |                 Name                 | Status | Server |
++----+--------------------------------------+--------+--------+
+| 12 | natty-server-cloudimg-amd64-kernel   | ACTIVE |        |
+| 13 | natty-server-cloudimg-amd64          | ACTIVE |        |
+| 14 | oneiric-server-cloudimg-amd64-kernel | ACTIVE |        |
+| 15 | oneiric-server-cloudimg-amd64        | ACTIVE |        |
++----+--------------------------------------+--------+--------+
+        </pre><p>下一步，你需要知道他们中每一个的相对大小。</p><pre class="programlisting">
+$ nova flavor-list
+        
++----+-----------+-----------+------+-----------+------+-------+-------------+
+| ID |    Name   | Memory_MB | Disk | Ephemeral | Swap | VCPUs | RXTX_Factor |
++----+-----------+-----------+------+-----------+------+-------+-------------+
+| 1  | m1.tiny   | 512       | 0    | N/A       | 0    | 1     |             |
+| 2  | m1.small  | 2048      | 20   | N/A       | 0    | 1     |             |
+| 3  | m1.medium | 4096      | 40   | N/A       | 0    | 2     |             |
+| 4  | m1.large  | 8192      | 80   | N/A       | 0    | 4     |             |
+| 5  | m1.xlarge | 16384     | 160  | N/A       | 0    | 8     |             |
++----+-----------+-----------+------+-----------+------+-------+-------------+        
+    </pre><p>你还可以缩小列表范围，通过用grep来只查找Ubuntu 11.04的镜像，命令如下所示：</p><p>
+        </p><pre class="programlisting">
+
+$ nova image-list | grep 'natty'
+
+| 12 | natty-server-cloudimg-amd64-kernel   | ACTIVE |        |
+| 13 | natty-server-cloudimg-amd64          | ACTIVE |        |
+</pre><p>
+    </p><p>使用这些对你来说有用的信息，你可以选择镜像和类型的组合来创建你的虚拟服务器，启动实例。</p></div><div class="section"><div xmlns="" class="titlepage"><div><div><h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="Listing-Images-a01518"> </a>启动实例</h3></div></div></div><p>要启动服务器，你首先选择你想要的镜像以及相配的大小，找到相应的镜像ID和类型ID，然后根据这些ID们创建命令。从我们之前得到的信息来看，我们知道那个Ubuntu Natty镜像的ID是13，如果你想启动一个小的实例，2GB内存和20GB硬盘，你应该选择m1.small类型，当在TryStack中使用1.1版本的API时，它的ID是2。将这些参数代入boot命令，你就可以创建一个新的虚拟服务器了。</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[注意]" src="../common/images/admon/note.png"/></td><th align="left">注意</th></tr><tr><td align="left" valign="top"><p>当使用支持Compute API 1.1版本的服务端点时，你能够通过一个ID来启动实例。而当使用支持Compute API 2版本的服务端点时，你必须使用UUID来启动实例。</p></td></tr></table></div><p>
+        </p><pre class="programlisting">
+ $ nova boot --flavor=2 --image=13 testserver
+ 
+ +-----------+--------------------------------------+
+|  Property |                Value                 |
++-----------+--------------------------------------+
+| adminPass | ****************                     |
+| created   | 2011-09-01T21:40:41Z                 |
+| flavor    | m1.small                             |
+| hostId    |                                      |
+| id        | 1805                                 |
+| image     | natty                                |
+| metadata  | {}                                   |
+| name      | testserver                           |
+| progress  | 0                                    |
+| status    | BUILD                                |
+| updated   | 2011-09-01T21:40:41Z                 |
+| uuid      | ce044452-f22e-4ea4-a3ec-d1cde80cf996 |
++-----------+--------------------------------------+
+ </pre><p>
+    </p><p>现在，你可以在你的云中查看这台服务器了，使用nova list命令：</p><pre class="programlisting">
+$ nova list
++------+------------+--------+--------------------------------+
+|  ID  |    Name    | Status |            Networks            |
++------+------------+--------+--------------------------------+
+| 1805 | testserver | ACTIVE | private=10.4.96.81             |
++------+------------+--------+--------------------------------+
+            </pre><p>你能够看到三种状态：ACTIVE，BUILDING，和UNKNOWN。状态BUILDING是个瞬时状态，很有可能你根本看不到它。如果你看到UNKNOWN，再次运行<code class="code">nova list</code>，直到这个状态消失。</p><p>要查看某个特定服务器的所有信息，使用nova show以及你刚才从nova list命令中看到的服务器ID。</p><pre class="programlisting">
+$ nova show 1805
+
++-----------------+----------------------------------------------------------+
+|     Property    |                          Value                           |
++-----------------+----------------------------------------------------------+
+| created         | 2011-09-01T21:40:41Z                                     |
+| flavor          | m1.small                                                 |
+| hostId          | 58a7430169aa42cde5ce2456b0cb5bb5ac1ab0703bab6420e8a49e6e |
+| id              | 1805                                                     |
+| image           | natty                                                    |
+| metadata        | {}                                                       |
+| name            | testserver                                               |
+| private network | 10.4.96.81                                               |
+| progress        | 100                                                      |
+| status          | ACTIVE                                                   |
+| updated         | 2011-09-01T21:40:46Z                                     |
+| uuid            | ce044452-f22e-4ea4-a3ec-d1cde80cf996                     |
++-----------------+----------------------------------------------------------+
+
+        </pre><p>现在你可以再次启动那个镜像了，不过启动时需要给它增加一些信息，这样你就能在日益增长的弹性云中更容易的识别它了。使用-meta选项，带一个key=value键值对，这里你可以填入键和值。例如，你可以增加一个描述，以及服务器的创建者。</p><pre class="programlisting">$ nova boot testserver --meta description='Use for testing purposes' --meta creator=joecool</pre></div></div></div><script type="text/javascript" src="../common/main.js"><!----></script><hr/><div id="disqus_thread"><script type="text/javascript">
+	      var disqus_shortname = 'os-apiquickstart';
+	      
+	      var disqus_identifier = 'openstack-api-quick-startopenstack-api-quick-start';
+	      </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><script type="text/javascript" src="../common/comments.js"><!----></script></div><hr/><div class="legal"><a href="index.html">Legal notices</a></div></div><div><div id="leftnavigation" style="padding-top:3px; background-color:white;"><div id="tabs"><ul><li><a href="#treeDiv" tabindex="1"><span class="contentsTab">目录</span></a></li></ul><div id="treeDiv"><img src="../common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;"/><div id="ulTreeDiv" style="display:none" class="thisisthat"><ul id="tree" class="filetree"><li tabindex="2"><span class="file"><a href="index.html#Compute_API_Quick_Start">OpenStack API快速入门</a></span><ul><li tabindex="2"><span class="file"><a href="index.html#Openstack-API-Concepts-a09234">OpenStack API介绍</a></span></li><li tabindex="2"><span class="file"><a href="index.html#Getting-Credentials-a00665">获取证书</a></span></li><li tabindex="2"><span class="file"><a href="index.html#Sending-Requests-to-API-a09879">向API发送请求</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="index.html#Setting-Up-Python-novaclient">安装python-novaclient</a></span><ul><li tabindex="2"><span class="file"><a href="index.html#Launching-Images-a09140">列出所有的镜像</a></span></li><li tabindex="2"><span class="file"><a href="index.html#Listing-Images-a01518">启动实例</a></span></li></ul></li></ul></div></div></div></div></div><script type="text/javascript" src="../common/jquery/jquery.qtip-1.0.0-rc3/jquery.qtip-1.0.0-rc3.min.js"><!--jQuery plugin for glossary popups. -->
+                   $('a[title]').qtip({ style: { name: 'cream', tip: true } })
+                </script></body></html>
