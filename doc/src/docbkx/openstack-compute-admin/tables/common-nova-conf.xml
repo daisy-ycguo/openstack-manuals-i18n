@@ -83,9 +83,26 @@
                     default files used are: [] </para></td>
             </tr>
             <tr>
-                <td><para>connection_type=&lt;None&gt; </para></td>
-                <td><para> (StrOpt) Virtualization API connection type :
-                    libvirt, xenapi, or fake </para></td>
+                <td>compute_driver='nova.virt.connection.get_connection'</td>
+                <td>String value; Driver to use for controlling
+                    virtualization. For convenience if the driver
+                    exists under the nove.virt namespace, nova.virt
+                    can be removed. There are 5 drivers in core
+                    openstack: fake.FakeDriver,
+                    libvirt.LibvirtDriver,
+                    baremetal.BareMetalDriver, xenapi.XenAPIDriver,
+                    vmwareapi.VMWareESXDriver. If nothing is
+                    specified the older connection_type mechanism
+                    will be used. Be aware that method will be
+                    removed post Folsom release.
+                </td>
+            </tr>
+            <tr>
+                <td>connection_type='libvirt' (Deprecated)</td>
+                <td>libvirt, xenapi, or fake; Value that
+                    indicates the virtualization connection
+                    type. Deprecated as of Folsom, will be removed in
+                    G release.</td>
             </tr>
             <tr>
                 <td><para>
@@ -186,11 +203,11 @@
                 </para></td>
             </tr>
             <tr>
-                <td><para>
-                    firewall_driver=nova.virt.firewall.IptablesFirewallDriver </para></td>
+                <td><para> firewall_driver=nova.virt.firewall.libvirt.IptablesFirewallDriver</para></td>
                 <td><para> (StrOpt) Firewall driver (defaults to iptables)
                 </para></td>
             </tr>
+
             <tr>
                 <td><para>
                     floating_ip_dns_manager=nova.network.dns_driver.DNSDriver </para></td>
@@ -257,7 +274,7 @@
                 <td><para> (StrOpt) Directory to use for lock files </para></td>
             </tr>
             <tr>
-                <td><para>log-config=&lt;None&gt; </para></td>
+                <td><para>log_config=&lt;None&gt; </para></td>
                 <td><para> (StrOpt) If this option is specified, the logging
                     configuration file specified is used and overrides
                     any other logging options specified. Please see
@@ -265,23 +282,22 @@
                     details on logging configuration files. </para></td>
             </tr>
             <tr>
-                <td><para> log-date-format=%Y-%m-%d %H:%M:%S </para></td>
+                <td><para> log_date_format=%Y-%m-%d %H:%M:%S </para></td>
                 <td><para> (StrOpt) Format string for %(asctime)s in log
                     records. Default: %default </para></td>
             </tr>
             <tr>
-                <td><para>log-dir=&lt;None&gt; </para></td>
+                <td><para>log_dir=&lt;None&gt; </para></td>
                 <td><para> (StrOpt) (Optional) The directory to keep log
                     files in (will be prepended to --logfile) </para></td>
             </tr>
             <tr>
-                <td><para>log-file=&lt;None&gt; </para></td>
+                <td><para>log_file=&lt;None&gt; </para></td>
                 <td><para> (StrOpt) (Optional) Name of log file to output
                     to. If not set, logging will go to stdout. </para></td>
             </tr>
             <tr>
-                <td><para> log-format= "%(asctime)s %(levelname)8s [%(name)s]
-                    %(message)s" </para></td>
+                <td><para> log_format= "%(asctime)s %(levelname)8s [%(name)s] %(message)s" </para></td>
                 <td><para> (StrOpt) A logging.Formatter log message format
                     string which may use any of the available
                     logging.LogRecord attributes. Default: %default
@@ -308,7 +324,7 @@
             </tr>
             <tr>
                 <td><para> metadata_host=$my_ip </para></td>
-                <td><para> (StrOpt) the IP for the metadata API server </para></td>
+                <td><para> (StrOpt) the IP address for the metadata API server </para></td>
             </tr>
             <tr>
                 <td><para> metadata_port=8775 </para></td>
@@ -326,7 +342,7 @@
             </tr>
             <tr>
                 <td><para> my_ip=192.168.1.82 </para></td>
-                <td><para> (StrOpt) IP address of this host </para></td>
+                <td><para> (StrOpt) IP address of this host; change my_ip to match each host when copying <filename>nova.conf</filename> files to multiple hosts.</para></td>
             </tr>
             <tr>
                 <td><para> network_api_class=nova.network.api.API </para></td>
@@ -439,7 +455,7 @@
                     retry count) </para></td>
             </tr>
             <tr>
-                <td><para> rabbit_password=guest </para></td>
+                <td><para> rabbit_password=<userinput>guest</userinput> </para></td>
                 <td><para> (StrOpt) the RabbitMQ password </para></td>
             </tr>
             <tr>
@@ -461,7 +477,7 @@
                 <td><para> (BoolOpt) connect over SSL for RabbitMQ </para></td>
             </tr>
             <tr>
-                <td><para> rabbit_userid=guest </para></td>
+                <td><para> rabbit_userid=<userinput>guest</userinput> </para></td>
                 <td><para> (StrOpt) the RabbitMQ userid </para></td>
             </tr>
             <tr>
@@ -491,9 +507,14 @@
                     it is left untouched. </para></td>
             </tr>
             <tr>
-                <td><para> root_helper=sudo </para></td>
+                <td><para> rootwrap_config=sudo nova-rootwrap
+                        /etc/nova/rootwrap.conf</para></td>
                 <td><para> (StrOpt) Command prefix to use for running
-                    commands as root </para></td>
+                        commands as root. Note that the configuration
+                        file (and executable) used here must match the
+                        one defined in the sudoers entry from packagers,
+                        otherwise the commands are rejected.
+                    </para></td>
             </tr>
             <tr>
                 <td><para> s3_dmz=$my_ip </para></td>
@@ -559,7 +580,7 @@
                 <td><para> use_cow_images=true </para></td>
                 <td><para> (BoolOpt) Whether to use cow images </para></td>
             </tr>
-            
+
             <tr>
                 <td><para> use_stderr=true </para></td>
                 <td><para> (BoolOpt) Log output to standard error </para></td>

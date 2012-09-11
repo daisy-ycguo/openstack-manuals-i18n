@@ -97,30 +97,137 @@
             </itemizedlist></para>
         
     </section><section xml:id="images-and-instances">
-            <title>Images and Instances</title>
-        
-        <para>An image is a file containing information about a virtual disk that completely
-            replicates all information about a working computer at a point in time including
-            operating system information and file system information. Compute can use certificate
-            management for decrypting bundled images. With the deprecated auth system, you can use
-            the euca2ools command-line tools distributed by the Eucalyptus Team for adding,
-            bundling, and deleting images. When using the Image Service (Keystone), you can use the
-            nova-client command-line tool for working with images and the glance-client command-line
-            tool for uploading images to the Image Service. </para>
-        <para>There are two methods for managing images. Images can be served through the OpenStack
-            Image Service, a project that is named Glance, or use the nova-objectstore service.
-            Compute defaults to being configured to use the Image Service. With an OpenStack Image
-            Service server in place, the Image Service fetches the image on to the host machine and
-            then OpenStack Compute boots the image from the host machine. To place images into the
-            service, you would use a REST interface to stream them, and the service, in turn,
-            streams that into a back end which could be S3, OpenStack Object Storage (which can use
-            an S3), or the local file system on the server where OpenStack Image Service is
-            installed.</para>
-        <para>An instance is a running virtual machine within the cloud. An instance has a life
-            cycle that is controlled by OpenStack Compute. Compute creates the instances and it is
-            responsible for building a disk image, launching it, reporting the state, attaching
-            persistent storage, and terminating it. </para>
-    </section><section xml:id="system-architecture">
+    <title>Images and Instances</title>
+    
+    <para>This introduction provides a high level overview of what
+            images and instances are and description of the life-cycle
+            of a typical virtual system within the cloud. There are
+            many ways to configure the details of an OpenStack cloud
+            and many ways to implement a virtual system within that
+            cloud. These configuration details as well as the specific
+            command line utilities and API calls to preform the
+            actions described are presented in the <link
+                linkend="ch_image_mgmt">Image Management</link> and
+                <link linkend="ch_volumes">Volume Management</link>
+            chapters.</para>
+
+    <para>Images are disk images which are templates for virtual
+            machine file systems. The image service, Glance, is
+            responsible for the storage and management of images
+            within OpenStack.</para>
+
+    <para>Instances are the individual virtual machines running on
+            physical compute nodes. The compute service, Nova, manages
+            instances. Any number of instances maybe started from the
+            same image. Each instance is run from a copy of the base
+            image so runtime changes made by an instance do not change
+            the image it is based on. Snapshots of running instances
+            may be taken which create a new image based on the current
+            disk state of a particular instance.</para>
+
+    <para>When starting an instance a set of virtual resources known
+            as a flavor must be selected. Flavors define how many
+            virtual CPUs an instance has and the amount of RAM and
+            size of its ephemeral disks. OpenStack provides a number
+            of predefined flavors which cloud administrators may edit
+            or add to. Users must select from the set of available
+            flavors defined on their cloud.</para>
+
+    <para>Additional resources such as persistent volume storage and
+            public IP address may be added to and removed from running
+            instances. The examples below show the nova-volume service
+            which provide persistent block storage as opposed to the
+            ephemeral storage provided by the instance flavor.</para>
+
+    <para>Here is an example of the life cycle of a typical virtual
+    system withing an OpenStack cloud to illustrate these
+    concepts.</para>
+
+    <simplesect xml:id="initial-instance-state">
+     <title>Initial State</title>
+
+     <para>The following diagram shows the system state prior to
+                launching an instance. The image store fronted by the
+                image service, Glance, has some number of predefined
+                images. In the cloud there is an available compute
+                node with available vCPU, memory and local disk
+                resources. Plus there are a number of predefined
+                volumes in the nova-volume service.</para>
+
+     <figure xml:id="initial-instance-state-figure">
+       <title>Base image state with no running instances</title>
+       <mediaobject>
+	 <imageobject>
+	   <imagedata fileref="figures/instance-life-1.png"/>
+	 </imageobject>
+       </mediaobject>
+     </figure>
+     </simplesect>
+
+    <simplesect xml:id="running-instance-state">
+     <title>Launching an instance</title>
+
+     <para>To launch an instance the user selects an image, a flavor
+     and optionally other attributes.  In this case the selected
+     flavor provides a root volume (as all flavors do) labeled vda in
+     the diagram and additional ephemeral storage labeled vdb in the
+     diagram.  The user has also opted to map a volume from the
+     nova-volume store to the third virtual disk, vdc, on this
+     instance.</para>
+
+     <figure xml:id="running-instance-state-figure">
+       <title>Instance creation from image and run time state</title>
+       <mediaobject>
+	 <imageobject>
+	   <imagedata fileref="figures/instance-life-2.png"/>
+	 </imageobject>
+       </mediaobject>
+     </figure>
+
+     <para>The OpenStack system copies the base image from the image
+                store to local disk which is used as the first disk of
+                the instance (vda), having small images will result in
+                faster start up of your instances as less data needs
+                to be copied across the network. The system also
+                creates a new empty disk image to present as the
+                second disk (vdb). The compute node attaches to the
+                requested nova-volume using iSCSI and maps this to the
+                third disk (vdc) as requested. The vCPU and memory
+                resources are provisioned and the instance is booted
+                from the first dive. The instance runs and changes
+                data on the disks indicated in red in the
+                diagram.</para>
+
+     <para>There are many possible variations in the details of the
+     scenario, particularly in terms of what the backing storage is
+     and the network protocols used to attach and move storage. One
+     variant worth mentioning here is that the ephemeral storage used
+     for volumes vda and vdb in this example may be backed by network
+     storage rather than local disk.  The details are left for later
+     chapters.</para>
+    
+    </simplesect>
+
+    <simplesect xml:id="end-instance-state">
+     <title>End State</title>
+
+     <para>Once the instance has served its purpose and is deleted all
+                state is reclaimed, except the persistent volume. The
+                ephemeral storage is purged. Memory and vCPU resources
+                are released. And of course the image has remained
+                unchanged through out.</para>
+
+     <figure xml:id="end-instance-state-figure">
+       <title>End state of image and volume after instance exits</title>
+       <mediaobject>
+	 <imageobject>
+	   <imagedata fileref="figures/instance-life-3.png"/>
+	 </imageobject>
+       </mediaobject>
+     </figure>
+    </simplesect>
+  </section>
+    <section xml:id="system-architecture">
         <title>System Architecture</title><para>OpenStack Compute consists of several main components. A "cloud controller" contains many of
             these components, and it represents the global state and interacts with all other
             components. An API Server acts as the web services front end for the cloud controller.
@@ -142,8 +249,81 @@
         
         <para>To achieve the shared-nothing property with multiple copies of the same component, OpenStack Compute keeps all the cloud system state in a database.</para></section>
     <section xml:id="storage-and-openstack-compute">
-            <title>Block Storage and OpenStack Compute</title><para>A ‘volume’ is a detachable block storage device. You can think of it as a USB hard drive. It
-            can only be attached to one instance at a time, so it does not work like a SAN. If you
-            wish to expose the same volume to multiple instances, you will have to use an NFS or
-            SAMBA share from an existing instance. </para><para>Every instance larger than m1.tiny starts with some local storage (up to 160GB for m1.xlarge).
-            This storage is currently the second partition on the root drive. </para></section></chapter>
+      <title>Block Storage and OpenStack Compute</title> 
+
+      <para>OpenStack provides two classes of block storage,
+      "ephemeral" storage and persistent "volumes".  Ephemeral storage
+      exists only for the life of an instance, it will persist across
+      reboots of the guest operating system but when the instance is
+      deleted so is the associated storage.  All instances have some
+      ephemeral storage.  Volumes are persistent virtualized block
+      devices independent of any particular instance.  Volumes may be
+      attached to a single instance at a time, but may be detached or
+      reattached to a different instance while retaining all data,
+      much like a USB drive.</para>
+      
+      <simplesect xml:id="about-ephemeral-storage">
+	<title>Ephemeral Storage</title>
+
+	<para>Ephemeral storage is associated with a single unique
+	instance.  Its size is defined by the flavor of the
+	instance.</para>
+
+	<para>Data on ephemeral storage ceases to exist when the
+	instance it is associated with goes away. In the typical use
+	case an instance's root filesystem is stored on ephemeral
+	storage. This is often an unpleasant surprise for people
+	unfamiliar with the cloud model of computing.</para>
+
+	<para>In addition to the ephemeral root volume all flavors
+	except the smallest, m1.tiny, provide an additional ephemeral
+	block device varying from 20G for the m1.small through 160G
+	for the m1.xlarge by default - these sizes are configurable.
+	This is presented as a raw block device with no partition
+	table or filesystem.  Cloud aware operating system images may
+	discover, format, and mount this device.  For example the
+	cloud-init package included in Ubuntu's stock cloud images
+	will format this space as an ext3 filesystem and mount it on
+	/mnt. It is important to note this a feature of the guest
+	operating system. OpenStack only provisions the raw
+	storage.</para>
+
+      </simplesect>
+
+      <simplesect xml:id="about-persistent-storage">
+	<title>Volume Storage</title>
+
+	<para>Volume storage is independent or any particular instance
+	and is persistent. Volumes are user created and within quota
+	and availability limits may be of any arbitrary size.</para>
+
+	<para>When first created volumes are raw block devices with no
+	partition table and no filesystem.  They must be attached to
+	an instance to be partitioned and/or formatted.  Once this is
+	done they may be used much like an external disk drive.
+	Volumes may attached to only one instance at a time, but may
+	be detached and reattached to either the same or different
+	instances.</para>
+
+	<para>It is possible to configure a volume so that it is
+	bootable and provides a persistent virtual instance similar to
+	traditional non-cloud based virtualization systems.  In this
+	use case the resulting instance may sill have ephemeral
+	storage depending on the flavor selected, but the root
+	filesystem (and possibly others) will be on the persistent
+	volume and thus state will be maintained even if the instance
+	it shutdown.  Details of this configuration are discussed in
+	the <link linkend="boot-from-volume">Boot From Volume</link>
+	section of this manual.</para>
+
+	<para>Volumes do not provide concurrent access from multiple
+	instances.  For that you need either a traditional network
+	filesystem like NFS or CIFS or a cluster filesystem such as
+	GlusterFS.  These may be built within an OpenStack cluster or
+	provisioned out side of it, but are not features provided by
+	the OpenStack software.</para>
+
+      </simplesect>
+
+    </section>
+</chapter>

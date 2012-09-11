@@ -5,8 +5,8 @@
     xml:id="ch_scheduling">
     <title>Scheduling</title>
     <para>Compute uses the <command>nova-scheduler</command> service to determine
-how to dispatch compute and volume requests. For example, the 
-<command>nova-scheduler</command> service determines which host 
+how to dispatch compute and volume requests. For example, the
+<command>nova-scheduler</command> service determines which host
 a VM should launch on. The term "host" in the context of filters means a
 physical node that has a <command>nova-compute</command> service running on
 it. The scheduler is configurable through a variety of options.</para>
@@ -23,7 +23,7 @@ compute_fill_first_cost_fn_weight=-1.0
 
 Compute is configured by default to use the Multi Scheduler, which allows the
 admin to specify different scheduling behavior for compute requests versus volume
-requests. 
+requests.
 </para>
 
 <para>The volume scheduler is configured by default
@@ -61,6 +61,7 @@ servicing the request (<literal>ComputeFilter</literal>).</para>
 
 
     <section xml:id="scheduler-filters">
+        <?dbhtml stop-chunking?>
         <title>Filters</title>
         <para>When the Filter Scheduler receives a request for a resource, it first
             applies filters to determine which hosts are eligible for
@@ -81,32 +82,42 @@ servicing the request (<literal>ComputeFilter</literal>).</para>
       </figure>
         </para>
 
-    <para>The <literal>scheduler_available_filters</literal> configuration option
-    in <filename>nova.conf</filename> provides the Compute service with the
-    list of the filters that will be used by the scheduler. The default setting
-    specifies all of the filter that are incldued with the Compute service:
-    <programlisting>
+    <para>The <literal>scheduler_available_filters</literal>
+            configuration option in <filename>nova.conf</filename>
+            provides the Compute service with the list of the filters
+            that will be used by the scheduler. The default setting
+            specifies all of the filter that are included with the
+            Compute service:
+            <programlisting>
 scheduler_available_filters=nova.scheduler.filters.standard_filters
     </programlisting>
-    This configuration option can be specified multiple times. For example,
-    if you implemented your own custom filter in Python called 
-    <literal>myfilter.MyFilter</literal> and you wanted to use both the
-    built-in filters and your custom filter, your <filename>nova.conf</filename> 
-    file would contain:
-    <programlisting>
+            This configuration option can be specified multiple times.
+            For example, if you implemented your own custom filter in
+            Python called <literal>myfilter.MyFilter</literal> and you
+            wanted to use both the built-in filters and your custom
+            filter, your <filename>nova.conf</filename> file would
+            contain:
+            <programlisting>
 scheduler_available_filters=nova.scheduler.filters.standard_filters
 scheduler_available_filters=myfilter.MyFilter
     </programlisting>
-</para>
-     <para>The <literal>scheduler_default_filters</literal> configuration option
-      in <filename>nova.conf</filename> defines the list of filters
-     that will be applied by the <command>nova-scheduler</command> service.
-     As mentioned above, the default filtes are:
-     <programlisting>
+        </para>
+     <para>The <literal>scheduler_default_filters</literal>
+            configuration option in <filename>nova.conf</filename>
+            defines the list of filters that will be applied by the
+                <command>nova-scheduler</command> service. As
+            mentioned above, the default filters are:
+            <programlisting>
 scheduler_default_filters=AvailabilityZoneFilter,RamFilter,ComputeFilter
      </programlisting>
-</para>
+        </para>
         <para>The available filters are described below.</para>
+
+    <section xml:id="aggregateinstanceextraspecsfilter">
+        <title>AggregateInstanceExtraSpecsFilter</title>
+        <para>Matches properties defined in an instance type's extra specs against
+            admin-defined properties on a host aggregate</para>
+    </section>
 
     <section xml:id="allhostsfilter">
         <title>AllHostsFilter</title>
@@ -118,22 +129,41 @@ scheduler_default_filters=AvailabilityZoneFilter,RamFilter,ComputeFilter
         <title>
             AvailabilityZoneFilter
         </title>
-        <para>
-            Filters hosts by availabilty zone. This filter must be enabled for
-            the scheduler to respect availability zones in requests.
-        </para>
+        <para> Filters hosts by availability zone. This filter must be
+                enabled for the scheduler to respect availability
+                zones in requests. </para>
+    </section>
+
+    <section xml:id="computecapabilitiesfilter">
+        <title>ComputeCapabilitiesFilter</title>
+        <para>Matches properties defined in an instance type's extra specs against
+            compute capabilities</para>
     </section>
 
     <section xml:id="computefilter">
         <title>
             ComputeFilter
         </title>
-        <para>
-            Filters hosts by flavor (also known as instance type). The scheduler
-            will check to ensure that a host has sufficient capabilities for
-            the requested flavor. In general, this filter should always be
-            enabled.
-        </para>
+        <para> Filters hosts by flavor (also known as instance type) and image properties. The
+                scheduler will check to ensure that a compute host has sufficient capabilities to
+                run a virtual machine instance that corresponds to the specified flavor. If the
+                image has properties specified, this filter will also check that the host can
+                support them. The image properties that the filter checks for are:<itemizedlist>
+                    <listitem>
+                        <para>architecture: Architecture describes the machine architecture required
+                            by the image. Examples are i686, x86_64, arm, and powerpc.</para>
+                    </listitem>
+                    <listitem>
+                        <para>hypervisor_type: Hypervisor type describes the hypervisor required by
+                            the image. Examples are xen, kvm, qemu, and xenapi.</para>
+                    </listitem>
+                    <listitem>
+                        <para>vm_mode: Virtual machine mode describes the hypervisor application
+                            binary interface (ABI) required by the image. Examples are 'xen' for Xen
+                            3.0 paravirtual ABI, 'hvm' for native ABI, 'uml' for User Mode Linux
+                            paravirtual ABI, exe for container virt executable ABI.</para>
+                    </listitem>
+                </itemizedlist>In general, this filter should always be enabled. </para>
     </section>
 
     <section xml:id="corefilter">
@@ -146,23 +176,39 @@ scheduler_default_filters=AvailabilityZoneFilter,RamFilter,ComputeFilter
             a host based on cores (i.e., the virtual cores running on an instance
             may exceed the physical cores).
         </para>
+        <para>This filter can be configured to allow a fixed amount of
+         vCPU overcommitment by using the <literal>cpu_allocation_ratio
+    </literal> Configuration option in <filename>nova.conf</filename>.
+     The default setting is:
+      <programlisting>
+      cpu_allocation_ratio=16.0
+      </programlisting>
+       With this setting, if there are 8 vCPUs on a node, the scheduler will
+       allow instances up to 128 vCPU to be run on that node.
+        </para>
+        <para>To disallow vCPU overcommitment set:</para>
+         <programlisting>
+         cpu_allocation_ratio=1.0
+         </programlisting>
     </section>
 
     <section xml:id="differenthostfilter">
             <title>DifferentHostFilter</title>
-            <para>Schedule the instance on a different host from a
-                set of instances. To take advantage of this filter, the requester
-                must pass a scheduler hint, using  <literal>different_host</literal>
-                as the keyand a list of instance uuids as the value. This
-                filter is the opposite of the <literal>SameHostFilter</literal>. 
-                Using the
-                <command>nova</command> command-line tool, use the <literal>--hint</literal>
-                flag. For example:
-<screen>
+            <para>Schedule the instance on a different host from a set
+                of instances. To take advantage of this filter, the
+                requester must pass a scheduler hint, using
+                    <literal>different_host</literal> as the key and a
+                list of instance uuids as the value. This filter is
+                the opposite of the <literal>SameHostFilter</literal>.
+                Using the <command>nova</command> command-line tool,
+                use the <literal>--hint</literal> flag. For example:
+                <screen>
 <prompt>$</prompt> <userinput>nova boot --image cedef40a-ed67-4d10-800e-17455edce175 --flavor 1 --hint different_host=[a0cf03a5-d921-4877-bb5c-86d26cf818e1,8c19174f-4220-44f0-824a-cd1eeef10287] server-1</userinput>
 </screen>
-With the API, use the <literal>os:scheduler_hints</literal> key. For example:
-<programlisting language="json">
+                With the API, use the
+                    <literal>os:scheduler_hints</literal> key. For
+                example:
+                <programlisting language="json">
     {
     'server': {
         'name': 'server-1',
@@ -177,7 +223,21 @@ With the API, use the <literal>os:scheduler_hints</literal> key. For example:
 </programlisting>
             </para>
         </section>
-        
+
+    <section xml:id="imagepropertiesfilter">
+        <title>ImagePropertiesFilter</title>
+        <para>Filters hosts based on properties defined on the instance's
+            image. It passes hosts that can support the specified image
+            properties contained in the instance. Properties include the 
+            architecture, hypervisor type, and virtual machine mode.
+            E.g., an instance might require a host that supports the ARM 
+            support the architecture on a qemu compute host.
+            An image can be decorated with these properties using
+            <programlisting>glance image-update img-uuid --property architecture=arm --property hypervisor_type=qemu</programlisting>
+</para>
+    </section>
+
+     
     <section xml:id="isolatedhostsfilter">
         <title>
             IsolatedHostsFilter
@@ -190,7 +250,7 @@ With the API, use the <literal>os:scheduler_hints</literal> key. For example:
         </para>
         <para>
             The admin must specify the isolated set of images and hosts in
-            the <filename>nova.conf</filename> file using the <literal>isolated_hosts</literal> 
+            the <filename>nova.conf</filename> file using the <literal>isolated_hosts</literal>
             and <literal>isolated_images</literal> configuration options. For
             example:
             <programlisting>
@@ -199,6 +259,72 @@ isolated_images=342b492c-128f-4a42-8d3a-c5088cf27d13,ebd267a6-ca86-4d6c-9a0e-bd1
             </programlisting>
         </para>
     </section>
+
+    <section xml:id="jsonfilter">
+        <title>JsonFilter</title>
+        <para>The JsonFilter allows a user to construct a custom filter by passing a scheduler hint
+                in JSON format. The following operators are supported:<itemizedlist>
+                    <listitem>
+                        <para>=</para>
+                    </listitem>
+                    <listitem>
+                        <para>&lt;</para>
+                    </listitem>
+                    <listitem>
+                        <para>></para>
+                    </listitem>
+                    <listitem>
+                        <para>in</para>
+                    </listitem>
+                    <listitem>
+                        <para>&lt;=</para>
+                    </listitem>
+                    <listitem>
+                        <para>>=</para>
+                    </listitem>
+                    <listitem>
+                        <para>not</para>
+                    </listitem>
+                    <listitem>
+                        <para>or</para>
+                    </listitem>
+                    <listitem>
+                        <para>and</para>
+                    </listitem>
+                </itemizedlist>The filter supports the following variables:<itemizedlist>
+                    <listitem>
+                        <para>$free_ram_mb</para>
+                    </listitem>
+                    <listitem>
+                        <para>$free_disk_mb</para>
+                    </listitem>
+                    <listitem>
+                        <para>$total_usable_ram_mb</para>
+                    </listitem>
+                    <listitem>
+                        <para>$vcpus_total</para>
+                    </listitem>
+                    <listitem>
+                        <para>$vcpus_used</para>
+                    </listitem>
+                </itemizedlist>Using the <command>nova</command> command-line tool, use the
+                    <literal>--hint</literal> flag:
+                <screen><userinput>$</userinput> <userinput>nova boot --image 827d564a-e636-4fc4-a376-d36f7ebe1747 --flavor
+1 --hint query='[">=","$free_ram_mb",1024]' server1</userinput></screen>
+                With the API, use the <literal>os:scheduler_hints</literal> key:
+                <programlisting>
+    {
+    'server': {
+        'name': 'server-1',
+        'imageRef': 'cedef40a-ed67-4d10-800e-17455edce175',
+        'flavorRef': '1'
+    },
+    'os:scheduler_hints': {
+        'query': '[">=","$free_ram_mb",1024]',
+    }
+}
+</programlisting></para>
+     </section>
 
     <section xml:id="ramfilter">
         <title>RamFilter</title>
@@ -218,19 +344,32 @@ ram_allocation_ratio=1.5
         </para>
     </section>
 
+        <section xml:id="retryfilter">
+            <title>RetryFilter</title>
+            <para>Filter out hosts that have already been attempted for scheduling purposes. If the
+                scheduler selects a host to respond to a service request, and the host fails to
+                respond to the request, this filter will prevent the scheduler from retrying that
+                host for the service request.</para>
+            <para>This filter is only useful if the <literal>scheduler_max_attempts</literal>
+                configuration option is set to a value greater than zero.</para>
+        </section>
+
         <section xml:id="samehostfilter">
             <title>SameHostFilter</title>
-            <para>Schedule the instance on the same host as another instance
-                in a set of of instances. To take advantage of this filter, the
-                requester must pass a scheduler hint, using  <literal>same_host</literal>
-                as the key and a list of instance uuids as the value. This
-                filter is the opposite of the <literal>DifferentHostFilter</literal>. Using the
-                <command>nova</command> command-line tool, use the <literal>--hint</literal>
-                flag:
-<screen>
+            <para>Schedule the instance on the same host as another
+                instance in a set of instances. To take advantage of
+                this filter, the requester must pass a scheduler hint,
+                using <literal>same_host</literal> as the key and a
+                list of instance uuids as the value. This filter is
+                the opposite of the
+                    <literal>DifferentHostFilter</literal>. Using the
+                    <command>nova</command> command-line tool, use the
+                    <literal>--hint</literal> flag:
+                <screen>
 <prompt>$</prompt> <userinput>nova boot --image cedef40a-ed67-4d10-800e-17455edce175 --flavor 1 --hint same_host=[a0cf03a5-d921-4877-bb5c-86d26cf818e1,8c19174f-4220-44f0-824a-cd1eeef10287] server-1</userinput></screen>
-With the API, use the <literal>os:scheduler_hints</literal> key:
-<programlisting>
+                With the API, use the
+                    <literal>os:scheduler_hints</literal> key:
+                <programlisting>
     {
     'server': {
         'name': 'server-1',
@@ -248,14 +387,9 @@ With the API, use the <literal>os:scheduler_hints</literal> key:
 
         <section xml:id="simplecidraffinityfilter">
             <title>SimpleCIDRAffinityFilter</title>
-            <warning>
-                <para>The SimpleCIDRAffinityFilter does not work properly in the Essex release.
-                 See <link xlink:href="https://bugs.launchpad.net/nova/+bug/999928">bug
-                 999928</link> for details.</para>
-            </warning>
             <para>Schedule the instance based on host IP subnet range. To
                 take advantage of this filter, the requester must specify a
-                range of valid IP address in CIDR format, by passing two 
+                range of valid IP address in CIDR format, by passing two
                 scheduler hints:
             <variablelist>
               <varlistentry>
@@ -341,7 +475,7 @@ noop_cost_fn_weight=1.0
             are added together. The scheduler selects the host that has the
             minimum weighted cost.
 
-        The Compute service comes with two cost functions:
+        The Compute service comes with three cost functions:
     </para>
         <section xml:id="compute_fill_first_cost_fn">
             <title>nova.scheduler.least_cost.compute_fill_first_cost_fn</title>
@@ -361,6 +495,16 @@ compute_fill_first_cost_fn_weight=-1.0
 </programlisting>
                 then the scheduler will favor hosts that have the most amount
                 of available RAM, leading to a "spread-first" behavior.</para>
+        </section>
+        <section xml:id="compute_retry_host_cost_fn">
+            <title>nova.scheduler.least_cost.retry_host_cost_fn</title>
+            <para>This cost function adds additional cost for retrying 
+		scheduling a host that was already used for a previous
+		scheduling attempt. </para>
+	   <para> The normal method of using this function is to set 
+		<literal>retry_host_cost_fn_weight</literal>
+		to a positive value, so that hosts which consistently
+		encounter build failures will be used less often.</para>
         </section>
         <section xml:id="noop_cost_fn">
             <title>nova.scheduler.least_cost.noop_cost_fn</title>
@@ -390,7 +534,7 @@ compute_fill_first_cost_fn_weight=-1.0
             configuration option.</para>
         </section>
         <section xml:id="simple">
-            <title>Simple Scheulder</title>
+            <title>Simple Scheduler</title>
             <para>The Simple Scheduler (<literal>nova.scheduler.simple.SimpleScheduler</literal>)
             implements a naive scheduler that tries to find the least loaded host
             (i.e., implements a "spread-first" algorithm). It can schedule requests

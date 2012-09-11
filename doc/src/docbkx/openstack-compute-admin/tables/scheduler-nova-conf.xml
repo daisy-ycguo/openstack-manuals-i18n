@@ -20,6 +20,13 @@
             </para></td>
         </tr>
         <tr>
+            <td><para>
+                scheduler_max_attempts=3 </para></td>
+            <td><para> (IntOpt) Maximum number of attempts to schedule an instance before giving up and settting the instance to
+                error
+            </para></td>
+        </tr>
+        <tr>
             <td><para> cpu_allocation_ratio=16.0 </para></td>
             <td><para> (FloatOpt) Virtual CPU to Physical CPU allocation
                 ratio </para></td>
@@ -60,6 +67,12 @@
             <td><para> (FloatOpt) How much weight to give the fill-first
                 cost function. A negative value will reverse
                 behavior: e.g. spread-first </para></td>
+        </tr>
+        <tr>
+            <td><para> retry_host_cost_fn_weight=1.0 </para></td>
+            <td><para> (FloatOpt) How much weight to give the retry host
+                cost function. A negative value will reverse
+                behavior: e.g. use multiple-times-retried hosts first </para></td>
         </tr>
         <tr>
             <td><para>

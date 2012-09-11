@@ -34,6 +34,39 @@
             </itemizedlist></para> <para>The three kinds of networks can co-exist in a cloud system. However,
             since you can't yet select the type of network for a given project, you cannot configure
             more than one type of network in a given Compute installation.</para>
+        <note>
+            <para>All of the networking options require network connectivity to be already set up
+                between OpenStack physical nodes. OpenStack will not create or configure any network
+                interfaces (except bridges and VM virtual interfaces). </para>
+            <para>All machines must have a <emphasis role="italic">public</emphasis> and <emphasis
+                    role="italic">internal</emphasis> network interface (controlled by the options:
+                    <literal>public_interface</literal> for the public interface, and
+                    <literal>flat_interface</literal> and <literal>vlan_interface</literal> for the
+                internal interface with flat / VLAN managers). </para>
+            <para>The internal network interface is used for communication with VMs, it shouldn't
+                have an IP address attached to it before OpenStack installation (it serves merely as
+                a fabric where the actual endpoints are VMs and dnsmasq). Also, the internal network
+                interface must be put in <emphasis role="italic">promiscuous mode</emphasis>,
+                because it will have to receive packets whose target MAC address is of the guest VM,
+                not of the host.</para>
+        </note>
+        <para>All the network managers configure the network using <emphasis role="italic">network
+                drivers</emphasis>, e.g. the linux L3 driver (<literal>l3.py</literal> and
+                <literal>linux_net.py</literal>) which makes use of <literal>iptables</literal>,
+                <literal>route</literal> and other network management facilities, and also of
+            libvirt's <link xlink:href="http://libvirt.org/formatnwfilter.html">network filtering
+                facilities</link>. The driver isn't tied to any particular network manager; all
+            network managers use the same driver. The driver usually initializes (creates bridges
+            etc.) only when the first VM lands on this host node. </para>
+        <para>All network managers operate in either <emphasis role="italic">single-host</emphasis>
+            or <emphasis role="italic">multi-host</emphasis> mode. This choice greatly influences
+            the network configuration. In single-host mode, there is just 1 instance of
+                <literal>nova-network</literal> which is used as a default gateway for VMs and hosts
+            a single DHCP server (dnsmasq), whereas in multi-host mode every compute node has its
+            own <literal>nova-network</literal>. In any case, all traffic between VMs and the outer
+            world flows through <literal>nova-network</literal>. There are pros and cons to both
+            modes, read more in <link linkend="existing-ha-networking-options">Existing High
+                Availability Options</link>.</para>
         <para>Compute makes a distinction between <emphasis role="italic">fixed IPs</emphasis> and
                 <emphasis role="italic">floating IPs</emphasis> for VM instances. Fixed IPs are IP
             addresses that are assigned to an instance on creation and stay the same until the
@@ -41,14 +74,14 @@
             dynamically associated with an instance. A floating IP address can be disassociated and
             associated with another instance at any time. A user can reserve a floating IP for their
             project. </para>
-        <para>In Flat Mode, a network administrator specifies a subnet. The IP addresses for VM
-            instances are grabbed from the subnet, and then injected into the image on launch. Each
-            instance receives a fixed IP address from the pool of available addresses. A network
-            administrator must configure the Linux networking bridge (typically named
-                <literal>br100</literal>, although this configurable) both on the network controller
-            hosting the network and on the cloud controllers hosting the instances. All instances of
-            the system are attached to the same bridge, configured manually by the network
-            administrator.</para>
+        <para>In <emphasis role="bold">Flat Mode</emphasis>, a network administrator specifies a
+            subnet. The IP addresses for VM instances are grabbed from the subnet, and then injected
+            into the image on launch. Each instance receives a fixed IP address from the pool of
+            available addresses. A network administrator must configure the Linux networking bridge
+            (typically named <literal>br100</literal>, although this configurable) both on the
+            network controller hosting the network and on the cloud controllers hosting the
+            instances. All instances of the system are attached to the same bridge, configured
+            manually by the network administrator.</para>
         <para>
             <note>
                 <para>The configuration injection currently only works on Linux-style systems that
@@ -56,37 +89,47 @@
                     <filename>/etc/network/interfaces</filename>.</para>
             </note>
         </para>
-        <para>In Flat DHCP Mode, you start a DHCP server to pass out
-            IP addresses to VM instances from the specified subnet in
-            addition to manually configuring the networking bridge. IP
-            addresses for VM instances are grabbed from a subnet
-            specified by the network administrator. </para>
-        <para>Like Flat Mode, all instances are attached to a single
-            bridge on the compute node. In addition a DHCP server is
-            running to configure instances. In this mode, Compute does
-            a bit more configuration in that it attempts to bridge
-            into an ethernet device (eth0 by default). It will also
-            run dnsmasq as a dhcpserver listening on this bridge.
-            Instances receive their fixed IPs by doing a dhcpdiscover. </para>
-        <para>In both flat modes, the network nodes do not act as a
-            default gateway. Instances are given public IP addresses.
-            Compute nodes have iptables/ebtables entries created per
-            project and instance to protect against IP/MAC address
-            spoofing and ARP poisoning. </para>
-        <para>VLAN Network Mode is the default mode for OpenStack
-            Compute. In this mode, Compute creates a VLAN and bridge
-            for each project. For multiple machine installation, the
-            VLAN Network Mode requires a switch that supports VLAN
-            tagging (IEEE 802.1Q). The project gets a range of private
-            IPs that are only accessible from inside the VLAN. In
-            order for a user to access the instances in their project,
-            a special VPN instance (code named cloudpipe) needs to be
-            created. Compute generates a certificate and key for the
-            user to access the VPN and starts the VPN automatically.
-            It provides a private network segment for each project's
-            instances that can be accessed via a dedicated VPN
-            connection from the Internet. In this mode, each project
-            gets its own VLAN, Linux networking bridge, and subnet. </para>
+        <para>In <emphasis role="bold">Flat DHCP Mode</emphasis>, OpenStack starts a DHCP server
+            (dnsmasq) to pass out IP addresses to VM instances from the specified subnet in addition
+            to manually configuring the networking bridge. IP addresses for VM instances are grabbed
+            from a subnet specified by the network administrator. </para>
+        <para>Like Flat Mode, all instances are attached to a single bridge on the compute node. In
+            addition a DHCP server is running to configure instances (depending on
+            single-/multi-host mode, alongside each <literal>nova-network</literal>). In this mode,
+            Compute does a bit more configuration in that it attempts to bridge into an ethernet
+            device (<literal>flat_interface</literal>, eth0 by default). It will also run and
+            configure dnsmasq as a DHCP server listening on this bridge, usually on IP address
+            10.0.0.1 (see <link linkend="dnsmasq">DHCP server: dnsmasq</link>). For every instance,
+            nova will allocate a fixed IP address and configure dnsmasq with the MAC/IP pair for the
+            VM, i.e. dnsmasq doesn't take part in the IP address allocation process, it only hands
+            out IPs according to the mapping done by nova. Instances receive their fixed IPs by
+            doing a dhcpdiscover. These IPs are <emphasis role="italic">not</emphasis> assigned to
+            any of the host's network interfaces, only to the VM's guest-side interface.</para>
+        <para>In any setup with flat networking, the host(-s) with nova-network on it is (are)
+            responsible for forwarding traffic from the private network configured with the
+                <literal>fixed_range</literal> configuration option in
+                <filename>nova.conf</filename>. Such host(-s) needs to have <literal>br100</literal>
+            configured and physically connected to any other nodes that are hosting VMs. You must
+            set the <literal>flat_network_bridge</literal> option or create networks with the bridge
+            parameter in order to avoid raising an error. Compute nodes have iptables/ebtables
+            entries created per project and instance to protect against IP/MAC address spoofing and
+            ARP poisoning. </para>
+        <note>
+            <para>In single-host Flat DHCP mode you <emphasis role="italic">will</emphasis> be able
+                to ping VMs via their fixed IP from the nova-network node, but you <emphasis
+                    role="italic">will not</emphasis> be able to ping them from the compute nodes.
+                This is expected behavior.</para>
+        </note>
+        <para><emphasis role="bold">VLAN Network Mode is the default mode</emphasis> for OpenStack
+            Compute. In this mode, Compute creates a VLAN and bridge for each project. For multiple
+            machine installation, the VLAN Network Mode requires a switch that supports VLAN tagging
+            (IEEE 802.1Q). The project gets a range of private IPs that are only accessible from
+            inside the VLAN. In order for a user to access the instances in their project, a special
+            VPN instance (code named cloudpipe) needs to be created. Compute generates a certificate
+            and key for the user to access the VPN and starts the VPN automatically. It provides a
+            private network segment for each project's instances that can be accessed via a
+            dedicated VPN connection from the Internet. In this mode, each project gets its own
+            VLAN, Linux networking bridge, and subnet. </para>
         <para>The subnets are specified by the network administrator,
             and are assigned dynamically to a project when required. A
             DHCP Server is started for each VLAN to pass out IP
@@ -114,6 +157,52 @@
 <computeroutput>/usr/bin/dhcp_release</computeroutput></screen></para>
         </note>
     </section>
+    <section xml:id="dnsmasq">
+        <title>DHCP server: dnsmasq</title>
+        <para>The Compute service uses <link
+                xlink:href="http://www.thekelleys.org.uk/dnsmasq/doc.html"
+                >dnsmasq</link> as the DHCP server when running with
+            either that Flat DHCP Network Manager or the VLAN Network
+            Manager. The <systemitem class="service"
+                >nova-network</systemitem> service is responsible for
+            starting up dnsmasq processes.</para>
+        <para>The behavior of dnsmasq can be customized by creating a
+            dnsmasq configuration file. Specify the config file using
+            the <literal>dnsmasq_config_file</literal> configuration
+            option. For
+            example:<programlisting>dnsmasq_config_file=/etc/dnsmasq-nova.conf</programlisting>See
+            the <link linkend="existing-ha-networking-options">high
+                availability section</link> for an example of how to
+            change the behavior of dnsmasq using a dnsmasq
+            configuration file. The dnsmasq documentation has a more
+            comprehensive <link
+                xlink:href="http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq.conf.example"
+                >dnsmasq configuration file example</link>.</para>
+        <para>Dnsmasq also acts as a caching DNS server for instances.
+            You can explicitly specify the DNS server that dnsmasq
+            should use by setting the <literal>dns_server</literal>
+            configuration option in
+                <filename>/etc/nova/nova.conf</filename>. The
+            following example would configure dnsmasq to use Google's
+            public DNS
+            server:<programlisting>dns_server=8.8.8.8</programlisting></para>
+        <para>Dnsmasq logging output goes to the syslog (typically
+                <filename>/var/log/syslog</filename> or
+                <filename>/var/log/messages</filename>, depending on
+            Linux distribution). The dnsmasq logging output can be
+            useful for troubleshooting if VM instances boot
+            successfully but are not reachable over the
+            network.</para>
+        <para>A network administrator can run <code>nova-manage fixed
+                reserve
+                --address=<replaceable>x.x.x.x</replaceable></code> to
+            specify the starting point IP address (x.x.x.x) to reserve
+            with the DHCP server, replacing the
+            flat_network_dhcp_start configuration option that was
+            available in Diablo. This reservation only affects which
+            IP address the VMs start at, not the fixed IP addresses
+            that the nova-network service places on the bridges.</para>
+    </section>
     <section xml:id="metadata-service">
         <title>Metadata service</title>
         <para>The Compute service uses a special metadata service to enable virtual machine
@@ -131,12 +220,18 @@
                 xlink:href="http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html"
                 >Amazon EC2 metadata service</link>; virtual machine images that are designed for
             EC2 will work properly with OpenStack. </para>
-        <para>The metadata service is implemented by the <systemitem class="service"
-                >nova-api</systemitem> service, which must have <literal>metadata</literal> as one
-            of the elements of the list of the <literal>enabled_apis</literal> configuration option
-            in <filename>/etc/nova/nova.conf</filename>. The default <literal>enabled_apis</literal>
-            configuration setting includes the metadata service, so you should not need to modify
-            it.</para>
+        <para>The metadata service is implemented by either the <systemitem class="service"
+                >nova-api</systemitem> service or the <systemitem class="service"
+                >nova-api-metadata</systemitem> service. (The <systemitem class="service"
+                >nova-api-metadata</systemitem> service is generally only used when running in
+            multi-host mode, see the section titled <link linkend="existing-ha-networking-options"
+                >Existing High Availability Options for Networking</link>  for details). If you are
+            running the <systemitem class="service">nova-api</systemitem> service,  you must have
+                <literal>metadata</literal> as one of the elements of the list of the
+                <literal>enabled_apis</literal> configuration option in
+                <filename>/etc/nova/nova.conf</filename>. The default
+                <literal>enabled_apis</literal> configuration setting includes the metadata service,
+            so you should not need to modify it.</para>
         <para>To allow instances to reach the metadata service, the <systemitem class="service"
                 >nova-network</systemitem> service will configure iptables to NAT port
                 <literal>80</literal> of the <literal>169.254.169.254</literal> address to the IP
@@ -144,7 +239,10 @@
             <literal>$my_ip</literal>, which is the IP address of the <systemitem class="service"
                 >nova-network</systemitem> service) and port specified in
                 <literal>metadata_port</literal> (default <literal>8775</literal>) in
-                <filename>/etc/nova/nova.conf</filename>.<note>
+                <filename>/etc/nova/nova.conf</filename>.
+            <warning><para>The <literal>metadata_host</literal> configuration option must be an IP address, not a
+                    hostname.</para></warning>
+            <note>
                 <para>The default Compute service settings assume that the <systemitem
                         class="service">nova-network</systemitem> service and the <systemitem
                         class="service">nova-api</systemitem> service are running on the same host.
@@ -163,8 +261,7 @@
 
         <orderedlist>
             <listitem>
-                <para>Set the "network-manager" option in
-                    nova.conf.</para>
+                <para>Set the <literal>network_manager</literal> option in nova.conf.</para>
             </listitem>
             <listitem>
                 <para>Use the <code>nova-manage network create label
@@ -180,26 +277,25 @@
             the nova.conf file. Here are the three possible options: </para>
         <itemizedlist>
             <listitem>
-                <para>network_manager=nova.network.manager.FlatManager</para>
+                <para><literal>--network_manager=nova.network.manager.FlatManager</literal></para>
                 <para>Simple, non-VLAN networking</para>
             </listitem>
             <listitem>
-                <para>network_manager=nova.network.manager.FlatDHCPManager</para>
-                <para>Flat networking with DHCP, you must set a bridge
-                    using the flat_network_bridge option</para>
+                <para><literal>--network_manager=nova.network.manager.FlatDHCPManager</literal></para>
+                <para>Flat networking with DHCP, you must set a bridge using the
+                        <literal>flat_network_bridge</literal> option</para>
             </listitem>
             <listitem>
-                <para>network_manager=nova.network.manager.VlanManager</para>
+                <para><literal>--network_manager=nova.network.manager.VlanManager</literal></para>
                 <para>VLAN networking with DHCP. This is the Default
                     if no network manager is defined in nova.conf.
                 </para>
             </listitem>
         </itemizedlist>
-        <para>When you issue the nova-manage network create
-            command, it uses the settings from the nova.conf
-            configuration options file. Use the following command to
+        <para>When you issue the <literal>nova-manage network create</literal> command, it uses the
+            settings from the nova.conf configuration options file. Use the following command to
             create the subnet that your VMs will run on :
-            <literallayout class="monospaced">nova-manage network create private 192.168.0.0/24 1 256</literallayout>
+            <literallayout class="monospaced"><literal>nova-manage network create private 192.168.0.0/24 1 256</literal></literallayout>
         </para>
         <para>When using the XenAPI compute driver, the OpenStack services run
             in a virtual machine. This means networking is
@@ -237,7 +333,7 @@ network_manager=nova.network.manager.FlatManager
             </para>
             <note>
                 <para>When configuring Flat Networking, failing to enable
-                        <literal>flat_injection</literal> can prevent
+                        <literal>flat_injected</literal> can prevent
                     guest VMs from receiving their IP information at
                     boot time.</para>
             </note>
@@ -343,36 +439,35 @@ iface br100 inet dhcp
 
         <section xml:id="configuring-flat-dhcp-networking">
             <title>Configuring Flat DHCP Networking</title>
-            <para>With Flat DHCP, the host running nova-network acts
-                as the gateway to the virtual nodes. You can run one
-                nova-network per cluster. Set the option
-                    <literal>network_host</literal> on the
-                    <filename>nova.conf</filename> stored on the
-                nova-compute node to tell it which host the
-                nova-network is running on so it can communicate with
-                nova-network. In any set up with FlatNetworking, the
-                host with nova-network on it is responsible for
-                forwarding traffic from the private network configured
-                with the <literal>fixed_range=</literal> directive in
-                    <filename>nova.conf</filename> and the
-                    <literal>flat_network_bridge</literal> flag which
-                you must also set to the name of the bridge (as there
-                is no default). The nova-network service will track
-                leases and releases in the database so it knows if a
-                VM instance has stopped properly configuring via DHCP.
-                Lastly, it sets up iptables rules to allow the VMs to
-                communicate with the outside world and contact a
-                special metadata server to retrieve information from
-                the cloud.</para>
-            <para>Compute hosts in the FlatDHCP model are responsible
-                for bringing up a matching bridge and bridging the VM
-                tap devices into the same ethernet device that the
-                network host is on. The compute hosts do not need an
-                IP address on the VM network, because the bridging
-                puts the VMs and the network host on the same logical
-                network. When a VM boots, the VM sends out DHCP
-                packets, and the DHCP server on the network host
-                responds with their assigned IP address.</para> 
+            <para>With Flat DHCP, the host(-s) running nova-network act as the gateway to the
+                virtual nodes. If you're using single-host networking, you can optionally set
+                    <literal>network_host</literal> on the <filename>nova.conf</filename> stored on
+                the nova-compute node to tell it which host the nova-network is running on so it can
+                more efficiently communicate with nova-network. In any setup with flat networking,
+                the hosts with nova-network on it are responsible for forwarding traffic from the
+                private network configured with the <literal>fixed_range=</literal> directive in
+                    <filename>nova.conf</filename> and the <literal>flat_network_bridge</literal>
+                flag which you must also set to the name of the bridge (as there is no default). The
+                nova-network service will track leases and releases in the database, using dnsmasq's
+                    <emphasis role="italic">dhcp-script</emphasis> facility (the script <emphasis
+                    role="italic">bin/nova-dhcpbridge</emphasis> is supplied) so it knows if a VM
+                instance has stopped properly configuring via DHCP (e.g. when a DHCP lease expires,
+                the fixed IP is released from the nova database). Lastly, it sets up iptables rules
+                to allow the VMs to communicate with the outside world and contact a special
+                metadata server to retrieve information from the cloud.</para>
+            <para>Compute hosts in the FlatDHCP model are responsible for bringing up a matching
+                bridge and bridging the VM tap devices into the same ethernet device that the
+                network host is on. The compute hosts should not have an IP address on the VM
+                network, because the bridging puts the VMs and the network host on the same logical
+                network. When a VM boots, the VM sends out DHCP packets, and the DHCP server on the
+                network host responds with their assigned IP address (remember, the address is
+                actually <emphasis role="italic">assigned</emphasis> by nova and put into DHCP
+                server's configuration file, the DHCP server merely tells the VM what it is).</para>
+            <para>You can read a detailed walk-through of what exactly happens in single-host Flat
+                DHCP mode in <link
+                    xlink:href="http://www.mirantis.com/blog/openstack-networking-single-host-flatdhcpmanager/"
+                    >this blogpost</link>, parts of which are also relevant in other networking
+                modes.</para> 
             <para>FlatDHCP doesn't create VLANs, it creates a bridge.
                 This bridge works just fine on a single host, but when
                 there are multiple hosts, traffic needs a way to get
@@ -405,15 +500,13 @@ iface br100 inet dhcp
                 very long time for you to create your initial network,
                 as an entry for each IP will be created in the
                 database. </para>
-            <para>If you have an unused interface on your hosts that
+            <para>If you have an unused interface on your hosts (eg eth2) that
                 has connectivity with no IP address, you can simply
                 tell FlatDHCP to bridge into the interface by
                 specifying
                         <literal>flat_interface=<replaceable>&lt;interface></replaceable></literal>
                 in your configuration file. The network host will
-                automatically add the gateway ip to this bridge. You
-                can also add the interface to br100 manually and not
-                set flat_interface. If this is the case for you, edit
+                automatically add the gateway ip to this bridge. If this is the case for you, edit
                 your nova.conf file to contain the following lines: </para>
             <para>
                 <programlisting>
@@ -421,12 +514,13 @@ dhcpbridge_flagfile=/etc/nova/nova.conf
 dhcpbridge=/usr/bin/nova-dhcpbridge
 network_manager=nova.network.manager.FlatDHCPManager
 fixed_range=10.0.0.0/8
-flat_network_dhcp_start=10.0.0.2
 flat_network_bridge=br100
 flat_interface=eth2
 flat_injected=False
 public_interface=eth0
                 </programlisting>
+                You can also add the unused interface to br100 manually and not
+                set flat_interface. 
             </para>
             <para>Integrate your network interfaces to match this
                 configuration.</para>
@@ -448,20 +542,18 @@ public_interface=eth0
             <para>Here is an extract from a <filename>nova.conf</filename>
                 file in a system running the above setup:</para>
             <para>
-                <programlisting>
-network_manager=nova.network.manager.FlatDHCPManager
+                <programlisting>network_manager=nova.network.manager.FlatDHCPManager
+xenapi_vif_driver=nova.virt.xenapi.vif.(XenAPIBridgeDriver or XenAPIOpenVswitchDriver)
 flat_interface=eth1
 flat_network_bridge=xenbr2
 public_interface=eth3
 multi_host=True
 dhcpbridge_flagfile=/etc/nova/nova.conf
 fixed_range=10.0.0.0/24
-flat_network_dhcp_start=10.0.0.2
 force_dhcp_release=True
 send_arp_for_ha=True
 flat_injected=False
-firewall_driver=nova.virt.xenapi.firewall.Dom0IptablesFirewallDriver
-                </programlisting>
+firewall_driver=nova.virt.xenapi.firewall.Dom0IptablesFirewallDriver</programlisting>
             </para>
             <para>You should notice that
                 <literal>flat_interface</literal>
@@ -582,22 +674,9 @@ firewall_driver=nova.virt.xenapi.firewall.Dom0IptablesFirewallDriver
                             network administrator to configure Compute properly (e.g., netmask,
                             broadcast, gateway, ethernet device, VLAN IDs)</para>
                     </listitem>
-                </itemizedlist></para>
-            <para>To configure your nodes to support VLAN tagging, install the
-                    <literal>vlan</literal> package and load the <literal>8021q</literal> kernel
-                module, as
-                root:<screen><prompt>#</prompt> <userinput>apt-get install vlan</userinput>
-<prompt>#</prompt> <userinput>modprobe 8021q </userinput></screen></para>
-            <para>To have this kernel module loaded on boot, add the following line to
-                    <filename>/etc/modules</filename>:<programlisting>8021q</programlisting></para>
-            <para>Here is an example of settings from <filename>/etc/nova/nova.conf</filename> for a
-                host configured to run <command>nova-network</command> in VLAN mode</para>
-
-            <programlisting>network_manager=nova.network.manager.VlanManager
-vlan_interface=eth0
-fixed_range=172.16.0.0/12
-network_size=256                </programlisting>
-<para>The <literal>network_manager=nova.network.manager.VlanManager</literal> option specifies VLAN
+                </itemizedlist>
+            </para>
+            <para>The <literal>network_manager=nova.network.manager.VlanManager</literal> option specifies VLAN
                 mode, which happens to be the default networking mode. </para>
             <para>The bridges that are created by the network manager will be attached to the
                 interface specified by <literal>vlan_interface</literal>, the example above uses the
@@ -724,18 +803,27 @@ Options:
                 a list of available fixed IP addresses. You can view the list of fixed IP addresses
                 and their associations with active virtual machines by doing, as
                 root:<screen><prompt>#</prompt> <userinput>nova-manage fix list</userinput></screen></para>
-            <para>
-                <warning>
-                    <para>Due to <link xlink:href="https://bugs.launchpad.net/nova/+bug/754900"
-                            >Compute bug #754900</link>, deleting a network with the
-                            <command>nova-manage network delete</command> command does not delete
-                        the associated fixed IP addresses. As a workaround, these fixed IP addresses
-                        can be deleted by connecting to the <literal>nova</literal> database and
-                        issuing the SQL query (this example assumes the deleted network id is
-                            <literal>1</literal><screen><userinput>DELETE from fixed_ips where network_id=1;</userinput></screen></para>
-                </warning>
+            <para>If users need to access the instances in their project across a VPN, a special VPN
+                instance (code named cloudpipe) needs to be created as described in the section
+                titled <link linkend="cloudpipe-per-project-vpns">Cloudpipe — Per Project
+                    VPNs</link>.
             </para>
 
+          <section xml:id="libvirt-vlan-networking">
+            <title>Libvirt VLAN networking</title>
+            <para>To configure your nodes to support VLAN tagging, install the
+                    <literal>vlan</literal> package and load the <literal>8021q</literal> kernel
+                module, as
+                root:<screen><prompt>#</prompt> <userinput>apt-get install vlan</userinput>
+<prompt>#</prompt> <userinput>modprobe 8021q </userinput></screen></para>
+            <para>To have this kernel module loaded on boot, add the following line to
+                    <filename>/etc/modules</filename>:<programlisting>8021q</programlisting></para>
+            <para>Here is an example of settings from <filename>/etc/nova/nova.conf</filename> for a
+                host configured to run <command>nova-network</command> in VLAN mode</para>
+            <programlisting>network_manager=nova.network.manager.VlanManager
+vlan_interface=eth0
+fixed_range=172.16.0.0/12
+network_size=256                </programlisting>
             <para>In certain cases, the network manager may not properly tear down bridges and VLANs
                 when it is stopped. If you attempt to restart the network manager and it does not
                 start, check the logs for errors indicating that a bridge device already exists. If
@@ -744,18 +832,151 @@ Options:
                 commands would stop the service, manually tear down the bridge and VLAN from the
                 previous example, kill any remaining dnsmasq processes, and start the service up
                 again, as root:</para>
-
             <screen><prompt>#</prompt> <userinput>stop nova-network</userinput>
 <prompt>#</prompt> <userinput>vconfig rem vlan169</userinput>
 <prompt>#</prompt> <userinput>ip link set br169 down</userinput>
 <prompt>#</prompt> <userinput>brctl delbr br169</userinput>
 <prompt>#</prompt> <userinput>killall dnsmasq</userinput>
 <prompt>#</prompt> <userinput>start nova-network</userinput></screen>
-
-            <para>If users need to access the instances in their project across a VPN, a special VPN
-                instance (code named cloudpipe) needs to be created as described in the section
-                titled <link linkend="cloudpipe-per-project-vpns">Cloudpipe — Per Project
-                    VPNs</link>. </para>
+            </section>
+            <section xml:id="xenapi-vlan-networking">
+                <title>XenAPI VLAN networking</title>
+                <para>VLAN networking works quite differently with the XenAPI
+                    driver, compared to the libvit driver.
+                    The following figure shows how your setup might look:
+                </para>
+                <figure xml:id="xenapi-vlan-diagram">
+                    <title>VLAN network, multiple interfaces, multiple
+                        servers, network HA with XenAPI driver</title>
+                    <mediaobject><imageobject>
+                        <imagedata scale="80" fileref="figures/XenApiVLANMultInterfaceHA.png" />
+                    </imageobject></mediaobject>
+                </figure>
+                <para>Here is an extract from a <filename>nova.conf</filename>
+                    file in a system running the above setup:</para>
+                <para>
+                    <programlisting>network_manager=nova.network.manager.VlanManager
+xenapi_vif_driver=nova.virt.xenapi.vif.(XenAPIBridgeDriver or XenAPIOpenVswitchDriver)
+vlan_interface=eth1
+public_interface=eth3
+multi_host=True
+force_dhcp_release=True
+send_arp_for_ha=True
+flat_injected=False
+firewall_driver=nova.virt.xenapi.firewall.Dom0IptablesFirewallDriver</programlisting>
+                </para>
+                <para>You should notice that
+                    <literal>vlan_interface</literal>
+                    refers to the network interface on the Hypervisor and
+                    the network interface on the VM running the OpenStack
+                    services.
+                    As with before <literal>public_interface</literal>
+                    refers to the network interfce on the VM running the
+                    OpenStack services.
+                </para>
+                <para>With VLAN networking and the XenAPI driver, the following
+                    things happen when you start a VM:
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                First the XenServer network is attached to the
+                                appropriate physical interface (PIF) and VLAN
+                                unless the network already exsists.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                               When the VM is created, its VIF is attached
+                               to the above network.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                              The 'Openstack domU', i.e. where nova-network is running,
+                              acts as a gateway and DHCP for this instance.
+                              The DomU does this for multiple VLAN networks,
+                              so it has to be attached on a VLAN trunk.
+                              For this reason it must have an interface on the
+                              parent bridge of the VLAN bridge where VM instances are plugged.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+                <para>To help understand VLAN networking with the XenAPI
+                    further, here are some important things to note:
+                  <itemizedlist>
+                    <listitem>
+                        <para>
+                        A physical interface (PIF) identified either
+                        by (A) the vlan_interface flag
+                        or (B) the bridge_interface column in the networks db
+                        table will be used for creating a XenServer VLAN network.
+                        The VLAN tag is found in the vlan column, still in the
+                        networks table, and by default the first tag is 100.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        VIF for VM instances within this network will be
+                        plugged in this VLAN network. You won't see the bridge
+                        until a VIF is plugged in it.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        The 'Openstack domU', i.e. the VM running the nova
+                        network node, instead will not be plugged into this network;
+                        since it acts as a gateway for multiple VLAN networks,
+                        it has to be attached on a VLAN trunk.
+                        For this reason it must have an interface on the parent
+                        bridge of the VLAN bridge where VM instances are plugged.
+                        For example, if <literal>vlan_interface</literal>
+                        is eth0 it must be plugged in xenbr1, eth1 --> xenbr1, etc.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Within the Openstack domU, 'ip link' is then used to
+                        configure VLAN interfaces on the 'trunk' port. Each of
+                        this vlan interfaces is associated with a dnsmasq instance,
+                        which will distribute IP addresses to instances.
+                        The lease file for dnsmasq is constantly updated by
+                        nova-network, thus ensuring VMs get the IP address
+                        specified by the layer3 network driver
+                        (nova IPAM or Melange).
+                        </para>
+                    </listitem>
+                  </itemizedlist>
+                </para>
+                <para>With this configuration, VM instances should be able to
+                get the IP address assigned to them from the appropriate dnsmasq
+                instance, and should be able to communicate without any problem
+                with other VMs on the same network and with the their gateway.
+                </para>
+                <para>The above point (3) probably needs some more explanations.
+                With Open vSwitch, we don't really have distinct bridges for
+                different VLANs; even if they appear as distinct bridges to linux
+                and XenServer, they are actually the same OVS instance, which
+                runs a distinct 'fake-bridge' for each VLAN. The 'real' bridge
+                is the 'parent' of the fake one.
+                You can easily navigate fake and real bridges with ovs-vsctl.
+                </para>
+                <para>As you can see I am referring to Openvswitch only.
+                This is for a specific reason: the fake-parent mechanism
+                automatically imply that ports which are not on a fake bridge
+                are trunk ports. This does not happen with linux bridge.
+                A packet forwarded on a VLAN interfaces does not get back
+                in the xenbrX bridge for ethX.
+                For this reason, with XenAPI, you must use Open vSwitch when
+                running VLAN networking with network HA (i.e. mult-host) enabled.
+                On XenServer 6.0 and later, Open vSwitch is the default
+                network stack.
+                When using VLAN networking with XenAPI and linux bridge,
+                the default networking stack on XenServer prior to version 6.0,
+                you must run the network node on a VM on a XenServer
+                that does not host any nova-compute controlled instances.
+                </para>
+            </section>
             <section xml:id="vlan-known-issues">
                 <title>Known issue with failed DHCP leases in VLAN configuration</title>
                 <para>Text in this section was adapted from <link
@@ -1129,60 +1350,6 @@ auto_assign_floating_ip=True
                     <command>nova boot</command> command will fail
                 with an error.</para>
         </section>
-        <section xml:id="Troubleshooting">
-            <title>Troubleshooting</title>
-            <para>If you aren't able to reach your instances via the
-                floating IP address, make sure the default security
-                group allows ICMP (ping) and SSH (port 22), so that
-                you can reach the instances:</para>
-            <screen>
-<prompt>$</prompt> <userinput>nova secgroup-list-rules default</userinput>
-<computeroutput>
-+-------------+-----------+---------+-----------+--------------+
-| IP Protocol | From Port | To Port |  IP Range | Source Group |
-+-------------+-----------+---------+-----------+--------------+
-| icmp        | -1        | -1      | 0.0.0.0/0 |              |
-| tcp         | 22        | 22      | 0.0.0.0/0 |              |
-+-------------+-----------+---------+-----------+--------------+
-</computeroutput>
-            </screen>
-            <para>Ensure the NAT rules have been added to iptables on
-                the node that nova-network is running on, as
-                root:</para>
-
-            <screen>
-<prompt>#</prompt> <userinput>iptables -L -nv</userinput>
-<computeroutput>
- -A nova-network-OUTPUT -d 68.99.26.170/32 -j DNAT --to-destination 10.0.0.3
-</computeroutput>
-<prompt>#</prompt> <userinput>iptables -L -nv -t nat</userinput>
-<computeroutput>
--A nova-network-PREROUTING -d 68.99.26.170/32 -j DNAT --to-destination10.0.0.3
--A nova-network-floating-snat -s 10.0.0.3/32 -j SNAT --to-source 68.99.26.170
-</computeroutput>
-            </screen>
-
-            <para>Check that the public address, in this example
-                "68.99.26.170", has been added to your public
-                interface: You should see the address in the listing
-                when you enter "ip addr" at the command prompt.</para>
-
-            <screen>
-<prompt>$</prompt> <userinput>ip addr</userinput>
-<computeroutput>
-2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP qlen 1000
-link/ether xx:xx:xx:17:4b:c2 brd ff:ff:ff:ff:ff:ff
-inet 13.22.194.80/24 brd 13.22.194.255 scope global eth0
-inet 68.99.26.170/32 scope global eth0
-inet6 fe80::82b:2bf:fe1:4b2/64 scope link
-valid_lft forever preferred_lft forever
-</computeroutput>
-            </screen>
-
-            <para>Note that you cannot SSH to an instance with a
-                public IP from within the same server as the routing
-                configuration won't allow it. </para>
-        </section>
     </section>
     <section xml:id="removing-network-from-project">
         <title>Removing a Network from a Project</title>
@@ -1222,9 +1389,7 @@ valid_lft forever preferred_lft forever
                 <title>multinic flat manager</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata scale="50"
-                            fileref="figures/SCH_5007_V00_NUAC-multi_nic_OpenStack-Flat-manager.jpg"
-                        />
+                        <imagedata scale="40" fileref="figures/SCH_5007_V00_NUAC-multi_nic_OpenStack-Flat-manager.jpg"/>
                     </imageobject>
                 </mediaobject>
             </figure>
@@ -1232,9 +1397,7 @@ valid_lft forever preferred_lft forever
                 <title>multinic flatdhcp manager</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata scale="40"
-                            fileref="figures/SCH_5007_V00_NUAC-multi_nic_OpenStack-Flat-DHCP-manager.jpg"
-                        />
+                        <imagedata scale="40" fileref="figures/SCH_5007_V00_NUAC-multi_nic_OpenStack-Flat-DHCP-manager.jpg"/>
                     </imageobject>
                 </mediaobject>
             </figure>
@@ -1242,31 +1405,29 @@ valid_lft forever preferred_lft forever
                 <title>multinic VLAN manager</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata scale="40"
-                            fileref="figures/SCH_5007_V00_NUAC-multi_nic_OpenStack-VLAN-manager.jpg"
-                        />
+                        <imagedata scale="40" fileref="figures/SCH_5007_V00_NUAC-multi_nic_OpenStack-VLAN-manager.jpg"/>
                     </imageobject>
                 </mediaobject>
             </figure>
         </para>
         <section xml:id="using-multiple-nics-usage">
             <title>Using the multinic feature</title>
-            <para> The first thing to do is to create a new network
-                and attach it to your project :
-                <screen><prompt>$</prompt> <userinput>nova-manage network create --fixed_range_v4=20.20.0.0/24 --num_networks=1 --network_size=256 --label=test --project=$your-project</userinput></screen>
-                Now every time you spawn a new instance, it gets two
-                IP addresses from the respective DHCP servers : <screen><prompt>$</prompt> <userinput>nova list</userinput>
+            <para> In order to use the multinic feature, first create two networks, and attach them
+                to your project :
+                <screen><prompt>$</prompt> <userinput>nova-manage network create --fixed_range_v4=20.20.0.0/24 --num_networks=1 --network_size=256 --label=first-net --project=$your-project</userinput>
+<prompt>$</prompt> <userinput>nova-manage network create --fixed_range_v4=20.20.10.0/24 --num_networks=1 --network_size=256 --label=second-net --project=$your-project</userinput>              </screen>
+                Now every time you spawn a new instance, it gets two IP addresses from the
+                respective DHCP servers : <screen><prompt>$</prompt> <userinput>nova list</userinput>
 <computeroutput>+-----+------------+--------+----------------------------------------+
-|  ID |    Name    | Status |                Networks                |
-+-----+------------+--------+----------------------------------------+
-| 124 | Server 124 | ACTIVE | network2=20.20.0.3; private=20.10.0.14 |
-+-----+------------+--------+----------------------------------------+</computeroutput></screen>
+ |  ID |    Name    | Status |                Networks                |
+ +-----+------------+--------+----------------------------------------+
+ | 124 | Server 124 | ACTIVE | network2=20.20.0.3; private=20.20.10.14|
+ +-----+------------+--------+----------------------------------------+</computeroutput></screen>
                 <note>
-                    <para>Make sure to power up the second interface
-                        on the instance, otherwise that last won't be
-                        reacheable via its second IP. Here is an
-                        example of how to setup the interfaces within
-                        the instance : </para>
+                    <para>Make sure to power up the second interface on the instance, otherwise that
+                        last won't be reacheable via its second IP. Here is an example of how to
+                        setup the interfaces within the instance (this is the configuration that
+                        needs to be applied inside the image) : </para>
                     <para><filename>/etc/network/interfaces</filename>
                         <programlisting># The loopback network interface
 auto lo
@@ -1278,17 +1439,23 @@ iface eth0 inet dhcp
 auto eth1
 iface eth1 inet dhcp                </programlisting></para>
                 </note></para>
+            <note>
+            <para>If the Virtual Network Service Quantum is installed, it is possible to specify the
+                networks to attach to the respective interfaces by using the
+                    <literal>--nic</literal> flag when invoking the <literal>nova</literal> command
+                :
+                <screen><prompt>$</prompt> <userinput>nova boot --image ed8b2a37-5535-4a5f-a615-443513036d71 --flavor 1 --nic net-id= &lt;id of first network&gt;  --nic net-id= &lt;id of first network&gt;  test-vm1</userinput></screen>
+            </para>
+            </note>
         </section>
     </section>
     <section xml:id="existing-ha-networking-options">
         <title>Existing High Availability Options for
             Networking</title>
-        <para>Adapted from a blog post by<link
-                xlink:href="http://unchainyourbrain.com/openstack/13-networking-in-nova">Vish
+        <para>Adapted from a blog post by<link xlink:href="http://unchainyourbrain.com/openstack/13-networking-in-nova">Vish
                 Ishaya</link></para>
 
-        <para>As illustrated in the Flat DHCP diagram in Section <link
-                xlink:href="#configuring-flat-dhcp-networking">Configuring Flat DHCP
+        <para>As illustrated in the Flat DHCP diagram in Section <link xlink:href="#configuring-flat-dhcp-networking">Configuring Flat DHCP
                 Networking</link> titled <link linkend="flat-dhcp-diagram">Flat DHCP network, multiple interfaces, multiple servers</link>,
             traffic from the VM to the public internet has to go through the host running nova
             network. DHCP is handled by nova-network as well, listening on the gateway address of
@@ -1337,17 +1504,18 @@ iface eth1 inet dhcp                </programlisting></para>
                         <para><command>nova-network</command></para>
                     </listitem>
                     <listitem>
-                        <para><command>nova-api</command></para>
+                        <para><command>nova-api-metadata</command> or
+                            <command>nova-api</command></para>
                     </listitem>
                 </itemizedlist></para>
-            <para>The <filename>nova.conf</filename> file on your compute hosts must contain the
-                following
-                options:<programlisting>multi_host=True
-enabled_apis=metadata</programlisting></para>
-            <para>If a compute host is also an API endpoint, your <literal>enabled_apis</literal>
-                option will need to contain additional values, depending on the API services. For
-                example, if it supports compute requests, volume requests, and EC2 compatibility,
-                the <filename>nova.conf</filename> file should contain:
+            <para>If the compute host is not an API endpoint, use the
+                    <command>nova-api-metadata</command> service. The <filename>nova.conf</filename>
+                file should contain:<programlisting>multi_host=True</programlisting></para>
+            <para>If a compute host is also an API endpoint, use the <command>nova-api</command>
+                service. Your <literal>enabled_apis</literal> option will need to contain
+                    <literal>metadata</literal>, as well as additional options depending on the API
+                services. For example, if it supports compute requests, volume requests, and EC2
+                compatibility, the <filename>nova.conf</filename> file should contain:
                 <programlisting>multi_host=True
 enabled_apis=ec2,osapi_compute,osapi_volume,metadata</programlisting></para>
 
@@ -1356,6 +1524,12 @@ enabled_apis=ec2,osapi_compute,osapi_volume,metadata</programlisting></para>
                 will send all network related commands to the host that the VM is on. You need to
                 set the configuration option <literal>enabled_apis</literal> such that it includes
                     <literal>metadata</literal> in the list of enabled APIs. </para>
+            <note><para>You must specify the <literal>multi_host</literal> option
+            on the command line when creating fixed networks. For example:
+            <screen>
+              <prompt>#</prompt> <userinput> nova-manage network create --fixed_range_v4=192.168.0.0/24 --num_networks=1 --network_size=256 --multi_host=T --label=test</userinput>
+            </screen></para>
+            </note>
         </simplesect>
 
         <simplesect>
@@ -1409,8 +1583,25 @@ enabled_apis=ec2,osapi_compute,osapi_volume,metadata</programlisting></para>
                     <listitem>
                         <para>Create a <systemitem class="service">dnsmasq</systemitem>
                             configuration file (e.g., <filename>/etc/dnsmasq-nova.conf</filename>)
-                            that contains the IP address of the external gateway using the following
-                            syntax:<programlisting>dhcp-option=3,<replaceable>&lt;ip of gateway></replaceable></programlisting></para>
+                            that contains the IP address of the external gateway. If running in
+                            FlatDHCP mode, assuming the IP address of the hardware gateway was
+                            172.16.100.1, the file would contain the
+                            line:<programlisting>dhcp-option=option:router,<replaceable>172.16.100.1</replaceable></programlisting></para>
+                        <para>If running in VLAN mode, a separate router must be specified for each
+                            network. The networks are identified by the <literal>--label</literal>
+                            argument when calling <command>nova-manage network create</command> to
+                            create the networks as documented in the <link
+                                linkend="configuring-vlan-networking">Configuring VLAN Networking
+                                subsection</link>. Assuming you have three VLANs, that are labeled
+                                <literal>red</literal>, <literal>green</literal>, and
+                                <literal>blue</literal>, with corresponding hardware routers at
+                                <literal>172.16.100.1</literal>, <literal>172.16.101.1</literal> and
+                                <literal>172.16.102.1</literal>, the <systemitem class="service"
+                                >dnsmasq</systemitem>configuration file  (e.g.,
+                                <filename>/etc/dnsmasq-nova.conf</filename>) would contain the
+                            following:<programlisting>dhcp-option=tag:'red',option:router,172.16.100.1
+dhcp-option=tag:'green',option:router,172.16.101.1
+dhcp-option=tag:'blue',option:router,172.16.102.1</programlisting></para>
                     </listitem>
                     <listitem>
                         <para>Edit <filename>/etc/nova/nova.conf</filename> to specify the location
@@ -1440,12 +1631,134 @@ enabled_apis=ec2,osapi_compute,osapi_volume,metadata</programlisting></para>
                             for virtual machines is routable.</para>
                     </listitem>
                 </orderedlist></para>
-            <warning>
-                <para>The hardware gateway option is not available when running in VLAN mode, as it
-                    can only be used to specify a single gateway for all instances, and VLAN mode
-                    requires a separate gateway for each network.</para>
-            </warning>
         </simplesect>
 
     </section>
+    <section xml:id="network-troubleshooting">
+        <title>Troubleshooting Networking</title>
+        <simplesect><title>Can't reach floating IPs</title>
+        <para>If you aren't able to reach your instances via the
+            floating IP address, make sure the default security
+            group allows ICMP (ping) and SSH (port 22), so that
+            you can reach the instances:</para>
+        <screen>
+<prompt>$</prompt> <userinput>nova secgroup-list-rules default</userinput>
+<computeroutput>
++-------------+-----------+---------+-----------+--------------+
+| IP Protocol | From Port | To Port |  IP Range | Source Group |
++-------------+-----------+---------+-----------+--------------+
+| icmp        | -1        | -1      | 0.0.0.0/0 |              |
+| tcp         | 22        | 22      | 0.0.0.0/0 |              |
++-------------+-----------+---------+-----------+--------------+
+</computeroutput>
+            </screen>
+        <para>Ensure the NAT rules have been added to iptables on
+            the node that nova-network is running on, as
+            root:</para>
+
+        <screen>
+<prompt>#</prompt> <userinput>iptables -L -nv</userinput>
+<computeroutput>
+ -A nova-network-OUTPUT -d 68.99.26.170/32 -j DNAT --to-destination 10.0.0.3
+</computeroutput>
+<prompt>#</prompt> <userinput>iptables -L -nv -t nat</userinput>
+<computeroutput>
+-A nova-network-PREROUTING -d 68.99.26.170/32 -j DNAT --to-destination10.0.0.3
+-A nova-network-floating-snat -s 10.0.0.3/32 -j SNAT --to-source 68.99.26.170
+</computeroutput>
+            </screen>
+
+        <para>Check that the public address, in this example
+            "68.99.26.170", has been added to your public
+            interface: You should see the address in the listing
+            when you enter "ip addr" at the command prompt.</para>
+
+        <screen>
+<prompt>$</prompt> <userinput>ip addr</userinput>
+<computeroutput>
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP qlen 1000
+link/ether xx:xx:xx:17:4b:c2 brd ff:ff:ff:ff:ff:ff
+inet 13.22.194.80/24 brd 13.22.194.255 scope global eth0
+inet 68.99.26.170/32 scope global eth0
+inet6 fe80::82b:2bf:fe1:4b2/64 scope link
+valid_lft forever preferred_lft forever
+</computeroutput>
+            </screen>
+
+        <para>Note that you cannot SSH to an instance with a
+            public IP from within the same server as the routing
+            configuration won't allow it. </para>
+            <para>You can use <command>tcpdump</command> to identify if packets are being routed to
+                the inbound interface on the compute host. If the packets are reaching the compute
+                hosts but the connection is failing, the issue may be that the packet is being
+                dropped by reverse path filtering. Try disabling reverse path filtering on the
+                inbound interface. For example, if the inbound interface is <literal>eth2</literal>,
+                as
+                root:<screen><prompt>#</prompt> <userinput>sysctl -w net.ipv4.conf.<replaceable>eth2</replaceable>.rp_filter=0</userinput></screen></para>
+            <para>If this solves your issue, add the following line to
+                    <filename>/etc/sysctl.conf</filename> so that the revesrse path filter will be
+                disabled the next time the compute host
+                reboots:<programlisting>net.ipv4.conf.rp_filter=0</programlisting></para>
+
+        </simplesect>
+        <simplesect><title>Disabling firewall</title>
+        <para>To help debug networking issues with reaching VMs, you can disable the firewall by
+            setting the following option in
+            <filename>/etc/nova/nova.conf</filename>:<programlisting>firewall_driver=nova.virt.firewall.NoopFirewallDriver</programlisting></para>
+        <para>We strongly recommend you remove the above line to re-enable the firewall once your
+            networking issues have been resolved.</para>
+        </simplesect>
+        <simplesect><title>Packet loss from instances to nova-network server (VLANManager mode)</title>
+            <para>If you can SSH to your instances but you find that the network interactions to
+                your instance is slow, or if you find that running certain operations are slower
+                than they should be (e.g., <command>sudo</command>), then there may be packet loss
+                occurring on the connection to the instance.</para>
+            <para>Packet loss can be caused by Linux networking configuration settings related to
+                bridges. Certain settings can cause packets to be dropped between the VLAN interface
+                (e.g., <literal>vlan100</literal>) and the associated bridge interface (e.g.,
+                    <literal>br100</literal>) on the host running the nova-network service.</para>
+            <para>One way to check if this is the issue in your setup is to open up three terminals
+                and run the following commands:</para>
+            <para>In the first terminal, on the host running nova-network, use
+                    <command>tcpdump</command> to monitor DNS-related traffic (UDP, port 53) on the
+                VLAN interface. As
+                root:<screen><prompt>#</prompt> <userinput>tcpdump -K -p -i vlan100 -v -vv udp port 53</userinput></screen></para>
+            <para>In the second terminal, also on the host running nova-network, use
+                    <command>tcpdump</command> to monitor DNS-related traffic on the bridge
+                interface. As
+                root:<screen><prompt>#</prompt> <userinput>tcpdump -K -p -i br100 -v -vv udp port 53</userinput></screen></para>
+            <para>In the third terminal, SSH inside of the instance and generate DNS requests by
+                using the <command>nslookup</command>
+                command:<screen><prompt>$</prompt> <userinput>nslookup www.google.com</userinput></screen></para>
+            <para>The symptoms may be intermittent, so try running <command>nslookup</command>
+                multiple times. If the network configuration is correct, the command should return
+                immediately each time. If it is not functioning properly, the command will hang for
+                several seconds.</para>
+            <para>If the <command>nslookup</command> command somteimes hangs, and there are packets
+                that appear in the first terminal but not the second, then the problem may be due to
+                filtering done on the bridges. Try to disable filtering, as
+                root:<screen><prompt>#</prompt> <userinput>sysctl -w net.bridge.bridge-nf-call-arptables=0</userinput>
+<prompt>#</prompt> <userinput>sysctl -w net.bridge.bridge-nf-call-iptables=0</userinput>
+<prompt>#</prompt> <userinput>sysctl -w net.bridge.bridge-nf-call-ip6tables=0</userinput></screen></para>
+            <para>If this solves your issue, add the following line to
+                    <filename>/etc/sysctl.conf</filename> so that these changes will take effect the
+                next time the host
+                reboots:<programlisting>net.bridge.bridge-nf-call-arptables=0
+net.bridge.bridge-nf-call-iptables=0
+net.bridge.bridge-nf-call-ip6tables=0</programlisting></para>
+        </simplesect>
+        <simplesect><title>KVM: Network connectivity works initially, then fails</title>
+        <para>Some administrators have observed an issue with the KVM hypervisor where instances
+                running Ubuntu 12.04 will sometimes lose network connectivity after functioning
+                properly for a period of time. Some users have reported success with loading the
+                vhost_net kernel module as a workaround for this issue (see <link
+                    xlink:href="https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/997978/">bug
+                    #997978</link>) . This kernel module may also <link
+                    xlink:href="http://www.linux-kvm.org/page/VhostNet">improve network performance
+                    on KVM</link>. To load the kernel module, as
+                root:<screen><prompt>#</prompt> <userinput>modprobe vhost_net</userinput></screen></para>
+            <para>Note that loading the module will have no effect on instances that are already
+                running.</para></simplesect>
+    </section>
+
 </chapter>

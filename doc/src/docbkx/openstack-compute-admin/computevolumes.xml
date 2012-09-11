@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns="http://docbook.org/ns/docbook"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0"
+    xml:id="ch_volumes">
+    <title>Volumes</title>
+    <section xml:id="managing-volumes">
+        <title>Managing Volumes</title>
+        <para>Nova-volume is the service that allows you to give extra block level storage to your
+            OpenStack Compute instances. You may recognize this as a similar offering from Amazon
+            EC2 known as Elastic Block Storage (EBS). However, nova-volume is not the same
+            implementation that EC2 uses today. Nova-volume is an iSCSI solution that employs the
+            use of Logical Volume Manager (LVM) for Linux. Note that a volume may only be attached
+            to one instance at a time. This is not a ‘shared storage’ solution like a SAN of NFS on
+            which multiple servers can attach to.</para>
+        <para>Before going any further; let's discuss the nova-volume implementation in OpenStack: </para>
+        <para>The nova-volumes service uses iSCSI-exposed LVM volumes to the compute nodes which run
+            instances. Thus, there are two components involved: </para>
+        <para>
+            <orderedlist>
+                <listitem>
+                    <para>lvm2, which works with a VG called "nova-volumes" (Refer to <link
+                            xlink:href="http://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)"
+                            >http://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)</link> for
+                        further details)</para>
+                </listitem>
+                <listitem>
+                    <para>open-iscsi, the iSCSI implementation which manages iSCSI sessions on the
+                        compute nodes </para>
+                </listitem>
+            </orderedlist>
+        </para>
+        <para>Here is what happens from the volume creation to its attachment: </para>
+        <orderedlist>
+            <listitem>
+                <para>The volume is created via <command>nova volume-create</command>; which creates an LV into the
+                    volume group (VG) "nova-volumes" </para>
+            </listitem>
+            <listitem>
+                <para>The volume is attached to an instance via <command>nova volume-attach</command>; which creates a
+                    unique iSCSI IQN that will be exposed to the compute node </para>
+            </listitem>
+            <listitem>
+                <para>The compute node which run the concerned instance has now an active ISCSI
+                    session; and a new local storage (usually a /dev/sdX disk) </para>
+            </listitem>
+            <listitem>
+                <para>libvirt uses that local storage as a storage for the instance; the instance
+                    get a new disk (usually a /dev/vdX disk) </para>
+            </listitem>
+        </orderedlist>
+        <para>For this particular walkthrough, there is one cloud controller running nova-api,
+            nova-scheduler, nova-objectstore, nova-network and nova-volume services. There are two
+            additional compute nodes running nova-compute. The walkthrough uses a custom
+            partitioning scheme that carves out 60GB of space and labels it as LVM. The network is a
+            /28 .80-.95, and FlatManger is the NetworkManager setting for OpenStack Compute (Nova). </para>
+        <para>Please note that the network mode doesn't interfere at
+            all with the way nova-volume works, but networking must be
+            set up for nova-volumes to work. Please refer to <link
+                linkend="ch_networking">Networking</link> for more
+            details.</para>
+        <para>To set up Compute to use volumes, ensure that nova-volume is installed along with
+            lvm2. The guide will be split in four parts : </para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>Installing the nova-volume service on the cloud controller.</para>
+                </listitem>
+                <listitem>
+                    <para>Configuring the "nova-volumes" volume group on the compute
+                        nodes.</para>
+                </listitem>
+                <listitem>
+                    <para>Troubleshooting your nova-volume installation.</para>
+                </listitem>
+                <listitem>
+                    <para>Backup your nova volumes.</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <xi:include href="install-nova-volume.xml" />
+        <xi:include href="configure-nova-volume.xml" />
+        <xi:include href="troubleshoot-nova-volume.xml" />
+        <xi:include href="backup-nova-volume-disks.xml" />
+    </section>
+    <section xml:id="volume-drivers">
+        <title>Volume drivers</title>
+        <para>The default nova-volume behaviour can be altered by
+            using different volume drivers that are included in Nova
+            codebase. To set volume driver, use
+                <literal>volume_driver</literal> flag. The default is
+            as follows:</para>
+        <programlisting>
+--volume_driver=nova.volume.driver.ISCSIDriver
+        </programlisting>
+
+        <section xml:id="ceph-rados">
+            <title>Ceph RADOS block device (RBD)</title>
+            <para>By Sebastien Han from <link xlink:href="http://www.sebastien-han.fr/blog/2012/06/10/introducing-ceph-to-openstack/">http://www.sebastien-han.fr/blog/2012/06/10/introducing-ceph-to-openstack/</link></para>
+            <para>If you are using KVM or QEMU as your hypervisor, the
+                Compute service can be configured to use
+                <link xlink:href="http://ceph.com/ceph-storage/block-storage/">
+                Ceph's RADOS block devices (RBD)</link> for volumes. </para>
+            <para>Ceph is a massively scalable, open source,
+                distributed storage system. It is comprised of an
+                object store, block store, and a POSIX-compliant
+                distributed file system. The platform is capable of
+                auto-scaling to the exabyte level and beyond, it runs
+                on commodity hardware, it is self-healing and
+                self-managing, and has no single point of failure.
+                Ceph is in the Linux kernel and is integrated with the
+                OpenStack™ cloud operating system. As a result of its
+                open source nature, this portable storage platform may
+                be installed and used in public or private clouds.<figure>
+                    <title>Ceph-architecture.png</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata
+                                fileref="http://sebastien-han.fr/images/Ceph-architecture.png"
+                            />
+                        </imageobject>
+                    </mediaobject>
+                </figure></para>
+            <simplesect>
+                <title>RADOS?</title>
+                <para>You can easily get confused by the denomination:
+                    Ceph? RADOS?</para>
+                <para><emphasis>RADOS: Reliable Autonomic Distributed
+                        Object Store</emphasis> is an object storage.
+                    RADOS takes care of distributing the objects
+                    across the whole storage cluster and replicating
+                    them for fault tolerance. It is built with 3 major
+                    components:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para><emphasis>Object Storage Device
+                                (ODS)</emphasis>: the storage daemon -
+                            RADOS service, the location of your data.
+                            You must have this daemon running on each
+                            server of your cluster. For each OSD you
+                            can have an associated hard drive disks.
+                            For performance purpose it’s usually
+                            better to pool your hard drive disk with
+                            raid arrays, LVM or btrfs pooling. With
+                            that, for one server your will have one
+                            daemon running. By default, three pools
+                            are created: data, metadata and
+                            RBD.</para>
+                    </listitem>
+                    <listitem>
+                        <para><emphasis>Meta-Data Server
+                                (MDS)</emphasis>: this is where the
+                            metadata are stored. MDSs builds POSIX
+                            file system on top of objects for Ceph
+                            clients. However if you are not using the
+                            Ceph File System, you do not need a meta
+                            data server.</para>
+                    </listitem>
+                    <listitem>
+                        <para><emphasis>Monitor (MON)</emphasis>: this
+                            lightweight daemon handles all the
+                            communications with the external
+                            applications and the clients. It also
+                            provides a consensus for distributed
+                            decision making in a Ceph/RADOS cluster.
+                            For instance when you mount a Ceph shared
+                            on a client you point to the address of a
+                            MON server. It checks the state and the
+                            consistency of the data. In an ideal setup
+                            you will at least run 3
+                                <code>ceph-mon</code> daemons on
+                            separate servers. Quorum decisions and
+                            calculs are elected by a majority vote, we
+                            expressly need odd number.</para>
+                    </listitem>
+                </itemizedlist>
+                <para>Ceph developers recommend to use btrfs as a
+                    filesystem for the storage. Using XFS is also
+                    possible and might be a better alternative for
+                    production environments. Neither Ceph nor Btrfs
+                    are ready for production. It could be really risky
+                    to put them together. This is why XFS is an
+                    excellent alternative to btrfs. The ext4
+                    filesystem is also compatible but doesn’t take
+                    advantage of all the power of Ceph.</para>
+
+                <note>
+                    <para>We recommend configuring Ceph to use the XFS
+                        file system in the near term, and btrfs in the
+                        long term once it is stable enough for
+                        production.</para>
+                </note>
+
+                <para>See <link xlink:href="http://ceph.com/docs/master/rec/filesystem/"
+                    >ceph.com/docs/master/rec/filesystem/</link> for more information about usable file
+                        systems.</para>
+            </simplesect>
+            <simplesect><title>Ways to store, use and expose data</title>
+                <para>There are several ways to store and access your data.</para>
+                <itemizedlist>
+                    <listitem>
+                        <para><emphasis>RADOS</emphasis>: as an
+                            object, default storage mechanism.</para>
+                    </listitem>
+                    <listitem><para><emphasis>RBD</emphasis>: as a block
+                        device. The linux kernel RBD (rados block
+                        device) driver allows striping a linux block
+                        device over multiple distributed object store
+                        data objects. It is compatible with the kvm
+                        RBD image.</para></listitem>
+                    <listitem><para><emphasis>CephFS</emphasis>: as a file,
+                        POSIX-compliant filesystem.</para></listitem>
+                </itemizedlist>
+                <para>Ceph exposes its distributed object store (RADOS) and it can be accessed via multiple interfaces:</para>
+                
+                <itemizedlist>
+                    <listitem><para><emphasis>RADOS Gateway</emphasis>:
+                        Swift and Amazon-S3 compatible RESTful
+                        interface. See <link xlink:href="http://ceph.com/wiki/RADOS_Gateway"
+                            >RADOS_Gateway</link> for further information.</para></listitem>
+                    <listitem><para><emphasis>librados</emphasis> and the
+                        related C/C++ bindings.</para></listitem>
+                    <listitem><para><emphasis>rbd and QEMU-RBD</emphasis>:
+                        linux kernel and QEMU block devices that
+                        stripe data across multiple
+                        objects.</para></listitem>
+                </itemizedlist>
+                <para>For detailed installation instructions and
+                    benchmarking information, see <link
+                        xlink:href="http://www.sebastien-han.fr/blog/2012/06/10/introducing-ceph-to-openstack/"
+                        >http://www.sebastien-han.fr/blog/2012/06/10/introducing-ceph-to-openstack/</link>. </para>
+            </simplesect>
+        </section>
+        <section xml:id="nexenta-driver">
+            <title>Nexenta</title>
+            <para>NexentaStor Appliance is NAS/SAN software platform designed for building reliable and fast network storage arrays. The NexentaStor is based on
+                the OpenSolaris and uses ZFS as a disk management system. NexentaStor can serve as a storage node for the OpenStack and provide block-level volumes
+                for the virtual servers via iSCSI protocol. </para>
+            <para>The Nexenta driver allows you to use Nexenta SA to
+                store Nova volumes. Every Nova volume is represented
+                by a single zvol in a predefined Nexenta volume. For
+                every new volume the driver creates a iSCSI target and
+                iSCSI target group that are used to access it from
+                compute hosts.</para>
+            <para>To use Nova with Nexenta Storage Appliance, you should:</para>
+                <itemizedlist>
+                    <listitem><para>set
+                            <literal>--volume_driver=nova.volume.nexenta.volume.NexentaDriver</literal>.</para></listitem>
+                    <listitem><para>set <literal>--nexenta_host</literal> flag to the hostname or IP
+                        of your NexentaStor</para></listitem>
+                    <listitem><para>set <literal>--nexenta_user</literal> and
+                            <literal>--nexenta_password</literal> to
+                        the username and password of the user with all
+                        necessary privileges on the appliance,
+                        including the access to REST API</para></listitem>
+                    <listitem><para>set <literal>--nexenta_volume</literal> to the name of the
+                        volume on the appliance that you would like to
+                        use in Nova, or create a volume named
+                            <literal>nova</literal> (it will be used
+                        by default)</para></listitem>
+                </itemizedlist>
+            <para>Nexenta driver has a lot of tunable flags. Some of them you might want to change:</para>
+                <itemizedlist>
+                    <listitem><para><literal>nexenta_target_prefix</literal> defines the prefix that
+                        will be prepended to volume id to form target
+                        name on Nexenta</para></listitem>
+                    <listitem><para><literal>nexenta_target_group_prefix</literal> defines the
+                        prefix for target groups</para></listitem>
+                    <listitem><para><literal>nexenta_blocksize</literal> can be set to the size of
+                        the blocks in newly created zvols on
+                        appliance, with the suffix; for example, the
+                        default 8K means 8 kilobytes</para></listitem>
+                    <listitem><para><literal>nexenta_sparse</literal> is boolean and can be set to
+                        use sparse zvols to save space on
+                        appliance</para></listitem>
+                </itemizedlist>
+            <para>Some flags that you might want to keep with the
+                default values:</para>
+                <itemizedlist>
+                    <listitem><para><literal>nexenta_rest_port</literal> is the port where Nexenta
+                        listens for REST requests (the same port where
+                        the NMV works)</para></listitem>
+                    <listitem><para><literal>nexenta_rest_protocol</literal> can be set to
+                            <literal>http</literal> or
+                            <literal>https</literal>, but the default
+                        is <literal>auto</literal> which makes the
+                        driver try to use HTTP and switch to HTTPS in
+                        case of failure</para></listitem>
+                    <listitem><para><literal>nexenta_iscsi_target_portal_port</literal> is the port
+                        to connect to Nexenta over iSCSI</para></listitem>
+                </itemizedlist>
+        </section>
+        <section xml:id="xensm">
+            <title>Using the XenAPI Storage Manager Volume Driver</title>
+            <para>The Xen Storage Manager Volume driver (xensm) is a
+                XenAPI hypervisor specific volume driver, and can be used
+                to provide basic storage functionality, including
+                volume creation and destruction, on a number of
+                different storage back-ends. It also enables the
+                capability of using more sophisticated storage
+                back-ends for operations like cloning/snapshots, etc.
+                The list below shows some of the storage plugins
+                already supported in Citrix XenServer and Xen Cloud Platform
+                (XCP): </para>
+            <orderedlist>
+                <listitem>
+                    <para>NFS VHD: Storage repository (SR) plugin which stores disks as Virtual Hard Disk (VHD)
+                        files on a remote Network File System (NFS).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Local VHD on LVM: SR plugin which represents disks as VHD disks on Logical Volumes (LVM)
+                        within a locally-attached Volume Group.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>HBA LUN-per-VDI driver: SR plugin which represents Logical Units (LUs)
+                        as Virtual Disk Images (VDIs) sourced by host bus adapters (HBAs).
+                        E.g. hardware-based iSCSI or FC support.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>NetApp: SR driver for mapping of LUNs to VDIs on a NETAPP server,
+                        providing use of fast snapshot and clone features on the filer.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>LVHD over FC: SR plugin which represents disks as VHDs on Logical Volumes
+                        within a Volume Group created on an HBA LUN. E.g. hardware-based iSCSI or FC support.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>iSCSI: Base ISCSI SR driver, provides a LUN-per-VDI.
+                        Does not support creation of VDIs but accesses existing LUNs on a target.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>LVHD over iSCSI: SR plugin which represents disks as
+                        Logical Volumes within a Volume Group created on an iSCSI LUN.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>EqualLogic: SR driver for mapping of LUNs to VDIs on a
+                        EQUALLOGIC array group, providing use of fast snapshot and clone features on the array.
+                    </para>
+                </listitem>
+            </orderedlist>
+            <section xml:id="xensmdesign">
+                <title>Design and Operation</title>
+                <simplesect>
+                    <title>Definitions</title>
+                    <itemizedlist>
+                        <listitem>
+                            <para><emphasis role="bold"
+                                   >Backend:</emphasis> A term for a
+                                particular storage backend. This could
+                                be iSCSI, NFS, Netapp etc. </para>
+                        </listitem>
+                        <listitem>
+                            <para><emphasis role="bold"
+                                   >Backend-config:</emphasis> All the
+                                parameters required to connect to a
+                                specific backend. For e.g. For NFS,
+                                this would be the server, path, etc. </para>
+                        </listitem>
+                        <listitem>
+                            <para><emphasis role="bold"
+                                   >Flavor:</emphasis> This term is
+                                equivalent to volume "types". A
+                                user0friendly term to specify some
+                                notion of quality of service. For
+                                example, "gold" might mean that the
+                                volumes will use a backend where
+                                backups are possible. A flavor can be
+                                associated with multiple backends. The
+                                volume scheduler, with the help of the
+                                driver, will decide which backend will
+                                be used to create a volume of a
+                                particular flavor. Currently, the
+                                driver uses a simple "first-fit"
+                                policy, where the first backend that
+                                can successfully create this volume is
+                                the one that is used. </para>
+                        </listitem>
+                    </itemizedlist>
+                </simplesect>
+                <simplesect>
+                    <title>Operation</title>
+                    <para>The admin uses the the nova-manage command
+                        detailed below to add flavors and backends. </para>
+                    <para>One or more nova-volume service instances
+                        will be deployed per availability zone. When
+                        an instance is started, it will create storage
+                        repositories (SRs) to connect to the backends
+                        available within that zone. All nova-volume
+                        instances within a zone can see all the
+                        available backends. These instances are
+                        completely symmetric and hence should be able
+                        to service any
+                            <literal>create_volume</literal> request
+                        within the zone. </para>
+                </simplesect>
+            </section>
+            <section xml:id="xensmconfig">
+                <title>Configuring XenAPI Storage Manager</title>
+                <simplesect>
+                    <title>Prerequisites
+                    </title>
+                    <orderedlist>
+                        <listitem>
+                            <para>xensm requires that you use either Citrix XenServer or XCP as the hypervisor.
+                                The Netapp and EqualLogic backends are not supported on XCP.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Ensure all <emphasis role="bold">hosts</emphasis> running volume and compute services
+                                have connectivity to the storage system.
+                            </para>
+                        </listitem>
+                    </orderedlist>
+                </simplesect>
+                <simplesect>
+                    <title>Configuration
+                    </title>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                <emphasis role="bold">Set the following configuration options for the nova volume service:
+                                    (nova-compute also requires the volume_driver configuration option.)
+                                </emphasis>
+                            </para>
+                            <programlisting>
+--volume_driver="nova.volume.xensm.XenSMDriver"
+--use_local_volumes=False
+                                </programlisting>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <emphasis role="bold">The backend configs that the volume driver uses need to be
+                                    created before starting the volume service.
+                                </emphasis>
+                            </para>
+                            <programlisting>
+<prompt>$</prompt> nova-manage sm flavor_create &lt;label> &lt;description>
+
+<prompt>$</prompt> nova-manage sm flavor_delete &lt;label>
+
+<prompt>$</prompt> nova-manage sm backend_add &lt;flavor label> &lt;SR type> [config connection parameters]
+
+Note: SR type and config connection parameters are in keeping with the XenAPI Command Line Interface. http://support.citrix.com/article/CTX124887
+
+<prompt>$</prompt> nova-manage sm backend_delete &lt;backend-id>
+
+                               </programlisting>
+                            <para> Example: For the NFS storage manager plugin, the steps
+                                below may be used.
+                            </para>
+                            <programlisting>
+<prompt>$</prompt> nova-manage sm flavor_create gold "Not all that glitters"
+
+<prompt>$</prompt> nova-manage sm flavor_delete gold
+
+<prompt>$</prompt> nova-manage sm backend_add gold nfs name_label=mybackend server=myserver serverpath=/local/scratch/myname
+
+<prompt>$</prompt> nova-manage sm backend_remove 1
+                                </programlisting>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <emphasis role="bold">Start nova-volume and nova-compute with the new configuration options.
+                                </emphasis>
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </simplesect>
+                <simplesect>
+                    <title>Creating and Accessing the volumes from VMs </title>
+                    <para>Currently, the flavors have not been tied to
+                        the volume types API. As a result, we simply
+                        end up creating volumes in a "first fit" order
+                        on the given backends. </para>
+                    <para>The standard euca-* or openstack API
+                        commands (such as volume extensions) should be
+                        used for creating, destroying, attaching, or
+                        detaching volumes. </para>
+                </simplesect>
+            </section>
+        </section>
+    </section>
+    <section xml:id="boot-from-volume">
+        <title>Boot From Volume</title>
+        <para>The Compute service has preliminary support for booting an instance from a
+            volume.</para>
+        <simplesect>
+            <title>Creating a bootable volume</title>
+            <para>To create a bootable volume, mount the volume to an existing instance, and then
+                build a volume-backed image. Here is an example based on <link
+                    xlink:href="https://github.com/openstack-dev/devstack/blob/master/exercises/boot_from_volume.sh"
+                    >exercises/boot_from_volume.sh</link>. This example assumes that you have a
+                running instance with a 1GB volume mounted at <literal>/dev/vdc</literal>. These
+                commands will make the mounted volume bootable using a CirrOS image. As
+                root:<screen><prompt>#</prompt> <userinput>mkfs.ext3 -b 1024 /dev/vdc 1048576</userinput>
+<prompt>#</prompt> <userinput>mkdir /tmp/stage</userinput>
+<prompt>#</prompt> <userinput>mount /dev/vdc /tmp/stage</userinput>
+
+<prompt>#</prompt> <userinput>cd /tmp</userinput>
+<prompt>#</prompt> <userinput>wget https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-rootfs.img.gz</userinput>
+<prompt>#</prompt> <userinput>gunzip cirros-0.3.0-x86_64-rootfs.img.gz</userinput>
+<prompt>#</prompt> <userinput>mkdir /tmp/cirros</userinput>
+<prompt>#</prompt> <userinput>mount /tmp/cirros-0.3.0-x86_64-rootfs.img /tmp/cirros</userinput>
+
+<prompt>#</prompt> <userinput>cp -pr /tmp/cirros/* /tmp/stage</userinput>
+<prompt>#</prompt> <userinput>umount /tmp/cirros</userinput>
+<prompt>#</prompt> <userinput>sync</userinput>
+<prompt>#</prompt> <userinput>umount /tmp/stage</userinput></screen></para>
+            <para>Detach the volume once you are done.</para>
+        </simplesect>
+        <simplesect>
+            <title>Booting an instance from the volume</title>
+            <para>To boot a new instance from the volume, use the
+                    <command>nova boot</command> command with the
+                    <literal>--block_device_mapping</literal> flag.
+                The output for <command>nova help boot</command> shows
+                the following documentation about this
+                flag:<screen><computeroutput> --block_device_mapping &lt;dev_name=mapping>
+                        Block device mapping in the format &lt;dev_name=&lt;id>:&lt;typ
+                        e>:&lt;size(GB)>:&lt;delete_on_terminate>.
+ </computeroutput></screen></para>
+            <para>The command arguments are:<variablelist>
+                    <varlistentry>
+                        <term><literal>dev_name</literal></term>
+                        <listitem>
+                            <para>A device name where the volume will be attached in the system at
+                                        <filename>/dev/<replaceable>dev_name</replaceable></filename>.
+                                This value is typically <literal>vda</literal>.</para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><literal>id</literal></term>
+                        <listitem>
+                            <para>The ID of the volume to boot from, as shown in the output of
+                                    <command>nova volume-list</command>.</para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><literal>type</literal></term>
+                        <listitem>
+                            <para>This is either <literal>snap</literal>, which means that the
+                                volume was created from a snapshot, or anything other than
+                                    <literal>snap</literal> (a blank string is valid). In the
+                                example above, the volume was not created from a snapshot, so we
+                                will leave this field blank in our example below.</para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><literal>size (GB)</literal></term>
+                        <listitem>
+                            <para>The size of the volume, in GB. It is safe to leave this blank and
+                                have the Compute service infer the size.</para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><literal>delete_on_terminate</literal></term>
+                        <listitem>
+                            <para>A boolean to indicate whether the volume should be deleted when
+                                the instance is terminated. True can be specified as
+                                    <literal>True</literal> or <literal>1</literal>. False can be
+                                specified as <literal>False</literal> or
+                                <literal>0</literal>.</para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist></para>
+            <para><note>
+                    <para>Because of bug <link
+                            xlink:href="https://bugs.launchpad.net/nova/+bug/1008622"
+                            >#1008622</link>, you must specify an image when booting from a volume,
+                        even though this image will not be used.</para>
+                </note>The following example will attempt boot from volume with
+                    ID=<literal>13</literal>, it will not delete on terminate. Replace the
+                    <literal>--image</literal> flag with a valid image on your system, and the
+                    <literal>--key_name</literal> with a valid keypair
+                name:<screen><prompt>$</prompt> <userinput>nova boot --image <replaceable>f4addd24-4e8a-46bb-b15d-fae2591f1a35</replaceable> --flavor 2 --key_name <replaceable>mykey</replaceable> --block_device_mapping vda=13:::0 boot-from-vol-test</userinput></screen></para>
+        </simplesect>
+    </section>
+</chapter>
