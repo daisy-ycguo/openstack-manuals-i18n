@@ -4,13 +4,18 @@
     xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
     <title>Pre-configuring the network</title>
-    <para>These instructions are for using the FlatDHCP networking mode with a single network interface. More complex configurations are described in the networking section, but this configuration is known to work. 
-    </para>
-    <para>First, setup your /etc/network/interfaces file with these settings: </para>
+    <para>These instructions are for using the FlatDHCP networking mode with a single network
+        interface. More complex configurations are described in the networking section, but this
+        configuration is known to work. These configuration options should be set on all compute
+        nodes.</para>
+    <para>Set your network interface in promiscuous mode so that it can receive packets that are
+        intended for virtual machines. As
+        root:<screen><prompt>#</prompt> <userinput>ip link set eth0 promisc on</userinput></screen></para>
+    <para>Set up your /etc/network/interfaces file with these settings: </para>
     <itemizedlist><listitem><para>eth0: public IP, gateway</para></listitem>
         <listitem><para>br100: no ports, stp off, fd 0, first address from fixed_range set in nova.conf files.</para></listitem></itemizedlist> 
-    <para>Here's an example:</para>
-    <para><literallayout class="monospaced"># The loopback network interface
+    <para os="ubuntu">Here's an Ubuntu/Debian example:</para>
+    <para os="ubuntu"><literallayout class="monospaced"># The loopback network interface
 auto lo
 iface lo inet loopback
 
@@ -25,8 +30,21 @@ address 192.168.100.1
 netmask 255.255.255.0 
 bridge_stp off
 bridge_fd 0</literallayout></para>
+    <para os="centos;fedora;rhel">Here's an example for RHEL, Fedora, or CentOS. Create
+        
+        <filename>/etc/sysconfig/network-scripts/ifcfg-br100</filename>:</para>
+    <literallayout os="centos;fedora;rhel" class="monospaced">
+DEVICE=br100
+TYPE=Bridge
+ONBOOT=yes
+DELAY=0
+BOOTPROTO=static
+IPADDR=192.168.100.1
+NETMASK=255.255.255.0   
+    </literallayout>
     <para>Also install bridge-utils:</para>
-    <literallayout class="monospaced">sudo apt-get install bridge-utils</literallayout>
+    <screen os="ubuntu"><prompt>$</prompt><userinput>sudo apt-get install bridge-utils</userinput></screen>
+    <screen os="rhel;centos;fedora"><prompt>$</prompt><userinput>sudo yum install bridge-utils</userinput></screen>
     <para>Ensure that you set up the bridge, although if you use
         flat_network_bridge=br100 in your <filename>nova.conf</filename> file, nova
         will set up the bridge for you when you run the
